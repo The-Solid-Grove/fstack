@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: ./setup [--host codex|claude|auto] [--repo-root PATH] [--skills-dir PATH] [--quiet]
+
+Links fstack skills into Codex and/or Claude Code skill directories.
+
+Options:
+  --host        Target host. Default: auto.
+  --repo-root   fstack checkout root. Default: directory containing this script.
+  --skills-dir  Override skill install directory. Use with --host codex or --host claude.
+  --quiet       Print only errors.
+  -h, --help    Show this help.
+EOF
+}
+
+HOST="auto"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+SKILLS_DIR=""
+QUIET=0
+
+log() {
+  [ "$QUIET" -eq 1 ] || echo "$@"
+}
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --host)
+      [ "${2:-}" ] || { echo "Missing value for --host" >&2; exit 1; }
+      HOST="$2"
+      shift 2
+      ;;
+    --host=*)
+      HOST="${1#--host=}"
+      shift
+      ;;
+    --repo-root)
+      [ "${2:-}" ] || { echo "Missing value for --repo-root" >&2; exit 1; }
+      REPO_ROOT="$2"
+      shift 2
+      ;;
+    --repo-root=*)
+      REPO_ROOT="${1#--repo-root=}"
+      shift
+      ;;
+    --skills-dir)
+      [ "${2:-}" ] || { echo "Missing value for --skills-dir" >&2; exit 1; }
+      SKILLS_DIR="$2"
+      shift 2
+      ;;
+    --skills-dir=*)
+      SKILLS_DIR="${1#--skills-dir=}"
+      shift
+      ;;
+    --quiet|-q)
+      QUIET=1
+      shift
+      ;;
+    --help|-h)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+done
+
+case "$HOST" in
+  codex|claude|auto) ;;
+  *)
+    echo "Unknown --host value: $HOST (expected codex, claude, or auto)" >&2
+    exit 1
+    ;;
+esac
+
+REPO_ROOT="$(cd "$REPO_ROOT" && pwd -P)"
+SKILLS_ROOT="$REPO_ROOT/skills"
+
+[ -d "$SKILLS_ROOT" ] || { echo "Missing skills directory: $SKILLS_ROOT" >&2; exit 1; }
+
+host_skills_dir() {
+  case "$1" in
+    codex) echo "${SKILLS_DIR:-$HOME/.codex/skills}" ;;
+    claude) echo "${SKILLS_DIR:-$HOME/.claude/skills}" ;;
+  esac
+}
+
+install_host() {
+  local host="$1"
+  local target_dir
+  target_dir="$(host_skills_dir "$host")"
+  mkdir -p "$target_dir"
+
+  local linked=0
+  for skill_dir in "$SKILLS_ROOT"/*; do
+    [ -d "$skill_dir" ] || continue
+    [ -f "$skill_dir/SKILL.md" ] || continue
+
+    local skill_name
+    skill_name="$(basename "$skill_dir")"
+    local link="$target_dir/$skill_name"
+
+    if [ -e "$link" ] && [ ! -L "$link" ]; then
+      echo "Refusing to replace non-symlink skill: $link" >&2
+      exit 1
+    fi
+
+    rm -f "$link"
+    ln -s "$skill_dir" "$link"
+    linked=$((linked + 1))
+    log "linked $host: $link -> $skill_dir"
+  done
+
+  [ "$linked" -gt 0 ] || { echo "No skills found under $SKILLS_ROOT" >&2; exit 1; }
+}
+
+auto_hosts() {
+  local hosts=()
+  command -v codex >/dev/null 2>&1 && hosts+=("codex")
+  command -v claude >/dev/null 2>&1 && hosts+=("claude")
+
+  if [ "${#hosts[@]}" -eq 0 ]; then
+    hosts=("codex" "claude")
+  fi
+
+  printf '%s\n' "${hosts[@]}"
+}
+
+if [ -n "$SKILLS_DIR" ] && [ "$HOST" = "auto" ]; then
+  echo "--skills-dir requires --host codex or --host claude" >&2
+  exit 1
+fi
+
+if [ "$HOST" = "auto" ]; then
+  while IFS= read -r detected_host; do
+    install_host "$detected_host"
+  done < <(auto_hosts)
+else
+  install_host "$HOST"
+fi
+
+log "fstack ready."

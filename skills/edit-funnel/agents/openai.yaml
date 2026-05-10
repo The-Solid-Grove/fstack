@@ -1,0 +1,4 @@
+interface:
+  display_name: "Edit Funnel"
+  short_description: "Edit and preview FunnelsGrove funnels"
+  default_prompt: "Use $edit-funnel to load a FunnelsGrove funnel, make the requested local edits, sync them back, publish preview, and verify the preview URL."
