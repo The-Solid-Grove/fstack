@@ -1,10 +1,11 @@
 # fstack
 
 fstack is a small skill pack for building and editing web funnels with AI agents.
-The first skill, `edit-funnel`, guides Codex or Claude Code through the
-FunnelsGrove local editing loop: load a hosted funnel with `fgrove`, make scoped
-local updates, sync them back, publish a preview, and verify the preview before
-finishing.
+It includes `edit-funnel` for the FunnelsGrove local editing loop and
+`writing-funnel-copy` for quiz-to-paywall funnel copy based on conversion
+psychology.
+
+Current version: `0.2.0`
 
 ## Requirements
 
@@ -44,8 +45,8 @@ Host install locations:
 
 | Host | Skill directory |
 | --- | --- |
-| Codex | `~/.codex/skills/edit-funnel` |
-| Claude Code | `~/.claude/skills/edit-funnel` |
+| Codex | `~/.codex/skills/<skill-name>` |
+| Claude Code | `~/.claude/skills/<skill-name>` |
 
 The installer creates symlinks back to this checkout. It is idempotent, so rerun
 it any time.
@@ -88,6 +89,27 @@ one. It will:
 Production publish is intentionally not part of the default flow. Ask for it
 explicitly and provide the target domain when you want production.
 
+## Use `writing-funnel-copy`
+
+Use this skill when you want a complete quiz-to-paywall funnel concept before
+editing screens:
+
+```text
+Use $writing-funnel-copy for a sleep app funnel. Ask me for the required product
+context first, then return the formatted strategy and screen-by-screen copy.
+```
+
+The skill asks for product, audience, entry promise, and screen count before
+writing. It then returns the five-column pre-work, transformation, emotional
+arc, fuel check, screen specs, paywall architecture, and A/B test ideas.
+The full psychology framework is bundled as a nearby reference at
+`skills/writing-funnel-copy/references/funnel-psychology-framework.md`, and the
+paywall-specific guidance is bundled at
+`skills/writing-funnel-copy/references/funnel-paywall-best-practices.md`.
+Conversion experiment guidance is bundled at
+`skills/writing-funnel-copy/references/funnel-conversion-best-practices.md`.
+The skill instructs agents to read the relevant references before drafting.
+
 ## Team Setup
 
 For now, use a shared global checkout instead of vendoring skills into each
@@ -96,8 +118,8 @@ use fstack:
 
 ```markdown
 Use fstack for FunnelsGrove funnel work. Start with `edit-funnel` for hosted
-funnel edits, and do not finish until a preview URL has been published and
-verified.
+funnel edits and `writing-funnel-copy` for quiz-to-paywall strategy. Do not
+finish hosted edits until a preview URL has been published and verified.
 ```
 
 Then each teammate runs:
@@ -114,6 +136,8 @@ Remove the symlinks:
 ```bash
 rm -f ~/.codex/skills/edit-funnel
 rm -f ~/.claude/skills/edit-funnel
+rm -f ~/.codex/skills/writing-funnel-copy
+rm -f ~/.claude/skills/writing-funnel-copy
 ```
 
 Remove the checkout only if nothing else depends on it:

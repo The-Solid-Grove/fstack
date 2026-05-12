@@ -22,6 +22,12 @@ assert_contains() {
   grep -Eq "$pattern" "$file" || fail "$file does not contain pattern: $pattern"
 }
 
+assert_not_contains() {
+  local file="$1"
+  local pattern="$2"
+  ! grep -Eq "$pattern" "$file" || fail "$file contains unwanted pattern: $pattern"
+}
+
 assert_no_template_markers() {
   local path="$1"
   if grep -RInE 'TODO|TBD|\[TODO|Replace with|placeholder' "$path" >/tmp/fstack-smoke-placeholders.$$ 2>/dev/null; then
@@ -32,15 +38,29 @@ assert_no_template_markers() {
   rm -f /tmp/fstack-smoke-placeholders.$$
 }
 
+validate_skill_dir() {
+  local skill="$1"
+  assert_no_template_markers "$skill"
+
+  local validator="/Users/andrew/.codex/skills/.system/skill-creator/scripts/quick_validate.py"
+  if [ -f "$validator" ] && command -v python3 >/dev/null 2>&1 && python3 -c 'import yaml' >/dev/null 2>&1; then
+    python3 "$validator" "$skill"
+  fi
+}
+
 check_readme() {
   assert_file "$ROOT/README.md"
+  assert_file "$ROOT/VERSION"
   assert_contains "$ROOT/README.md" '^# fstack'
+  assert_contains "$ROOT/VERSION" '^0\.2\.0$'
+  assert_contains "$ROOT/README.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'
   assert_contains "$ROOT/README.md" 'Install'
   assert_contains "$ROOT/README.md" 'Update'
   assert_contains "$ROOT/README.md" 'Uninstall'
   assert_contains "$ROOT/README.md" 'edit-funnel'
+  assert_contains "$ROOT/README.md" 'writing-funnel-copy'
 }
 
 check_setup() {
@@ -59,12 +79,34 @@ check_skill() {
   assert_contains "$skill/SKILL.md" 'publish --env preview'
   assert_contains "$skill/agents/openai.yaml" 'display_name:'
   assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
-  assert_no_template_markers "$skill"
+  validate_skill_dir "$skill"
+}
 
-  local validator="/Users/andrew/.codex/skills/.system/skill-creator/scripts/quick_validate.py"
-  if [ -f "$validator" ] && command -v python3 >/dev/null 2>&1 && python3 -c 'import yaml' >/dev/null 2>&1; then
-    python3 "$validator" "$skill"
-  fi
+check_copy_skill() {
+  local skill="$ROOT/skills/writing-funnel-copy"
+  assert_file "$skill/SKILL.md"
+  assert_file "$skill/agents/openai.yaml"
+  assert_file "$skill/references/funnel-psychology-framework.md"
+  assert_file "$skill/references/funnel-paywall-best-practices.md"
+  assert_file "$skill/references/funnel-conversion-best-practices.md"
+  assert_contains "$skill/SKILL.md" '^name: writing-funnel-copy$'
+  assert_contains "$skill/SKILL.md" '^description:'
+  assert_contains "$skill/SKILL.md" 'references/funnel-psychology-framework.md'
+  assert_contains "$skill/SKILL.md" 'references/funnel-paywall-best-practices.md'
+  assert_contains "$skill/SKILL.md" 'references/funnel-conversion-best-practices.md'
+  assert_contains "$skill/SKILL.md" 'Product name and what it does'
+  assert_contains "$skill/SKILL.md" 'Five-column pre-work table'
+  assert_contains "$skill/SKILL.md" 'Screen-by-screen spec'
+  assert_contains "$skill/references/funnel-psychology-framework.md" '^id: funnel-psychology-framework$'
+  assert_contains "$skill/references/funnel-psychology-framework.md" '^# Funnel Psychology Engine$'
+  assert_contains "$skill/references/funnel-paywall-best-practices.md" '^id: funnel-paywall-best-practices$'
+  assert_contains "$skill/references/funnel-paywall-best-practices.md" '^# Paywall Structure'
+  assert_contains "$skill/references/funnel-conversion-best-practices.md" '^id: funnel-conversion-best-practices$'
+  assert_contains "$skill/references/funnel-conversion-best-practices.md" '^# Web Funnel Conversion Best Practices$'
+  assert_not_contains "$skill/references/funnel-conversion-best-practices.md" 'web2wave|Source:|Q4 2025|📊|⚠️'
+  assert_contains "$skill/agents/openai.yaml" 'display_name:'
+  assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
+  validate_skill_dir "$skill"
 }
 
 check_install_for_host() {
@@ -75,9 +117,11 @@ check_install_for_host() {
 
   HOME="$tmp_home" "$ROOT/setup" --host "$host" --repo-root "$ROOT" --quiet
 
-  local link="$tmp_home/$skill_parent/edit-funnel"
-  [ -L "$link" ] || fail "expected symlink at $link"
-  [ "$(cd "$link" && pwd -P)" = "$ROOT/skills/edit-funnel" ] || fail "wrong symlink target for $host"
+  for skill_name in edit-funnel writing-funnel-copy; do
+    local link="$tmp_home/$skill_parent/$skill_name"
+    [ -L "$link" ] || fail "expected symlink at $link"
+    [ "$(cd "$link" && pwd -P)" = "$ROOT/skills/$skill_name" ] || fail "wrong symlink target for $host"
+  done
 
   rm -rf "$tmp_home"
 }
@@ -95,8 +139,12 @@ check_auto_install_fallback() {
 
   [ -L "$tmp_home/.codex/skills/edit-funnel" ] || fail "auto fallback did not install Codex skill"
   [ -L "$tmp_home/.claude/skills/edit-funnel" ] || fail "auto fallback did not install Claude skill"
+  [ -L "$tmp_home/.codex/skills/writing-funnel-copy" ] || fail "auto fallback did not install Codex copy skill"
+  [ -L "$tmp_home/.claude/skills/writing-funnel-copy" ] || fail "auto fallback did not install Claude copy skill"
   [ "$(cd "$tmp_home/.codex/skills/edit-funnel" && pwd -P)" = "$ROOT/skills/edit-funnel" ] || fail "wrong auto Codex symlink target"
   [ "$(cd "$tmp_home/.claude/skills/edit-funnel" && pwd -P)" = "$ROOT/skills/edit-funnel" ] || fail "wrong auto Claude symlink target"
+  [ "$(cd "$tmp_home/.codex/skills/writing-funnel-copy" && pwd -P)" = "$ROOT/skills/writing-funnel-copy" ] || fail "wrong auto Codex copy symlink target"
+  [ "$(cd "$tmp_home/.claude/skills/writing-funnel-copy" && pwd -P)" = "$ROOT/skills/writing-funnel-copy" ] || fail "wrong auto Claude copy symlink target"
 
   rm -rf "$tmp_home"
 }
@@ -104,6 +152,7 @@ check_auto_install_fallback() {
 check_readme
 check_setup
 check_skill
+check_copy_skill
 check_installs
 check_auto_install_fallback
 
