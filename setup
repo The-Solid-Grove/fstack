@@ -3,7 +3,7 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Usage: ./setup [--host codex|claude|auto] [--repo-root PATH] [--skills-dir PATH] [--quiet]
+Usage: ./setup [--host codex|claude|auto] [--repo-root PATH] [--skills-dir PATH] [--skip-fgrove-cli] [--quiet]
 
 Links fstack skills into Codex and/or Claude Code skill directories.
 
@@ -11,6 +11,8 @@ Options:
   --host        Target host. Default: auto.
   --repo-root   fstack checkout root. Default: directory containing this script.
   --skills-dir  Override skill install directory. Use with --host codex or --host claude.
+  --skip-fgrove-cli
+                Do not check or update the global fgrove CLI.
   --quiet       Print only errors.
   -h, --help    Show this help.
 EOF
@@ -20,6 +22,7 @@ HOST="auto"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 SKILLS_DIR=""
 QUIET=0
+SKIP_FGROVE_CLI=0
 
 log() {
   [ "$QUIET" -eq 1 ] || echo "$@"
@@ -54,6 +57,10 @@ while [ "$#" -gt 0 ]; do
       SKILLS_DIR="${1#--skills-dir=}"
       shift
       ;;
+    --skip-fgrove-cli)
+      SKIP_FGROVE_CLI=1
+      shift
+      ;;
     --quiet|-q)
       QUIET=1
       shift
@@ -82,6 +89,19 @@ REPO_ROOT="$(cd "$REPO_ROOT" && pwd -P)"
 SKILLS_ROOT="$REPO_ROOT/skills"
 
 [ -d "$SKILLS_ROOT" ] || { echo "Missing skills directory: $SKILLS_ROOT" >&2; exit 1; }
+
+ensure_fgrove_cli() {
+  [ "$SKIP_FGROVE_CLI" -eq 1 ] && return 0
+
+  local helper="$REPO_ROOT/scripts/ensure-fgrove-cli"
+  [ -x "$helper" ] || { echo "Missing fgrove CLI helper: $helper" >&2; exit 1; }
+
+  if [ "$QUIET" -eq 1 ]; then
+    "$helper" --quiet
+  else
+    "$helper"
+  fi
+}
 
 host_skills_dir() {
   case "$1" in
@@ -135,6 +155,8 @@ if [ -n "$SKILLS_DIR" ] && [ "$HOST" = "auto" ]; then
   echo "--skills-dir requires --host codex or --host claude" >&2
   exit 1
 fi
+
+ensure_fgrove_cli
 
 if [ "$HOST" = "auto" ]; then
   while IFS= read -r detected_host; do

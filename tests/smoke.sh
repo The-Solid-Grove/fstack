@@ -52,7 +52,7 @@ check_readme() {
   assert_file "$ROOT/README.md"
   assert_file "$ROOT/VERSION"
   assert_contains "$ROOT/README.md" '^# fstack'
-  assert_contains "$ROOT/VERSION" '^0\.2\.0$'
+  assert_contains "$ROOT/VERSION" '^0\.3\.0$'
   assert_contains "$ROOT/README.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'
@@ -67,6 +67,9 @@ check_setup() {
   assert_file "$ROOT/setup"
   assert_executable "$ROOT/setup"
   bash -n "$ROOT/setup"
+  assert_file "$ROOT/scripts/ensure-fgrove-cli"
+  assert_executable "$ROOT/scripts/ensure-fgrove-cli"
+  bash -n "$ROOT/scripts/ensure-fgrove-cli"
 }
 
 check_skill() {
@@ -76,10 +79,78 @@ check_skill() {
   assert_contains "$skill/SKILL.md" '^name: edit-funnel$'
   assert_contains "$skill/SKILL.md" '^description:'
   assert_contains "$skill/SKILL.md" 'fgrove'
+  assert_contains "$skill/SKILL.md" 'ensure-fgrove-cli'
+  assert_contains "$skill/SKILL.md" 'AGENTS.md'
+  assert_contains "$skill/SKILL.md" 'agent.md'
   assert_contains "$skill/SKILL.md" 'publish --env preview'
   assert_contains "$skill/agents/openai.yaml" 'display_name:'
   assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
   validate_skill_dir "$skill"
+}
+
+check_fgrove_cli_helper() {
+  local tmp_dir fake_bin install_log latest_file installed_file
+  tmp_dir="$(mktemp -d)"
+  fake_bin="$tmp_dir/bin"
+  install_log="$tmp_dir/install.log"
+  latest_file="$tmp_dir/latest"
+  installed_file="$tmp_dir/installed"
+  mkdir -p "$fake_bin"
+
+  cat > "$fake_bin/fgrove" <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+if [ "${1:-}" = "--version" ]; then
+  echo "fgrove $(cat "$FGROVE_INSTALLED_FILE")"
+  exit 0
+fi
+echo "unexpected fgrove call: $*" >&2
+exit 1
+EOF
+  chmod +x "$fake_bin/fgrove"
+
+  cat > "$fake_bin/npm" <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+if [ "${1:-}" = "view" ] && [ "${2:-}" = "@funnelsgrove/cli" ] && [ "${3:-}" = "version" ]; then
+  cat "$FGROVE_LATEST_FILE"
+  exit 0
+fi
+if [ "${1:-}" = "install" ]; then
+  printf '%s\n' "$*" >> "$FGROVE_INSTALL_LOG"
+  exit 0
+fi
+echo "unexpected npm call: $*" >&2
+exit 1
+EOF
+  chmod +x "$fake_bin/npm"
+
+  echo "1.2.3" > "$latest_file"
+  echo "1.2.3" > "$installed_file"
+  PATH="$fake_bin:$PATH" \
+    FGROVE_LATEST_FILE="$latest_file" \
+    FGROVE_INSTALLED_FILE="$installed_file" \
+    FGROVE_INSTALL_LOG="$install_log" \
+    "$ROOT/scripts/ensure-fgrove-cli" --quiet
+  [ ! -f "$install_log" ] || fail "helper installed fgrove when versions matched"
+
+  echo "1.2.4" > "$installed_file"
+  PATH="$fake_bin:$PATH" \
+    FGROVE_LATEST_FILE="$latest_file" \
+    FGROVE_INSTALLED_FILE="$installed_file" \
+    FGROVE_INSTALL_LOG="$install_log" \
+    "$ROOT/scripts/ensure-fgrove-cli" --quiet
+  [ ! -f "$install_log" ] || fail "helper downgraded a newer local fgrove CLI"
+
+  echo "1.2.2" > "$installed_file"
+  PATH="$fake_bin:$PATH" \
+    FGROVE_LATEST_FILE="$latest_file" \
+    FGROVE_INSTALLED_FILE="$installed_file" \
+    FGROVE_INSTALL_LOG="$install_log" \
+    "$ROOT/scripts/ensure-fgrove-cli" --quiet
+  grep -Eq '^install -g @funnelsgrove/cli@latest$' "$install_log" || fail "helper did not install latest fgrove CLI"
+
+  rm -rf "$tmp_dir"
 }
 
 check_copy_skill() {
@@ -115,7 +186,7 @@ check_install_for_host() {
   local tmp_home
   tmp_home="$(mktemp -d)"
 
-  HOME="$tmp_home" "$ROOT/setup" --host "$host" --repo-root "$ROOT" --quiet
+  HOME="$tmp_home" "$ROOT/setup" --host "$host" --repo-root "$ROOT" --skip-fgrove-cli --quiet
 
   for skill_name in edit-funnel writing-funnel-copy; do
     local link="$tmp_home/$skill_parent/$skill_name"
@@ -135,7 +206,7 @@ check_auto_install_fallback() {
   local tmp_home
   tmp_home="$(mktemp -d)"
 
-  PATH="/usr/bin:/bin" HOME="$tmp_home" "$ROOT/setup" --host auto --repo-root "$ROOT" --quiet
+  PATH="/usr/bin:/bin" HOME="$tmp_home" "$ROOT/setup" --host auto --repo-root "$ROOT" --skip-fgrove-cli --quiet
 
   [ -L "$tmp_home/.codex/skills/edit-funnel" ] || fail "auto fallback did not install Codex skill"
   [ -L "$tmp_home/.claude/skills/edit-funnel" ] || fail "auto fallback did not install Claude skill"
@@ -151,6 +222,7 @@ check_auto_install_fallback() {
 
 check_readme
 check_setup
+check_fgrove_cli_helper
 check_skill
 check_copy_skill
 check_installs

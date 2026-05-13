@@ -33,6 +33,7 @@ the source reference is:
 Use this command shape as the minimum workflow:
 
 ```bash
+<fstack-checkout>/scripts/ensure-fgrove-cli
 fgrove whoami
 fgrove use --project <project-id-or-slug> --funnel <funnel-id-or-slug>
 fgrove status
@@ -44,6 +45,13 @@ fgrove publish --env preview --message '<summary>'
 
 Add `--api-url <api-url>` or `--workspace <workspace-id>` when the target is not
 covered by defaults.
+
+Run the fstack `scripts/ensure-fgrove-cli` helper before every hosted funnel
+edit. It checks the installed `fgrove` version against npm and installs
+`@funnelsgrove/cli@latest` when the CLI is missing or outdated. If the helper is
+not available, do the equivalent check manually before continuing. Always run
+`fgrove docs --dir <local-dir>` after that check so a newly installed CLI can
+refresh the funnel-specific editing docs.
 
 ## Workflow
 
@@ -62,11 +70,12 @@ fgrove funnels clone --funnel <source-id-or-slug> --name <new-name>
 
 ### 2. Load the Local Project
 
-Check auth and context first. Sync down only when there is no current synced
-directory or when the local tree is stale. Keep `.funnelsgrove-sync.json` in
-place because it carries the draft sync state.
+Check/update the CLI version first, then check auth and context. Sync down only
+when there is no current synced directory or when the local tree is stale. Keep
+`.funnelsgrove-sync.json` in place because it carries the draft sync state.
 
 ```bash
+<fstack-checkout>/scripts/ensure-fgrove-cli
 fgrove whoami
 fgrove use --project <project-id-or-slug> --funnel <funnel-id-or-slug>
 fgrove status
@@ -76,9 +85,11 @@ fgrove docs --dir <local-dir>
 
 ### 3. Inspect Before Editing
 
-Read the local docs produced by `fgrove docs`, then inspect the funnel tree with
-fast file search. Find the exact pages, steps, content files, styles, assets, and
-tests that control the requested behavior.
+Read the local docs produced by `fgrove docs`, especially the generated
+`AGENTS.md` or `agent.md`, then inspect the funnel tree with fast file search.
+Treat those generated agent docs as the source of truth for funnel-specific
+build and edit rules. Find the exact pages, steps, content files, styles,
+assets, and tests that control the requested behavior.
 
 ```bash
 rg --files <local-dir>

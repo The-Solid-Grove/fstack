@@ -1,0 +1,164 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PACKAGE="${FGROVE_PACKAGE:-@funnelsgrove/cli}"
+BIN="${FGROVE_BIN:-fgrove}"
+QUIET=0
+
+usage() {
+  cat <<'EOF'
+Usage: scripts/ensure-fgrove-cli [--quiet]
+
+Checks the installed fgrove CLI against npm and installs @funnelsgrove/cli@latest
+when the CLI is missing or npm reports a newer package version.
+
+Options:
+  --quiet       Print only warnings and errors.
+  -h, --help    Show this help.
+EOF
+}
+
+log() {
+  [ "$QUIET" -eq 1 ] || echo "$@"
+}
+
+warn() {
+  echo "$@" >&2
+}
+
+installed_version() {
+  command -v "$BIN" >/dev/null 2>&1 || return 1
+  "$BIN" --version 2>/dev/null \
+    | grep -Eo '[0-9]+([.][0-9]+){1,2}([-+][0-9A-Za-z.]+)?' \
+    | head -n 1
+}
+
+latest_version() {
+  command -v npm >/dev/null 2>&1 || return 1
+  npm view "$PACKAGE" version 2>/dev/null | tr -d '[:space:]'
+}
+
+version_core() {
+  local version="$1"
+  version="${version%%+*}"
+  version="${version%%-*}"
+  echo "$version"
+}
+
+has_prerelease() {
+  case "$1" in
+    *-*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+is_newer_version() {
+  local latest="$1"
+  local installed="$2"
+
+  [ -z "$installed" ] && return 0
+  [ "$latest" = "$installed" ] && return 1
+
+  local latest_core installed_core
+  latest_core="$(version_core "$latest")"
+  installed_core="$(version_core "$installed")"
+
+  local latest_major latest_minor latest_patch
+  local installed_major installed_minor installed_patch
+  IFS=. read -r latest_major latest_minor latest_patch <<EOF
+$latest_core
+EOF
+  IFS=. read -r installed_major installed_minor installed_patch <<EOF
+$installed_core
+EOF
+
+  latest_major="${latest_major:-0}"
+  latest_minor="${latest_minor:-0}"
+  latest_patch="${latest_patch:-0}"
+  installed_major="${installed_major:-0}"
+  installed_minor="${installed_minor:-0}"
+  installed_patch="${installed_patch:-0}"
+
+  local latest_parts installed_parts index
+  latest_parts=("$latest_major" "$latest_minor" "$latest_patch")
+  installed_parts=("$installed_major" "$installed_minor" "$installed_patch")
+
+  for index in 0 1 2; do
+    if [ "${latest_parts[$index]}" -gt "${installed_parts[$index]}" ]; then
+      return 0
+    fi
+    if [ "${latest_parts[$index]}" -lt "${installed_parts[$index]}" ]; then
+      return 1
+    fi
+  done
+
+  if has_prerelease "$installed" && ! has_prerelease "$latest"; then
+    return 0
+  fi
+
+  return 1
+}
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --quiet|-q)
+      QUIET=1
+      shift
+      ;;
+    --help|-h)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+done
+
+installed="$(installed_version || true)"
+
+if [ -z "$installed" ]; then
+  log "fgrove CLI not found."
+else
+  log "fgrove CLI installed: $installed"
+fi
+
+if ! command -v npm >/dev/null 2>&1; then
+  if [ -n "$installed" ]; then
+    warn "npm is not available; cannot check for a newer $PACKAGE version."
+    exit 0
+  fi
+
+  echo "fgrove CLI is not installed and npm is not available to install $PACKAGE." >&2
+  exit 1
+fi
+
+latest="$(latest_version || true)"
+
+if [ -z "$latest" ]; then
+  if [ -n "$installed" ]; then
+    warn "Could not read the latest $PACKAGE version from npm; keeping installed fgrove CLI $installed."
+    exit 0
+  fi
+
+  echo "fgrove CLI is not installed and the latest $PACKAGE version could not be read from npm." >&2
+  exit 1
+fi
+
+if ! is_newer_version "$latest" "$installed"; then
+  log "fgrove CLI is current: $installed"
+  exit 0
+fi
+
+if [ -z "$installed" ]; then
+  log "Installing fgrove CLI $latest..."
+else
+  log "Updating fgrove CLI from $installed to $latest..."
+fi
+
+npm install -g "$PACKAGE@latest"
+
+updated="$(installed_version || true)"
+[ -z "$updated" ] || log "fgrove CLI ready: $updated"

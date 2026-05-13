@@ -5,7 +5,7 @@ It includes `edit-funnel` for the FunnelsGrove local editing loop and
 `writing-funnel-copy` for quiz-to-paywall funnel copy based on conversion
 psychology.
 
-Current version: `0.2.0`
+Current version: `0.3.0`
 
 ## Requirements
 
@@ -49,7 +49,16 @@ Host install locations:
 | Claude Code | `~/.claude/skills/<skill-name>` |
 
 The installer creates symlinks back to this checkout. It is idempotent, so rerun
-it any time.
+it any time. By default it also checks the installed `fgrove` CLI against the
+latest `@funnelsgrove/cli` version on npm and updates the global CLI when a
+newer version is available.
+
+For offline installs or CI smoke checks that should not touch global npm
+packages, skip that check:
+
+```bash
+./setup --host auto --skip-fgrove-cli
+```
 
 ## Update
 
@@ -77,14 +86,16 @@ The skill expects a target workspace/project/funnel or enough context to find
 one. It will:
 
 1. Confirm the target and whether a clone is safer.
-2. Check `fgrove` auth and current context.
-3. Sync the funnel into a local directory or use the existing synced tree.
-4. Refresh local editing docs with `fgrove docs`.
-5. Make the requested edits.
-6. Run available checks.
-7. Run `fgrove sync up`.
-8. Run `fgrove publish --env preview`.
-9. Verify the returned preview URL before claiming the work is done.
+2. Check/update the `fgrove` CLI version.
+3. Check `fgrove` auth and current context.
+4. Sync the funnel into a local directory or use the existing synced tree.
+5. Refresh local editing docs with `fgrove docs`.
+6. Read the generated `AGENTS.md` or `agent.md` docs before editing.
+7. Make the requested edits.
+8. Run available checks.
+9. Run `fgrove sync up`.
+10. Run `fgrove publish --env preview`.
+11. Verify the returned preview URL before claiming the work is done.
 
 Production publish is intentionally not part of the default flow. Ask for it
 explicitly and provide the target domain when you want production.
