@@ -52,7 +52,7 @@ check_readme() {
   assert_file "$ROOT/README.md"
   assert_file "$ROOT/VERSION"
   assert_contains "$ROOT/README.md" '^# fstack'
-  assert_contains "$ROOT/VERSION" '^0\.3\.0$'
+  assert_contains "$ROOT/VERSION" '^0\.4\.0$'
   assert_contains "$ROOT/README.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'
@@ -61,6 +61,10 @@ check_readme() {
   assert_contains "$ROOT/README.md" 'Uninstall'
   assert_contains "$ROOT/README.md" 'edit-funnel'
   assert_contains "$ROOT/README.md" 'writing-funnel-copy'
+  assert_contains "$ROOT/README.md" 'local preview'
+  assert_contains "$ROOT/README.md" 'Ask whether to publish'
+  assert_contains "$ROOT/README.md" 'preview QA'
+  assert_contains "$ROOT/README.md" 'production QA'
 }
 
 check_setup() {
@@ -83,6 +87,14 @@ check_skill() {
   assert_contains "$skill/SKILL.md" 'AGENTS.md'
   assert_contains "$skill/SKILL.md" 'agent.md'
   assert_contains "$skill/SKILL.md" 'publish --env preview'
+  assert_contains "$skill/SKILL.md" 'local preview'
+  assert_contains "$skill/SKILL.md" 'Ask the user whether to publish'
+  assert_contains "$skill/SKILL.md" 'production URL'
+  assert_contains "$skill/SKILL.md" 'submit email|add.*email'
+  assert_contains "$skill/SKILL.md" 'test payment|payment path'
+  assert_contains "$skill/SKILL.md" 'larger discount'
+  assert_contains "$skill/SKILL.md" '/manage-subscription'
+  assert_contains "$skill/SKILL.md" 'cancellation flow'
   assert_contains "$skill/agents/openai.yaml" 'display_name:'
   assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
   validate_skill_dir "$skill"
