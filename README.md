@@ -5,7 +5,7 @@ It includes `edit-funnel` for the FunnelsGrove local editing loop and
 `writing-funnel-copy` for quiz-to-paywall funnel copy based on conversion
 psychology.
 
-Current version: `0.3.0`
+Current version: `0.4.0`
 
 ## Requirements
 
@@ -79,7 +79,8 @@ In Codex or Claude Code, ask the agent to use the skill:
 
 ```text
 Use $edit-funnel to edit the ClaimBee onboarding funnel. Change the hero copy,
-sync it back, publish preview, and verify the preview URL.
+run local preview, ask whether to publish, publish preview if approved, run QA,
+and publish production only after approved preview QA.
 ```
 
 The skill expects a target workspace/project/funnel or enough context to find
@@ -93,12 +94,24 @@ one. It will:
 6. Read the generated `AGENTS.md` or `agent.md` docs before editing.
 7. Make the requested edits.
 8. Run available checks.
-9. Run `fgrove sync up`.
-10. Run `fgrove publish --env preview`.
-11. Verify the returned preview URL before claiming the work is done.
+9. Open the local preview by default.
+10. Adjust locally and repeat the local preview loop until the change is ready.
+11. Ask whether to publish.
+12. If approved, run `fgrove sync up`.
+13. Run `fgrove publish --env preview`.
+14. Run preview QA on the returned preview URL.
+15. If production publish is explicitly approved, publish production and run
+    production QA on the production URL.
+
+Full QA covers adding or submitting email, making a test payment or approved
+payment-path equivalent, closing and reopening checkout to verify the larger
+discount path, and checking `/manage-subscription` through the cancellation
+flow when a test subscription is available.
 
 Production publish is intentionally not part of the default flow. Ask for it
-explicitly and provide the target domain when you want production.
+explicitly and provide the target domain when you want production. The skill
+should not publish production until preview QA has passed or you explicitly
+accept the risk of skipped QA.
 
 ## Use `writing-funnel-copy`
 
@@ -130,7 +143,9 @@ use fstack:
 ```markdown
 Use fstack for FunnelsGrove funnel work. Start with `edit-funnel` for hosted
 funnel edits and `writing-funnel-copy` for quiz-to-paywall strategy. Do not
-finish hosted edits until a preview URL has been published and verified.
+finish hosted edits until a local preview has been checked. Ask whether to
+publish before hosted deploys; if publishing, run preview QA before any
+production publish and run production QA after production publish.
 ```
 
 Then each teammate runs:
