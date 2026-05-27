@@ -65,6 +65,9 @@ check_readme() {
   assert_contains "$ROOT/README.md" 'Ask whether to publish'
   assert_contains "$ROOT/README.md" 'preview QA'
   assert_contains "$ROOT/README.md" 'production QA'
+  assert_contains "$ROOT/README.md" 'Update local project packages'
+  assert_contains "$ROOT/README.md" 'npm outdated'
+  assert_contains "$ROOT/README.md" 'pnpm outdated'
 }
 
 check_setup() {
@@ -95,6 +98,15 @@ check_skill() {
   assert_contains "$skill/SKILL.md" 'larger discount'
   assert_contains "$skill/SKILL.md" '/manage-subscription'
   assert_contains "$skill/SKILL.md" 'cancellation flow'
+  assert_contains "$skill/SKILL.md" 'Update Local Project Packages'
+  assert_contains "$skill/SKILL.md" 'package manager'
+  assert_contains "$skill/SKILL.md" 'package-lock\.json'
+  assert_contains "$skill/SKILL.md" 'pnpm-lock\.yaml'
+  assert_contains "$skill/SKILL.md" 'yarn\.lock'
+  assert_contains "$skill/SKILL.md" 'bun\.lockb'
+  assert_contains "$skill/SKILL.md" 'npm outdated'
+  assert_contains "$skill/SKILL.md" 'pnpm outdated'
+  assert_contains "$skill/SKILL.md" 'npm update'
   assert_contains "$skill/agents/openai.yaml" 'display_name:'
   assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
   validate_skill_dir "$skill"

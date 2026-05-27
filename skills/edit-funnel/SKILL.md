@@ -99,13 +99,35 @@ assets, and tests that control the requested behavior.
 rg --files <local-dir>
 ```
 
-### 4. Make Scoped Updates
+### 4. Update Local Project Packages
+
+When the user asks to update packages, or when stale dependencies block local
+checks or preview, update the synced funnel project with the package manager
+already used by the tree. Detect it from lockfiles and generated docs:
+
+| Lockfile | Package manager | Inspect | Update | Install |
+| --- | --- | --- | --- | --- |
+| `package-lock.json` | npm | `npm outdated` | `npm update` | `npm install` |
+| `pnpm-lock.yaml` | pnpm | `pnpm outdated` | `pnpm update` | `pnpm install` |
+| `yarn.lock` | yarn | `yarn outdated` | `yarn upgrade` | `yarn install` |
+| `bun.lockb` | bun | `bun outdated` | `bun update` | `bun install` |
+
+Use one package manager per project. Do not create a new lockfile with a
+different tool. If no lockfile exists, follow `packageManager` in `package.json`
+or ask before choosing. After updating, run the install command for that manager
+so the lockfile and installed dependencies match, then run the local checks.
+
+Keep package updates separate from unrelated funnel edits when possible. Report
+the package manager, update command, install command, changed lockfile, and any
+security or peer-dependency warnings.
+
+### 5. Make Scoped Updates
 
 Edit only the local funnel tree. Keep code simple and DRY. Avoid unrelated
 refactors, metadata churn, generated output, and secret files. Treat `.env` and
 `.env.*` as local runtime material, not uploadable source.
 
-### 5. Run Local Checks
+### 6. Run Local Checks
 
 Run the checks that exist in the synced tree. Prefer the narrowest relevant
 check first, then a build or full smoke pass when available.
@@ -119,7 +141,7 @@ npm run build
 If no package scripts exist, still verify the edited files structurally and open
 the local preview if the tree provides a dev command.
 
-### 6. Preview Locally and Adjust
+### 7. Preview Locally and Adjust
 
 Start or open the local preview by default before any hosted publish. Use the
 generated funnel docs first, then package scripts such as `npm run dev` when the
@@ -132,13 +154,13 @@ publishing. Major edits include checkout, pricing, payment, subscription,
 cancellation, identity/email capture, routing, analytics, or broad visual/flow
 changes.
 
-### 7. Ask Before Publishing
+### 8. Ask Before Publishing
 
 Ask the user whether to publish after local preview verification. Do not sync up
 or publish only because local checks passed. If the user declines publishing,
 stop after reporting the local checks and local preview status.
 
-### 8. Sync, Publish Preview, and Run QA
+### 9. Sync, Publish Preview, and Run QA
 
 Use a clear message that names the edit. Do not publish production from this
 skill unless the user explicitly asks for production and provides the target
@@ -156,7 +178,7 @@ first step, the edited step, and any paywall, checkout, or conversion step
 affected by the request. For major edits and production candidates, run the full
 QA checklist.
 
-### 9. Publish Production and Run Production QA
+### 10. Publish Production and Run Production QA
 
 Publish production only when the user explicitly approves production after the
 preview URL has passed QA. Use the production publish command required by the

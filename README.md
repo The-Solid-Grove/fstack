@@ -92,16 +92,24 @@ one. It will:
 4. Sync the funnel into a local directory or use the existing synced tree.
 5. Refresh local editing docs with `fgrove docs`.
 6. Read the generated `AGENTS.md` or `agent.md` docs before editing.
-7. Make the requested edits.
-8. Run available checks.
-9. Open the local preview by default.
-10. Adjust locally and repeat the local preview loop until the change is ready.
-11. Ask whether to publish.
-12. If approved, run `fgrove sync up`.
-13. Run `fgrove publish --env preview`.
-14. Run preview QA on the returned preview URL.
-15. If production publish is explicitly approved, publish production and run
+7. Update local project packages when requested or needed for checks.
+8. Make the requested edits.
+9. Run available checks.
+10. Open the local preview by default.
+11. Adjust locally and repeat the local preview loop until the change is ready.
+12. Ask whether to publish.
+13. If approved, run `fgrove sync up`.
+14. Run `fgrove publish --env preview`.
+15. Run preview QA on the returned preview URL.
+16. If production publish is explicitly approved, publish production and run
     production QA on the production URL.
+
+Update local project packages with the package manager already used by the
+synced funnel tree. Use `npm outdated`, `npm update`, and `npm install` for
+`package-lock.json`; `pnpm outdated`, `pnpm update`, and `pnpm install` for
+`pnpm-lock.yaml`; `yarn outdated`, `yarn upgrade`, and `yarn install` for
+`yarn.lock`; or the Bun equivalents for `bun.lockb`. Do not introduce a second
+lockfile. After package updates, run the funnel's checks before local preview.
 
 Full QA covers adding or submitting email, making a test payment or approved
 payment-path equivalent, closing and reopening checkout to verify the larger
