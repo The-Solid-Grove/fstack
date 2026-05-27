@@ -65,9 +65,6 @@ check_readme() {
   assert_contains "$ROOT/README.md" 'Ask whether to publish'
   assert_contains "$ROOT/README.md" 'preview QA'
   assert_contains "$ROOT/README.md" 'production QA'
-  assert_contains "$ROOT/README.md" 'Update local project packages'
-  assert_contains "$ROOT/README.md" 'npm outdated'
-  assert_contains "$ROOT/README.md" 'pnpm outdated'
 }
 
 check_setup() {

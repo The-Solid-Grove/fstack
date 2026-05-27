@@ -27,13 +27,10 @@ context cannot answer them:
 
 ## CLI Reference
 
-Prefer the installed `funnelsgrove-cli` skill when available. In this workspace,
-the source reference is:
-
-`/Users/andrew/work/funnelsgrove/app-deals/codex-skills/funnelsgrove-cli/SKILL.md`
-
-Use this command shape as the minimum hosted CLI workflow. Local preview commands
-come from the generated funnel docs and should run before `fgrove sync up`.
+Prefer the installed `funnelsgrove-cli` skill when available for full command
+help. Use the command shape below as the minimum hosted CLI workflow. Local
+preview commands come from the generated funnel docs and should run before
+`fgrove sync up`.
 
 ```bash
 <fstack-checkout>/scripts/ensure-fgrove-cli

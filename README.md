@@ -1,32 +1,24 @@
 # fstack
 
-fstack is a small skill pack for building and editing web funnels with AI agents.
-It includes `edit-funnel` for the FunnelsGrove local editing loop and
-`writing-funnel-copy` for quiz-to-paywall funnel copy based on conversion
-psychology.
+A small skill pack for building and editing web funnels with AI agents.
+
+- `edit-funnel` — local editing loop for FunnelsGrove hosted funnels (sync, preview, QA, publish).
+- `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
 
 Current version: `0.4.0`
 
 ## Requirements
 
-- Git
-- Bash
+- Git, Bash
 - Codex and/or Claude Code
-- FunnelsGrove CLI access for hosted funnel work:
+- FunnelsGrove CLI for hosted funnel work:
 
-```bash
-npm install -g @funnelsgrove/cli
-fgrove login
-```
-
-If you already use the FunnelsGrove CLI skill from
-`/Users/andrew/work/funnelsgrove/app-deals/codex-skills/funnelsgrove-cli`,
-keep using it for detailed CLI command help. `edit-funnel` references that
-workflow instead of duplicating every command.
+  ```bash
+  npm install -g @funnelsgrove/cli
+  fgrove login
+  ```
 
 ## Install
-
-Clone fstack once, then link the skills into your agent.
 
 ```bash
 git clone git@github.com:The-Solid-Grove/fstack.git ~/.fstack
@@ -34,36 +26,18 @@ cd ~/.fstack
 ./setup --host auto
 ```
 
-Install for one host:
-
-```bash
-./setup --host codex
-./setup --host claude
-```
-
-Host install locations:
+Single host: `./setup --host codex` or `./setup --host claude`.
 
 | Host | Skill directory |
 | --- | --- |
 | Codex | `~/.codex/skills/<skill-name>` |
 | Claude Code | `~/.claude/skills/<skill-name>` |
 
-The installer creates symlinks back to this checkout. It is idempotent, so rerun
-it any time. By default it also checks the installed `fgrove` CLI against the
-latest `@funnelsgrove/cli` version on npm and updates the global CLI when a
-newer version is available.
-
-For offline installs or CI smoke checks that should not touch global npm
-packages, skip that check:
-
-```bash
-./setup --host auto --skip-fgrove-cli
-```
+The installer creates idempotent symlinks back to this checkout. By default it
+also checks the installed `fgrove` CLI against the latest `@funnelsgrove/cli`
+on npm and updates it when newer. Skip that check with `--skip-fgrove-cli`.
 
 ## Update
-
-Updates follow the same simple shape as gstack: pull the checkout and rerun
-setup.
 
 ```bash
 cd ~/.fstack
@@ -71,92 +45,54 @@ git pull --ff-only
 ./setup --host auto
 ```
 
-If you installed from a different path, run those commands from that checkout.
-
 ## Use `edit-funnel`
 
-In Codex or Claude Code, ask the agent to use the skill:
+Ask the agent to use the skill against a target funnel:
 
 ```text
-Use $edit-funnel to edit the ClaimBee onboarding funnel. Change the hero copy,
+Use $edit-funnel to edit <workspace>/<project>/<funnel>. Change <copy/screen>,
 run local preview, ask whether to publish, publish preview if approved, run QA,
 and publish production only after approved preview QA.
 ```
 
-The skill expects a target workspace/project/funnel or enough context to find
-one. It will:
+The skill syncs the funnel locally, reads its `AGENTS.md`/`agent.md`, makes
+edits, runs checks, opens local preview, and loops until ready. Update local
+project packages with the package manager already used by the synced tree.
+Use `npm outdated`, `pnpm outdated`, yarn, or bun as appropriate, and never
+introduce a second lockfile. Ask whether to publish before any deploy, run preview QA on the
+returned preview URL, and only run production QA after an explicit production
+publish.
 
-1. Confirm the target and whether a clone is safer.
-2. Check/update the `fgrove` CLI version.
-3. Check `fgrove` auth and current context.
-4. Sync the funnel into a local directory or use the existing synced tree.
-5. Refresh local editing docs with `fgrove docs`.
-6. Read the generated `AGENTS.md` or `agent.md` docs before editing.
-7. Update local project packages when requested or needed for checks.
-8. Make the requested edits.
-9. Run available checks.
-10. Open the local preview by default.
-11. Adjust locally and repeat the local preview loop until the change is ready.
-12. Ask whether to publish.
-13. If approved, run `fgrove sync up`.
-14. Run `fgrove publish --env preview`.
-15. Run preview QA on the returned preview URL.
-16. If production publish is explicitly approved, publish production and run
-    production QA on the production URL.
-
-Update local project packages with the package manager already used by the
-synced funnel tree. Use `npm outdated`, `npm update`, and `npm install` for
-`package-lock.json`; `pnpm outdated`, `pnpm update`, and `pnpm install` for
-`pnpm-lock.yaml`; `yarn outdated`, `yarn upgrade`, and `yarn install` for
-`yarn.lock`; or the Bun equivalents for `bun.lockb`. Do not introduce a second
-lockfile. After package updates, run the funnel's checks before local preview.
-
-Full QA covers adding or submitting email, making a test payment or approved
-payment-path equivalent, closing and reopening checkout to verify the larger
-discount path, and checking `/manage-subscription` through the cancellation
-flow when a test subscription is available.
-
-Production publish is intentionally not part of the default flow. Ask for it
-explicitly and provide the target domain when you want production. The skill
-should not publish production until preview QA has passed or you explicitly
-accept the risk of skipped QA.
+Full QA covers email submit, a test payment (or approved payment-path
+equivalent), reopening checkout to verify the larger discount path, and
+`/manage-subscription` cancellation when a test subscription is available.
+Production publish is opt-in — pass the target domain explicitly.
 
 ## Use `writing-funnel-copy`
 
-Use this skill when you want a complete quiz-to-paywall funnel concept before
-editing screens:
-
 ```text
-Use $writing-funnel-copy for a sleep app funnel. Ask me for the required product
-context first, then return the formatted strategy and screen-by-screen copy.
+Use $writing-funnel-copy for a <product> funnel. Ask for the required product
+context first, then return the strategy and screen-by-screen copy.
 ```
 
-The skill asks for product, audience, entry promise, and screen count before
-writing. It then returns the five-column pre-work, transformation, emotional
-arc, fuel check, screen specs, paywall architecture, and A/B test ideas.
-The full psychology framework is bundled as a nearby reference at
-`skills/writing-funnel-copy/references/funnel-psychology-framework.md`, and the
-paywall-specific guidance is bundled at
-`skills/writing-funnel-copy/references/funnel-paywall-best-practices.md`.
-Conversion experiment guidance is bundled at
-`skills/writing-funnel-copy/references/funnel-conversion-best-practices.md`.
-The skill instructs agents to read the relevant references before drafting.
+The skill asks for product, audience, entry promise, and screen count, then
+returns pre-work, transformation arc, screen specs, paywall architecture, and
+A/B ideas. Reference material lives under
+`skills/writing-funnel-copy/references/`.
 
-## Team Setup
+## Team setup
 
-For now, use a shared global checkout instead of vendoring skills into each
-project. Add this to a project `AGENTS.md` or `CLAUDE.md` when teammates should
-use fstack:
+Use a shared global checkout. Add this to your project `AGENTS.md` or
+`CLAUDE.md`:
 
 ```markdown
-Use fstack for FunnelsGrove funnel work. Start with `edit-funnel` for hosted
-funnel edits and `writing-funnel-copy` for quiz-to-paywall strategy. Do not
-finish hosted edits until a local preview has been checked. Ask whether to
-publish before hosted deploys; if publishing, run preview QA before any
-production publish and run production QA after production publish.
+Use fstack for FunnelsGrove funnel work. Use `edit-funnel` for hosted edits
+and `writing-funnel-copy` for quiz-to-paywall strategy. Always run local
+preview, ask before publishing, run preview QA before any production publish,
+and run production QA after production publish.
 ```
 
-Then each teammate runs:
+Each teammate runs:
 
 ```bash
 git clone git@github.com:The-Solid-Grove/fstack.git ~/.fstack
@@ -165,28 +101,17 @@ cd ~/.fstack && ./setup --host auto
 
 ## Uninstall
 
-Remove the symlinks:
-
 ```bash
-rm -f ~/.codex/skills/edit-funnel
-rm -f ~/.claude/skills/edit-funnel
-rm -f ~/.codex/skills/writing-funnel-copy
-rm -f ~/.claude/skills/writing-funnel-copy
-```
-
-Remove the checkout only if nothing else depends on it:
-
-```bash
+rm -f ~/.codex/skills/edit-funnel ~/.claude/skills/edit-funnel
+rm -f ~/.codex/skills/writing-funnel-copy ~/.claude/skills/writing-funnel-copy
 rm -rf ~/.fstack
 ```
 
 ## Develop
 
-Run the smoke checks:
-
 ```bash
 bash tests/smoke.sh
 ```
 
-The checks validate README coverage, installer syntax, skill frontmatter, and
+Smoke checks validate the README, installer syntax, skill frontmatter, and
 temporary Codex/Claude Code installs.
