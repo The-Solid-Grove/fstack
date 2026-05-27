@@ -10,6 +10,7 @@ Current version: `0.4.0`
 ## Requirements
 
 - Git, Bash
+- Node.js 18+ and npm (for the FunnelsGrove CLI)
 - Codex and/or Claude Code
 - FunnelsGrove CLI for hosted funnel work:
 
