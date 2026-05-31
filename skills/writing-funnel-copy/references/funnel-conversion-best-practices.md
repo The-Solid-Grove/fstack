@@ -10,9 +10,11 @@ keywords:
   - interstitial
   - onboarding
   - conversion
+  - case study
   - funnel
   - cr
   - ctr
+  - aov
 step_types:
   - intro_hero
   - value_prop_story
@@ -267,6 +269,123 @@ price.
 4. User re-selects a plan and completes purchase.
 
 **Impact pattern:** ARPU +15%.
+
+## Case Study: Quiz Funnel from $50k/mo to $200k/mo
+
+Use this as a reference pattern for product-aware traffic coming from long-form
+ads, advertorials, PDPs, or other presell pages. The goal is not to copy the
+exact claims; it is to reuse the structure: expectation match, early trust,
+problem mechanism, and offer logic tied to the user's result.
+
+**Starting point:**
+
+- Quiz revenue was about $50k/month, excluding the brand's other revenue.
+- Traffic split between a product page, a "7 reasons why" advertorial, and the
+  quiz.
+- The product page and advertorial together produced about 3x the quiz revenue.
+- The quiz had not been iterated recently, but the flow was sound: light intro
+  question -> future pacing -> problem questions -> pain amplification ->
+  profile -> offer.
+- Baseline metrics: 14% start rate, 12% completion rate, and 5.4% purchase rate
+  after completion.
+
+### Intervention 1: Congruent Opening
+
+**Problem:** The quiz opened with only a question and answers, even though the
+top ads were already 2-3 minutes long and had educated visitors on the core
+problem.
+
+**Experiment:**
+
+- A/B test the front of the funnel, including whether to remove the first
+  question entirely.
+- Reframe the opening as a direct continuation of the ad: "See if this applies
+  to you, and if it does, we will help you find the right solution."
+- Reference the specific problem the ad explained and the specific outcome the
+  quiz has helped similar users move toward.
+
+**Result pattern:** Start rate improved meaningfully, and once visitors began,
+drop-off stayed low.
+
+### Intervention 2: Sell During Completion
+
+**Problem:** Completion did not equal persuasion. Visitors were answering 11
+questions in a row, then seeing the interesting sales material at the end. They
+completed, but they were not being warmed up.
+
+**Experiment:**
+
+- Add strong social proof early, around question 3, especially when the audience
+  relies heavily on "people like me" signals.
+- Add a problem-mechanism reveal after the deepest problem question.
+- Use a strong visual and a simple graph to show how the problem actually works
+  and why it is worse than it first appears.
+- Keep the solution mechanism near the end so the quiz first makes the problem
+  legible, then makes the product feel like the next step.
+
+**Result pattern:** Completion-to-purchase increased after the funnel started
+teaching and building trust before the result screen.
+
+### Intervention 3: Positioning for AOV and Retention
+
+**Problem:** The offer needed a stronger reason for customers to buy more
+immediately and stay consistent long enough to see value.
+
+**Experiment:**
+
+- Change the end graph from "where you are now vs. where you will be" into a
+  timeline: where you are today, using today's date, versus where you can be 4
+  months from now.
+- Connect the timeline to the bundle logic: "Based on results from people like
+  you, you can get there in about 4 months, but you need consistency."
+- Position the multi-pack as the natural fit for the user's quiz result, not as
+  a generic upsell.
+- Use UTM or result-state logic to auto-select the recommended multi-pack and
+  free gift at checkout.
+- Carry the earned-discount feeling into the loader and checkout with copy like
+  "Applying discount code" when the code is real and pre-applied.
+- Explain why the user qualifies for the specific deal and why the recommended
+  usage period matters.
+
+**Result pattern:** AOV increased by about $16 on average.
+
+### Reusable Lessons
+
+- **Match the ad's awareness level.** If the ad already taught the problem, the
+  quiz should feel like the next diagnostic step, not a cold introduction.
+- **Do not confuse completion with selling.** Long quiz flows need trust,
+  proof, mechanisms, and value reveals before the end.
+- **Place social proof before skepticism peaks.** Early before/afters,
+  testimonials, or customer evidence can make later claims easier to believe.
+- **Show the problem mechanism before the solution mechanism.** Users buy faster
+  when they understand why their current state is happening.
+- **Use date-based timelines to justify bundles.** A multi-pack or longer plan
+  converts better when it is tied to the user's realistic progress window.
+- **Make discounts feel earned.** Result-based, pre-applied offers feel more
+  personal than generic coupon blocks.
+- **Align spend with the strongest path.** Once the quiz outperforms, ads and
+  budget can be shifted toward the quiz as the primary product discovery path.
+
+### Test Ideas From This Case
+
+- Front-screen framing: plain question vs. problem-aware diagnostic intro.
+- First-question removal: immediate start vs. introductory question.
+- Early proof: no proof vs. before/after proof after question 3.
+- Mechanism reveal: no mid-quiz education vs. graph after the deepest problem
+  question.
+- Result graph: static before/after vs. dated timeline projection.
+- Bundle logic: generic bundle vs. quiz-result recommended multi-pack.
+- Discount reveal: visible coupon vs. loader applying the earned code.
+
+### Guardrails
+
+- Use real proof only: do not invent before/afters, customer results, or similar
+  user outcomes.
+- Keep projections compliant. For health, beauty, fitness, finance, or medical
+  offers, use ranges, assumptions, and eligibility language instead of
+  guaranteed outcomes.
+- The discount, free gift, timer, or code must be real and consistently applied
+  through checkout.
 
 ## Summary Table
 
