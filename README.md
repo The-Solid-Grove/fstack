@@ -60,9 +60,12 @@ The skill syncs the funnel locally, reads its `AGENTS.md`/`agent.md`, makes
 edits, runs checks, opens local preview, and loops until ready. Update local
 project packages with the package manager already used by the synced tree.
 Use `npm outdated`, `pnpm outdated`, yarn, or bun as appropriate, and never
-introduce a second lockfile. Ask whether to publish before any deploy, run preview QA on the
-returned preview URL, and only run production QA after an explicit production
-publish.
+introduce a second lockfile. Ask whether to publish before any deploy. Publish
+returns a deployment id and preview URL; poll deployment status by id when the
+CLI/API exposes it, and watch the stage metadata (`publishBuild`,
+`stageTimings`, runtime environment, and image-variant stages) before declaring
+a deploy stuck. Run preview QA on the returned preview URL, and only run
+production QA after an explicit production publish.
 
 Full QA covers email submit, a test payment (or approved payment-path
 equivalent), reopening checkout to verify the larger discount path, and
