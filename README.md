@@ -5,7 +5,7 @@ A small skill pack for building and editing web funnels with AI agents.
 - `edit-funnel` — local editing loop for FunnelsGrove hosted funnels (sync, preview, QA, publish).
 - `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
 
-Current version: `0.4.0`
+Current version: `0.4.1`
 
 ## Requirements
 
@@ -57,8 +57,11 @@ and publish production only after approved preview QA.
 ```
 
 The skill syncs the funnel locally, reads its `AGENTS.md`/`agent.md`, makes
-edits, runs checks, opens local preview, and loops until ready. Update local
-project packages with the package manager already used by the synced tree.
+edits, runs checks, opens local preview, and loops until ready. After creating
+or editing any step, it runs a content-fit audit in local preview using iPhone 16 Pro `430x932`
+as the default viewport for all step checks, plus iPhone 12 `390x844` before the
+step is considered ready. Update local project packages with the package manager
+already used by the synced tree.
 Use `npm outdated`, `pnpm outdated`, yarn, or bun as appropriate, and never
 introduce a second lockfile. Ask whether to publish before any deploy. Publish
 returns a deployment id and preview URL; poll deployment status by id when the

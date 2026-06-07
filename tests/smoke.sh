@@ -52,7 +52,7 @@ check_readme() {
   assert_file "$ROOT/README.md"
   assert_file "$ROOT/VERSION"
   assert_contains "$ROOT/README.md" '^# fstack'
-  assert_contains "$ROOT/VERSION" '^0\.4\.0$'
+  assert_contains "$ROOT/VERSION" '^0\.4\.1$'
   assert_contains "$ROOT/README.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'
@@ -63,6 +63,10 @@ check_readme() {
   assert_contains "$ROOT/README.md" 'writing-funnel-copy'
   assert_contains "$ROOT/README.md" 'local preview'
   assert_contains "$ROOT/README.md" 'Ask whether to publish'
+  assert_contains "$ROOT/README.md" 'content-fit audit'
+  assert_contains "$ROOT/README.md" 'iPhone 12.*390.?x.?844'
+  assert_contains "$ROOT/README.md" 'iPhone 16 Pro.*430.?x.?932'
+  assert_contains "$ROOT/README.md" 'default viewport'
   assert_contains "$ROOT/README.md" 'preview QA'
   assert_contains "$ROOT/README.md" 'production QA'
 }
@@ -88,6 +92,10 @@ check_skill() {
   assert_contains "$skill/SKILL.md" 'agent.md'
   assert_contains "$skill/SKILL.md" 'publish --env preview'
   assert_contains "$skill/SKILL.md" 'local preview'
+  assert_contains "$skill/SKILL.md" 'content-fit audit'
+  assert_contains "$skill/SKILL.md" 'iPhone 12.*390.?x.?844'
+  assert_contains "$skill/SKILL.md" 'iPhone 16 Pro.*430.?x.?932'
+  assert_contains "$skill/SKILL.md" 'default viewport'
   assert_contains "$skill/SKILL.md" 'Ask the user whether to publish'
   assert_contains "$skill/SKILL.md" 'production URL'
   assert_contains "$skill/SKILL.md" 'submit email|add.*email'

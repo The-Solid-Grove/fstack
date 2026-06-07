@@ -124,6 +124,11 @@ Edit only the local funnel tree. Keep code simple and DRY. Avoid unrelated
 refactors, metadata churn, generated output, and secret files. Treat `.env` and
 `.env.*` as local runtime material, not uploadable source.
 
+After creating or editing any funnel step, run a content-fit audit for that step
+in the local preview. Use iPhone 16 Pro `430x932` as the default viewport across
+all step checks, and also verify iPhone 12 `390x844`. Fix clipped, overflowing,
+overlapping, or hidden content before moving on to another step.
+
 ### 6. Run Local Checks
 
 Run the checks that exist in the synced tree. Prefer the narrowest relevant
@@ -145,6 +150,11 @@ generated funnel docs first, then package scripts such as `npm run dev` when the
 docs point there. Inspect the changed flow in the browser, check console/runtime
 errors when a browser tool is available, adjust the local files, rerun checks,
 and preview locally again until the local result matches the request.
+
+For created or edited steps, the local preview inspection must include the
+content-fit audit on iPhone 16 Pro `430x932` and iPhone 12 `390x844`. Treat
+iPhone 16 Pro as the default viewport for every step, then spot-check iPhone 12
+before considering the step ready.
 
 For major edits, ask the user whether to run the full QA checklist before
 publishing. Major edits include checkout, pricing, payment, subscription,
@@ -217,15 +227,18 @@ Finish only after all of these are true:
 1. Target workspace/project/funnel and local directory are recorded.
 2. Requested edits pass available local checks.
 3. Local preview is opened or an unavailable local preview has a named reason.
-4. The user is asked whether to publish after local preview.
-5. If publishing, requested edits are synced with `fgrove sync up`.
-6. If publishing, preview is published with `fgrove publish --env preview`.
-7. If preview is published, preview QA is run and reported.
-8. If production is explicitly requested, production is published only after
+4. Every created or edited step has a reported content-fit audit on iPhone 16
+   Pro `430x932` and iPhone 12 `390x844`, with iPhone 16 Pro as the default
+   viewport.
+5. The user is asked whether to publish after local preview.
+6. If publishing, requested edits are synced with `fgrove sync up`.
+7. If publishing, preview is published with `fgrove publish --env preview`.
+8. If preview is published, preview QA is run and reported.
+9. If production is explicitly requested, production is published only after
    preview QA and production QA is run on the production URL.
-9. Checks and QA flows run are listed, including unavailable checks or skipped
+10. Checks and QA flows run are listed, including unavailable checks or skipped
    flows.
-10. Any blockers have a named root cause and concrete next step.
+11. Any blockers have a named root cause and concrete next step.
 
 ## Safety Rules
 
