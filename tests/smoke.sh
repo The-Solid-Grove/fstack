@@ -51,20 +51,46 @@ validate_skill_dir() {
 check_readme() {
   assert_file "$ROOT/README.md"
   assert_file "$ROOT/VERSION"
+  assert_file "$ROOT/docs/funnel-qa-checklist.md"
   assert_contains "$ROOT/README.md" '^# fstack'
-  assert_contains "$ROOT/VERSION" '^0\.4\.0$'
+  assert_contains "$ROOT/VERSION" '^0\.5\.0$'
   assert_contains "$ROOT/README.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'
   assert_contains "$ROOT/README.md" 'Install'
   assert_contains "$ROOT/README.md" 'Update'
   assert_contains "$ROOT/README.md" 'Uninstall'
+  assert_contains "$ROOT/README.md" 'create-funnel'
   assert_contains "$ROOT/README.md" 'edit-funnel'
   assert_contains "$ROOT/README.md" 'writing-funnel-copy'
   assert_contains "$ROOT/README.md" 'local preview'
   assert_contains "$ROOT/README.md" 'Ask whether to publish'
+  assert_contains "$ROOT/README.md" 'content-fit audit'
+  assert_contains "$ROOT/README.md" 'iPhone 12.*390.?x.?844'
+  assert_contains "$ROOT/README.md" 'iPhone 16 Pro.*430.?x.?932'
+  assert_contains "$ROOT/README.md" 'default viewport'
   assert_contains "$ROOT/README.md" 'preview QA'
   assert_contains "$ROOT/README.md" 'production QA'
+  assert_contains "$ROOT/README.md" 'Image performance'
+  assert_contains "$ROOT/README.md" 'AVIF/WebP'
+  assert_contains "$ROOT/README.md" 'manifest-driven next-step image preloading'
+  assert_contains "$ROOT/README.md" 'docs/funnel-qa-checklist\.md'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'preview build'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'every step'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'every branch'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'A/B experiment'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Apple Pay'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Google Pay'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Stripe dashboard'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Visual Pass'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" '430x932'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" '390x844'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Image Performance'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'imageVariants'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'AVIF/WebP'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'assetIds'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'second-stage discount'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'complete registration'
 }
 
 check_setup() {
@@ -88,10 +114,22 @@ check_skill() {
   assert_contains "$skill/SKILL.md" 'agent.md'
   assert_contains "$skill/SKILL.md" 'publish --env preview'
   assert_contains "$skill/SKILL.md" 'local preview'
+  assert_contains "$skill/SKILL.md" 'content-fit audit'
+  assert_contains "$skill/SKILL.md" 'iPhone 12.*390.?x.?844'
+  assert_contains "$skill/SKILL.md" 'iPhone 16 Pro.*430.?x.?932'
+  assert_contains "$skill/SKILL.md" 'default viewport'
   assert_contains "$skill/SKILL.md" 'Ask the user whether to publish'
   assert_contains "$skill/SKILL.md" 'production URL'
+  assert_contains "$skill/SKILL.md" 'preview-build coverage'
+  assert_contains "$skill/SKILL.md" 'docs/funnel-qa-checklist\.md'
+  assert_contains "$skill/SKILL.md" 'every step'
+  assert_contains "$skill/SKILL.md" 'every branch'
+  assert_contains "$skill/SKILL.md" 'A/B experiment'
   assert_contains "$skill/SKILL.md" 'submit email|add.*email'
   assert_contains "$skill/SKILL.md" 'test payment|payment path'
+  assert_contains "$skill/SKILL.md" 'Apple Pay'
+  assert_contains "$skill/SKILL.md" 'Google Pay'
+  assert_contains "$skill/SKILL.md" 'complete registration'
   assert_contains "$skill/SKILL.md" 'larger discount'
   assert_contains "$skill/SKILL.md" '/manage-subscription'
   assert_contains "$skill/SKILL.md" 'cancellation flow'
@@ -104,6 +142,11 @@ check_skill() {
   assert_contains "$skill/SKILL.md" 'npm outdated'
   assert_contains "$skill/SKILL.md" 'pnpm outdated'
   assert_contains "$skill/SKILL.md" 'npm update'
+  assert_contains "$skill/SKILL.md" 'Image Performance Lock'
+  assert_contains "$skill/SKILL.md" 'AVIF/WebP'
+  assert_contains "$skill/SKILL.md" 'funnelManifest\.assets'
+  assert_contains "$skill/SKILL.md" 'assetIds'
+  assert_contains "$skill/SKILL.md" 'next-step preloads'
   assert_contains "$skill/agents/openai.yaml" 'display_name:'
   assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
   validate_skill_dir "$skill"
@@ -201,6 +244,31 @@ check_copy_skill() {
   validate_skill_dir "$skill"
 }
 
+check_create_skill() {
+  local skill="$ROOT/skills/create-funnel"
+  assert_file "$skill/SKILL.md"
+  assert_file "$skill/agents/openai.yaml"
+  assert_contains "$skill/SKILL.md" '^name: create-funnel$'
+  assert_contains "$skill/SKILL.md" '^description:'
+  assert_contains "$skill/SKILL.md" 'apps/funnel-template'
+  assert_contains "$skill/SKILL.md" 'fgrove create'
+  assert_contains "$skill/SKILL.md" '[Rr]eskin'
+  assert_contains "$skill/SKILL.md" 'funnel.manifest.ts'
+  assert_contains "$skill/SKILL.md" 'discount-on-close'
+  assert_contains "$skill/SKILL.md" '430x932'
+  assert_contains "$skill/SKILL.md" '390x844'
+  assert_contains "$skill/SKILL.md" 'qa-checklist'
+  assert_contains "$skill/SKILL.md" 'Stripe dashboard'
+  assert_contains "$skill/SKILL.md" 'sync up'
+  assert_contains "$skill/SKILL.md" 'publish --env preview'
+  assert_contains "$skill/SKILL.md" 'AVIF/WebP'
+  assert_contains "$skill/SKILL.md" 'funnelManifest\.assets'
+  assert_contains "$skill/SKILL.md" 'assetIds'
+  assert_contains "$skill/agents/openai.yaml" 'display_name:'
+  assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
+  validate_skill_dir "$skill"
+}
+
 check_install_for_host() {
   local host="$1"
   local skill_parent="$2"
@@ -209,7 +277,7 @@ check_install_for_host() {
 
   HOME="$tmp_home" "$ROOT/setup" --host "$host" --repo-root "$ROOT" --skip-fgrove-cli --quiet
 
-  for skill_name in edit-funnel writing-funnel-copy; do
+  for skill_name in create-funnel edit-funnel writing-funnel-copy; do
     local link="$tmp_home/$skill_parent/$skill_name"
     [ -L "$link" ] || fail "expected symlink at $link"
     [ "$(cd "$link" && pwd -P)" = "$ROOT/skills/$skill_name" ] || fail "wrong symlink target for $host"
@@ -246,6 +314,7 @@ check_setup
 check_fgrove_cli_helper
 check_skill
 check_copy_skill
+check_create_skill
 check_installs
 check_auto_install_fallback
 

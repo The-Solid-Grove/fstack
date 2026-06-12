@@ -1,4 +1,4 @@
 interface:
   display_name: "Edit Funnel"
   short_description: "Edit, local-preview, and QA FunnelsGrove funnels"
-  default_prompt: "Use $edit-funnel to load a FunnelsGrove funnel, make the requested local edits, run local preview, ask whether to publish, publish preview if approved, run QA, and only publish production after approved preview QA."
+  default_prompt: "Use $edit-funnel to load a FunnelsGrove funnel, make the requested local edits, run local preview, ask whether to publish, publish preview if approved, run QA, verify preview coverage for the production candidate, and only publish production after approved preview QA."

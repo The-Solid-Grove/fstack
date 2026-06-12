@@ -2,10 +2,11 @@
 
 A small skill pack for building and editing web funnels with AI agents.
 
+- `create-funnel` — scaffold a new funnel from the FunnelsGrove funnel template (copy, reskin, verify, optional hosted wiring).
 - `edit-funnel` — local editing loop for FunnelsGrove hosted funnels (sync, preview, QA, publish).
 - `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
 
-Current version: `0.4.0`
+Current version: `0.5.0`
 
 ## Requirements
 
@@ -46,6 +47,22 @@ git pull --ff-only
 ./setup --host auto
 ```
 
+## Use `create-funnel`
+
+```text
+Use $create-funnel to start a new funnel for <AppName> from the funnel
+template, verify the full flow locally at 430x932 and 390x844, and wire the
+hosted funnel only when I ask.
+```
+
+The skill copies `apps/funnel-template` from a funnelsgrove monorepo checkout
+(never `fgrove create` from the global CLI — the npm package does not ship
+templates), reskins the name/branding, installs dependencies, runs checks, and
+walks the full flow locally including the paywall's two-stage discount. The
+template ships working quiz steps, email capture, the ClaimBee-derived paywall
+with discount-on-close, a paywall B variant for experiments, Apple Pay/Google
+Pay slots, and subscription management.
+
 ## Use `edit-funnel`
 
 Ask the agent to use the skill against a target funnel:
@@ -53,24 +70,39 @@ Ask the agent to use the skill against a target funnel:
 ```text
 Use $edit-funnel to edit <workspace>/<project>/<funnel>. Change <copy/screen>,
 run local preview, ask whether to publish, publish preview if approved, run QA,
-and publish production only after approved preview QA.
+verify preview coverage for the production candidate, and publish production
+only after approved preview QA.
 ```
 
 The skill syncs the funnel locally, reads its `AGENTS.md`/`agent.md`, makes
-edits, runs checks, opens local preview, and loops until ready. Update local
-project packages with the package manager already used by the synced tree.
+edits, runs checks, opens local preview, and loops until ready. After creating
+or editing any step, it runs a content-fit audit in local preview using iPhone 16 Pro `430x932`
+as the default viewport for all step checks, plus iPhone 12 `390x844` before the
+step is considered ready. Update local project packages with the package manager
+already used by the synced tree.
 Use `npm outdated`, `pnpm outdated`, yarn, or bun as appropriate, and never
 introduce a second lockfile. Ask whether to publish before any deploy. Publish
 returns a deployment id and preview URL; poll deployment status by id when the
 CLI/API exposes it, and watch the stage metadata (`publishBuild`,
 `stageTimings`, runtime environment, and image-variant stages) before declaring
-a deploy stuck. Run preview QA on the returned preview URL, and only run
-production QA after an explicit production publish.
+a deploy stuck. Before production publish or post-publish production QA, verify
+whether the current production candidate already has a matching preview build.
+If it does not, publish to preview first and run the full QA checklist on that
+preview URL. Only run production QA after an explicit production publish.
 
-Full QA covers email submit, a test payment (or approved payment-path
-equivalent), reopening checkout to verify the larger discount path, and
-`/manage-subscription` cancellation when a test subscription is available.
-Production publish is opt-in — pass the target domain explicitly.
+Image performance is part of every image-touching edit. Keep the publish build's
+raster optimization and AVIF/WebP variant generation enabled, and verify the
+`imageVariants` stage when publishing. Funnel images should be declared in
+`funnelManifest.assets` and attached to steps with `assetIds`, then preloaded
+with the ClaimBee/Blessly pattern: first-viewport images use the framework's
+normal priority/preload path, while the shell warms only likely next-step images
+at low priority instead of preloading the whole funnel.
+
+Full QA is described in `docs/funnel-qa-checklist.md`. It includes every step,
+branch, and active A/B experiment; paywall and checkout paths; Apple Pay and
+Google Pay button appearance; checkout/payment behavior; complete registration;
+required links; and `/manage-subscription` cancellation when a test subscription
+is available. Production publish is opt-in — pass the target domain explicitly.
 
 ## Use `writing-funnel-copy`
 
@@ -90,10 +122,13 @@ Use a shared global checkout. Add this to your project `AGENTS.md` or
 `CLAUDE.md`:
 
 ```markdown
-Use fstack for FunnelsGrove funnel work. Use `edit-funnel` for hosted edits
-and `writing-funnel-copy` for quiz-to-paywall strategy. Always run local
-preview, ask before publishing, run preview QA before any production publish,
-and run production QA after production publish.
+Use fstack for FunnelsGrove funnel work. Use `create-funnel` to start a new
+funnel from the template, `edit-funnel` for hosted edits, and
+`writing-funnel-copy` for quiz-to-paywall strategy. Always run local
+preview, ask before publishing, verify preview coverage for the production
+candidate, run preview QA before any production publish, and run production QA
+after production publish. For image edits, keep build-time image optimization
+enabled and use manifest-driven next-step image preloading.
 ```
 
 Each teammate runs:
@@ -106,6 +141,7 @@ cd ~/.fstack && ./setup --host auto
 ## Uninstall
 
 ```bash
+rm -f ~/.codex/skills/create-funnel ~/.claude/skills/create-funnel
 rm -f ~/.codex/skills/edit-funnel ~/.claude/skills/edit-funnel
 rm -f ~/.codex/skills/writing-funnel-copy ~/.claude/skills/writing-funnel-copy
 rm -rf ~/.fstack
