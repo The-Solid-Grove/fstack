@@ -34,7 +34,7 @@ rm -rf node_modules .next out tsconfig.tsbuildinfo
 - `funnel.config.json` — `name` and `description` for the new app; leave ids for hosted wiring.
 - `src/config/funnel.manifest.ts` — `meta.title` and `meta.description`.
 - `src/theme/theme.ts` — brand palette and fonts (or keep defaults until design exists).
-- Rewriting the template's per-step copy and images in `src/steps/content/*.content.ts` is a separate, later task.
+- Rewriting the template's per-step copy and images in `src/steps/content/*.content.ts` is a separate, later task. When adding or replacing steps, keep user-facing `path` values meaningful, such as `/fitness-goal` or `/email-capture`, not `/step-1`. Sequential or ordered step ids and filenames are okay when they match the existing tree.
 
 ### 3. Install and check
 
@@ -51,7 +51,7 @@ build-time image reduction.
 
 ### 4. Verify locally
 
-`npm run dev` (note the port it actually picks — it moves to 3001+ when 3000 is busy), then walk the full flow from step-1 through email capture and paywall to subscription-started. Run the docs' QA checklist (`docs/qa-checklist.md` in the funnel tree): content-fit at 430x932 and 390x844, sticky CTA on an opaque bar, paywall countdown + promo card + discounted plan prices render. Dev mode runs Stripe in test mode with the template's test plan catalog.
+`npm run dev` (note the port it actually picks — it moves to 3001+ when 3000 is busy), then walk the full flow from the first step through email capture and paywall to subscription-started. Run the docs' QA checklist (`docs/qa-checklist.md` in the funnel tree): content-fit at 430x932 and 390x844, sticky CTA on an opaque bar, paywall countdown + promo card + discounted plan prices render. Dev mode runs Stripe in test mode with the template's test plan catalog.
 
 The copied `.env.local` is the template's local dev config (API on `localhost:4001`); it is never synced, and `fgrove env pull` replaces it after hosted wiring. Opening checkout, the close-checkout special offer, and test payments need a reachable FunnelsGrove API with its database (local API + DB, or the published preview). Without one, the paywall shows a fetch error where checkout would start — report those three QA items as a named blocker and finish them on the preview URL.
 
@@ -95,6 +95,8 @@ QA the preview URL with the same checklist before any production talk. Real Appl
 - Copying `node_modules`/`.next` along and shipping stale build state — delete them before install.
 - Skipping the rebrand of `funnel.manifest.ts` meta — the builder then shows template branding.
 - Treating missing wallet buttons in local dev as a defect — wallets need Stripe domain/return-URL config; verify on preview with Stripe configured.
+- Creating user-facing URLs like `/step-1`, `/step-2`, or `/step-07`. Use a
+  meaningful route slug even if the internal step id or filename is sequential.
 - Leaving new step artwork outside `funnelManifest.assets`/`assetIds`, which
   prevents manifest-driven next-step preloading.
 - Disabling build-time raster compression or AVIF/WebP variant generation.

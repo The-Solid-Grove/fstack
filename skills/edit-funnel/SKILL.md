@@ -129,6 +129,12 @@ in the local preview. Use iPhone 16 Pro `430x932` as the default viewport across
 all step checks, and also verify iPhone 12 `390x844`. Fix clipped, overflowing,
 overlapping, or hidden content before moving on to another step.
 
+When creating a step, keep the public route meaningful. `path` should describe
+the screen's purpose, such as `/motivation`, `/fitness-goal`, `/email-capture`,
+or `/paywall`; do not create user-facing paths like `/step-1` or `/step-07`.
+Sequential ids and `step-NN-*` filenames are acceptable when the existing funnel
+uses them for ordering, but URLs should be readable product routes.
+
 ### Image Performance Lock
 
 For any new or edited image, image-heavy step, or route that changes which

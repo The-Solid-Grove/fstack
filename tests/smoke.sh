@@ -53,7 +53,7 @@ check_readme() {
   assert_file "$ROOT/VERSION"
   assert_file "$ROOT/docs/funnel-qa-checklist.md"
   assert_contains "$ROOT/README.md" '^# fstack'
-  assert_contains "$ROOT/VERSION" '^0\.5\.1$'
+  assert_contains "$ROOT/VERSION" '^0\.5\.2$'
   assert_contains "$ROOT/README.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'
@@ -74,6 +74,8 @@ check_readme() {
   assert_contains "$ROOT/README.md" 'Image performance'
   assert_contains "$ROOT/README.md" 'AVIF/WebP'
   assert_contains "$ROOT/README.md" 'manifest-driven next-step image preloading'
+  assert_contains "$ROOT/README.md" 'meaningful route slugs'
+  assert_contains "$ROOT/README.md" '/step-1'
   assert_contains "$ROOT/README.md" 'docs/funnel-qa-checklist\.md'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'preview build'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'every step'
@@ -147,6 +149,8 @@ check_skill() {
   assert_contains "$skill/SKILL.md" 'funnelManifest\.assets'
   assert_contains "$skill/SKILL.md" 'assetIds'
   assert_contains "$skill/SKILL.md" 'next-step preloads'
+  assert_contains "$skill/SKILL.md" 'public route'
+  assert_contains "$skill/SKILL.md" '/step-1'
   assert_contains "$skill/agents/openai.yaml" 'display_name:'
   assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
   validate_skill_dir "$skill"
@@ -264,6 +268,8 @@ check_create_skill() {
   assert_contains "$skill/SKILL.md" 'AVIF/WebP'
   assert_contains "$skill/SKILL.md" 'funnelManifest\.assets'
   assert_contains "$skill/SKILL.md" 'assetIds'
+  assert_contains "$skill/SKILL.md" 'meaningful route slug'
+  assert_contains "$skill/SKILL.md" '/step-1'
   assert_contains "$skill/agents/openai.yaml" 'display_name:'
   assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
   validate_skill_dir "$skill"

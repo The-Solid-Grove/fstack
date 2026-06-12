@@ -6,7 +6,7 @@ A small skill pack for building and editing web funnels with AI agents.
 - `edit-funnel` — local editing loop for FunnelsGrove hosted funnels (sync, preview, QA, publish).
 - `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
 
-Current version: `0.5.1`
+Current version: `0.5.2`
 
 ## Requirements
 
@@ -61,7 +61,9 @@ templates), reskins the name/branding, installs dependencies, runs checks, and
 walks the full flow locally including the paywall's two-stage discount. The
 template ships working quiz steps, email capture, the ClaimBee-derived paywall
 with discount-on-close, a paywall B variant for experiments, Apple Pay/Google
-Pay slots, and subscription management.
+Pay slots, and subscription management. When adding steps, user-facing URLs must
+be meaningful slugs rather than `/step-1` style routes; internal ids or filenames
+may stay sequential if the project already uses that convention.
 
 ## Use `edit-funnel`
 
@@ -89,6 +91,10 @@ a deploy stuck. Before production publish or post-publish production QA, verify
 whether the current production candidate already has a matching preview build.
 If it does not, publish to preview first and run the full QA checklist on that
 preview URL. Only run production QA after an explicit production publish.
+
+For new steps, keep `path` values semantic and user-readable. Sequential ids and
+`step-NN-*` filenames are fine for code ordering, but public URLs should be
+meaningful route slugs, not `/step-1`.
 
 Image performance is part of every image-touching edit. Keep the publish build's
 raster optimization and AVIF/WebP variant generation enabled, and verify the
@@ -127,8 +133,9 @@ funnel from the template, `edit-funnel` for hosted edits, and
 `writing-funnel-copy` for quiz-to-paywall strategy. Always run local
 preview, ask before publishing, verify preview coverage for the production
 candidate, run preview QA before any production publish, and run production QA
-after production publish. For image edits, keep build-time image optimization
-enabled and use manifest-driven next-step image preloading.
+after production publish. For new steps, use meaningful public route paths even
+when ids or filenames are sequential. For image edits, keep build-time image
+optimization enabled and use manifest-driven next-step image preloading.
 ```
 
 Each teammate runs:
