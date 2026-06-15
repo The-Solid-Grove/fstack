@@ -1,6 +1,6 @@
 ---
 name: writing-funnel-copy
-description: Use when drafting quiz-to-paywall funnel copy, onboarding funnel screen copy, paywall copy, conversion psychology, or screen-by-screen funnel strategy for a product.
+description: Use when drafting, building, reviewing, QAing, or optimizing quiz-to-paywall funnel copy, onboarding screens, paywalls, conversion psychology, product sense, competitor research, positioning, or screen-by-screen funnel strategy for a product.
 ---
 
 # Writing Funnel Copy
@@ -12,6 +12,10 @@ Framework. Keep the skill body lean; the complete framework lives beside this
 file at `references/funnel-psychology-framework.md`, with paywall-specific
 guidance at `references/funnel-paywall-best-practices.md` and conversion
 experiment guidance at `references/funnel-conversion-best-practices.md`.
+Research-stage guidance for `PRODUCT_SENSE.md`, competitor research, and
+pre-plan positioning lives at `references/funnel-research.md`, with fstack
+additions at `references/funnel-research-stage.md`. Live funnel teardowns,
+copy swipe files, and QA/build heuristics live at `references/funnels-research/`.
 
 ## Required Reference
 
@@ -36,7 +40,21 @@ down-sell recovery, also read and follow
 `references/funnel-conversion-best-practices.md`. Treat it as a catalog of
 conversion-focused patterns to apply where they match the product and claims.
 
-If the reference file is unavailable, stop and report that the framework cannot
+When the task involves funnel research, `PRODUCT_SENSE.md`, competitor research,
+positioning, messaging strategy, or strategy before plan generation/code edits,
+also read and follow `references/funnel-research.md` and
+`references/funnel-research-stage.md`. Treat the copied prompt as the source
+research contract and the stage reference as the fstack-specific extension
+before drafting copy or writing an edit plan.
+
+When building, editing, reviewing, QAing, or optimizing an existing funnel,
+inspect `references/funnels-research/README.md` and then load only the relevant
+files from that folder. Start with `00-MUST-DO-TRICKS.md` for build patterns,
+`00-QA-CHECKLIST.md` for review/QA, `00-LIVE-FINDINGS.md` for live market
+patterns, `00-MASTER-FUNNEL-LIST.md` for vertical examples, `copy/` for swipe
+copy, and `live/` for observed live-funnel behavior.
+
+If any required reference file is unavailable, stop and report that it cannot
 be loaded rather than drafting from memory.
 
 ## Gather Context First
@@ -60,16 +78,21 @@ local funnel docs and current copy before asking questions that the files answer
 ## Workflow
 
 1. Gather the required inputs.
-2. Read `references/funnel-psychology-framework.md`.
-3. Read `references/funnel-paywall-best-practices.md` when the output includes
+2. Read `references/funnel-research.md` and
+   `references/funnel-research-stage.md` when the task includes research,
+   product sense, competitor analysis, positioning, or pre-plan strategy.
+3. Read `references/funnel-psychology-framework.md`.
+4. Read `references/funnel-paywall-best-practices.md` when the output includes
    a paywall, checkout, pricing, trial, or subscription offer.
-4. Read `references/funnel-conversion-best-practices.md` when the output
+5. Read `references/funnel-conversion-best-practices.md` when the output
    includes quiz, onboarding, interstitial, pre-paywall, checkout, or CR
    optimization recommendations.
-5. Complete the five-column pre-work table before writing screens.
-6. Map the screen count to the framework's six funnel sections.
-7. Write the funnel screen-by-screen using the framework's per-screen checklist.
-8. Return the framework's required formatted output, including the
+6. Inspect `references/funnels-research/README.md` and relevant corpus files
+   when building, reviewing, QAing, or optimizing a funnel.
+7. Complete the five-column pre-work table before writing screens.
+8. Map the screen count to the framework's six funnel sections.
+9. Write the funnel screen-by-screen using the framework's per-screen checklist.
+10. Return the framework's required formatted output, including the
    Five-column pre-work table, transformation, emotional arc, fuel balance
    check, Screen-by-screen spec, paywall architecture, and A/B tests.
 

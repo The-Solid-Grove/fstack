@@ -1,4 +1,4 @@
 interface:
   display_name: "Writing Funnel Copy"
-  short_description: "Draft quiz-to-paywall funnel copy"
-  default_prompt: "Use $writing-funnel-copy to ask for product context, then draft a screen-by-screen quiz-to-paywall funnel with paywall copy."
+  short_description: "Research, draft, and review quiz-to-paywall funnels"
+  default_prompt: "Use $writing-funnel-copy to research product sense when needed, then draft or review a screen-by-screen quiz-to-paywall funnel with paywall copy."

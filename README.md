@@ -6,7 +6,7 @@ A small skill pack for building and editing web funnels with AI agents.
 - `edit-funnel` — local editing loop for FunnelsGrove hosted funnels (sync, preview, QA, publish).
 - `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
 
-Current version: `0.5.2`
+Current version: `0.5.3`
 
 ## Requirements
 

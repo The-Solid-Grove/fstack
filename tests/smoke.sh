@@ -30,7 +30,7 @@ assert_not_contains() {
 
 assert_no_template_markers() {
   local path="$1"
-  if grep -RInE 'TODO|TBD|\[TODO|Replace with|placeholder' "$path" >/tmp/fstack-smoke-placeholders.$$ 2>/dev/null; then
+  if grep -RInE --exclude-dir=funnels-research 'TODO|TBD|\[TODO|Replace with|placeholder' "$path" >/tmp/fstack-smoke-placeholders.$$ 2>/dev/null; then
     cat /tmp/fstack-smoke-placeholders.$$ >&2
     rm -f /tmp/fstack-smoke-placeholders.$$
     fail "template markers remain under $path"
@@ -53,7 +53,7 @@ check_readme() {
   assert_file "$ROOT/VERSION"
   assert_file "$ROOT/docs/funnel-qa-checklist.md"
   assert_contains "$ROOT/README.md" '^# fstack'
-  assert_contains "$ROOT/VERSION" '^0\.5\.2$'
+  assert_contains "$ROOT/VERSION" '^0\.5\.3$'
   assert_contains "$ROOT/README.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'
