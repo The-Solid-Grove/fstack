@@ -51,7 +51,7 @@ build-time image reduction.
 
 ### 4. Verify locally
 
-`npm run dev` (note the port it actually picks — it moves to 3001+ when 3000 is busy), then walk the full flow from the first step through email capture and paywall to subscription-started. Run the docs' QA checklist (`docs/qa-checklist.md` in the funnel tree): content-fit at 430x932 and 390x844, sticky CTA on an opaque bar, paywall countdown + promo card + discounted plan prices render. Dev mode runs Stripe in test mode with the template's test plan catalog.
+`npm run dev` (note the port it actually picks — it moves to 3001+ when 3000 is busy), then walk the full flow from the first step through email capture and paywall to subscription-started. Run the docs' QA checklist (`docs/qa-checklist.md` in the funnel tree): content-fit at small 375x667, medium 393x852, large 402x874, and desktop-small 1280x800, sticky CTA on an opaque bar, paywall countdown + promo card + discounted plan prices render. Dev mode runs Stripe in test mode with the template's test plan catalog.
 
 The copied `.env.local` is the template's local dev config (API on `localhost:4001`); it is never synced, and `fgrove env pull` replaces it after hosted wiring. Opening checkout, the close-checkout special offer, and test payments need a reachable FunnelsGrove API with its database (local API + DB, or the published preview). Without one, the paywall shows a fetch error where checkout would start — report those three QA items as a named blocker and finish them on the preview URL.
 

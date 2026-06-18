@@ -53,7 +53,7 @@ check_readme() {
   assert_file "$ROOT/VERSION"
   assert_file "$ROOT/docs/funnel-qa-checklist.md"
   assert_contains "$ROOT/README.md" '^# fstack'
-  assert_contains "$ROOT/VERSION" '^0\.5\.3$'
+  assert_contains "$ROOT/VERSION" '^0\.5\.4$'
   assert_contains "$ROOT/README.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'
@@ -63,12 +63,14 @@ check_readme() {
   assert_contains "$ROOT/README.md" 'create-funnel'
   assert_contains "$ROOT/README.md" 'edit-funnel'
   assert_contains "$ROOT/README.md" 'writing-funnel-copy'
+  assert_contains "$ROOT/README.md" 'preview-funnel'
   assert_contains "$ROOT/README.md" 'local preview'
   assert_contains "$ROOT/README.md" 'Ask whether to publish'
   assert_contains "$ROOT/README.md" 'content-fit audit'
-  assert_contains "$ROOT/README.md" 'iPhone 12.*390.?x.?844'
-  assert_contains "$ROOT/README.md" 'iPhone 16 Pro.*430.?x.?932'
-  assert_contains "$ROOT/README.md" 'default viewport'
+  assert_contains "$ROOT/README.md" 'small.*375.?x.?667'
+  assert_contains "$ROOT/README.md" 'medium.*393.?x.?852'
+  assert_contains "$ROOT/README.md" 'large.*402.?x.?874'
+  assert_contains "$ROOT/README.md" 'desktop-small.*1280.?x.?800'
   assert_contains "$ROOT/README.md" 'preview QA'
   assert_contains "$ROOT/README.md" 'production QA'
   assert_contains "$ROOT/README.md" 'Image performance'
@@ -85,8 +87,10 @@ check_readme() {
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Google Pay'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Stripe dashboard'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Visual Pass'
-  assert_contains "$ROOT/docs/funnel-qa-checklist.md" '430x932'
-  assert_contains "$ROOT/docs/funnel-qa-checklist.md" '390x844'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" '375x667'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" '393x852'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" '402x874'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" '1280x800'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Image Performance'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'imageVariants'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'AVIF/WebP'
@@ -117,9 +121,10 @@ check_skill() {
   assert_contains "$skill/SKILL.md" 'publish --env preview'
   assert_contains "$skill/SKILL.md" 'local preview'
   assert_contains "$skill/SKILL.md" 'content-fit audit'
-  assert_contains "$skill/SKILL.md" 'iPhone 12.*390.?x.?844'
-  assert_contains "$skill/SKILL.md" 'iPhone 16 Pro.*430.?x.?932'
-  assert_contains "$skill/SKILL.md" 'default viewport'
+  assert_contains "$skill/SKILL.md" 'small.*375.?x.?667'
+  assert_contains "$skill/SKILL.md" 'medium.*393.?x.?852'
+  assert_contains "$skill/SKILL.md" 'large.*402.?x.?874'
+  assert_contains "$skill/SKILL.md" 'desktop-small.*1280.?x.?800'
   assert_contains "$skill/SKILL.md" 'Ask the user whether to publish'
   assert_contains "$skill/SKILL.md" 'production URL'
   assert_contains "$skill/SKILL.md" 'preview-build coverage'
@@ -236,6 +241,8 @@ check_copy_skill() {
   assert_contains "$skill/SKILL.md" 'Product name and what it does'
   assert_contains "$skill/SKILL.md" 'Five-column pre-work table'
   assert_contains "$skill/SKILL.md" 'Screen-by-screen spec'
+  assert_contains "$skill/SKILL.md" 'preview-funnel'
+  assert_contains "$skill/SKILL.md" 'visualize|visualizing'
   assert_contains "$skill/references/funnel-psychology-framework.md" '^id: funnel-psychology-framework$'
   assert_contains "$skill/references/funnel-psychology-framework.md" '^# Funnel Psychology Engine$'
   assert_contains "$skill/references/funnel-paywall-best-practices.md" '^id: funnel-paywall-best-practices$'
@@ -243,6 +250,26 @@ check_copy_skill() {
   assert_contains "$skill/references/funnel-conversion-best-practices.md" '^id: funnel-conversion-best-practices$'
   assert_contains "$skill/references/funnel-conversion-best-practices.md" '^# Web Funnel Conversion Best Practices$'
   assert_not_contains "$skill/references/funnel-conversion-best-practices.md" 'web2wave|Source:|Q4 2025|📊|⚠️'
+  assert_contains "$skill/agents/openai.yaml" 'display_name:'
+  assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
+  validate_skill_dir "$skill"
+}
+
+check_preview_skill() {
+  local skill="$ROOT/skills/preview-funnel"
+  assert_file "$skill/SKILL.md"
+  assert_file "$skill/agents/openai.yaml"
+  assert_contains "$skill/SKILL.md" '^name: preview-funnel$'
+  assert_contains "$skill/SKILL.md" '^description:'
+  assert_contains "$skill/SKILL.md" 'funnel copy'
+  assert_contains "$skill/SKILL.md" 'mockup'
+  assert_contains "$skill/SKILL.md" 'sticky'
+  assert_contains "$skill/SKILL.md" 'python3 -m http.server'
+  assert_contains "$skill/SKILL.md" '375x667'
+  assert_contains "$skill/SKILL.md" '393x852'
+  assert_contains "$skill/SKILL.md" '402x874'
+  assert_contains "$skill/SKILL.md" '1280x800'
+  assert_contains "$skill/SKILL.md" 'throwaway|temporary'
   assert_contains "$skill/agents/openai.yaml" 'display_name:'
   assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
   validate_skill_dir "$skill"
@@ -259,8 +286,10 @@ check_create_skill() {
   assert_contains "$skill/SKILL.md" '[Rr]eskin'
   assert_contains "$skill/SKILL.md" 'funnel.manifest.ts'
   assert_contains "$skill/SKILL.md" 'discount-on-close'
-  assert_contains "$skill/SKILL.md" '430x932'
-  assert_contains "$skill/SKILL.md" '390x844'
+  assert_contains "$skill/SKILL.md" '375x667'
+  assert_contains "$skill/SKILL.md" '393x852'
+  assert_contains "$skill/SKILL.md" '402x874'
+  assert_contains "$skill/SKILL.md" '1280x800'
   assert_contains "$skill/SKILL.md" 'qa-checklist'
   assert_contains "$skill/SKILL.md" 'Stripe dashboard'
   assert_contains "$skill/SKILL.md" 'sync up'
@@ -283,7 +312,7 @@ check_install_for_host() {
 
   HOME="$tmp_home" "$ROOT/setup" --host "$host" --repo-root "$ROOT" --skip-fgrove-cli --quiet
 
-  for skill_name in create-funnel edit-funnel writing-funnel-copy; do
+  for skill_name in create-funnel edit-funnel preview-funnel writing-funnel-copy; do
     local link="$tmp_home/$skill_parent/$skill_name"
     [ -L "$link" ] || fail "expected symlink at $link"
     [ "$(cd "$link" && pwd -P)" = "$ROOT/skills/$skill_name" ] || fail "wrong symlink target for $host"
@@ -307,10 +336,14 @@ check_auto_install_fallback() {
   [ -L "$tmp_home/.claude/skills/edit-funnel" ] || fail "auto fallback did not install Claude skill"
   [ -L "$tmp_home/.codex/skills/writing-funnel-copy" ] || fail "auto fallback did not install Codex copy skill"
   [ -L "$tmp_home/.claude/skills/writing-funnel-copy" ] || fail "auto fallback did not install Claude copy skill"
+  [ -L "$tmp_home/.codex/skills/preview-funnel" ] || fail "auto fallback did not install Codex preview skill"
+  [ -L "$tmp_home/.claude/skills/preview-funnel" ] || fail "auto fallback did not install Claude preview skill"
   [ "$(cd "$tmp_home/.codex/skills/edit-funnel" && pwd -P)" = "$ROOT/skills/edit-funnel" ] || fail "wrong auto Codex symlink target"
   [ "$(cd "$tmp_home/.claude/skills/edit-funnel" && pwd -P)" = "$ROOT/skills/edit-funnel" ] || fail "wrong auto Claude symlink target"
   [ "$(cd "$tmp_home/.codex/skills/writing-funnel-copy" && pwd -P)" = "$ROOT/skills/writing-funnel-copy" ] || fail "wrong auto Codex copy symlink target"
   [ "$(cd "$tmp_home/.claude/skills/writing-funnel-copy" && pwd -P)" = "$ROOT/skills/writing-funnel-copy" ] || fail "wrong auto Claude copy symlink target"
+  [ "$(cd "$tmp_home/.codex/skills/preview-funnel" && pwd -P)" = "$ROOT/skills/preview-funnel" ] || fail "wrong auto Codex preview symlink target"
+  [ "$(cd "$tmp_home/.claude/skills/preview-funnel" && pwd -P)" = "$ROOT/skills/preview-funnel" ] || fail "wrong auto Claude preview symlink target"
 
   rm -rf "$tmp_home"
 }
@@ -320,6 +353,7 @@ check_setup
 check_fgrove_cli_helper
 check_skill
 check_copy_skill
+check_preview_skill
 check_create_skill
 check_installs
 check_auto_install_fallback

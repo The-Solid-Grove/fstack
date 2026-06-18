@@ -95,6 +95,10 @@ local funnel docs and current copy before asking questions that the files answer
 10. Return the framework's required formatted output, including the
    Five-column pre-work table, transformation, emotional arc, fuel balance
    check, Screen-by-screen spec, paywall architecture, and A/B tests.
+11. After the copy is drafted, offer to use `preview-funnel` to visualize it as
+    a temporary local click-through mockup for copy review. Do not create the
+    preview automatically unless the user asked for visualization or a local
+    mockup.
 
 Do not invent testimonials, press mentions, official data, legal claims, payout
 amounts, or metrics. Ask for sources, use clearly labeled assumptions, or write

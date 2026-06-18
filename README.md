@@ -5,8 +5,9 @@ A small skill pack for building and editing web funnels with AI agents.
 - `create-funnel` — scaffold a new funnel from the FunnelsGrove funnel template (copy, reskin, verify, optional hosted wiring).
 - `edit-funnel` — local editing loop for FunnelsGrove hosted funnels (sync, preview, QA, publish).
 - `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
+- `preview-funnel` — temporary local click-through mockups for reviewing funnel copy.
 
-Current version: `0.5.3`
+Current version: `0.5.4`
 
 ## Requirements
 
@@ -51,8 +52,9 @@ git pull --ff-only
 
 ```text
 Use $create-funnel to start a new funnel for <AppName> from the funnel
-template, verify the full flow locally at 430x932 and 390x844, and wire the
-hosted funnel only when I ask.
+template, verify the full flow locally at small 375x667, medium 393x852,
+large 402x874, and desktop-small 1280x800, and wire the hosted funnel only
+when I ask.
 ```
 
 The skill copies `apps/funnel-template` from a funnelsgrove monorepo checkout
@@ -78,10 +80,10 @@ only after approved preview QA.
 
 The skill syncs the funnel locally, reads its `AGENTS.md`/`agent.md`, makes
 edits, runs checks, opens local preview, and loops until ready. After creating
-or editing any step, it runs a content-fit audit in local preview using iPhone 16 Pro `430x932`
-as the default viewport for all step checks, plus iPhone 12 `390x844` before the
-step is considered ready. Update local project packages with the package manager
-already used by the synced tree.
+or editing any step, it runs a content-fit audit in local preview at all four
+default breakpoints: small `375x667`, medium `393x852`, large `402x874`, and
+desktop-small `1280x800`. Update local project packages with the package
+manager already used by the synced tree.
 Use `npm outdated`, `pnpm outdated`, yarn, or bun as appropriate, and never
 introduce a second lockfile. Ask whether to publish before any deploy. Publish
 returns a deployment id and preview URL; poll deployment status by id when the
@@ -120,7 +122,25 @@ context first, then return the strategy and screen-by-screen copy.
 The skill asks for product, audience, entry promise, and screen count, then
 returns pre-work, transformation arc, screen specs, paywall architecture, and
 A/B ideas. Reference material lives under
-`skills/writing-funnel-copy/references/`.
+`skills/writing-funnel-copy/references/`. Once copy is drafted, it should offer
+to use `preview-funnel` when a temporary local visualization would make review
+easier.
+
+## Use `preview-funnel`
+
+```text
+Use $preview-funnel to turn this finished funnel copy into a temporary local
+click-through mockup, keep the styling simple, run a local server, and verify
+the sticky CTA at small 375x667, medium 393x852, large 402x874, and
+desktop-small 1280x800.
+```
+
+The skill creates throwaway static HTML/CSS/JS outside tracked source, usually
+under a `mktemp` directory, so product-specific preview artifacts do not stay in
+the repo. It uses simple building blocks: progress header, headline, support
+copy, choice cards, notes/proof rows, and sticky bottom buttons. It reports the
+local URL, how to restart the server, and whether the temporary files were
+removed or left for review.
 
 ## Team setup
 
@@ -129,13 +149,14 @@ Use a shared global checkout. Add this to your project `AGENTS.md` or
 
 ```markdown
 Use fstack for FunnelsGrove funnel work. Use `create-funnel` to start a new
-funnel from the template, `edit-funnel` for hosted edits, and
-`writing-funnel-copy` for quiz-to-paywall strategy. Always run local
-preview, ask before publishing, verify preview coverage for the production
-candidate, run preview QA before any production publish, and run production QA
-after production publish. For new steps, use meaningful public route paths even
-when ids or filenames are sequential. For image edits, keep build-time image
-optimization enabled and use manifest-driven next-step image preloading.
+funnel from the template, `edit-funnel` for hosted edits, `writing-funnel-copy`
+for quiz-to-paywall strategy, and `preview-funnel` for temporary local copy
+mockups. Always run local preview, ask before publishing, verify preview
+coverage for the production candidate, run preview QA before any production
+publish, and run production QA after production publish. For new steps, use
+meaningful public route paths even when ids or filenames are sequential. For
+image edits, keep build-time image optimization enabled and use
+manifest-driven next-step image preloading.
 ```
 
 Each teammate runs:
@@ -150,6 +171,7 @@ cd ~/.fstack && ./setup --host auto
 ```bash
 rm -f ~/.codex/skills/create-funnel ~/.claude/skills/create-funnel
 rm -f ~/.codex/skills/edit-funnel ~/.claude/skills/edit-funnel
+rm -f ~/.codex/skills/preview-funnel ~/.claude/skills/preview-funnel
 rm -f ~/.codex/skills/writing-funnel-copy ~/.claude/skills/writing-funnel-copy
 rm -rf ~/.fstack
 ```

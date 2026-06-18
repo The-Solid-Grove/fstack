@@ -1,4 +1,4 @@
 interface:
   display_name: "Create Funnel"
   short_description: "Scaffold a new funnel from the FunnelsGrove funnel template"
-  default_prompt: "Use $create-funnel to scaffold a new funnel from the funnel template, rebrand it, install dependencies, verify the full flow locally including the paywall discount stages at 430x932 and 390x844, and wire the hosted funnel only when requested."
+  default_prompt: "Use $create-funnel to scaffold a new funnel from the funnel template, rebrand it, install dependencies, verify the full flow locally including the paywall discount stages at small 375x667, medium 393x852, large 402x874, and desktop-small 1280x800, and wire the hosted funnel only when requested."

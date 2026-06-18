@@ -125,9 +125,9 @@ refactors, metadata churn, generated output, and secret files. Treat `.env` and
 `.env.*` as local runtime material, not uploadable source.
 
 After creating or editing any funnel step, run a content-fit audit for that step
-in the local preview. Use iPhone 16 Pro `430x932` as the default viewport across
-all step checks, and also verify iPhone 12 `390x844`. Fix clipped, overflowing,
-overlapping, or hidden content before moving on to another step.
+in the local preview. Verify all four default breakpoints: small `375x667`,
+medium `393x852`, large `402x874`, and desktop-small `1280x800`. Fix clipped,
+overflowing, overlapping, or hidden content before moving on to another step.
 
 When creating a step, keep the public route meaningful. `path` should describe
 the screen's purpose, such as `/motivation`, `/fitness-goal`, `/email-capture`,
@@ -179,9 +179,8 @@ errors when a browser tool is available, adjust the local files, rerun checks,
 and preview locally again until the local result matches the request.
 
 For created or edited steps, the local preview inspection must include the
-content-fit audit on iPhone 16 Pro `430x932` and iPhone 12 `390x844`. Treat
-iPhone 16 Pro as the default viewport for every step, then spot-check iPhone 12
-before considering the step ready.
+content-fit audit at small `375x667`, medium `393x852`, large `402x874`, and
+desktop-small `1280x800` before considering the step ready.
 
 For major edits, ask the user whether to run the full QA checklist before
 publishing. Major edits include checkout, pricing, payment, subscription,
@@ -267,9 +266,8 @@ Finish only after all of these are true:
 1. Target workspace/project/funnel and local directory are recorded.
 2. Requested edits pass available local checks.
 3. Local preview is opened or an unavailable local preview has a named reason.
-4. Every created or edited step has a reported content-fit audit on iPhone 16
-   Pro `430x932` and iPhone 12 `390x844`, with iPhone 16 Pro as the default
-   viewport.
+4. Every created or edited step has a reported content-fit audit at small
+   `375x667`, medium `393x852`, large `402x874`, and desktop-small `1280x800`.
 5. Image edits preserve build-time image optimization and manifest-driven
    next-step preloading, or any unavailable optimization/preload check is named.
 6. The user is asked whether to publish after local preview.

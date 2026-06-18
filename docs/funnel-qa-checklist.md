@@ -46,7 +46,14 @@ Verify the funnel as a user would move through it:
 
 ## Visual Pass
 
-Run at iPhone 16 Pro `430x932` (default), then spot-check iPhone 12 `390x844`:
+Run at all four default breakpoints:
+
+| Breakpoint | Size | Baseline |
+| --- | --- | --- |
+| small | `375x667` | iPhone SE and smaller-width stress check |
+| medium | `393x852` | iPhone 15 |
+| large | `402x874` | iPhone 17 Pro |
+| desktop-small | `1280x800` | 13-inch MacBook |
 
 - Nothing intersects or overlaps: text never collides with images, cards,
   badges, dialogs, or the action bar.
@@ -123,8 +130,8 @@ Report the QA result with:
 - Payment method or payment-path equivalent used.
 - Apple Pay and Google Pay button result.
 - Subscription-management result.
-- Browser, viewport, and device assumptions, including the `430x932` and
-  `390x844` visual pass results.
+- Browser and breakpoint assumptions, including visual pass results for small
+  `375x667`, medium `393x852`, large `402x874`, and desktop-small `1280x800`.
 - Image optimization and next-step preload result when images changed or the
   run is a preview-to-production candidate.
 - Blockers, skipped checks, unavailable third-party services, missing test
