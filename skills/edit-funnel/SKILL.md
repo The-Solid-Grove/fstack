@@ -30,16 +30,20 @@ context cannot answer them:
 Prefer the installed `funnelsgrove-cli` skill when available for full command
 help. Use the command shape below as the minimum hosted CLI workflow. Local
 preview commands come from the generated funnel docs and should run before
-`fgrove sync up`.
+syncing any hosted draft.
 
 ```bash
 <fstack-checkout>/scripts/ensure-fgrove-cli
 fgrove whoami
 fgrove use --project <project-id-or-slug> --funnel <funnel-id-or-slug>
 fgrove status
+git -C <local-dir> status --short
+fgrove github status --dir <local-dir>
 fgrove sync down --funnel <id-or-slug> --dir <local-dir>
 fgrove docs --dir <local-dir>
-# run local preview from generated docs, inspect, and adjust before publishing
+# run local preview from generated docs, inspect, and adjust before hosted sync
+# if GitHub is connected: git push, then fgrove github pull
+# if GitHub is not connected:
 fgrove sync up --message '<summary>'
 fgrove publish --env preview --message '<summary>'
 ```
@@ -69,20 +73,49 @@ fgrove funnels list
 fgrove funnels clone --funnel <source-id-or-slug> --name <new-name>
 ```
 
-### 2. Load the Local Project
+### 2. Load, Refresh, and Merge the Local Project
 
 Check/update the CLI version first, then check auth and context. Sync down only
-when there is no current synced directory or when the local tree is stale. Keep
-`.funnelsgrove-sync.json` in place because it carries the draft sync state.
+when there is no current synced directory or after the local tree is clean or
+checkpointed. Keep `.funnelsgrove-sync.json` in place because it carries the
+draft sync state.
 
 ```bash
 <fstack-checkout>/scripts/ensure-fgrove-cli
 fgrove whoami
 fgrove use --project <project-id-or-slug> --funnel <funnel-id-or-slug>
 fgrove status
+git -C <local-dir> status --short
+fgrove github status --dir <local-dir>
 fgrove sync down --funnel <id-or-slug> --dir <local-dir>
 fgrove docs --dir <local-dir>
 ```
+
+If the local tree has changes, create a checkpoint before refreshing remote
+state. Prefer a normal WIP commit on a local branch when the directory is a git
+checkout; otherwise copy the changed files or sync the latest draft into a temp
+directory. Do not run `fgrove sync down` over a dirty synced directory unless
+the user explicitly wants to discard local changes and you pass `--force`.
+
+When GitHub is connected and remote is ahead, run `fgrove github pull --dir
+<local-dir>` to pull GitHub into the hosted draft, then poll `fgrove github
+status --dir <local-dir>` until the pull job is completed or skipped. After
+that, sync the latest draft into a clean directory and merge the local
+checkpoint with normal git or file diff tools before editing further.
+
+For GitHub-connected funnels, GitHub is the write path for source changes. After
+local checks pass, commit and push with normal git, then run `fgrove github pull
+--dir <local-dir>` and poll `fgrove github status --dir <local-dir>` until the
+pull job completes or skips. Do not run `fgrove sync up` for the same local
+diff.
+
+When GitHub is not connected, use the hosted draft as remote truth: run `fgrove
+sync down --funnel <id-or-slug> --dir <temp-dir>` or use an already selected
+`fgrove use` context to download the current draft into a temporary clean
+directory. Compare it with the local checkpoint, merge intentionally, then
+continue from the merged local tree. If `fgrove sync up` reports that the remote
+draft changed since the local directory was synced, repeat this temp-directory
+merge flow before retrying.
 
 ### 3. Inspect Before Editing
 
@@ -199,6 +232,21 @@ Use a clear message that names the edit. Do not publish production from this
 skill unless the user explicitly asks for production and provides the target
 domain.
 
+For GitHub-connected funnels, push source changes through GitHub and pull them
+into the hosted draft:
+
+```bash
+git push
+fgrove github pull --dir <local-dir>
+fgrove github status --dir <local-dir>
+fgrove publish --env preview --message '<summary>'
+```
+
+Poll `fgrove github status` until the pull job has completed or skipped before
+publishing. Do not also run `fgrove sync up` for the same source change.
+
+For funnels without GitHub, sync local source directly to the hosted draft:
+
 ```bash
 fgrove sync up --message '<summary>'
 fgrove publish --env preview --message '<summary>'
@@ -271,7 +319,9 @@ Finish only after all of these are true:
 5. Image edits preserve build-time image optimization and manifest-driven
    next-step preloading, or any unavailable optimization/preload check is named.
 6. The user is asked whether to publish after local preview.
-7. If publishing, requested edits are synced with `fgrove sync up`.
+7. If publishing, requested edits are synced through the correct source path:
+   GitHub-connected funnels use normal `git push` plus `fgrove github pull`;
+   funnels without GitHub use `fgrove sync up`.
 8. If publishing, preview is published with `fgrove publish --env preview`.
 9. If preview is published, preview QA is run and reported.
 10. If production is explicitly requested or post-publish QA is requested,

@@ -7,7 +7,7 @@ A small skill pack for building and editing web funnels with AI agents.
 - `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
 - `preview-funnel` — temporary local click-through mockups for reviewing funnel copy.
 
-Current version: `0.5.4`
+Current version: `0.5.5`
 
 ## Requirements
 
@@ -79,11 +79,18 @@ only after approved preview QA.
 ```
 
 The skill syncs the funnel locally, reads its `AGENTS.md`/`agent.md`, makes
-edits, runs checks, opens local preview, and loops until ready. After creating
-or editing any step, it runs a content-fit audit in local preview at all four
-default breakpoints: small `375x667`, medium `393x852`, large `402x874`, and
-desktop-small `1280x800`. Update local project packages with the package
-manager already used by the synced tree.
+edits, runs checks, opens local preview, and loops until ready. Before
+refreshing a synced directory, it checks local git state and GitHub sync state,
+checkpoints local changes, and merges any newer remote draft intentionally.
+When GitHub is connected, source changes go through normal git commit/push,
+then `fgrove github pull` syncs GitHub into the hosted draft; the agent must not
+also run `fgrove sync up` for the same diff. When GitHub is not connected, it
+downloads the current hosted draft into a temporary clean directory and uses
+that as the merge source. After creating or editing any step, it runs a
+content-fit audit in local preview at all four default breakpoints: small
+`375x667`, medium `393x852`, large `402x874`, and desktop-small `1280x800`.
+Update local project packages with the package manager already used by the
+synced tree.
 Use `npm outdated`, `pnpm outdated`, yarn, or bun as appropriate, and never
 introduce a second lockfile. Ask whether to publish before any deploy. Publish
 returns a deployment id and preview URL; poll deployment status by id when the
