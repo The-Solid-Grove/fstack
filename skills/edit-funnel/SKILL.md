@@ -168,6 +168,16 @@ or `/paywall`; do not create user-facing paths like `/step-1` or `/step-07`.
 Sequential ids and `step-NN-*` filenames are acceptable when the existing funnel
 uses them for ordering, but URLs should be readable product routes.
 
+### Experiment Source of Truth
+
+For new or edited experiments, prefer the FunnelsGrove UI/API as the source of
+truth. It owns the database row, PostHog flag, and generated
+`src/config/experiments.generated.ts`; `src/config/experiments.ts` should usually
+stay as the generated compatibility wrapper. If a user asks for a code-authored
+experiment or the UI/API path is unavailable, keep the object source-readable:
+explicit `sourceStepId` or `stepId`, explicit variant route step ids, labels,
+traffic percentages, and normal manifest steps/edges for every variant.
+
 ### Image Performance Lock
 
 For any new or edited image, image-heavy step, or route that changes which
