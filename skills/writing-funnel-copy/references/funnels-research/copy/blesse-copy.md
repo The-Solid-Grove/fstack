@@ -1,7 +1,9 @@
 # Blesse — Copy Swipe (verbatim from source)
 > Source: rag-catalog/blesse. (Brand shown on-screen: "Perfect Prayer".)
+>
+> **Reference mode: `step-structure-only`.** This swipe file is copy and screen-structure research—not current FunnelsGrove contract guidance. Do not copy its `type`/`kind`, answer writes, routing, shell/controller, helpers, or analytics; implementation must follow the synced project's `AGENTS.md` and `docs/funnelsgrove/START-HERE.md`.
 
-## Step 1 — Landing intro + gender (intro_hero)
+## Step 1 — Landing intro + gender
 - **Promo banner:** "🎁 The Presentation of Jesus Day -70% OFF! 🎁"
 - **Language selector:** "🇺🇸"
 - **Logo alt:** "Perfect Prayer"
@@ -13,13 +15,13 @@
 - **Footer contact:** "Contact us", "info@blesse.co"
 - **Legal:** "2026 © ALL RIGHTS RESERVED", "Disclaimer: results may vary from person to person."
 
-## Step 2 — Journey intro (progress_interstitial; Goals 1/17, ~6%)
+## Step 2 — Journey intro (Goals 1/17, ~6%)
 - **Headline:** "Your spiritual journey starts / here!"
 - **Body:** "We worked for five years to create perfect quiz - a quiz that would give us all the information we need to write fully personalised prayer book **ONLY FOR YOU**"
 - **Body:** "Remember, your answers will determine the content of this book, so be honest and read every question carefully."
 - **CTA:** "Got it"
 
-## Step 3 — Primary reason (intro_hero; Goals 2/17, ~12%)
+## Step 3 — Primary reason (Goals 2/17, ~12%)
 - **Headline:** "What is your primary reason / for wanting a prayer book?"
 - **Options:**
   - "Reduce stress and anxiety"
@@ -30,12 +32,12 @@
   - "Get over addiction"
   - "Get over a difficult life situation"
 
-## Step 4 — Daily routine selector (intro_hero; Get to know you 4/17, ~24%)
+## Step 4 — Daily routine selector (Get to know you 4/17, ~24%)
 - **Headline:** "What should your ideal daily / routine include?"
 - **Options:** "Morning Prayer", "Evening Prayer", "Bible Verse", "Mealtime Blessing", "Journaling & Reflections", "Bible Reading & Daily Devotional", "Christian Meditation", "Daily Affirmation", "Bible Sleep Story"
 - **CTA:** "Continue"
 
-## Step 5 — Benefits summary (summary_confirmation; Goals 7/17, ~41%)
+## Step 5 — Benefits summary (Goals 7/17, ~41%)
 - **Headline:** "Benefits of Your Personalized / 'Perfect Prayer' Book"
 - **Benefits list:**
   - "Custom daily prayers tailored to your spiritual needs"
@@ -45,17 +47,18 @@
   - "Content that will be useful for the rest of your life"
 - **CTA:** "Got it"
 
-## Step 6 — Generation progress (progress_interstitial; auto-advance ~2.4s)
+## Step 6 — Generation progress (auto-advance ~2.4s)
 - **Headline:** "We are now generating the / content of your book"
 - **Status:** animated percentage ring "{n}%" (animates 0 → 78%)
 
-## Step 7 — Personalized result summary (summary_confirmation; Goals 14/17, ~82%)
+## Step 7 — Personalized result summary (Goals 14/17, ~82%)
 - **Headline:** "Would you look at that! Based on / your preferences, we've created"
 - **Card body:** "We created personalized content crafted from the most powerful passages of Scripture-made just for you to feel closer to God and his peace."
 - **Stats:** "1200+ Personalized Prayers", "140+ Selected Bible Readings"
 - **CTA:** "Got it"
 
-## Step 8 — Book cover personalization (paywall_offer; Personalisation 17/17, 100%)
+## Step 8 — Book cover personalization (not a paywall; Personalisation 17/17, 100%)
+- **Contract annotation (`cover-personalization`):** `legacy-label-invalid`; exact implementation classification lives only in `docs/funnelsgrove/START-HERE.md` → `docs/funnelsgrove/steps/form_input.md`.
 - **Headline:** "Personalise your book cover"
 - **Label:** "Choose cover colour"
 - **Color options (aria-labels):** "blue", "black", "green", "pink", "red", "white"
@@ -63,7 +66,7 @@
 - **Input placeholder:** "Enter your name"
 - **CTA:** "Continue"
 
-## Step 9 — Long-form paywall (paywall_offer / kind: paywall)
+## Step 9 — Long-form purchasable paywall
 - **Headline:** "Well done, your Perfect / Prayer is almost ready!"
 - **Cover name overlay:** "for MARI"
 - **CTA (top):** "Get your book"

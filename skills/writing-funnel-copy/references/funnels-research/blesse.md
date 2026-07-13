@@ -1,5 +1,7 @@
 # Blesse Funnel — Research Notes
 
+> **Reference mode: `step-structure-only`.** This teardown is copy, visual, and interaction research—not current FunnelsGrove contract guidance. Do not copy its `type`/`kind`, answer writes, routing, shell/controller, helpers, or analytics; implementation must follow the synced project's `AGENTS.md` and `docs/funnelsgrove/START-HERE.md`.
+
 ## 1. Overview
 
 **Vertical:** Faith / Christian spirituality. The product is "Perfect Prayer" by Blesse — a *personalized Christian prayer-and-Bible-reading book* generated from the user's quiz answers. This is a faith-flavored variant of the standard "personalized book" quiz-to-paywall pattern (think astrology/self-help personalized-book funnels, ported to a Christian devotional audience).
@@ -21,7 +23,7 @@
 
 ## 2. Step-by-Step Walkthrough
 
-### step-1 — `landing-intro` (type `intro_hero`)
+### step-1 — `landing-intro` (entry with gender choice)
 - **Headline:** "Personalized way to / spirituality" with product logo (`peace-logo.png`) and a user collage (`landing-collage.png`).
 - **Promo bar (top):** "🎁 The Presentation of Jesus Day -70% OFF! 🎁" — anchors a discount before any price is seen; ties the offer to a liturgical calendar event for authenticity. Language selector (🇺🇸) for credibility/localization signal.
 - **Benefit bullets:** "Feel closer to God / Develop a prayer routine / Find your inner peace / Understand God's word."
@@ -30,7 +32,7 @@
 - **Psychological lever:** Effortless first micro-commitment (gender = near-100% answerable, zero cognitive cost), per the investment-escalation principle. Promo bar plants loss-aversion/urgency early. Full SEO-style footer (Terms, Privacy, Contact, "© 2026 ALL RIGHTS RESERVED", "Disclaimer: results may vary") answers the trust gate (threat → "this is a legit company").
 - **Branching:** none — `goNext()` → step-2. Gender is captured but never used to branch copy (missed personalization).
 
-### step-2 — `journey-intro` (type `progress_interstitial`)
+### step-2 — `journey-intro` (journey framing)
 - **Progress header:** "Goals — 1/17 — 5.88%". Note: the funnel advertises a **17-step quiz** but only renders a handful; the progress bar is fictional pacing.
 - **Headline:** "Your spiritual journey starts here!"
 - **Key copy:** "We worked for five years to create [a] perfect quiz … to write [a] fully personalised prayer book **ONLY FOR YOU**." + "Remember, your answers will determine the content of this book, so be honest and read every question carefully."
@@ -38,7 +40,7 @@
 - **Psychological lever:** Effort-justification + authority ("five years"). The "be honest, read carefully" line is a classic commitment primer — it makes the user treat subsequent taps as meaningful inputs, raising perceived personalization and investment. No selling yet; pure fuel-refill / framing screen.
 - **Branching:** none → step-3.
 
-### step-3 — `primary-reason` (type `intro_hero`, really a quiz question)
+### step-3 — `primary-reason` (quiz question)
 - **Progress:** "Goals — 2/17 — 11.76%". Hero illustration `reason-hero.png`.
 - **Headline:** "What is your primary reason for wanting a prayer book?"
 - **Answer options (single-tap arrow rows, auto-advance):**
@@ -52,7 +54,7 @@
 - **Value loaded / lever:** Self-segmentation; the user names their own pain (Hitchcock — they generate the problem). `setAnswer('primaryReason', …)`. Options span emotional pains (anxiety, addiction, hardship) and aspirational goals — wide net to mirror any visitor.
 - **Branching:** none — every answer routes to step-4 (no per-answer divergence despite 7 emotionally distinct answers). Captured but unused for branching.
 
-### step-4 — `daily-routine` (type `intro_hero`, quiz question)
+### step-4 — `daily-routine` (routine selector)
 - **Progress:** "Get to know you — 4/17 — 23.53%" (note the jump from 2/17 to 4/17 — skipped/compressed steps imply a longer quiz than shown). Hero `routine-hero.png`.
 - **Headline:** "What should your ideal daily routine include?"
 - **Answer options (radio multi-list, default pre-selected = "Morning Prayer", explicit Continue):** Morning Prayer / Evening Prayer / Bible Verse / Mealtime Blessing / Journaling & Reflections / Bible Reading & Daily Devotional / Christian Meditation / Daily Affirmation / Bible Sleep Story.
@@ -60,7 +62,7 @@
 - **Lever:** Pre-selected default reduces friction and nudges a "yes." Radio + explicit Continue = slightly higher commitment than step-3's auto-advance (investment escalation).
 - **Branching:** none → step-5.
 
-### step-5 — `benefits-summary` (type `summary_confirmation`)
+### step-5 — `benefits-summary` (benefit recap)
 - **Progress:** "Goals — 7/17 — 41.18%".
 - **Headline:** "Benefits of Your Personalized 'Perfect Prayer' Book."
 - **Checklist (green check-circles):**
@@ -74,13 +76,13 @@
 - **Lever:** Confirmation + loss-aversion framing. Pure fuel refill.
 - **Branching:** none → step-6.
 
-### step-6 — `generation-progress` (type `progress_interstitial`, auto-advance)
+### step-6 — `generation-progress` (auto-advancing generation)
 - **Headline:** "We are now generating the content of your book."
 - **Mechanic:** Animated circular progress ring eases from 0 → **78%** over `2400ms` (`STEP_SIX_AUTO_ADVANCE_MS`), then auto-advances (`actionBar.autoAdvanceMs`). It deliberately stops at 78%, not 100% — a perceived "almost done" tension that pulls the user forward.
 - **Lever:** Labor illusion / operational transparency — the fake compute makes the personalization feel real and effortful ("System 2 sees work being done"). Builds the sunk-cost feeling: "my book is being made right now."
 - **Branching:** none → step-7 (time-based).
 
-### step-7 — `personalized-result` (type `summary_confirmation`)
+### step-7 — `personalized-result` (personalized result recap)
 - **Progress:** "Goals — 14/17 — 82.35%".
 - **Headline:** "Would you look at that! Based on your preferences, we've created…"
 - **Info card copy:** "We created personalized content crafted from the most powerful passages of Scripture — made just for you to feel closer to God and his peace."
@@ -91,7 +93,8 @@
 - **Value loaded:** Hitchcock self-generated value — concrete big numbers ("1200+", "140+") let the user's brain conclude "this is substantial." First quantified proof of depth; pre-loads the paywall's content claims.
 - **Lever:** Anchoring (big numbers), reward-after-effort (payoff for the quiz + loader). `goNext()` → step-8.
 
-### step-8 — `cover-personalization` (type `paywall_offer`, pre-paywall personalization)
+### step-8 — `cover-personalization` (cover form; not a paywall)
+- **Contract annotation (`cover-personalization`):** `legacy-label-invalid`; exact implementation classification lives only in `docs/funnelsgrove/START-HERE.md` → `docs/funnelsgrove/steps/form_input.md`.
 - **Progress:** "Personalisation — 17/17 — 100%" (quiz now "complete").
 - **Headline:** "Personalise your book cover."
 - **Interactions:**
@@ -101,7 +104,7 @@
 - **Value loaded:** Endowment effect / IKEA effect — the user customizes and "owns" the artifact before paying. Seeing *their* name on a real-looking cover makes walking away feel like abandoning something already theirs.
 - **Lever:** Peak commitment + tangibility. This is the strongest single conversion device before the wall. `goNext()` → step-9.
 
-### step-9 — `long-paywall` (type `paywall_offer`, `kind: "paywall"`)
+### step-9 — `long-paywall` (long purchasable paywall)
 A single long scrolling page (Figma `63:8271`). Sections top-to-bottom:
 - **Hero headline:** "Well done, your Perfect Prayer is almost ready!"
 - **Personalized cover** with overlay "**for MARI**" (hardcoded placeholder name — should bind to `bookName` from step-8; see Weaknesses).
@@ -119,14 +122,14 @@ A single long scrolling page (Figma `63:8271`). Sections top-to-bottom:
 - **CTA #3 ("Get your book")** — bottom, tracks `'bottom'`.
 - **Scripture verse:** "2 Kings 20:5 (NKJV) — 'I have heard your prayer, I have seen your tears; surely I will heal you.'" + priest-reading image.
 - **Authority testimonial:** quote "The new God squad … it's been a blessing … grow closer to God and find the inner peace we all seek." attributed to **Fr. Peter Flant** with handwritten **signature image** + **priest portrait**.
-- **Branching:** terminal screen. CTAs only record analytics (`setAnswer`) — actual pricing/checkout is delegated to the FunnelsGrove runtime/SDK for the `paywall_offer` step type; no price tiers, trial terms, or checkout modal are coded in the step itself.
+- **Branching:** terminal screen. CTAs only record analytics (`setAnswer`) — actual pricing/checkout is delegated to the FunnelsGrove runtime/SDK; no price tiers, trial terms, or checkout modal are coded in the step itself.
 
 ---
 
 ## 3. Branching, Experiments & Entry Points
 
 **Branching:** None active. The flow is strictly linear `step-1 → … → step-9`.
-- `funnel.routing.ts` `legacyStepRouteRulesById` defines only `{type:'route'}` edges 1→2→3→…→9. `choiceTargetsByStepId` is empty (`{}`) — no yes/no per-answer routing.
+- The legacy routing config defines only sequential edges 1→2→3→…→9. `choiceTargetsByStepId` is empty (`{}`) — no yes/no per-answer routing.
 - The manifest (`funnel.manifest.ts`) builds `sequentialEdgesByStepId` purely from sequence order.
 - Quiz answers (`gender`, `primaryReason`, `idealRoutine`, `coverColor`, `bookName`) are all captured via `setAnswer` but **none drive routing or conditional copy.** Personalization is implied/cosmetic, not behavioral.
 
@@ -142,7 +145,7 @@ A single long scrolling page (Figma `63:8271`). Sections top-to-bottom:
 
 ## 4. Paywall Architecture
 
-**Type:** Single long-form scrolling paywall (`step-9`, `kind: "paywall"`), preceded by a "soft pre-paywall" personalization screen (`step-8`). The paywall is content-and-proof heavy; the actual price/checkout UI is rendered by the FunnelsGrove SDK runtime for `paywall_offer` steps, not hardcoded in the step.
+**Structure:** Single long-form scrolling paywall (`step-9`), preceded by a cover-personalization form (`step-8`, not a paywall). The paywall is content-and-proof heavy; the actual price/checkout UI is rendered by the FunnelsGrove SDK runtime for the purchasable screen, not hardcoded in the step.
 
 **Above the fold:** Personalized headline ("almost ready!") + personalized cover with the buyer's name + immediate primary CTA. Matches the best-practice "hero block with CTA above the fold" rule.
 
