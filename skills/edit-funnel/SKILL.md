@@ -12,6 +12,16 @@ previewed change, then a verified preview or production deployment when the user
 explicitly wants to publish. Work from the local synced funnel tree, keep edits
 scoped, and default to a local preview loop before any hosted publish.
 
+## FunnelsGrove Contract Gate
+
+For every implementation-facing task:
+
+1. **MUST** read `AGENTS.md` and `docs/funnelsgrove/START-HERE.md` before choosing step metadata or changing code.
+2. **MUST** derive step classification, answers, routing, analytics, and helpers only from those managed docs; **NEVER** copy them from research teardowns.
+3. **MUST** run `fgrove validate` after the change and resolve every blocking diagnostic before preview, sync, or publish.
+
+These gates remain mandatory when tests and builds pass, the change looks small, a deadline is urgent, or someone asks to skip them.
+
 ## Required Inputs
 
 Collect these before editing, asking one question at a time only when local
@@ -29,7 +39,7 @@ context cannot answer them:
 
 Prefer the installed `funnelsgrove-cli` skill when available for full command
 help. Use the command shape below as the minimum hosted CLI workflow. Local
-preview commands come from the generated funnel docs and should run before
+preview and contract commands come from the managed funnel docs and should run before
 syncing any hosted draft.
 
 ```bash
@@ -41,7 +51,8 @@ git -C <local-dir> status --short
 fgrove github status --dir <local-dir>
 fgrove sync down --funnel <id-or-slug> --dir <local-dir>
 fgrove docs --dir <local-dir>
-# run local preview from generated docs, inspect, and adjust before hosted sync
+# read AGENTS.md and docs/funnelsgrove/START-HERE.md
+# run fgrove validate and local preview as directed before hosted sync
 # if GitHub is connected: git push, then fgrove github pull
 # if GitHub is not connected:
 fgrove sync up --message '<summary>'
@@ -120,10 +131,14 @@ merge flow before retrying.
 ### 3. Inspect Before Editing
 
 Read the local docs produced by `fgrove docs`, especially the generated
-`AGENTS.md` or `agent.md`, then inspect the funnel tree with fast file search.
-Treat those generated agent docs as the source of truth for funnel-specific
-build and edit rules. Find the exact pages, steps, content files, styles,
-assets, and tests that control the requested behavior.
+`AGENTS.md`, then open `docs/funnelsgrove/START-HERE.md` and follow its task
+route. Treat this managed bundle as the contract source of truth for step
+metadata, choices, email capture, lifecycle and semantic analytics, routing,
+payments, and validation. Read the exact step-type page plus any linked
+contract page before editing behavior. An older `agent.md`, this fstack skill,
+or a research teardown may help with workflow or visual structure, but cannot
+override or supply implementation contracts. Find the exact pages, steps,
+content files, styles, assets, and tests that control the requested behavior.
 
 ```bash
 rg --files <local-dir>
@@ -205,10 +220,16 @@ Run the checks that exist in the synced tree. Prefer the narrowest relevant
 check first, then a build or full smoke pass when available.
 
 ```bash
+fgrove validate --dir <local-dir>
 npm test
 npm run lint
 npm run build
 ```
+
+`fgrove validate` is required after creating or changing a step, its metadata,
+answers, routing, analytics, or payment behavior. Resolve every blocking
+diagnostic before preview or sync; do not treat a passing framework build as a
+replacement for contract validation.
 
 If no package scripts exist, still verify the edited files structurally and open
 the local preview if the tree provides a dev command.

@@ -357,5 +357,6 @@ check_preview_skill
 check_create_skill
 check_installs
 check_auto_install_fallback
+bash "$ROOT/tests/contract-guidance.sh"
 
 echo "PASS: fstack smoke checks"

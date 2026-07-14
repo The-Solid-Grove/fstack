@@ -1,6 +1,8 @@
 # ClaimBee Funnel — Research Notes
 
 > Source: `funnels/rag-catalog/claimbee-funnel`. Copy quoted from `src/steps/content/*.content.ts`; routing from `src/config/funnel.manifest.ts` (`edgesByStepId`); pricing from `src/config/billing.plans.ts`; experiments from `src/config/experiments.ts`. RAG quality score 0.92.
+>
+> **Reference mode: `step-structure-only`.** This teardown is copy, visual, and interaction research—not current FunnelsGrove contract guidance. Do not copy its `type`/`kind`, answer writes, routing, shell/controller, helpers, or analytics; implementation must follow the synced project's `AGENTS.md` and `docs/funnelsgrove/START-HERE.md`.
 
 ## 1. Overview
 
@@ -20,96 +22,96 @@
 
 ## 2. Step-by-Step Walkthrough
 
-Numbering follows file names. Branches noted per step. `goChoice('yes'/'no')` reads the manifest edges; multi-choice steps call `goToStep` directly.
+Numbering follows file names and branches are noted per step. Routing descriptions summarize observed structure only; use the managed flow/controller contract when implementing them.
 
 ### Section A — Hook & first commitment
 
-**`claim` (step-01, single_step_choice, intro_hero) — DEFAULT ENTRY**
+**`claim` (step-01; shared-Continue entry) — DEFAULT ENTRY**
 - Headline: **"People getting / free money / know one secret"** (middle line accented in ClaimBee blue).
 - No question, no CTA friction — just a shared Continue. Pure curiosity gap + expectation match.
 - Lever: curiosity + greed; trust gate begins (clean visual quality). → `profile`.
 
 **`claim-b` (step-01b)** — A/B variant of step 1 (experiment `claim-step-ab`, 50/50). Same headline content, different Figma node `6043:6332`. → `profile`.
 
-**`profile` (step-02, single_step_choice)**
+**`profile` (step-02; shared-Continue content)**
 - Headline: **"They / take it back / from big corporations."**
 - Reframes "free money" as justice/recovery from corporations — kills the scam objection early (Trust Gate: "are you an ally"). → `activate`.
 
-**`activate` (step-03, single_step_choice)**
+**`activate` (step-03; shared-Continue content)**
 - Headline: **"ClaimBee / helps you claim / what is yours."** First brand introduction + bee mascot/glow.
 - Lever: ally framing + product name priming. → `eligibility`.
 
 ### Section B — Eligibility & settlement value-loading
 
-**`eligibility` (step-04, single_step_choice, inline Yes/No)**
+**`eligibility` (step-04; inline Yes/No interaction)**
 - Headline: **"Have you owned or used any Android devices with cellular data?"** Buttons "✅ Yes" / "❌ No".
 - Near-100%-yes targeting question; first real micro-commitment.
 - **Branch:** `yes → active-google-claim`; `no → subscriptions` (skips the Google settlement highlight).
 
-**`active-google-claim` (step-04b, progress_interstitial)** — *Yes branch only*
+**`active-google-claim` (step-04b; status/value screen)** — *Yes branch only*
 - Copy: *"Right now, Android users can file claims for the **active Google privacy settlement**."* Good-to-know: *"Eligible users may receive **up to $100 per user**."* Status bar: *"Checking active claim status…"*.
 - Lever: real cited settlement + loader-as-priming. → `subscriptions`.
 
-**`devices-selected` (step-05, multi_select)** — **⚠ ORPHANED in live graph.** Asks *"Which of these devices have you used?"* (iPhone / Apple Watch / iPad / MacBook / None) "to calculate your potential device-specific compensation." Edges send it → `settlement`, but **nothing routes into it** (the old iPhone path was replaced by the Android `eligibility` question). Dead-but-present.
+**`devices-selected` (step-05, multi-select interaction)** — **⚠ ORPHANED in live graph.** Asks *"Which of these devices have you used?"* (iPhone / Apple Watch / iPad / MacBook / None) "to calculate your potential device-specific compensation." Edges send it → `settlement`, but **nothing routes into it** (the old iPhone path was replaced by the Android `eligibility` question). Dead-but-present.
 
-**`settlement` (step-07, progress_interstitial)** — **⚠ ORPHANED** (only `devices-selected` points to it).
+**`settlement` (step-07; status/value screen)** — **⚠ ORPHANED** (only `devices-selected` points to it).
 - Copy: *"In early 2024, **iPhone owners** began receiving checks for the **'batterygate' settlement**."* Good-to-know: *"The average compensation was **$92 per device**."* Status: *"Connecting to FTC Registry…"*. This is the canonical Hitchcock data-point screen; still in the codebase as the legacy iPhone variant. → `subscriptions`.
 
-**`subscriptions` (step-08, single_step_choice)**
+**`subscriptions` (step-08; shared-Continue content)**
 - Tag "Google settlement." Copy: *"Your Android data may qualify… Google privacy settlement is active… **Google set aside $135M for refunds**. Let's check what else may be waiting for you."*
 - Lever: anchoring with a huge real number; "what else is waiting" opens the next curiosity loop. → `prime-question`.
 
-**`prime-question` (step-09, single_step_choice, inline Yes/No)**
+**`prime-question` (step-09; inline Yes/No interaction)**
 - *"Did you have an active **Amazon Prime** subscription at any point between 2019 and 2025?"*
 - **Branch:** `yes → digital-rights`; `no → never-miss` (skips the Amazon $2.5B reveal).
 
-**`digital-rights` (step-10, value_prop_story)** — *Prime-Yes branch*
+**`digital-rights` (step-10; value story)** — *Prime-Yes branch*
 - *"Your digital rights matter — The FTC ordered Amazon to pay out a record **$2.5 billion**. Why? Because they used confusing interface designs known as 'dark patterns' to sign people up without clear consent."*
 - Lever: problem-mechanism reveal (dark patterns) + huge anchor; validates the user's latent grievance. → `never-miss`.
 
-**`never-miss` (step-11, social_proof)**
+**`never-miss` (step-11; testimonial/value screen)**
 - *"Never miss a payout you're owed. Our system tracks verified legal sources 24/7 to find payouts you didn't know existed."* Testimonial — George P., 5★: *"ClaimBee told me about money I was owed even though my friends and social feeds never mentioned it."*
 - Lever: social proof placed early (per case-study "place proof before skepticism peaks"). → `delivery-apps`.
 
-**`delivery-apps` (step-12, single_step_choice, inline Yes/No)**
+**`delivery-apps` (step-12; inline Yes/No interaction)**
 - *"Did you use delivery apps like UberEats, DoorDash, or GrubHub during 2025?"*
 - **Branch:** `yes → active-cases`; `no → claims-progress`.
 
-**`active-cases` (step-13, single_step_choice)** — *delivery-Yes branch*
+**`active-cases` (step-13; shared-Continue content)** — *delivery-Yes branch*
 - *"We are tracking active cases regarding hidden fees… Many of these services are currently facing lawsuits regarding non-transparent service fees."* → `claims-progress`.
 
-**`claims-progress` (step-14, progress_interstitial)**
+**`claims-progress` (step-14; status/value screen)**
 - *"See claims others miss — ClaimBee monitor trusted legal sources to catch hidden settlements and alert you the moment you qualify."* Status: *"Verifying claim deadlines…"*. → `digital-safety-intro`.
 
 ### Section C — Privacy / data-breach value block
 
-**`digital-safety-intro` (step-15, intro_hero)**
+**`digital-safety-intro` (step-15; section intro)**
 - Tag "Privacy & Security." *"Now, let's talk about your **digital safety** — The largest compensation funds in recent years aren't from social media, but from **the companies you trusted with your personal data**."*
 - Pattern interrupt introducing a new value category. → `facebook-question`.
 
 **`facebook-question` (step-16, inline Yes/No)** — *"Did you have an active Facebook account between 2007 and 2024?"* **Branch:** `yes → facebook-breach`; `no → google-question`.
 
-**`facebook-breach` (step-17, progress_interstitial)** — *FB-Yes branch* — *"This period 2007-2024 covers a massive data breach at **Facebook & Cambridge Analytica**."* Good-to-know: *"The settlement reached was **$725 million**."* → `google-question`.
+**`facebook-breach` (step-17; status/value screen)** — *FB-Yes branch* — *"This period 2007-2024 covers a massive data breach at **Facebook & Cambridge Analytica**."* Good-to-know: *"The settlement reached was **$725 million**."* → `google-question`.
 
 **`google-question` (step-18, inline Yes/No)** — *"Do you use Google Maps or Google Search on your smartphone?"* **Branch:** `yes → privacy-right`; `no → data-breach-question`.
 
-**`privacy-right` (step-19, value_prop_story)** — *Google-Yes branch* — *"Privacy is a right, not a setting. Google faced a **$425 million verdict** for tracking location data even when users explicitly turned 'Location History' off."* → `data-breach-question`.
+**`privacy-right` (step-19; value story)** — *Google-Yes branch* — *"Privacy is a right, not a setting. Google faced a **$425 million verdict** for tracking location data even when users explicitly turned 'Location History' off."* → `data-breach-question`.
 
 **`data-breach-question` (step-20, inline Yes/No)** — *"Have you ever received an email with the subject line 'Notice of Data Breach'?"* **Branch:** `yes → spam-explainer`; `no → be-first-progress`.
 
 **`spam-explainer` (step-21)** — *breach-Yes branch* — *"We get it — it looks like spam. But that email is effectively a check waiting to be cashed, often ranging **$50 to $500**. We help you turn those 'junk' emails into cash."* (Reframes a familiar object as money — strong self-generated value.) → `be-first-progress`.
 
-**`be-first-progress` (step-22, progress_interstitial)** — *"Be the First to Know and File. Speed is your biggest advantage… we tell you about new money settlements days early… News sites are often 2 weeks late. We find settlements before they hit the headlines."* Status: *"Verifying claim deadlines…"*. (Builds the product's unique mechanism = speed/automation.) → `nyt-question`.
+**`be-first-progress` (step-22; status/value screen)** — *"Be the First to Know and File. Speed is your biggest advantage… we tell you about new money settlements days early… News sites are often 2 weeks late. We find settlements before they hit the headlines."* Status: *"Verifying claim deadlines…"*. (Builds the product's unique mechanism = speed/automation.) → `nyt-question`.
 
-**`nyt-question` (step-23, single_step_choice)** — *"Did a The New York Times article bring you here?"* Authority/attribution probe. **Branch: both Yes and No → `payout-calculating`** (no divergence; likely an attribution-tagging question).
+**`nyt-question` (step-23; Yes/No interaction)** — *"Did a The New York Times article bring you here?"* Authority/attribution probe. **Branch: both Yes and No → `payout-calculating`** (no divergence; likely an attribution-tagging question).
 
 ### Section D — Self-generated payout reveal
 
-**`payout-calculating` (step-24, progress_interstitial, auto-advance 20s)**
+**`payout-calculating` (step-24; timed scan, auto-advance 20s)**
 - 8 rotating scan frames (2.5s each): *"Analyzing device history…"*, *"Scanning data breach records (2018-2025)…"*, *"Matching profile with open Class Action lawsuits…"*, *"Identifying antitrust settlement eligibility…"*, *"Filtering out expired claims…"*, *"Cross-referencing FTC settlement registry…"*, *"Structuring claim groups…"*, *"Finalizing potential payout estimate…"*. Caption: *"Calculating your potential payout…"*.
 - Lever: the loader-as-priming masterpiece — fake computation manufactures perceived personalization and effort. → `great-news`.
 
-**`great-news` (step-25, progress_interstitial)** — the conviction climax
+**`great-news` (step-25; result reveal)** — the conviction climax
 - *"Great news! Based on your answers, you are **pre-qualified for 7 active class action lawsuits**."* "Your Potential Payout:" with an **animated SVG chart that counts up to $1,250** over 2s (`MAX_PAYOUT = 1250`, `step-25-great-news.tsx`). X-axis: 0 → "After 2 Weeks." Footnote: *"*The final amount depends on verifying your usage."* CTA "See how to claim."
 - Lever: range-not-promise + self-generated number + pre-qualification framing ("pre-qualified for 7"). The chart rising to a date ("After 2 Weeks") doubles as a timeline projection. → `filing-simple`.
 
@@ -117,7 +119,7 @@ Numbering follows file names. Branches noted per step. `goChoice('yes'/'no')` re
 
 **`filing-simple` (step-26)** — *"Filing claims can be complex. We make it simple! ClaimBee replaces clunky government forms with a smart, step-by-step experience… strip away the confusing legal jargon."* (Solution mechanism after problem mechanism.) → `journey-choice`.
 
-**`journey-choice` (step-27, single_step_choice, custom branching component)**
+**`journey-choice` (step-27; custom two-card branch)**
 - *"This is your journey — Which pace would you prefer?"* Two cards:
   - **ClaimBee** (badge "Recommended"): *"Auto-file all eligible claims in one click."*
   - **By Myself**: *"You will find court websites, download forms and mail them by yourself."*
@@ -125,7 +127,7 @@ Numbering follows file names. Branches noted per step. `goChoice('yes'/'no')` re
 
 **`by-myself-warning` (step-28)** — *DIY branch* — *"Are you sure? Self-filing typically takes about **14 hours of work**. You will need to locate court dockets, navigate legal terminology, and monitor deadlines individually. Or, let us handle the heavy lifting. We can automatically file for all 7 lawsuits with a single digital signature."* Reveals the true effort cost, then one button back to the product. → `relationship-status` (rejoins main path).
 
-**`relationship-status` (step-29, single_step_choice)** — value multiplier
+**`relationship-status` (step-29; three-option branch)** — value multiplier
 - *"One last thing to maximize your household's return — What is your current relationship status?"* Options: 💍 Married/Partnered, ⚖️ Divorced, 👤 Single. Defaults to "married." Sets attribute `relationship-status:family = (selected === 'married')`.
 - **Branch:** `married → family-claims`; `divorced`/`single` → `email-capture`.
 
@@ -133,17 +135,21 @@ Numbering follows file names. Branches noted per step. `goChoice('yes'/'no')` re
 
 ### Section F — Capture + Paywall
 
-**`email-capture` (step-31, paywall_offer type)**
+**`email-capture` (step-31; email form)**
+- **Contract annotation (`email-capture`):** `legacy-label-invalid`; exact implementation classification lives only in `docs/funnelsgrove/START-HERE.md` → `docs/funnelsgrove/steps/form_input.md`.
 - *"Enter the email address for your official claims. Please double-check the spelling. This is the address where you will receive important case updates and payout notifications."*
 - Lever: email framed as *operationally necessary* (where payouts go), not marketing. → `paywall`.
 
-**`scratch-card` (step-31b, paywall_offer)** — **NOT in default path.** Full-screen scratch-to-reveal discount; user must erase ≥80% (auto-reveals after 10s on mobile). Reveals confetti + first discount label, resets paywall discount snapshot, → `paywall`. README: "no longer part of the default conversion path… stays available for direct experiments or previews."
+**`scratch-card` (step-31b; discount-reveal transition, not a paywall)** — **NOT in default path.**
+- **Contract annotation (`scratch-card`):** `legacy-label-invalid`; exact implementation classification lives only in `docs/funnelsgrove/START-HERE.md` → `docs/funnelsgrove/steps/INDEX.md`.
+- Full-screen scratch-to-reveal discount; user must erase ≥80% (auto-reveals after 10s on mobile). This screen has no purchasable plans. Reveals confetti + first discount label, resets paywall discount snapshot, → `paywall`. README: "no longer part of the default conversion path… stays available for direct experiments or previews."
 
 **`paywall` (step-32)** — see Section 4. → `subscription-started`.
 
-**`subscription-started` (step-33, subscription_handoff)** — see Section 5.
+**`subscription-started` (step-33; post-purchase completion/handoff)** — see Section 5.
+- **Contract annotation (`subscription-started`):** `legacy-label-invalid`; exact implementation classification lives only in `docs/funnelsgrove/START-HERE.md` → `docs/funnelsgrove/steps/complete_registration.md`.
 
-**`manage-subscription` (step-35, subscription_management)** — see Section 5.
+**`manage-subscription` (step-35; account-management screen)** — see Section 5.
 
 ## 3. Branching, Experiments & Entry Points
 

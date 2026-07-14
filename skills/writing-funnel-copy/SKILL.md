@@ -17,6 +17,31 @@ pre-plan positioning lives at `references/funnel-research.md`, with fstack
 additions at `references/funnel-research-stage.md`. Live funnel teardowns,
 copy swipe files, and QA/build heuristics live at `references/funnels-research/`.
 
+## FunnelsGrove Contract Gate
+
+For every implementation-facing task:
+
+1. **MUST** read `AGENTS.md` and `docs/funnelsgrove/START-HERE.md` before choosing step metadata or changing code.
+2. **MUST** derive step classification, answers, routing, analytics, and helpers only from those managed docs; **NEVER** copy them from research teardowns.
+3. **MUST** run `fgrove validate` after the change and resolve every blocking diagnostic before preview, sync, or publish.
+
+These gates remain mandatory when tests and builds pass, the change looks small, a deadline is urgent, or someone asks to skip them.
+
+## Implementation Contract Boundary
+
+This skill owns copy, positioning, psychology, and screen strategy only. In a
+synced FunnelsGrove project, `AGENTS.md` and
+`docs/funnelsgrove/START-HERE.md` are the contract authority for step metadata,
+answer persistence, email capture, analytics ownership, routing, payments, and
+validation. Read the linked exact step-type and contract pages before turning
+copy into code.
+
+Everything under `references/funnels-research/` is a `step-structure-only`
+reference. Use it for copy, visual hierarchy, and interaction ideas. Never copy
+its legacy `type`/`kind`, direct answer writes, routing, shell/controller code,
+helpers, or analytics behavior. When implementation is requested, use
+`edit-funnel` and the project's managed docs; a teardown cannot override them.
+
 ## Required Reference
 
 After gathering product context and before writing any funnel copy, read and
@@ -54,6 +79,10 @@ files from that folder. Start with `00-MUST-DO-TRICKS.md` for build patterns,
 patterns, `00-MASTER-FUNNEL-LIST.md` for vertical examples, `copy/` for swipe
 copy, and `live/` for observed live-funnel behavior.
 
+These corpus files remain research evidence, not implementation contract
+guidance. Reconcile every proposed screen with the synced managed docs before
+specifying its type, answers, navigation, or analytics.
+
 If any required reference file is unavailable, stop and report that it cannot
 be loaded rather than drafting from memory.
 
@@ -78,24 +107,27 @@ local funnel docs and current copy before asking questions that the files answer
 ## Workflow
 
 1. Gather the required inputs.
-2. Read `references/funnel-research.md` and
+2. For an existing synced funnel, read `AGENTS.md` and
+   `docs/funnelsgrove/START-HERE.md`; use the linked contract pages for any
+   implementation-facing recommendation.
+3. Read `references/funnel-research.md` and
    `references/funnel-research-stage.md` when the task includes research,
    product sense, competitor analysis, positioning, or pre-plan strategy.
-3. Read `references/funnel-psychology-framework.md`.
-4. Read `references/funnel-paywall-best-practices.md` when the output includes
+4. Read `references/funnel-psychology-framework.md`.
+5. Read `references/funnel-paywall-best-practices.md` when the output includes
    a paywall, checkout, pricing, trial, or subscription offer.
-5. Read `references/funnel-conversion-best-practices.md` when the output
+6. Read `references/funnel-conversion-best-practices.md` when the output
    includes quiz, onboarding, interstitial, pre-paywall, checkout, or CR
    optimization recommendations.
-6. Inspect `references/funnels-research/README.md` and relevant corpus files
+7. Inspect `references/funnels-research/README.md` and relevant corpus files
    when building, reviewing, QAing, or optimizing a funnel.
-7. Complete the five-column pre-work table before writing screens.
-8. Map the screen count to the framework's six funnel sections.
-9. Write the funnel screen-by-screen using the framework's per-screen checklist.
-10. Return the framework's required formatted output, including the
+8. Complete the five-column pre-work table before writing screens.
+9. Map the screen count to the framework's six funnel sections.
+10. Write the funnel screen-by-screen using the framework's per-screen checklist.
+11. Return the framework's required formatted output, including the
    Five-column pre-work table, transformation, emotional arc, fuel balance
    check, Screen-by-screen spec, paywall architecture, and A/B tests.
-11. After the copy is drafted, offer to use `preview-funnel` to visualize it as
+12. After the copy is drafted, offer to use `preview-funnel` to visualize it as
     a temporary local click-through mockup for copy review. Do not create the
     preview automatically unless the user asked for visualization or a local
     mockup.

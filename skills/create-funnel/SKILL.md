@@ -9,6 +9,24 @@ description: Use when creating, scaffolding, or starting a new FunnelsGrove funn
 
 Scaffold a new working funnel from the canonical funnel template, rebrand it, verify it locally, and optionally wire it to a hosted FunnelsGrove funnel. The template ships ready to sell: quiz steps, email capture, the ClaimBee-derived paywall with two-stage discount-on-close, a paywall B variant for experiments, Apple Pay / Google Pay slots, subscription-started, and manage-subscription.
 
+The copied template's managed documentation is the contract authority. Before
+changing steps, read `AGENTS.md`, then
+`docs/funnelsgrove/START-HERE.md`, and follow the linked contract and exact
+step-type page. For paywalls, that includes
+`docs/funnelsgrove/steps/paywall_offer.md`; for email capture, choices,
+analytics, routing, and payments, use the corresponding managed pages instead
+of inferring rules from this workflow skill or a catalog funnel.
+
+## FunnelsGrove Contract Gate
+
+For every implementation-facing task:
+
+1. **MUST** read `AGENTS.md` and `docs/funnelsgrove/START-HERE.md` before choosing step metadata or changing code.
+2. **MUST** derive step classification, answers, routing, analytics, and helpers only from those managed docs; **NEVER** copy them from research teardowns.
+3. **MUST** run `fgrove validate` after the change and resolve every blocking diagnostic before preview, sync, or publish.
+
+These gates remain mandatory when tests and builds pass, the change looks small, a deadline is urgent, or someone asks to skip them.
+
 **Do not use `fgrove create` from a globally installed CLI.** The npm package does not ship templates; it fails with `ENOENT ... funnels/rag-catalog/...` (and still exits 0). Scaffold by copying the template from a funnelsgrove monorepo checkout instead.
 
 ## Required Inputs
@@ -30,6 +48,12 @@ rm -rf node_modules .next out tsconfig.tsbuildinfo
 
 ### 2. Reskin
 
+Start by following the managed-doc router in `AGENTS.md` and
+`docs/funnelsgrove/START-HERE.md`. If those managed files are missing or report
+a conflict, refresh them with the current `fgrove docs --dir <dest>` workflow
+before authoring steps. Do not substitute an older teardown or copied template
+metadata for the managed contract.
+
 - `package.json` — `"name": "<kebab-name>-funnel"`.
 - `funnel.config.json` — `name` and `description` for the new app; leave ids for hosted wiring.
 - `src/config/funnel.manifest.ts` — `meta.title` and `meta.description`.
@@ -39,9 +63,15 @@ rm -rf node_modules .next out tsconfig.tsbuildinfo
 ### 3. Install and check
 
 ```bash
+<fstack-checkout>/scripts/ensure-fgrove-cli
 npm install        # resolves @funnelsgrove/* from npm — needs current ^ ranges in package.json
+fgrove validate --dir .
 npm run test:run && npm run lint && npm run build
 ```
+
+`fgrove validate` is required after scaffolding and after any step, metadata,
+answer, routing, analytics, or payment change. Resolve every blocking diagnostic
+before local preview; a passing framework build does not replace validation.
 
 If `@funnelsgrove/*` versions fail to resolve, the copied template predates the version bumps — update the three ranges to the latest published versions and re-install.
 Keep the template's image build settings intact: the publish artifact build
@@ -51,7 +81,7 @@ build-time image reduction.
 
 ### 4. Verify locally
 
-`npm run dev` (note the port it actually picks — it moves to 3001+ when 3000 is busy), then walk the full flow from the first step through email capture and paywall to subscription-started. Run the docs' QA checklist (`docs/qa-checklist.md` in the funnel tree): content-fit at small 375x667, medium 393x852, large 402x874, and desktop-small 1280x800, sticky CTA on an opaque bar, paywall countdown + promo card + discounted plan prices render. Dev mode runs Stripe in test mode with the template's test plan catalog.
+`npm run dev` (note the port it actually picks — it moves to 3001+ when 3000 is busy), then walk the full flow from the first step through email capture and paywall to subscription-started. Run the managed local and paywall QA pages under `docs/funnelsgrove/qa/`; an older `docs/qa-checklist.md` is a compatibility pointer, not contract authority. Check content fit at small 375x667, medium 393x852, large 402x874, and desktop-small 1280x800, sticky CTA on an opaque bar, and that the paywall countdown + promo card + discounted plan prices render. Dev mode runs Stripe in test mode with the template's test plan catalog.
 
 The copied `.env.local` is the template's local dev config (API on `localhost:4001`); it is never synced, and `fgrove env pull` replaces it after hosted wiring. Opening checkout, the close-checkout special offer, and test payments need a reachable FunnelsGrove API with its database (local API + DB, or the published preview). Without one, the paywall shows a fetch error where checkout would start — report those three QA items as a named blocker and finish them on the preview URL.
 
@@ -86,7 +116,7 @@ QA the preview URL with the same checklist before any production talk. Real Appl
 | Experiments (empty, ready) | `src/config/experiments.ts` |
 | Plans / discounts | `src/config/billing.plans.ts` (+ `billing.test.plans.ts`) |
 | Paywall with discount-on-close | `src/steps/step-32-paywall.tsx` |
-| Agent docs (after `fgrove docs`) | `AGENTS.md`, `docs/` in the funnel tree |
+| Managed agent docs | `AGENTS.md`, `docs/funnelsgrove/START-HERE.md` |
 
 ## Common Mistakes
 

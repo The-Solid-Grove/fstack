@@ -3,6 +3,8 @@
 > Source: `/Users/andrei/work/funnelsgrove/funnelsgrove/funnels/rag-catalog/12min`
 > Vertical: book-summary / micro-learning (nonfiction summaries consumable in ~12 minutes), web-to-app annual subscription.
 > Reconstructed from Figma nodes; 11 steps, fully linear, single long-form paywall.
+>
+> **Reference mode: `step-structure-only`.** This teardown is copy, visual, and interaction research—not current FunnelsGrove contract guidance. Do not copy its `type`/`kind`, answer writes, routing, shell/controller, helpers, or analytics; implementation must follow the synced project's `AGENTS.md` and `docs/funnelsgrove/START-HERE.md`.
 
 ## 1. Overview
 
@@ -12,19 +14,19 @@
 
 **Structural shape.** 11 steps, declared in `src/config/funnel.manifest.ts`:
 
-| # | id | name | manifest `type` | Real function |
+| # | id | name | Observed interaction | Real function |
 |---|------|------|------|------|
-| 1 | step-1 | age-picker | intro_hero | Hook + age segmentation (entry) |
-| 2 | step-2 | book-interest | single_step_choice | Yes/No micro-commitment on a book cover |
-| 3 | step-3 | email-capture | multi_select_choice | Email + marketing opt-in |
-| 4 | step-4 | plan-ready | summary_confirmation | Animated "plan is ready" growth chart |
-| 5 | step-5 | profile-improve-topics | progress_interstitial | Multi-select topics ("Profile" progress) |
-| 6 | step-6 | profile-learning-concepts | progress_interstitial | "12 minutes, not hours" concept sell |
-| 7 | step-7 | patterns-positive-framing | progress_interstitial | Motivational reframe ("Patterns" progress) |
-| 8 | step-8 | patterns-social-proof | progress_interstitial | "300,000 microbooks last month" proof |
-| 9 | step-9 | goal-selection | multi_select_choice | Life-goal multi-select |
-| 10 | step-10 | summary-bridge | paywall_offer | Value bridge / callback to hook |
-| 11 | step-11 | long-paywall | paywall_offer, `kind: paywall` | Long-form annual paywall + FAQ |
+| 1 | step-1 | age-picker | Age-card choice | Hook + age segmentation (entry) |
+| 2 | step-2 | book-interest | Yes/No choice | Yes/No micro-commitment on a book cover |
+| 3 | step-3 | email-capture | Email form; legacy label invalid | Email + marketing opt-in |
+| 4 | step-4 | plan-ready | Plan-ready recap | Animated "plan is ready" growth chart |
+| 5 | step-5 | profile-improve-topics | Multi-select topic question | Multi-select topics ("Profile" progress) |
+| 6 | step-6 | profile-learning-concepts | Concept value screen | "12 minutes, not hours" concept sell |
+| 7 | step-7 | patterns-positive-framing | Motivational value screen | Motivational reframe ("Patterns" progress) |
+| 8 | step-8 | patterns-social-proof | Social-proof screen | "300,000 microbooks last month" proof |
+| 9 | step-9 | goal-selection | Multi-select goal question | Life-goal multi-select |
+| 10 | step-10 | summary-bridge | Value bridge; legacy label invalid | Value bridge / callback to hook |
+| 11 | step-11 | long-paywall | Purchasable paywall | Long-form annual paywall + FAQ |
 
 **Important architecture note.** Unlike many funnels in this catalog, the step files are **not** thin re-exports of a single brand file. `src/steps/twelve-min-ui.tsx` only holds *shared chrome* — `TwelveMinHeader`, `TwelveMinProgress`, `TwelveMinStickyCta`, `TwelveMinStaticCta`, `useGoToPreviousStep`. The real copy and logic live in each `step-NN.tsx`. All quotes below are from the actual step source.
 
@@ -32,21 +34,22 @@
 
 ## 2. Step-by-Step Walkthrough
 
-### Step 1 — `step-1` / age-picker (intro_hero, entry)
+### Step 1 — `step-1` / age-picker (entry age choice)
 - **Headline:** "Become the Most Interesting Person at the Table" + kicker **"3-MINUTE QUIZ"**.
 - **Options (4 image cards):** Age 18-24 / 25-34 / 35-44 / 45+, each labeled with a trailing "→".
 - **Value loaded:** Expectation match with the ad; the "3-MINUTE QUIZ" kicker sets a low, finite time cost (mirrors the brand's own "12 minutes" promise — time is the product).
 - **Lever:** Investment escalation done right — the very first interaction is a single zero-friction tap that *also* segments the user. Picking a card both answers and advances (`setAnswer('ageRange'); goNext()`), so there is no separate Continue button. No back button (`TwelveMinHeader` with no `showBack`) — you can't retreat from the entry.
 - **Branching:** None. All four ages route to step-2. Age is captured but never used to reroute or change copy.
 
-### Step 2 — `step-2` / book-interest (single_step_choice)
+### Step 2 — `step-2` / book-interest (Yes/No choice)
 - **Headline:** "Is this book interesting to you?" over a single **book cover** image (alt: *The Power of Habit*).
 - **Options:** No / Yes (icon cards).
 - **Value loaded:** Book-cover social proof + a near-100%-yes confirmation question (framework Section A: "first question must have a near-100% yes rate"). The Power of Habit is a famous, broadly appealing title.
 - **Lever:** Yes-momentum / commitment bias. Either answer advances identically — the question exists to manufacture a micro-commitment and make the catalog feel personally relevant, not to branch.
 - **Branching:** None. `handleChoice('yes'|'no')` both store `bookInterest` and call `goNext()` to step-3.
 
-### Step 3 — `step-3` / email-capture (multi_select_choice in manifest, actually an email form)
+### Step 3 — `step-3` / email-capture (email form; legacy label invalid)
+- **Contract annotation (`email-capture`):** `legacy-label-invalid`; exact implementation classification lives only in `docs/funnelsgrove/START-HERE.md` → `docs/funnelsgrove/steps/form_input.md`.
 - **Headline:** "**Achieve your goals** with the 12min App." (first phrase highlighted).
 - **Subtitle:** "Create an account to access your personalized plan."
 - **Fields:** Email input (icon-prefixed) + optional checkbox "I want to receive exclusive offers, personalized content, and updates…".
@@ -55,7 +58,7 @@
 - **Notable risk:** No validation — `handleContinue` stores `email.trim()` and advances even if empty; marketing opt-in defaults **off** (good for compliance, weaker for list growth). This is an early, hard ask (email at step 3 of 11) placed *before* most value is loaded — aggressive sequencing.
 - **Branching:** None.
 
-### Step 4 — `step-4` / plan-ready (summary_confirmation) — the payoff screen
+### Step 4 — `step-4` / plan-ready — the payoff screen
 - **Headline:** "Your personal development plan *is ready!*"
 - **Subtitle:** "Based on your answers, we have created a development plan with readings that will help you improve exactly where you need to."
 - **Hero:** An **animated SVG growth chart** (`requestAnimationFrame`, 1800ms) that draws an upward curve from "Now" to a date **3 months out** computed live (`addMonths(today, 3)`, `formatPlanDate`), with a floating badge "**20 books / per month**".
@@ -64,7 +67,7 @@
 - **Lever:** This is the big motivation refill after three ask-screens (age, book, email). Dated timeline = the "where you are today vs. 4 months from now" technique from the conversion case study, here at 3 months. Sticky Continue CTA.
 - **Branching:** None.
 
-### Step 5 — `step-5` / profile-improve-topics (progress_interstitial)
+### Step 5 — `step-5` / profile-improve-topics (multi-select topic question)
 - **Progress bar appears for the first time:** label "**Profile**", 20% fill, states `['dot','active','empty','empty']`.
 - **Headline:** "What Would You Like to Improve?"
 - **Options (12 chips, multi-select):** Understanding Emotions, Motivation, Nutrition, Habits, Self-Confidence, Mindset, Self-Care, Fitness Life, Empathy, Dating and Marriage, Personal Finances, Creativity.
@@ -73,7 +76,7 @@
 - **Note vs. best practice:** 12 options violates the "max 5 on first quiz question" rule — but this is mid-funnel (committed users only), where the framework allows more complexity, so it's defensible.
 - **Branching:** None.
 
-### Step 6 — `step-6` / profile-learning-concepts (progress_interstitial) — give screen
+### Step 6 — `step-6` / profile-learning-concepts — give screen
 - **Progress:** "Profile" 28% (`['dot','active','empty','empty']`).
 - **Hero image:** `chart-pie-profile.png`.
 - **Headline:** "Learn Great Concepts in Minutes, Not Hours".
@@ -82,7 +85,7 @@
 - **Lever:** Anchoring (12 min vs. hours of reading) + ability-objection pre-handling ("I don't have time").
 - **Branching:** None.
 
-### Step 7 — `step-7` / patterns-positive-framing (progress_interstitial)
+### Step 7 — `step-7` / patterns-positive-framing
 - **Progress jumps to "Patterns" 74%, states `['dot','check','active','empty']`** — note the section label changes from "Profile" to "Patterns" and the first stop now shows a check. (Implies the quiz has multiple labeled phases.)
 - **Hero:** `bunny-books.png` mascot.
 - **Headline:** "Focusing on the positive aspects is a great way to motivate yourself even more."
@@ -91,7 +94,7 @@
 - **Lever:** Poke→soothe→empower in the lightest form; keeps the "plan is being built for *you*" narrative alive.
 - **Branching:** None.
 
-### Step 8 — `step-8` / patterns-social-proof (progress_interstitial)
+### Step 8 — `step-8` / patterns-social-proof
 - **Progress:** "Patterns" **100%**, states `['dot','check','check','check']` — quiz visually "complete".
 - **Hero:** `pie-work-routine.png`.
 - **Headline:** "Last month, our users read/listened to over **300,000 microbooks!**"
@@ -100,14 +103,15 @@
 - **Lever:** Social proof + loss-aversion-tinged "finally make time" (you've been failing to; join and fix it).
 - **Branching:** None.
 
-### Step 9 — `step-9` / goal-selection (multi_select_choice)
+### Step 9 — `step-9` / goal-selection (multi-select goal question)
 - **Headline:** "Do you have a specific goal at the moment?"
 - **Options (8, emoji + label, multi-select):** 🙋 Get a promotion · 📊 Becoming an entrepreneur · 💑 Relationship commitment · 👨‍👩‍👧 Parenthood · ✈️ Major life transition · 🤯 Mental and emotional well-being · 🏦 Financial milestone · 🏖️ Retirement planning.
 - **Value loaded:** Final, deepest personal-relevance commitment — ties book summaries to a concrete life ambition. Continue disabled until ≥1 selected. Stored as `currentGoals[]`.
 - **Lever:** Commitment lock-in (framework Section D) immediately before the paywall — the user has now told the product what they want, so the offer feels like the answer to their own stated goal.
 - **Branching:** None. Note the progress bar is **gone** on this screen (no `TwelveMinProgress`), subtly signaling "the quiz is over, this is the finish line."
 
-### Step 10 — `step-10` / summary-bridge (paywall_offer, not the real paywall)
+### Step 10 — `step-10` / summary-bridge (value bridge; not a paywall)
+- **Contract annotation (`summary-bridge`):** `legacy-label-invalid`; exact implementation classification lives only in `docs/funnelsgrove/START-HERE.md` → `docs/funnelsgrove/steps/summary_confirmation.md`.
 - **Headline:** "Become the most interesting person at the table!" — **callback to the step-1 hook**, closing the loop.
 - **Subtitle:** "Based on your answers, we have created your personal development plan."
 - **Hero:** `mascot-compare.png` (before/after style mascot comparison).
@@ -115,7 +119,7 @@
 - **Lever:** Consistency / completion — you started wanting to be "the most interesting person at the table," and here's your plan. No header back button. Sticky Continue → paywall.
 - **Branching:** None.
 
-### Step 11 — `step-11` / long-paywall (paywall_offer, `kind: paywall`) — see §4.
+### Step 11 — `step-11` / long purchasable paywall — see §4.
 
 ## 3. Branching, Experiments & Entry Points
 
