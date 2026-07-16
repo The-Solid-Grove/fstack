@@ -75,9 +75,11 @@ before drafting copy or writing an edit plan.
 When building, editing, reviewing, QAing, or optimizing an existing funnel,
 inspect `references/funnels-research/README.md` and then load only the relevant
 files from that folder. Start with `00-MUST-DO-TRICKS.md` for build patterns,
-`00-QA-CHECKLIST.md` for review/QA, `00-LIVE-FINDINGS.md` for live market
-patterns, `00-MASTER-FUNNEL-LIST.md` for vertical examples, `copy/` for swipe
-copy, and `live/` for observed live-funnel behavior.
+`00-QA-CHECKLIST.md` for funnel-level review/QA, `00-STEP-DESIGN-QA.md` for
+per-step design/copy/visual QA (headline, imagery, color contrast, typography),
+`00-LIVE-FINDINGS.md` for live market patterns, `00-MASTER-FUNNEL-LIST.md` for
+vertical examples, `copy/` for swipe copy, and `live/` for observed live-funnel
+behavior.
 
 These corpus files remain research evidence, not implementation contract
 guidance. Reconcile every proposed screen with the synced managed docs before

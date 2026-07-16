@@ -14,11 +14,25 @@ so we can validate and build the highest-performing funnels possible.
   conversion completeness; Part B = real bugs from the code teardowns; Part C = live-funnel
   addendum (pricing/rollover/downsell/payment/gating). Run before preview publish and again
   on the preview URL before production.
+- **[00-STEP-DESIGN-QA.md](00-STEP-DESIGN-QA.md)** — per-step design/content QA: step
+  anatomy, fuel/copy checks, imagery/faces, CTA color-contrast rules, typography sizing,
+  step-type overlays, and refuted CRO myths. Every rule evidence-tagged ([V] verified /
+  [P] practitioner / [S] standard / [F] framework / [✗] refuted). Run on every screen;
+  complements the funnel-level checklist above.
 - **[00-LIVE-FINDINGS.md](00-LIVE-FINDINGS.md)** — what ~24 real funnels from `funnels.xlsx`
   actually do: real prices, evergreen timers, first-term→rollover, exit downsells,
   withhold-the-result paywalls, payment reality, gating, and per-vertical levers.
 - **[00-MASTER-FUNNEL-LIST.md](00-MASTER-FUNNEL-LIST.md)** — the full index of 313 funnels
   from `funnels.xlsx` (Webfunnels.club curated set), grouped by 26 verticals.
+
+## External research
+
+- **[campaignswell-scaling-web-funnels.md](campaignswell-scaling-web-funnels.md)** —
+  Campaignswell guide "Inside web funnels that scaled up to $1.8M spend/mo": 7 scaling
+  principles, 6 money-losing mistakes, pre-scale health checklist, and 5 case studies
+  (Dialogue AI, Talaboos, GlamAI, N1x, NVAPPS). Covers the layer around our teardowns —
+  creatives↔funnel narrative continuity, LTV-based scaling, web-payment ops, per-channel
+  funnel adaptation.
 
 ## Copy swipe files
 
