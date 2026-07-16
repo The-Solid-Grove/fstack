@@ -44,6 +44,23 @@ Verify the funnel as a user would move through it:
 - Submit email or identity capture and confirm the next expected state.
 - Check browser console and network errors when a browser tool is available.
 
+## Active Experiments
+
+For every active A/B experiment, verify control and each variant separately:
+
+- Confirm the control arm renders exactly as it did before the experiment:
+  plan titles, prices, badges, tags, and default selection are unchanged.
+  Variant edits leaking into shared config is the most common experiment
+  regression.
+- On each variant paywall, select each plan and open checkout. Confirm the
+  checkout charges the plan the variant displayed, not the control default —
+  the selected offer set must flow through to checkout.
+- Close checkout on each variant and confirm the checkout-close discount and
+  downsell path still work. Variants without their own discount config must
+  fall back to the default discounts, not lose the downsell.
+- If any fix shipped while the experiment was running, confirm the experiment
+  analytics window was restarted so results exclude pre-fix sessions.
+
 ## Visual Pass
 
 Run at all four default breakpoints:

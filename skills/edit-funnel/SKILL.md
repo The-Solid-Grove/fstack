@@ -193,6 +193,29 @@ experiment or the UI/API path is unavailable, keep the object source-readable:
 explicit `sourceStepId` or `stepId`, explicit variant route step ids, labels,
 traffic percentages, and normal manifest steps/edges for every variant.
 
+### Experiment Variant Isolation
+
+Every rule below comes from a regression that shipped in a real funnel
+experiment and needed a follow-up fix. When adding or editing an experiment
+variant:
+
+- Scope every edit to the variant's own offer set or config entry. Never let a
+  variant change touch control or shared generated entries — control labels,
+  prices, and defaults must stay byte-identical while the experiment runs. Pin
+  the control values with a test that asserts them separately from the variant.
+- Key variant-specific presentation (badges, tags, labels) on plan data fields
+  such as `billingInterval` or `followUpProviderPlanId`, never on plan keys,
+  plan titles, or offer-set keys. Broad conditions leak variant UI into
+  control; key/title conditions break the moment copy changes.
+- Verify the selected offer set flows through to checkout. The plan charged at
+  checkout must be the plan the variant displayed, not the control default.
+- Give variants an explicit fallback to the default discount and
+  checkout-close downsell config. A variant without its own discount config
+  must inherit the default, not silently lose the downsell path.
+- After fixing any bug in a running experiment, restart the experiment
+  analytics window so results exclude sessions that saw the broken behavior.
+  A fixed variant with polluted analytics still produces a wrong decision.
+
 ### Image Performance Lock
 
 For any new or edited image, image-heavy step, or route that changes which

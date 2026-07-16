@@ -53,7 +53,8 @@ check_readme() {
   assert_file "$ROOT/VERSION"
   assert_file "$ROOT/docs/funnel-qa-checklist.md"
   assert_contains "$ROOT/README.md" '^# fstack'
-  assert_contains "$ROOT/VERSION" '^0\.5\.4$'
+  assert_contains "$ROOT/VERSION" '^[0-9]+\.[0-9]+\.[0-9]+$'
+  assert_contains "$ROOT/README.md" "Current version: \`$(cat "$ROOT/VERSION")\`"
   assert_contains "$ROOT/README.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'

@@ -33,6 +33,11 @@ so we can validate and build the highest-performing funnels possible.
   (Dialogue AI, Talaboos, GlamAI, N1x, NVAPPS). Covers the layer around our teardowns —
   creatives↔funnel narrative continuity, LTV-based scaling, web-payment ops, per-channel
   funnel adaptation.
+- **[2026-07-industry-updates.md](2026-07-industry-updates.md)** — July 2026 web-research
+  snapshot: current benchmarks (3% start→purchase, 13% reach paywall, localization tops
+  LTV-uplift ranking), intro-discount-over-free-trial default, 20–60-screen onboarding,
+  choose-your-trial-price, and RevenueCat's Experiment step as competitor baseline.
+  Reported numbers, not first-hand verified.
 
 ## Copy swipe files
 
