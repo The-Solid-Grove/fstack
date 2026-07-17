@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview Funnel — reference example</title>
+<!-- In a generated preview this is styles.css (a verbatim copy of preview-style.css) -->
+<link rel="stylesheet" href="preview-style.css">
+</head>
+<body>
+  <div class="stage-title">Letters from the Past</div>
+  <div class="stage-subtitle">source: docs/product-specs/pisma-screens-v3.md</div>
+  <div class="phone">
+    <div class="screen">
+      <div class="app-name">Letters from the Past</div>
+      <div class="progress"><i id="bar" style="width: 14%"></i></div>
+      <div class="step-num" id="stepnum">03 / 21</div>
+      <div class="content" id="content"></div>
+      <div class="cta" id="cta"></div>
+    </div>
+  </div>
+  <div class="stage-nav">
+    <button id="back">← Back</button>
+    <span id="navlabel">Recipient</span>
+    <button id="restart">Restart</button>
+  </div>
+<script type="module">
+const steps = [
+  {
+    id: "step-03", title: "Recipient", kind: "choice",
+    headline: "Who matters enough to really know you?",
+    choices: ["My kids", "My partner", "My parent(s)", "A friend", "My future self", "Future generations"],
+    primaryAction: "Continue",
+  },
+  {
+    id: "step-08", title: "Reframe effort", kind: "info",
+    headline: "You don't need to write much.",
+    supportingText: "One sentence. One photo. That's already a letter.",
+    proof: { from: "Example letter", text: "“Proud of you today.”" },
+    primaryAction: "Got it",
+  },
+  {
+    id: "step-14", title: "Projection", kind: "info",
+    headline: "Write once a week, and in a year your kids will have real moments of you.",
+    stat: { num: "52", label: "letters in your first year (from your own answers)" },
+    note: "You can fine-tune this for each letter, anytime.",
+    primaryAction: "I want this",
+  },
+];
+let i = 0, picked = null;
+const content = document.getElementById("content"), cta = document.getElementById("cta");
+function render() {
+  const s = steps[i]; picked = null;
+  document.getElementById("bar").style.width = ((i + 1) / steps.length * 100) + "%";
+  document.getElementById("stepnum").innerHTML = "<strong>" + String(i + 1).padStart(2, "0") + "</strong> / " + String(steps.length).padStart(2, "0");
+  document.getElementById("navlabel").textContent = s.title;
+  let h = `<div class="hero">${s.headline}</div>`;
+  if (s.supportingText) h += `<div class="body-text">${s.supportingText}</div>`;
+  if (s.proof) h += `<div class="card-paper"><div class="from">${s.proof.from}</div><div class="letter-text">${s.proof.text}</div></div>`;
+  if (s.stat) h += `<div class="stat-box"><div class="num">${s.stat.num}</div><div class="label">${s.stat.label}</div></div>`;
+  if (s.choices) h += `<div class="options">` + s.choices.map((c, j) => `<button class="opt" data-j="${j}">${c}</button>`).join("") + `</div>`;
+  if (s.note) h += `<div class="note">${s.note}</div>`;
+  content.innerHTML = h;
+  cta.innerHTML = `<button class="btn" id="next" ${s.kind === "choice" ? "disabled" : ""}>${s.primaryAction}</button>`;
+  content.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
+    content.querySelectorAll(".opt").forEach(x => x.classList.remove("selected"));
+    b.classList.add("selected"); picked = b.dataset.j;
+    document.getElementById("next").disabled = false;
+  }));
+  document.getElementById("next").addEventListener("click", () => { if (i < steps.length - 1) { i++; render(); } });
+}
+document.getElementById("back").addEventListener("click", () => { if (i > 0) { i--; render(); } });
+document.getElementById("restart").addEventListener("click", () => { i = 0; render(); });
+render();
+</script>
+</body>
+</html>

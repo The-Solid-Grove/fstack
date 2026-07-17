@@ -1,4 +1,4 @@
 interface:
   display_name: "Preview Funnel"
-  short_description: "Build simple click-through funnel copy mockups"
-  default_prompt: "Use $preview-funnel to turn completed funnel copy into a temporary click-through mockup, run a local preview server, and verify it at small 375x667, medium 393x852, large 402x874, and desktop-small 1280x800."
+  short_description: "Build polished click-through funnel copy mockups"
+  default_prompt: "Use $preview-funnel to turn completed funnel copy into a temporary click-through mockup styled with the skill's bundled warm-editorial stylesheet, run a local preview server, and verify it at small 375x667, medium 393x852, large 402x874, and desktop-small 1280x800."

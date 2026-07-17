@@ -5,9 +5,9 @@ A small skill pack for building and editing web funnels with AI agents.
 - `create-funnel` — scaffold a new funnel from the FunnelsGrove funnel template (copy, reskin, verify, optional hosted wiring).
 - `edit-funnel` — local editing loop for FunnelsGrove hosted funnels (sync, preview, QA, publish).
 - `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
-- `preview-funnel` — temporary local click-through mockups for reviewing funnel copy.
+- `preview-funnel` — temporary local click-through mockups for reviewing funnel copy, styled with the bundled "candlelit stationery" stylesheet.
 
-Current version: `0.5.5`
+Current version: `0.5.7`
 
 ## Requirements
 

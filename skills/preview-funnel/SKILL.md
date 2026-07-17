@@ -8,8 +8,10 @@ description: Use when Codex needs to turn finished funnel copy, screen-by-screen
 ## Overview
 
 Build a simple, temporary click-through that makes funnel copy easy to read,
-tap through, and critique. Favor plain static HTML/CSS/JS, one reusable screen
-renderer, and low-fidelity building blocks over production design.
+tap through, and critique. Favor plain static HTML/CSS/JS and one reusable
+screen renderer. Structure stays low-fidelity, but the preview should look
+good by default: use the bundled warm-editorial stylesheet
+(`references/preview-style.css`) instead of inventing ad-hoc neutral styling.
 
 ## Workflow
 
@@ -26,13 +28,15 @@ renderer, and low-fidelity building blocks over production design.
    them.
 3. Build the smallest useful static app:
    - `index.html` for the shell
-   - `styles.css` for low-fidelity mobile layout
+   - `styles.css` — copy `references/preview-style.css` from this skill into
+     the preview directory verbatim; do not write styles from scratch
    - `steps.mjs` or `steps.json` for copy data
    - `app.mjs` for navigation and choice state
 4. Render one reusable mobile screen: progress header, headline, support copy,
    optional choice cards, optional notes/proof rows, and a sticky bottom CTA.
-5. Keep visuals deliberately simple: boxes, labels, neutral colors, and clear
-   spacing. The goal is copy flow review, not final design approval.
+5. Follow the Visual Style section below. The goal is still copy flow review,
+   not final design approval — but the preview should be pleasant to read and
+   feel like a real product, not a wireframe.
 6. Start a local server from the temporary directory:
 
    ```bash
@@ -49,6 +53,49 @@ renderer, and low-fidelity building blocks over production design.
 9. Leave the server running only while the user is reviewing. Stop it and remove
    the temporary directory when the preview is no longer needed unless the user
    explicitly asks to keep it.
+
+## Visual Style
+
+The default look is "candlelit stationery": a dark warm stage with a vignette
+and film grain around a cream paper phone screen, a single copper accent, a
+serif display face (Fraunces) for headlines, and a humanist sans (DM Sans) for
+everything else. It is defined once in `references/preview-style.css` — copy
+it in as `styles.css` and build markup from its class names.
+`references/example.html` is a working three-screen sample (choice, info with
+a proof card, projection with a stat box) that shows the expected markup and
+renderer wiring — mirror its structure rather than inventing new markup:
+
+- Stage (page): `.stage-title` (italic serif) / `.stage-subtitle` (small caps;
+  put the source copy path here) above the phone, `.stage-nav` for
+  back/restart controls under it.
+- Phone: `.phone > .screen` — the bezel, notch, copper edge glow, and paper
+  grain all come from `.phone`'s own CSS; no extra markup.
+- Screen anatomy, top to bottom: `.app-name` (small caps between hairlines),
+  `.progress > i` (fill width = step progress), `.step-num`
+  (`<strong>03</strong> / 12`), `.content` (scrollable; children get a
+  staggered entrance animation, and short content auto-centers vertically),
+  `.cta` (pinned to the bottom).
+- Copy: `.hero` (serif headline, one per screen; wrap a key phrase in `<em>`
+  for a copper italic), `.hero-sm`, `.body-text`, `.note` (italic serif
+  caveat), `.quote` (left-bordered italic).
+- Choices: `.options > button.opt`; each gets a radio ring automatically;
+  toggle `.selected` on tap (copper ring, border, and tint come from CSS).
+- Proof and letters: `.card-paper` with optional `.from` label and
+  `.letter-text` for quoted letter copy; `.tag` for PRO/MOST POPULAR pills;
+  `.stat-box` with `.num` and `.label` for counters.
+- Buttons: `.btn` primary (disable until a required choice is made),
+  `.btn-ghost` secondary.
+
+Rules:
+
+- Never introduce pure black, pure white, or default-blue anything; every
+  color on screen must come from the `:root` custom properties.
+- Headlines use the display serif; do not set body copy in it.
+- If the product has its own established brand palette and the user wants it,
+  swap only the `:root` custom properties (accent, screen, stage, text tones)
+  and keep every class and layout rule unchanged.
+- Emojis are fine as lightweight visual anchors (matching the copy spec), but
+  no external images or icon fonts.
 
 ## Copy Data Shape
 

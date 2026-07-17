@@ -1,0 +1,537 @@
+/* preview-funnel default visual style — "candlelit stationery"
+ *
+ * Warm dark stage, cream paper screen, single copper accent.
+ * Palette lifted from the Letters from the Past screens board.
+ * Copy this file into the preview directory as styles.css and keep
+ * the class names; to match a product's own brand, swap ONLY the
+ * custom properties in :root — never the structure.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+:root {
+  /* stage (page around the phone) */
+  --stage: #170E06;
+  --stage-glow: #2E1D0C;
+  --stage-line: #3A2E1E;
+  --stage-muted: #8B7355;
+
+  /* screen (inside the phone) */
+  --screen-hi: #FFFBF4;
+  --screen-lo: #F9F0E1;
+  --card: #F5EBDA;
+  --card-line: #E9DCC6;
+  --paper: #FFF9F0;
+  --line: #E8DDD0;
+
+  /* text */
+  --ink: #241708;
+  --body: #4A3826;
+  --soft: #5C4A32;
+  --muted: #8B7355;
+
+  /* accent */
+  --accent: #C4703A;
+  --accent-hi: #D98A50;
+  --accent-lo: #A85A2B;
+  --accent-soft: rgba(196, 112, 58, 0.32);
+  --accent-faint: rgba(196, 112, 58, 0.09);
+  --on-accent: #FFF6EC;
+  --success: #1D9E75;
+
+  --bezel: #241708;
+
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background:
+    radial-gradient(120% 90% at 50% 38%, var(--stage-glow) 0%, var(--stage) 62%, #100903 100%)
+    fixed var(--stage);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 36px 16px 44px;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* film grain over the stage */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.4 0 0 0 0 0.25 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- stage chrome: title, source path, nav ---- */
+
+.stage-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(24px, 3.4vw, 32px);
+  letter-spacing: 0.01em;
+  color: #F3E7D5;
+  text-align: center;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+}
+
+.stage-subtitle {
+  font-size: 10.5px;
+  color: var(--stage-muted);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: -8px;
+}
+
+.stage-subtitle::before,
+.stage-subtitle::after {
+  content: '·';
+  color: var(--accent);
+  margin: 0 10px;
+}
+
+.stage-meta {
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ---- phone frame ---- */
+
+.phone {
+  width: min(376px, 100%);
+  height: min(700px, calc(100vh - 176px));
+  min-height: 540px;
+  background: linear-gradient(178deg, var(--screen-hi) 0%, var(--screen-lo) 100%);
+  border-radius: 48px;
+  border: none;
+  box-shadow:
+    0 0 0 9px var(--bezel),
+    0 0 0 10px rgba(217, 138, 80, 0.35),
+    0 2px 1px 9px rgba(255, 235, 205, 0.06),
+    0 30px 60px -12px rgba(0, 0, 0, 0.75),
+    0 60px 120px -20px rgba(0, 0, 0, 0.55);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 22px;
+  background: var(--bezel);
+  border-radius: 12px;
+  z-index: 10;
+}
+
+/* paper grain inside the screen */
+.phone::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.33 0 0 0 0 0.2 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23p)'/%3E%3C/svg%3E");
+}
+
+/* ---- in-screen layout ---- */
+
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 52px 24px 22px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.app-name {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-name::before,
+.app-name::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-soft));
+}
+
+.app-name::after {
+  background: linear-gradient(90deg, var(--accent-soft), transparent);
+}
+
+.progress {
+  height: 2px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-lo), var(--accent-hi));
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.step-num {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 8px 0 22px;
+}
+
+.step-num strong { color: var(--accent); font-weight: 600; }
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 56px; /* biases the centered block upward */
+  scrollbar-width: none;
+}
+
+.content::-webkit-scrollbar { display: none; }
+
+/* center short content vertically; collapses to top-aligned when it overflows */
+.content > :first-child { margin-top: auto; }
+.content > :last-child { margin-bottom: auto; }
+
+/* staggered entrance on every screen change */
+.content > * {
+  animation: rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.content > :nth-child(1) { animation-delay: 0.02s; }
+.content > :nth-child(2) { animation-delay: 0.08s; }
+.content > :nth-child(3) { animation-delay: 0.14s; }
+.content > :nth-child(4) { animation-delay: 0.2s; }
+.content > :nth-child(5) { animation-delay: 0.26s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content > * { animation: none; }
+}
+
+/* ---- copy ---- */
+
+.hero {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+
+.hero em { font-style: italic; color: var(--accent); }
+
+.hero-sm {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.body-text {
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.note {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+.quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--body);
+  line-height: 1.55;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent-soft);
+  margin-bottom: 10px;
+}
+
+.divider { height: 1px; background: var(--line); margin: 14px 0; }
+
+/* ---- choices ---- */
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 4px;
+}
+
+.opt {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--soft);
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  border-radius: 14px;
+  padding: 13px 15px;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  transition: border-color 0.15s, transform 0.12s, box-shadow 0.15s, background 0.15s;
+}
+
+/* radio ring */
+.opt::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1.5px solid #CDBDA2;
+  background: var(--paper);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.opt:hover {
+  border-color: var(--accent-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(74, 46, 18, 0.08);
+}
+
+.opt:active { transform: scale(0.985); }
+
+.opt.selected {
+  border-color: var(--accent);
+  background: linear-gradient(0deg, var(--accent-faint), var(--accent-faint)), var(--paper);
+  color: var(--ink);
+  box-shadow: 0 4px 16px rgba(196, 112, 58, 0.14);
+}
+
+.opt.selected::before {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 4px var(--paper), inset 0 0 0 12px var(--accent);
+}
+
+/* ---- proof / letter cards ---- */
+
+.card-paper {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-size: 13.5px;
+  color: var(--body);
+  line-height: 1.6;
+  box-shadow: 0 2px 10px rgba(74, 46, 18, 0.05);
+  position: relative;
+}
+
+.card-paper .from {
+  font-size: 9px;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.card-paper .letter-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--on-accent);
+  background: linear-gradient(135deg, var(--accent-hi), var(--accent-lo));
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-box {
+  text-align: center;
+  background: var(--paper);
+  border: 1px dashed var(--accent-soft);
+  border-radius: 16px;
+  padding: 18px 14px 15px;
+  margin: 12px 0;
+}
+
+.stat-box .num {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.stat-box .label {
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ---- CTA ---- */
+
+.cta {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent) 55%, var(--accent-lo));
+  color: var(--on-accent);
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 15px 16px;
+  border: none;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow:
+    0 8px 20px -6px rgba(168, 90, 43, 0.55),
+    inset 0 1px 0 rgba(255, 246, 236, 0.35);
+  transition: filter 0.15s, transform 0.12s, box-shadow 0.15s;
+}
+
+.btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 24px -6px rgba(168, 90, 43, 0.6),
+    inset 0 1px 0 rgba(255, 246, 236, 0.35);
+}
+
+.btn:active { transform: translateY(0) scale(0.99); }
+
+.btn:disabled {
+  background: var(--card);
+  color: var(--muted);
+  box-shadow: none;
+  cursor: default;
+  transform: none;
+  filter: none;
+}
+
+.btn-ghost {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  text-align: center;
+  padding: 10px;
+  margin-top: 2px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.btn-ghost:hover { color: var(--soft); }
+
+/* ---- stage nav under the phone ---- */
+
+.stage-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--stage-muted);
+}
+
+.stage-nav button {
+  background: rgba(255, 235, 205, 0.04);
+  border: 1px solid var(--stage-line);
+  color: var(--stage-muted);
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.stage-nav button:hover {
+  color: #F3E7D5;
+  border-color: var(--stage-muted);
+  background: rgba(255, 235, 205, 0.07);
+}
+
+@media (max-width: 480px) {
+  body { padding: 20px 10px 28px; gap: 14px; }
+  .phone { height: calc(100vh - 148px); border-radius: 40px; }
+  .stage-title { font-size: 22px; }
+}
