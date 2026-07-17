@@ -90,6 +90,24 @@ Verify the paywall and checkout experience end to end:
   the Stripe dashboard (payment method domains and return-URL allowlist); for
   new funnels or new domains, confirm that Stripe configuration exists and
   report missing configuration as a named blocker, not a pass.
+- Check each wallet method separately: Apple Pay and Google Pay availability
+  differ by platform and browser, so a pass for one is not a pass for both.
+  Report untestable methods (for example Apple Pay outside Safari) as named
+  unavailable items.
+- Watch wallet buttons for rendering defects while the paywall loads and while
+  plans or discounts change: stuck loading spinners, layout jumps, clipped or
+  overflowing button stacks, and buttons that disappear after checkout is
+  closed and reopened. The Apple Pay button resizes itself when the border
+  radius passes Stripe's threshold, so check button height after any radius or
+  styling change.
+- If wallet buttons misbehave, check the funnel's `@funnelsgrove/runtime`,
+  `@funnelsgrove/payments`, and `@funnelsgrove/analytics` versions against
+  latest before debugging step code — wallet fixes usually ship in the shared
+  packages.
+- For funnels with an active pricing experiment, confirm the checkout and
+  purchase analytics carry the selected offer set and the paywall's step
+  identity, and that control traffic still gets the default plans and
+  discounts.
 - Complete a test payment, or verify the payment path with the target-approved
   equivalent when real payment is not appropriate.
 - Close checkout without paying and confirm the special-offer dialog appears,

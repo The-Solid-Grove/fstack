@@ -33,6 +33,11 @@ so we can validate and build the highest-performing funnels possible.
   (Dialogue AI, Talaboos, GlamAI, N1x, NVAPPS). Covers the layer around our teardowns —
   creatives↔funnel narrative continuity, LTV-based scaling, web-payment ops, per-channel
   funnel adaptation.
+- **[web2app-2026-trends.md](web2app-2026-trends.md)** — July 2026 external snapshot:
+  Funnelfox 2026 benchmarks (~3% session→purchase, ~13% reach paywall, ~6% paywall CVR,
+  localization as top LTV lever), RevenueCat's 2026 web-to-app guide (paid trials over
+  free, single annual plan on web, promise↔app alignment, payment-failure reality), and
+  Stripe wallet-button rules that feed the edit-funnel Wallet Checkout Lock.
 
 ## Copy swipe files
 

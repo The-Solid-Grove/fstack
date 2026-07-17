@@ -105,6 +105,15 @@ For new steps, keep `path` values semantic and user-readable. Sequential ids and
 `step-NN-*` filenames are fine for code ordering, but public URLs should be
 meaningful route slugs, not `/step-1`.
 
+Wallet checkout is locked to the shared pattern: paywall Apple Pay and Google
+Pay render through the shared `@funnelsgrove/payments` checkout slots rather
+than hand-rolled Stripe Express Checkout embedding, wallet availability is
+tracked per method, checkout analytics carry step identity plus the manifest
+step contract version, and pricing experiments forward the selected offer set
+into purchase metadata. When wallet buttons misbehave, the first check is the
+`@funnelsgrove/*` package versions, since wallet fixes ship in the shared
+packages.
+
 Image performance is part of every image-touching edit. Keep the publish build's
 raster optimization and AVIF/WebP variant generation enabled, and verify the
 `imageVariants` stage when publishing. Funnel images should be declared in

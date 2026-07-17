@@ -214,6 +214,37 @@ images appear next, preserve the ClaimBee/Blessly pattern:
   `assetId` exists and that the shell uses manifest-driven next-step preloads
   instead of a component-local hardcoded preload map.
 
+### Wallet Checkout Lock
+
+For any paywall, checkout, pricing, or wallet-button edit, preserve the shared
+wallet checkout pattern:
+
+- Render Apple Pay and Google Pay through the shared slots from
+  `@funnelsgrove/payments` (`ApplePaySubscriptionCheckoutSlot`,
+  `GooglePaySubscriptionCheckoutSlot`) and the shared checkout dialogs. Do not
+  hand-roll `StripeExpressCheckoutElement` mounting, appearance, payment-method
+  ordering, or line items inside a step; per-step wallet embedding has produced
+  long fix chains (paint timing, loading loops, clipped button stacks, invalid
+  express-checkout options, invalid button heights, remount churn) that the
+  shared slots already solve.
+- When wallet buttons misbehave, first compare the funnel's
+  `@funnelsgrove/runtime`, `@funnelsgrove/payments`, and
+  `@funnelsgrove/analytics` versions against the latest published versions.
+  Wallet fixes usually ship in the shared packages, so a version bump is often
+  the whole fix. Keep any `package.json` `overrides` pin equal to the
+  dependency version so the bump actually applies.
+- Track wallet availability per method (Apple Pay and Google Pay separately),
+  keyed to the current checkout intent. A single availability boolean hides
+  platform differences and causes wrong initial checkout state.
+- Pass full step identity into the checkout configuration: `stepId`,
+  `stepName`, the canonical paywall `stepType` expected by the analytics
+  contract, and the manifest `stepContractVersion`. Purchase analytics must
+  attribute to the exact step contract that produced them.
+- When a pricing experiment selects an offer set, forward the selected offer
+  set into checkout and into purchase metadata (for example an
+  `offer_set_key` field) so purchases attribute per variant, and fall back to
+  the default plans and discounts for control or missing variants.
+
 ### 6. Run Local Checks
 
 Run the checks that exist in the synced tree. Prefer the narrowest relevant
@@ -349,22 +380,25 @@ Finish only after all of these are true:
    `375x667`, medium `393x852`, large `402x874`, and desktop-small `1280x800`.
 5. Image edits preserve build-time image optimization and manifest-driven
    next-step preloading, or any unavailable optimization/preload check is named.
-6. The user is asked whether to publish after local preview.
-7. If publishing, requested edits are synced through the correct source path:
+6. Paywall, checkout, pricing, or wallet edits use the shared wallet checkout
+   slots and carry step identity plus any selected offer set into checkout
+   analytics, or the deviation is named and approved.
+7. The user is asked whether to publish after local preview.
+8. If publishing, requested edits are synced through the correct source path:
    GitHub-connected funnels use normal `git push` plus `fgrove github pull`;
    funnels without GitHub use `fgrove sync up`.
-8. If publishing, preview is published with `fgrove publish --env preview`.
-9. If preview is published, preview QA is run and reported.
-10. If production is explicitly requested or post-publish QA is requested,
+9. If publishing, preview is published with `fgrove publish --env preview`.
+10. If preview is published, preview QA is run and reported.
+11. If production is explicitly requested or post-publish QA is requested,
    preview-build coverage for the current production candidate or version is
    verified and reported.
-11. If there is no matching preview build, preview is published and full QA is
+12. If there is no matching preview build, preview is published and full QA is
    run on the preview URL before continuing.
-12. If production is explicitly requested, production is published only after
+13. If production is explicitly requested, production is published only after
    preview QA and production QA is run on the production URL.
-13. Checks and QA flows run are listed, including unavailable checks or skipped
+14. Checks and QA flows run are listed, including unavailable checks or skipped
    flows.
-14. Any blockers have a named root cause and concrete next step.
+15. Any blockers have a named root cause and concrete next step.
 
 ## Safety Rules
 
