@@ -193,6 +193,13 @@ experiment or the UI/API path is unavailable, keep the object source-readable:
 explicit `sourceStepId` or `stepId`, explicit variant route step ids, labels,
 traffic percentages, and normal manifest steps/edges for every variant.
 
+When porting an experiment from another funnel or staging variant steps before
+the experiment is live, follow `references/experiment-migration.md`: keep
+inactive variants unbranched (manifest step, no `branches` entry, unreachable
+from the default flow), never copy experiment ids across funnels, replace
+hardcoded `goToStep` targets with `goNext()` plus manifest edges, and never
+hand-edit the generated managed docs bundle.
+
 ### Image Performance Lock
 
 For any new or edited image, image-heavy step, or route that changes which

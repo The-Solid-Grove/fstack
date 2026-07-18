@@ -142,6 +142,10 @@ check_skill() {
   assert_contains "$skill/SKILL.md" 'complete registration'
   assert_contains "$skill/SKILL.md" 'larger discount'
   assert_contains "$skill/SKILL.md" '/manage-subscription'
+  assert_file "$skill/references/experiment-migration.md"
+  assert_contains "$skill/SKILL.md" 'references/experiment-migration\.md'
+  assert_contains "$skill/references/experiment-migration.md" 'unbranched'
+  assert_contains "$skill/references/experiment-migration.md" 'experiment ids across funnels'
   assert_contains "$skill/SKILL.md" 'cancellation flow'
   assert_contains "$skill/SKILL.md" 'Update Local Project Packages'
   assert_contains "$skill/SKILL.md" 'package manager'
@@ -236,6 +240,8 @@ check_copy_skill() {
   assert_file "$skill/references/funnel-psychology-framework.md"
   assert_file "$skill/references/funnel-paywall-best-practices.md"
   assert_file "$skill/references/funnel-conversion-best-practices.md"
+  assert_file "$skill/references/funnels-research/paywall-benchmarks-2026.md"
+  assert_contains "$skill/references/funnels-research/README.md" 'paywall-benchmarks-2026\.md'
   assert_contains "$skill/SKILL.md" '^name: writing-funnel-copy$'
   assert_contains "$skill/SKILL.md" '^description:'
   assert_contains "$skill/SKILL.md" 'references/funnel-psychology-framework.md'

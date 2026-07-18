@@ -78,8 +78,10 @@ verify preview coverage for the production candidate, and publish production
 only after approved preview QA.
 ```
 
-The skill syncs the funnel locally, reads its `AGENTS.md`/`agent.md`, makes
-edits, runs checks, opens local preview, and loops until ready. Before
+The skill syncs the funnel locally, reads the managed docs (`AGENTS.md` and
+`docs/funnelsgrove/START-HERE.md`; an older `agent.md` is workflow color, not
+contract), makes edits, runs checks, opens local preview, and loops until
+ready. Before
 refreshing a synced directory, it checks local git state and GitHub sync state,
 checkpoints local changes, and merges any newer remote draft intentionally.
 When GitHub is connected, source changes go through normal git commit/push,

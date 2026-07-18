@@ -33,6 +33,10 @@ so we can validate and build the highest-performing funnels possible.
   (Dialogue AI, Talaboos, GlamAI, N1x, NVAPPS). Covers the layer around our teardowns —
   creatives↔funnel narrative continuity, LTV-based scaling, web-payment ops, per-channel
   funnel adaptation.
+- **[paywall-benchmarks-2026.md](paywall-benchmarks-2026.md)** — July 2026 web snapshot:
+  Adapty paywall/pricing data (trial strategy by vertical, price-increase win rates,
+  post-paywall welcome offers, hard-vs-soft trade-off), RevenueCat's case against
+  quiz-only web2app thinking, and funnel load-speed conversion claims.
 
 ## Copy swipe files
 
