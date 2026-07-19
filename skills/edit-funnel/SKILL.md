@@ -193,6 +193,27 @@ experiment or the UI/API path is unavailable, keep the object source-readable:
 explicit `sourceStepId` or `stepId`, explicit variant route step ids, labels,
 traffic percentages, and normal manifest steps/edges for every variant.
 
+### Pricing Source of Truth
+
+Plans, prices, and offer sets come from the platform-generated pricing
+snapshot (generated offer-set and provider plan mapping files); the
+FunnelsGrove UI/API owns them. Treat generated pricing files as read-only
+output: refresh them through the platform, never hand-edit them.
+
+A generated snapshot can go stale against the payment provider: it may still
+reference a Stripe price whose product was retired, which breaks test-mode
+checkout even while live mode looks healthy. Before checkout QA and before
+publishing any pricing change:
+
+- Verify every provider price ID the funnel can resolve — per plan, per offer
+  set, in test and live mode — maps to an active Stripe price.
+- Prefer fixing the mapping upstream in the platform and re-syncing the
+  snapshot over patching prices in funnel code.
+- If a runtime override is unavoidable, scope it to the exact offer-set key,
+  plan key, and stale price ID it replaces, and comment which retired
+  provider price it works around so the patch is removable once the snapshot
+  is corrected.
+
 ### Image Performance Lock
 
 For any new or edited image, image-heavy step, or route that changes which

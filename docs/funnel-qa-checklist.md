@@ -84,6 +84,10 @@ Verify the paywall and checkout experience end to end:
 - Open every paywall used by the funnel and confirm prices, products, discounts,
   guarantees, terms, and primary calls to action are correct.
 - Open checkout from each paywall path and confirm the checkout loads.
+- In test mode, confirm every plan and offer-set entry checkout can resolve
+  maps to an active Stripe price. A retired or archived provider price ID is a
+  blocker even when the paywall renders the correct amounts, because generated
+  pricing snapshots can lag behind Stripe product changes.
 - Verify Apple Pay and Google Pay buttons appear when supported by the test
   browser, region, device, and payment configuration. Wallet buttons silently
   fail when the funnel domain and checkout return URLs are not configured in
