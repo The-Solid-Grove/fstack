@@ -10,8 +10,10 @@ description: Use when drafting, building, reviewing, QAing, or optimizing quiz-t
 Use this skill to design quiz-to-paywall funnels with the Funnel Psychology
 Framework. Keep the skill body lean; the complete framework lives beside this
 file at `references/funnel-psychology-framework.md`, with paywall-specific
-guidance at `references/funnel-paywall-best-practices.md` and conversion
-experiment guidance at `references/funnel-conversion-best-practices.md`.
+guidance at `references/funnel-paywall-best-practices.md`, conversion
+experiment guidance at `references/funnel-conversion-best-practices.md`, and
+benchmark data plus compliance copy rules at
+`references/funnel-benchmarks-and-compliance.md`.
 Research-stage guidance for `PRODUCT_SENSE.md`, competitor research, and
 pre-plan positioning lives at `references/funnel-research.md`, with fstack
 additions at `references/funnel-research-stage.md`. Live funnel teardowns,
@@ -64,6 +66,14 @@ answer feedback, progress screens, pre-paywall warmups, payment shortcuts, or
 down-sell recovery, also read and follow
 `references/funnel-conversion-best-practices.md`. Treat it as a catalog of
 conversion-focused patterns to apply where they match the product and claims.
+
+When setting conversion expectations, prioritizing which screens or tests to
+work on, writing pricing/plan/trial/renewal copy, or adding social proof,
+urgency, or auto-renewal disclosures, also read and follow
+`references/funnel-benchmarks-and-compliance.md`. Treat its drop-off
+benchmarks and measured uplift figures as calibration data, and its
+compliance section as hard constraints on paywall and checkout copy. For the
+full course knowledge base behind it, use the `web2app-essentials` skill.
 
 When the task involves funnel research, `PRODUCT_SENSE.md`, competitor research,
 positioning, messaging strategy, or strategy before plan generation/code edits,
@@ -121,15 +131,18 @@ local funnel docs and current copy before asking questions that the files answer
 6. Read `references/funnel-conversion-best-practices.md` when the output
    includes quiz, onboarding, interstitial, pre-paywall, checkout, or CR
    optimization recommendations.
-7. Inspect `references/funnels-research/README.md` and relevant corpus files
+7. Read `references/funnel-benchmarks-and-compliance.md` when the output
+   includes conversion targets, test prioritization, pricing/plan/trial/
+   renewal copy, or paywall disclosure elements.
+8. Inspect `references/funnels-research/README.md` and relevant corpus files
    when building, reviewing, QAing, or optimizing a funnel.
-8. Complete the five-column pre-work table before writing screens.
-9. Map the screen count to the framework's six funnel sections.
-10. Write the funnel screen-by-screen using the framework's per-screen checklist.
-11. Return the framework's required formatted output, including the
+9. Complete the five-column pre-work table before writing screens.
+10. Map the screen count to the framework's six funnel sections.
+11. Write the funnel screen-by-screen using the framework's per-screen checklist.
+12. Return the framework's required formatted output, including the
    Five-column pre-work table, transformation, emotional arc, fuel balance
    check, Screen-by-screen spec, paywall architecture, and A/B tests.
-12. After the copy is drafted, offer to use `preview-funnel` to visualize it as
+13. After the copy is drafted, offer to use `preview-funnel` to visualize it as
     a temporary local click-through mockup for copy review. Do not create the
     preview automatically unless the user asked for visualization or a local
     mockup.
