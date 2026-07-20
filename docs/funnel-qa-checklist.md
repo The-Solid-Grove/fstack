@@ -98,6 +98,31 @@ Verify the paywall and checkout experience end to end:
 - Confirm successful payment returns to the expected success, onboarding, or
   registration state.
 
+## Pricing Experiments And Offer Sets
+
+When the funnel runs a pricing experiment that swaps plan catalogs or offer
+sets (distilled from the ClaimBee weekly-intro offer-set launch, July 2026,
+where each of these failed at least once):
+
+- Load every variant explicitly with its experiment URL parameters
+  (`?experiment=<id>&variant=<key>`) in both test and live modes; do not rely
+  on random assignment to reach a variant.
+- Confirm the control variant is byte-for-byte unchanged: plan titles, badges,
+  featured tags, default plan selection, and prices must match the
+  pre-experiment paywall. Launching a variant must not rename or re-badge
+  control plans.
+- Confirm plan badges and labels derive from plan data (billing interval,
+  follow-up plan linkage), not from hard-coded offer-set keys or plan titles —
+  otherwise a variant badge leaks onto the control paywall.
+- Confirm each variant offer set resolves its discounts, and that an offer set
+  without its own coupons falls back to the default discounts so the two-stage
+  discount-on-close flow still works on every variant.
+- Confirm the selected offer set key is sent with checkout purchase metadata,
+  so analytics can attribute conversions per offer set. Without it the
+  experiment cannot be read.
+- Complete a test checkout on each variant and verify the charged price
+  matches the variant's displayed price.
+
 ## Complete Registration
 
 Verify the complete registration page after payment or the equivalent terminal

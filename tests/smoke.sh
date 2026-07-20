@@ -100,6 +100,10 @@ check_readme() {
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'assetIds'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'second-stage discount'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'complete registration'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'Pricing Experiments And Offer Sets'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'offer set key'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'control variant is byte-for-byte unchanged'
+  assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'falls back to the default discounts'
 }
 
 check_setup() {
@@ -351,9 +355,6 @@ check_auto_install_fallback() {
   rm -rf "$tmp_home"
 }
 
-check_readme
-check_setup
-check_fgrove_cli_helper
 check_web2app_skill() {
   local skill="$ROOT/skills/web2app-essentials"
   assert_file "$skill/SKILL.md"
@@ -386,6 +387,9 @@ PYEOF
   validate_skill_dir "$skill"
 }
 
+check_readme
+check_setup
+check_fgrove_cli_helper
 check_skill
 check_copy_skill
 check_preview_skill

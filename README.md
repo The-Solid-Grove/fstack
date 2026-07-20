@@ -7,7 +7,7 @@ A small skill pack for building and editing web funnels with AI agents.
 - `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
 - `preview-funnel` — temporary local click-through mockups for reviewing funnel copy, styled with the bundled "candlelit stationery" stylesheet.
 
-Current version: `0.5.7`
+Current version: `0.5.8`
 
 ## Requirements
 
