@@ -149,6 +149,21 @@ copy, choice cards, notes/proof rows, and sticky bottom buttons. It reports the
 local URL, how to restart the server, and whether the temporary files were
 removed or left for review.
 
+## Use `web2app-essentials`
+
+```text
+Use $web2app-essentials: what conversion should we expect from paywall to
+purchase, and which onboarding mechanics have measured uplift?
+```
+
+The skill is a Q&A knowledge base for web2app and quiz-to-paywall funnels —
+benchmarks, paid acquisition, onboarding mechanics, monetization, payments,
+analytics, growth process, and compliance. It routes each question to the
+matching module under `skills/web2app-essentials/references/` and answers with
+the corpus's concrete numbers and caveats. Ask it to "teach web2app" for a
+module-by-module learning path. It is reference-only: implementation work
+still goes through `create-funnel`, `edit-funnel`, and `writing-funnel-copy`.
+
 ## Team setup
 
 Use a shared global checkout. Add this to your project `AGENTS.md` or
@@ -180,6 +195,7 @@ rm -f ~/.codex/skills/create-funnel ~/.claude/skills/create-funnel
 rm -f ~/.codex/skills/edit-funnel ~/.claude/skills/edit-funnel
 rm -f ~/.codex/skills/preview-funnel ~/.claude/skills/preview-funnel
 rm -f ~/.codex/skills/writing-funnel-copy ~/.claude/skills/writing-funnel-copy
+rm -f ~/.codex/skills/web2app-essentials ~/.claude/skills/web2app-essentials
 rm -rf ~/.fstack
 ```
 

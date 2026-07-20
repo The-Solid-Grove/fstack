@@ -30,7 +30,7 @@ assert_not_contains() {
 
 assert_no_template_markers() {
   local path="$1"
-  if grep -RInE --exclude-dir=funnels-research 'TODO|TBD|\[TODO|Replace with|placeholder' "$path" >/tmp/fstack-smoke-placeholders.$$ 2>/dev/null; then
+  if grep -RInwE --exclude-dir=funnels-research 'TODO|TBD|\[TODO|Replace with|placeholder' "$path" >/tmp/fstack-smoke-placeholders.$$ 2>/dev/null; then
     cat /tmp/fstack-smoke-placeholders.$$ >&2
     rm -f /tmp/fstack-smoke-placeholders.$$
     fail "template markers remain under $path"
@@ -315,7 +315,7 @@ check_install_for_host() {
 
   HOME="$tmp_home" "$ROOT/setup" --host "$host" --repo-root "$ROOT" --skip-fgrove-cli --quiet
 
-  for skill_name in create-funnel edit-funnel preview-funnel writing-funnel-copy; do
+  for skill_name in create-funnel edit-funnel preview-funnel writing-funnel-copy web2app-essentials; do
     local link="$tmp_home/$skill_parent/$skill_name"
     [ -L "$link" ] || fail "expected symlink at $link"
     [ "$(cd "$link" && pwd -P)" = "$ROOT/skills/$skill_name" ] || fail "wrong symlink target for $host"
@@ -354,10 +354,43 @@ check_auto_install_fallback() {
 check_readme
 check_setup
 check_fgrove_cli_helper
+check_web2app_skill() {
+  local skill="$ROOT/skills/web2app-essentials"
+  assert_file "$skill/SKILL.md"
+  assert_file "$skill/agents/openai.yaml"
+  assert_file "$skill/references/README.md"
+  assert_contains "$skill/SKILL.md" '^name: web2app-essentials$'
+  assert_contains "$skill/SKILL.md" '^description:'
+  assert_contains "$skill/SKILL.md" 'Routing table'
+  assert_contains "$skill/SKILL.md" 'edit-funnel'
+  local module
+  for module in \
+    "1-intro-to-web-funnels/1.1-introduction-to-web-funnels.md" \
+    "2-paid-acquisition/2.1-media-buying.md" \
+    "3-onboarding-and-experiments/3.1-onboarding.md" \
+    "4-payments-and-monetization/4.1-monetization-and-paywalls.md" \
+    "5-web-funnel-analytics/5.1-web-funnel-analytics.md" \
+    "6-growth-team-and-process/6.1-growth-process.md" \
+    "7-risks-and-compliance/7.1-compliance-and-risks.md"; do
+    assert_file "$skill/references/$module"
+    assert_contains "$skill/SKILL.md" "references/$module"
+  done
+  python3 - "$skill" <<'PYEOF' || fail "web2app-essentials contains untranslated Cyrillic text"
+import pathlib, re, sys
+root = pathlib.Path(sys.argv[1])
+files = [root / "SKILL.md", *root.glob("references/**/*.md")]
+sys.exit(1 if any(re.search(r"[Ѐ-ӿ]", f.read_text()) for f in files) else 0)
+PYEOF
+  assert_contains "$skill/agents/openai.yaml" 'display_name:'
+  assert_contains "$skill/agents/openai.yaml" 'default_prompt:'
+  validate_skill_dir "$skill"
+}
+
 check_skill
 check_copy_skill
 check_preview_skill
 check_create_skill
+check_web2app_skill
 check_installs
 check_auto_install_fallback
 bash "$ROOT/tests/contract-guidance.sh"

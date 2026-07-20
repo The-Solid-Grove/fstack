@@ -24,8 +24,8 @@ keywords:
 
 Use this reference to set realistic conversion expectations, prioritize which
 copy to write or test first, and keep paywall/pricing copy legally compliant.
-The full course distillation (acquisition, analytics, payments, growth process)
-lives at `docs/webfunnels-course/README.md`; this file carries only the parts
+The full course knowledge base (acquisition, analytics, payments, growth
+process) lives in the `web2app-essentials` skill; this file carries only the parts
 that change how funnel copy is written.
 
 ## Funnel drop-off benchmarks
@@ -124,8 +124,8 @@ Additional rules:
   for social-proof or FOMO elements. Countdown timers and "limited" claims
   must reflect a real limitation.
 
-Full regulation summaries and source links live at
-`docs/webfunnels-course/7-risks-and-compliance/`.
+Full regulation summaries and source links live in the `web2app-essentials`
+skill under `references/7-risks-and-compliance/`.
 
 ## Optimization priorities for copy tests
 

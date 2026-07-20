@@ -72,8 +72,8 @@ work on, writing pricing/plan/trial/renewal copy, or adding social proof,
 urgency, or auto-renewal disclosures, also read and follow
 `references/funnel-benchmarks-and-compliance.md`. Treat its drop-off
 benchmarks and measured uplift figures as calibration data, and its
-compliance section as hard constraints on paywall and checkout copy. The full
-course distillation behind it lives at `docs/webfunnels-course/README.md`.
+compliance section as hard constraints on paywall and checkout copy. For the
+full course knowledge base behind it, use the `web2app-essentials` skill.
 
 When the task involves funnel research, `PRODUCT_SENSE.md`, competitor research,
 positioning, messaging strategy, or strategy before plan generation/code edits,
