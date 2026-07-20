@@ -1,6 +1,6 @@
 # Web Funnels Course — Recommendations
 
-English distillations of a Russian-language course on quiz-to-paywall web funnels ("Курс по веб воронкам", 2024). Each doc is an essential summary plus actionable recommendations extracted from the original slide decks, templates, and lecture transcripts. The folder structure mirrors the source course modules.
+English distillations of a Russian-language course on quiz-to-paywall web funnels (2024). Each doc is an essential summary plus actionable recommendations extracted from the original slide decks, templates, and lecture transcripts. The folder structure mirrors the source course modules.
 
 Source materials (PDFs, docx/xlsx templates, recordings) live outside the repo in `WebFunnels-2/`; these docs preserve the concrete numbers, benchmarks, and checklists — the videos and screenshots are not reproduced.
 
@@ -8,7 +8,7 @@ Source materials (PDFs, docx/xlsx templates, recordings) live outside the repo i
 
 ### 1. Intro to web funnels
 - [1.1 Introduction to web funnels](1-intro-to-web-funnels/1.1-introduction-to-web-funnels.md) — funnel models (app / web2app / web2web / full web), unit economics, drop-off benchmarks, optimization order
-- [1.2 Funnel structure and tools](1-intro-to-web-funnels/1.2-funnel-structure-and-tools.md) — five-block funnel anatomy, build-vs-buy, funnel-builder comparison (funnelfox, heyflow, embeddables, …)
+- [1.2 Funnel structure and tools](1-intro-to-web-funnels/1.2-funnel-structure-and-tools.md) — five-block funnel anatomy, build-vs-buy, platform capability checklist
 - [1.3 Top funnel examples](1-intro-to-web-funnels/1.3-top-funnel-examples.md) — swipe file of top web funnels (BetterMe, Noom, Simple, Promova, …) with patterns to steal
 
 ### 2. Paid acquisition
