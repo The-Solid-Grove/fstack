@@ -361,6 +361,15 @@ check_web2app_skill() {
   assert_contains "$skill/SKILL.md" '^description:'
   assert_contains "$skill/SKILL.md" 'Routing table'
   assert_contains "$skill/SKILL.md" 'edit-funnel'
+  # 2025-2026 verified updates must not regress to the stale course claims.
+  local payments="$skill/references/4-payments-and-monetization/4.2-payments-in-web-funnels.md"
+  local legal="$skill/references/7-risks-and-compliance/7.2-legal-compliance-summary.md"
+  assert_contains "$payments" 'Visa Acquirer Monitoring Program \(VAMP\)'
+  assert_not_contains "$payments" 'Visa Dispute Monitoring Program \(VDMP\)'
+  assert_contains "$legal" 'vacated'
+  assert_contains "$legal" 'ROSCA'
+  assert_contains "$skill/references/1-intro-to-web-funnels/1.1-introduction-to-web-funnels.md" 'Post-course update'
+
   # Every module file on disk must be routed in SKILL.md, so the routing
   # table cannot silently drift from the corpus.
   local module_path module
