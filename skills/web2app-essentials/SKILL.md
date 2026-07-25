@@ -28,7 +28,13 @@ docs.
 3. Always carry the corpus caveats: benchmarks vary widely between products;
    judge changes by CAC and ROAS (CR × LTV), not proxy metrics; uplift figures
    are course-observed, not guarantees.
-4. If the corpus does not cover the question, say so rather than
+4. **Update blocks override course text.** Blockquotes starting with
+   `**Post-course update (verified <Month> <Year>): ...**` record what changed
+   after the 2024 course. Where one contradicts the surrounding text (store
+   commissions, Visa monitoring programs, FTC rules, platform features),
+   answer from the update block and mention its verified date; use the course
+   text for the underlying mechanics and playbooks.
+5. If the corpus does not cover the question, say so rather than
    extrapolating; the references note where source material was lost
    (slide-image tables, garbled transcripts).
 

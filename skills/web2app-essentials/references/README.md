@@ -4,6 +4,20 @@ English distillations of a Russian-language course on quiz-to-paywall web funnel
 
 Source materials (PDFs, docx/xlsx templates, recordings) live outside the repo in `WebFunnels-2/`; these docs preserve the concrete numbers, benchmarks, and checklists — the videos and screenshots are not reproduced.
 
+## Updating the corpus
+
+The course text is a fixed 2024 snapshot — never rewrite it. New knowledge is
+added only as blockquoted update blocks inside the relevant module, and every
+block must be specific and verifiable (`tests/update-blocks.sh` enforces the
+format):
+
+- First line, on a single line:
+  `> **Post-course update (verified <Month> <Year>): <headline>**`
+- Body must cite at least one `[text](https://...)` source link, verified live
+  at the time of writing.
+- Update blocks override the surrounding course text where they conflict;
+  keep them next to the passage they correct.
+
 ## Contents
 
 ### 1. Intro to web funnels
