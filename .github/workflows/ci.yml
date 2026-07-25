@@ -6,9 +6,15 @@ on:
   pull_request:
 
 jobs:
-  smoke:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run smoke checks
-        run: bash tests/smoke.sh
+      - name: Run all test suites
+        run: |
+          status=0
+          for suite in tests/*.sh; do
+            echo "=== $suite ==="
+            bash "$suite" || status=1
+          done
+          exit $status
