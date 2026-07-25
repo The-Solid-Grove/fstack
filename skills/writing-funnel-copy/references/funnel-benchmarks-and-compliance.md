@@ -92,9 +92,15 @@ Narrative rules that make these work:
 
 ## Compliance constraints on paywall and checkout copy
 
-These are copy requirements, not implementation guidance. They come from the
-FTC Negative Option Rule ("click to cancel"), ROSCA, California SB 478 /
-§ 17602 / AB 2863, and Apple's subscription guidelines.
+These are copy requirements, not implementation guidance. They come from
+ROSCA and FTC Act §5, state auto-renewal laws (California SB 478 / § 17602 /
+AB 2863 is the strictest and the practical national baseline; Minnesota, New
+York, and others added similar rules in 2025), and Apple's subscription
+guidelines. The FTC's separate "click to cancel" rule was vacated in court in
+July 2025 before taking effect, but every requirement below still binds
+through ROSCA and state law — and the FTC's 2025–2026 enforcement (the $2.5B
+Amazon Prime settlement; the June 2026 case against the Wisey/Nebula
+quiz-funnel network) shows these exact rules are what gets litigated.
 
 Before the purchase button, the paywall or checkout copy must state clearly
 and conspicuously:

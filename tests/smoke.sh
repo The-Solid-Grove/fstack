@@ -67,6 +67,7 @@ check_readme() {
   assert_contains "$ROOT/README.md" 'edit-funnel'
   assert_contains "$ROOT/README.md" 'writing-funnel-copy'
   assert_contains "$ROOT/README.md" 'preview-funnel'
+  assert_contains "$ROOT/README.md" 'web2app-essentials'
   assert_contains "$ROOT/README.md" 'local preview'
   assert_contains "$ROOT/README.md" 'Ask whether to publish'
   assert_contains "$ROOT/README.md" 'content-fit audit'
@@ -351,9 +352,6 @@ check_auto_install_fallback() {
   rm -rf "$tmp_home"
 }
 
-check_readme
-check_setup
-check_fgrove_cli_helper
 check_web2app_skill() {
   local skill="$ROOT/skills/web2app-essentials"
   assert_file "$skill/SKILL.md"
@@ -363,18 +361,22 @@ check_web2app_skill() {
   assert_contains "$skill/SKILL.md" '^description:'
   assert_contains "$skill/SKILL.md" 'Routing table'
   assert_contains "$skill/SKILL.md" 'edit-funnel'
-  local module
-  for module in \
-    "1-intro-to-web-funnels/1.1-introduction-to-web-funnels.md" \
-    "2-paid-acquisition/2.1-media-buying.md" \
-    "3-onboarding-and-experiments/3.1-onboarding.md" \
-    "4-payments-and-monetization/4.1-monetization-and-paywalls.md" \
-    "5-web-funnel-analytics/5.1-web-funnel-analytics.md" \
-    "6-growth-team-and-process/6.1-growth-process.md" \
-    "7-risks-and-compliance/7.1-compliance-and-risks.md"; do
-    assert_file "$skill/references/$module"
-    assert_contains "$skill/SKILL.md" "references/$module"
-  done
+  # 2025-2026 verified updates must not regress to the stale course claims.
+  local payments="$skill/references/4-payments-and-monetization/4.2-payments-in-web-funnels.md"
+  local legal="$skill/references/7-risks-and-compliance/7.2-legal-compliance-summary.md"
+  assert_contains "$payments" 'Visa Acquirer Monitoring Program \(VAMP\)'
+  assert_not_contains "$payments" 'Visa Dispute Monitoring Program \(VDMP\)'
+  assert_contains "$legal" 'vacated'
+  assert_contains "$legal" 'ROSCA'
+  assert_contains "$skill/references/1-intro-to-web-funnels/1.1-introduction-to-web-funnels.md" 'Post-course update'
+
+  # Every module file on disk must be routed in SKILL.md, so the routing
+  # table cannot silently drift from the corpus.
+  local module_path module
+  while IFS= read -r module_path; do
+    module="${module_path#"$skill/references/"}"
+    assert_contains "$skill/SKILL.md" "references/${module//./\\.}"
+  done < <(find "$skill/references" -mindepth 2 -name '*.md' | sort)
   python3 - "$skill" <<'PYEOF' || fail "web2app-essentials contains untranslated Cyrillic text"
 import pathlib, re, sys
 root = pathlib.Path(sys.argv[1])
@@ -386,6 +388,9 @@ PYEOF
   validate_skill_dir "$skill"
 }
 
+check_readme
+check_setup
+check_fgrove_cli_helper
 check_skill
 check_copy_skill
 check_preview_skill
