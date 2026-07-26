@@ -202,9 +202,20 @@ rm -rf ~/.fstack
 
 ## Develop
 
+Run every test suite:
+
 ```bash
-bash tests/smoke.sh
+for suite in tests/*.sh; do bash "$suite"; done
 ```
 
-Smoke checks validate the README, installer syntax, skill frontmatter, and
-temporary Codex/Claude Code installs.
+- `tests/smoke.sh` — README/installer/skill content checks and temporary
+  Codex/Claude Code installs.
+- `tests/skill-frontmatter.sh` — SKILL.md frontmatter contract: name matches
+  the directory, "Use when" description within length bounds, host-agnostic
+  routing text.
+- `tests/references.sh` — documentation cross-references resolve to real files.
+- `tests/corpus.sh` — every web2app-essentials module is indexed and routable.
+- `tests/update-blocks.sh` — "Post-course update" blocks carry a verified date
+  and source link.
+- `tests/contract-guidance.sh` — funnel contract guidance stays consistent
+  across skills.
