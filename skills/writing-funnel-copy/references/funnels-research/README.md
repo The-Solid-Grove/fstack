@@ -43,8 +43,10 @@ so we can validate and build the highest-performing funnels possible.
 
 1. **Code teardowns** (`*.md` in this folder) — 10 funnels from `funnelsgrove/funnels/
    rag-catalog/` read at the source level (every step, route, experiment, paywall file).
-2. **Live walkthroughs** (`live/*.md`) — ~24 funnels from `funnels.xlsx` driven in a real
-   browser through to the paywall (real pricing/offers, ~20 verticals).
+2. **Live walkthroughs** ([live/README.md](live/README.md)) — ~24 funnels from
+   `funnels.xlsx` driven in a real browser through to the paywall (real pricing/offers,
+   ~20 verticals). The index lists each walkthrough with its standout observation and
+   flags the funnels that could not be walked.
 
 ## Per-funnel teardowns
 

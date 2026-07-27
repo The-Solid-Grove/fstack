@@ -3,6 +3,14 @@
 Verbatim on-screen copy harvested per funnel, step by step — a swipe file for writing new
 funnel copy, generating A/B variants, or seeding copy references.
 
+## Start here
+
+- **[00-COPY-BANK-by-screen-type.md](00-COPY-BANK-by-screen-type.md)** — the cross-funnel
+  copy bank: lines from ~30 funnels (10 code-extracted + ~21 live) reorganized by screen /
+  element type (hooks, feedback, loaders, paywall, guarantee, CTAs…), each tagged with its
+  source funnel. Fastest way to find swipe copy for a specific screen; fall back to the
+  per-funnel files below for full-flow context.
+
 ## Two sources
 
 - **Code-extracted (exact):** copy pulled directly from the rag-catalog funnel source —
