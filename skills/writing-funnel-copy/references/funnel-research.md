@@ -1,7 +1,11 @@
 ---
 id: funnel-research
+title: Funnel Research Prompt
+summary: Structured research stage that enriches PRODUCT_SENSE.md before plan generation.
 version: 2.1.0
-description: Structured research stage that enriches PRODUCT_SENSE.md before plan generation
+intents:
+  - research
+  - plan
 ---
 Goal: enrich `PRODUCT_SENSE.md` with research and strategy before plan generation or funnel code edits.
 

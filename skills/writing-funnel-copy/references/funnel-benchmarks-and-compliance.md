@@ -95,8 +95,10 @@ Narrative rules that make these work:
 These are copy requirements, not implementation guidance. They come from
 ROSCA and FTC Act §5, state auto-renewal laws (California SB 478 / § 17602 /
 AB 2863 is the strictest and the practical national baseline; Minnesota, New
-York, and others added similar rules in 2025), and Apple's subscription
-guidelines. The FTC's separate "click to cancel" rule was vacated in court in
+York, and others added similar rules in 2025, and a 2026 wave keeps raising
+it — Maine SP 650 effective Jan 1, Maryland Ch. 204 effective Jun 1, and
+Virginia HB1022/SB493 plus Connecticut SB 3 both effective Jul 1, 2026), and
+Apple's subscription guidelines. The FTC's separate "click to cancel" rule was vacated in court in
 July 2025 before taking effect, but every requirement below still binds
 through ROSCA and state law — and the FTC's 2025–2026 enforcement (the $2.5B
 Amazon Prime settlement; the June 2026 case against the Wisey/Nebula
@@ -115,7 +117,9 @@ and conspicuously:
 Additional rules:
 
 - Consent must be express and informed. Safest pattern: a dedicated checkbox
-  or button specifically for the auto-renewal terms.
+  or button specifically for the auto-renewal terms — Maine (SP 650, 2026)
+  now requires consent to the auto-renewal provision separately from the
+  rest of the purchase, which only the dedicated-element pattern satisfies.
 - The actually billed amount must be the most prominent pricing element in the
   layout. "Clear and conspicuous" means larger type than surrounding text,
   contrasting type or color, or set off by marks that call attention to it.
@@ -123,7 +127,18 @@ Additional rules:
   mandatory fees upfront (California SB 478).
 - Free or discounted introductory pricing requires a reminder before the price
   changes, and subscribers must receive renewal reminder notices; requirements
-  vary by jurisdiction.
+  vary by jurisdiction. The 2026 floor: Maryland requires a notice before any
+  free trial or discount period longer than 14 days ends, and Connecticut
+  requires an annual renewal reminder regardless of the subscription term —
+  write the reminder email/notice copy as part of the funnel, not as an
+  afterthought.
+- Cancellation and save-offer copy is regulated too: Virginia (Jul 2026)
+  requires cancellation at least as easy as sign-up, available through every
+  channel a user could enroll through, and removed the prior good-faith
+  safe harbor. Connecticut (Jul 2026) requires telling the subscriber they
+  can cancel at any time *before* presenting any discount or retention
+  benefit — put the cancel-anytime line above the save offer in the
+  cancellation flow.
 - One-click upsells that charge the saved payment method require their own
   clear authorization; do not imply the upsell is free or already included.
 - Never fabricate testimonials, media mentions, guarantees, or results data
