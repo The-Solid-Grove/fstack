@@ -9,13 +9,12 @@ description: Use when creating, scaffolding, or starting a new FunnelsGrove funn
 
 Scaffold a new working funnel from the canonical funnel template, rebrand it, verify it locally, and optionally wire it to a hosted FunnelsGrove funnel. The template ships ready to sell: quiz steps, email capture, the ClaimBee-derived paywall with two-stage discount-on-close, a paywall B variant for experiments, Apple Pay / Google Pay slots, subscription-started, and manage-subscription.
 
-The copied template's managed documentation is the contract authority. Before
-changing steps, read `AGENTS.md`, then
-`docs/funnelsgrove/START-HERE.md`, and follow the linked contract and exact
-step-type page. For paywalls, that includes
-`docs/funnelsgrove/steps/paywall_offer.md`; for email capture, choices,
-analytics, routing, and payments, use the corresponding managed pages instead
-of inferring rules from this workflow skill or a catalog funnel.
+The copied template's managed documentation is the contract authority, and the
+Contract Gate below applies from the first step change. Beyond the gate, follow
+the exact step-type page for whatever you edit: paywalls use
+`docs/funnelsgrove/steps/paywall_offer.md`; email capture, choices, analytics,
+routing, and payments use the corresponding managed pages, never rules inferred
+from this workflow skill or a catalog funnel.
 
 ## FunnelsGrove Contract Gate
 
@@ -48,11 +47,9 @@ rm -rf node_modules .next out tsconfig.tsbuildinfo
 
 ### 2. Reskin
 
-Start by following the managed-doc router in `AGENTS.md` and
-`docs/funnelsgrove/START-HERE.md`. If those managed files are missing or report
-a conflict, refresh them with the current `fgrove docs --dir <dest>` workflow
-before authoring steps. Do not substitute an older teardown or copied template
-metadata for the managed contract.
+If the copied `AGENTS.md` or `docs/funnelsgrove/START-HERE.md` are missing or
+report a conflict, refresh them with the current `fgrove docs --dir <dest>`
+workflow before authoring steps.
 
 - `package.json` — `"name": "<kebab-name>-funnel"`.
 - `funnel.config.json` — `name` and `description` for the new app; leave ids for hosted wiring.
@@ -69,9 +66,8 @@ fgrove validate --dir .
 npm run test:run && npm run lint && npm run build
 ```
 
-`fgrove validate` is required after scaffolding and after any step, metadata,
-answer, routing, analytics, or payment change. Resolve every blocking diagnostic
-before local preview; a passing framework build does not replace validation.
+`fgrove validate` is required right after scaffolding too, not only after later
+edits; a passing framework build does not replace validation.
 
 If `@funnelsgrove/*` versions fail to resolve, the copied template predates the version bumps — update the three ranges to the latest published versions and re-install.
 Keep the template's image build settings intact: the publish artifact build
@@ -105,7 +101,8 @@ fgrove env pull --dir <dest>
 fgrove publish --env preview --message 'Initial template import'
 ```
 
-QA the preview URL with the same checklist before any production talk. Real Apple Pay / Google Pay buttons require the domain and checkout return URLs to be configured in the Stripe dashboard — report unconfigured Stripe as a named blocker, not a failure.
+QA the preview URL with the same checklist before any production talk; for a
+preview-to-production candidate, run fstack's full `docs/funnel-qa-checklist.md`. Real Apple Pay / Google Pay buttons require the domain and checkout return URLs to be configured in the Stripe dashboard — report unconfigured Stripe as a named blocker, not a failure.
 
 ## Quick Reference
 
