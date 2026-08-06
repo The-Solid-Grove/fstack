@@ -1,7 +1,7 @@
 # Live-Funnel Findings — What 20+ Real Web2Web Funnels Actually Do
 
 Synthesis of **live browser walkthroughs** of funnels from `funnels.xlsx` (the
-Webfunnels.club curated set), one per `funnel-research/live/*.md`. This complements the
+Webfunnels.club curated set), one per `live/*.md`. This complements the
 10 code-level teardowns: the live walks reveal what code can't — **real prices, real
 timer/rollover behavior, real checkout-close downsells, and the gating mechanics** that
 gate real users.

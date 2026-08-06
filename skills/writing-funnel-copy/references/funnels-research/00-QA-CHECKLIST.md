@@ -12,6 +12,10 @@ URL before production**. It has two parts:
 Mark each ✅ pass / ⚠️ weak / ❌ fail. A funnel is launch-ready only when Part A has no ❌
 and Part B has no ❌.
 
+For functional and production readiness — preview gate, breakpoints, image
+performance, payments, subscription management — also run fstack's
+[funnel QA checklist](../../../../docs/funnel-qa-checklist.md).
+
 ---
 
 ## PART A — Conversion Completeness

@@ -4,6 +4,15 @@ Use this checklist for full QA on preview-to-production candidates, production
 URLs after publish, and existing production funnels where production readiness is
 uncertain.
 
+This checklist covers functional, visual, and payment readiness. For
+conversion-quality QA, pair it with:
+
+- [Conversion completeness and defect catch-list](../skills/writing-funnel-copy/references/funnels-research/00-QA-CHECKLIST.md)
+  — funnel-level: whether the funnel contains the elements that make funnels
+  convert, plus the concrete defects observed shipping in real funnels.
+- [Step design and content QA](../skills/writing-funnel-copy/references/funnels-research/00-STEP-DESIGN-QA.md)
+  — step-level: design, copy, imagery, color, and typography of each screen.
+
 ## Production Preview Gate
 
 Before production publish or post-publish production QA, verify whether the
