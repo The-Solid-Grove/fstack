@@ -1,5 +1,5 @@
 # Live Funnels — Consolidated Copy Swipe
-> Harvested from funnel-research/live/*.md (real on-screen copy captured during browser walkthroughs). Some funnels were only partially walked — copy is what was observed, not necessarily the full flow.
+> Harvested from `../live/*.md` (real on-screen copy captured during browser walkthroughs). Some funnels were only partially walked — copy is what was observed, not necessarily the full flow.
 
 ## Acely (Edtech / SAT-ACT AI test prep)
 **Entry:** "Your personal study trainer for the SAT & ACT." / "Smarter than a prep course. More personal than a tutor. A fraction of the cost." Hero proof: "1480 — Ava increased her SAT score by 110 points in 2 months." CTA "Try Acely for free".
