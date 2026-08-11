@@ -5,6 +5,8 @@
 
 These are **live public quiz-to-paywall funnels**. Use this as the index for per-funnel research notes.
 
+> **Note (verified August 2026):** six brands on this list — Nebula (Obrio Ltd.), Wisey (Koflimin Ltd.), Mad Muscles, Harna, and Unimeal (Amo group), and Lumi (Bramol Ltd.) — are operated by defendants in *FTC v. GM Universeapps Ltd.*, No. 4:26-cv-05232 (N.D. Cal., filed June 2, 2026; TRO with asset freeze June 4; preliminary injunctions June 30 and July 2026). The complaint alleges obscured auto-renewal and deliberately hard cancellation behind quiz funnels ([FTC case page](https://www.ftc.gov/legal-library/browse/cases-proceedings/growthmindwisey)). Study these funnels for quiz structure if useful, but do not treat their enrollment, billing-disclosure, or cancellation patterns as models.
+
 ## AI characters (10)
 
 | # | Brand | Domain |
