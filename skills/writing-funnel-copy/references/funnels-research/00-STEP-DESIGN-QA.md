@@ -70,6 +70,10 @@ one exception: it scrolls by design, but its hero + first CTA must fit above the
       fuel) or a *give* (adds fuel). No 3 asks in a row without a give between. `[F]`
 - [ ] **Expectation match.** The step delivers what the previous step's CTA or
       question implied. Broken promise chains are the fastest fuel drain. `[F]`
+      For the opening screens this extends upstream to the ad itself: flows whose
+      first screens match the ad/keyword that drove the click measurably
+      out-convert one generic flow. `[P — Adapty ad-source study, Aug 2026
+      (vendor data, mobile onboarding; see appendix)]`
 - [ ] **Hitchcock check.** The user concludes value themselves from evidence
       (numbers, comparisons, their own inputs reflected back); the copy never claims
       "this is amazing." `[F]`
@@ -218,7 +222,7 @@ Apply on top of §§1-6 depending on what the step is:
 | **Loader / processing** | Rotating status copy referencing the user's actual inputs; duration 3-6s; progress feels like computation `[V]` `[F]` |
 | **Projection / results** | Range not promise `[F]`; anchored to the user's stated goal/date; reflects ≥1 real input (personalization-integrity — see funnel-level B1) |
 | **Email capture** | Framed as functionally necessary, placed ~⅓+ into the funnel, consequence stated ("we'll send results here") `[P]` `[F]` |
-| **Paywall** | Hero + first CTA above the fold; per-day reframe; this file's §§2-5 apply to every block; full paywall QA lives in funnel-level A5/C1 and `funnel-paywall-best-practices.md` |
+| **Paywall** | Hero + first CTA above the fold; per-day reframe `[F]`; this file's §§2-5 apply to every block; full paywall QA lives in funnel-level A5/C1 and `funnel-paywall-best-practices.md` |
 
 ## 8. Myths — do NOT enforce these
 
@@ -274,6 +278,12 @@ The highest-ROI step-level failures to hunt first:
   https://www.paddle.com/studios/shows/fix-that-funnel/noom-full-interview
 - Noom funnel: up to 113 screens, 10-15 min; email gate ~⅓ in — RevenueCat teardown:
   https://www.revenuecat.com/blog/growth/web-to-app-onboarding-funnel/
+- Ad-source-matched onboarding (vendor data, mobile onboarding; verified 2026-08-27):
+  Adapty's Apple Ads dataset (1M+ ad groups, 8,000+ apps) — flows matched to the
+  driving keyword/creative: install→trial +41%, trial→paid +24%, day-92 ROAS +81%;
+  needs ~200+ installs per keyword cluster per week to read a test, and the ROAS gap
+  is still widening at day 92, so judge at day 90+ — Adapty, Aug 12 2026:
+  https://adapty.io/blog/how-to-personalize-app-onboarding-by-ad-source/
 - Practitioner corpus (CTA copy, faces, VoC, micro-commitments, paywall test win
   rates): Copyhackers, CXL CTA guide, EyeQuant, VWO, Flint, Heyflow, RevenueCat
   paywall guide, Airbridge — see `00-LIVE-FINDINGS.md` and this folder's teardowns

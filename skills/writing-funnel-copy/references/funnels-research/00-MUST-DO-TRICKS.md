@@ -42,7 +42,10 @@ cancellation save) — that is the cheapest place to win.
 1. **Match the ad in the first 3 seconds.** Screen 1 repeats the ad's exact promise.
    Headway opens *and* closes on "Become the most interesting person in the room";
    12min bookends "most interesting person at the table." Expectation match = fuel
-   refill; bait-and-switch = instant exit.
+   refill; bait-and-switch = instant exit. Quantified support (vendor data, mobile
+   onboarding): Adapty's Aug 2026 ad-source study measured keyword/creative-matched
+   flows at install→trial +41% and trial→paid +24% vs one generic flow — see the
+   `00-STEP-DESIGN-QA.md` appendix for the source.
 2. **Make the first interaction a one-tap question, not a welcome screen.** Headway's
    first tap is age photo-cards; Addmile is a one-tap age gate. The first "yes" must
    have a ~100% agreement rate based on targeting.
