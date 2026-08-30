@@ -1,5 +1,7 @@
 # Colonbroom (Physical goods / supplement subscription) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://colonbroom.com (homepage = ecommerce store); quiz funnel at `/glp-1/...`, checkout at `/glp-1/shipping`.
 - **Entry promise:** Homepage hero "Gut issues suck, but your life no longer has to." / "Support your digestive wellness with ColonBroom gut health supplements and gentle colon cleanse solutions." Quiz entry: "From cravings to control with up to 70% OFF" / "natural GLP-1 support."

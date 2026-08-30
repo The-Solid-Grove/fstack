@@ -1,5 +1,7 @@
 # LoveStrive (Relationship / Dating-coaching) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://lovestrive.com
 - **Entry promise:** "Discover Your **True Love Style** — Uncover how you give and receive love and understand why you interact the way you do in relationships." Positioned as a free psychology "Love Style Test."

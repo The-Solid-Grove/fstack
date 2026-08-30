@@ -1,5 +1,7 @@
 # Plantin / PlantIn (Gardening / plant care + identification) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://quiz.myplantin.com
 - **Entry promise:** Not observable — the funnel never rendered past its splash screen.

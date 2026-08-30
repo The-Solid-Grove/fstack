@@ -1,5 +1,7 @@
 # Monivate Funnel — Research Notes
 
+> Source: `funnels/rag-catalog/monivate` — `src/steps/step-01.tsx` … `step-14.tsx` via shared `MonivateUi.tsx` primitives.
+
 ## 1. Overview
 
 **Vertical (confirmed):** Personal-finance / investing-literacy education. Monivate sells a subscription to a "personalized wealth-growth plan" — structured lessons that turn a curious beginner into a "Confident Investor." It is *not* a get-rich product; the copy is careful to position it as an education/skills product (see the explicit disclaimer "it's not a guarantee or a promise of result" on the paywall). This is the money/finance + motivation hybrid the name implies ("Mon"-ey + moti-"vate").
