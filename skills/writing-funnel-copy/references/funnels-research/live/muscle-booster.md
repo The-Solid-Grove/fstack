@@ -1,5 +1,7 @@
 # Muscle Booster (Fitness) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://plan.muscle-booster.io (onboarding) → /payment (paywall)
 - **Entry promise:** "Personalized workout plan according to your age" — age-gated entry, instant tap-to-start (no welcome screen).

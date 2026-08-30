@@ -1,5 +1,7 @@
 # Astroline Funnel — Research Notes
 
+> Source: `funnels/rag-catalog/astroline` — `src/steps/step-01.tsx` … `step-19.tsx` (no `rag.meta.json`; see the source-of-truth note below).
+
 ## 1. Overview
 
 **Vertical:** Astrology + palm reading ("spiritual" trust vertical).

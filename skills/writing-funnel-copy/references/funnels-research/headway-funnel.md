@@ -1,5 +1,7 @@
 # Headway Funnel — Research Notes
 
+> Source: `funnels/rag-catalog/headway-funnel` — `src/steps/index.ts` is the source of truth (repo also carries stale ClaimBee scaffold debris; see risks).
+
 ## 1. Overview
 
 - **Brand:** Headway (40M+ user self-growth / micro-learning app; nonfiction book summaries + insights). Brand assets, logo, legal entities ("LibroTech Inc." US / Nicosia Cyprus) all real-Headway-styled.

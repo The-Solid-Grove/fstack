@@ -1,6 +1,6 @@
 # 12min Funnel — Research Notes
 
-> Source: `/Users/andrei/work/funnelsgrove/funnelsgrove/funnels/rag-catalog/12min`
+> Source: `funnels/rag-catalog/12min`
 > Vertical: book-summary / micro-learning (nonfiction summaries consumable in ~12 minutes), web-to-app annual subscription.
 > Reconstructed from Figma nodes; 11 steps, fully linear, single long-form paywall.
 >
