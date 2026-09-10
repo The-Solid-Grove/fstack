@@ -90,7 +90,7 @@ for suite in tests/*.sh; do
 done
 ```
 
-Current version: `0.5.8`
+Current version: `0.6.0`
 
 ## Course references
 
