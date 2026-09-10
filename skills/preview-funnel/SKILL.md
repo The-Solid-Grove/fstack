@@ -1,6 +1,6 @@
 ---
 name: preview-funnel
-description: Use when Codex needs to turn finished funnel copy, screen-by-screen funnel specs, PLAN.md sections, or research-derived funnel copy into a temporary clickable local mockup for copy review, especially before committing to final design or FunnelsGrove implementation.
+description: Use when turning finished funnel copy, screen-by-screen funnel specs, PLAN.md sections, or research-derived funnel copy into a temporary clickable local mockup for copy review, especially before committing to final design or FunnelsGrove implementation.
 ---
 
 # Preview Funnel
