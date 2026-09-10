@@ -1,4 +1,4 @@
-![Skills for Web-to-Web Growth](assets/web-to-web-growth.png)
+<img src="assets/web-to-web-growth.png" alt="Skills for Web-to-Web Growth" width="50%">
 
 # Skills for Web-to-Web Growth
 
