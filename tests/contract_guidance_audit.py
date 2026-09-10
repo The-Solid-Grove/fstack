@@ -36,23 +36,7 @@ TAXONOMY_TOKENS = (
     "summary_confirmation",
     "complete_registration",
 )
-RESEARCH_ANNOTATIONS = {
-    "skills/writing-funnel-copy/references/funnels-research/claimbee-funnel.md": (
-        "email-capture",
-        "scratch-card",
-        "subscription-started",
-    ),
-    "skills/writing-funnel-copy/references/funnels-research/blesse.md": (
-        "cover-personalization",
-    ),
-    "skills/writing-funnel-copy/references/funnels-research/copy/blesse-copy.md": (
-        "cover-personalization",
-    ),
-    "skills/writing-funnel-copy/references/funnels-research/12min.md": (
-        "email-capture",
-        "summary-bridge",
-    ),
-}
+
 
 
 @dataclass(frozen=True)
@@ -335,7 +319,7 @@ def audit_repo(root: Path) -> list[Diagnostic]:
         diagnostics.extend(audit_mandatory_validation(skill_text[path], path))
 
     copy_skill = skill_text[skill_paths[2]]
-    if "step-structure-only" not in copy_skill or "contract authority" not in copy_skill:
+    if "managed docs" not in copy_skill or "step metadata" not in copy_skill:
         diagnostics.append(
             _diagnostic(
                 "copy-skill-boundary-required",
@@ -344,10 +328,8 @@ def audit_repo(root: Path) -> list[Diagnostic]:
             )
         )
 
-    for path, annotation_ids in RESEARCH_ANNOTATIONS.items():
-        diagnostics.extend(
-            audit_research_boundary((root / path).read_text(), path, annotation_ids)
-        )
+    for reference in (root / "skills/writing-funnel-copy/references").glob("*.md"):
+        diagnostics.extend(audit_research_taxonomy(reference.read_text(), str(reference.relative_to(root))))
 
     transcript_path = "tests/fixtures/contract-guidance/behavioral-pressure-transcript.md"
     diagnostics.extend(

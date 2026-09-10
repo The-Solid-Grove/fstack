@@ -8,7 +8,7 @@ A good funnel connects the ad promise, the questions, the offer, and the product
 
 Use them together or pick the one you need. Read the instructions, adapt them to your product, and make them your own.
 
-Works with **Codex** and **Claude Code**. The research library covers web-to-app growth; copy and previews can be used independently. Building and hosted editing use **FunnelsGrove**.
+Works with **Codex** and **Claude Code**. The course covers Web-to-Web growth; copy and previews can be used independently. Building and hosted editing use **FunnelsGrove**.
 
 ## Installation
 
@@ -24,13 +24,13 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ## The skills
 
-### [web2app-essentials](skills/web2app-essentials/SKILL.md)
+### [Web-to-Web Essentials](skills/web2app-essentials/SKILL.md)
 
-**Understand what to work on.** A research library for acquisition, onboarding, pricing, payments, analytics, and experiments. Ask a specific question or learn web2app module by module, with sources and context attached to the numbers.
+**Understand what to work on.** The [FunnelsGrove course](https://funnelsgrove.com/learn/web2web), available as text for your agent. Learn the full system or ask about acquisition, economics, onboarding, payments, and experiments. Invoke it as `web2app-essentials`.
 
 ### [writing-funnel-copy](skills/writing-funnel-copy/SKILL.md)
 
-**Give every screen a job.** Turn your product, audience, and ad promise into a quiz-to-paywall story. Write a complete flow, improve a single screen, or review an offer using the bundled frameworks and funnel teardowns.
+**Give every screen a job.** Turn your product, audience, and ad promise into a quiz-to-paywall story. Write a complete flow, improve a single screen, or review an offer using the concise frameworks and research patterns.
 
 ### [preview-funnel](skills/preview-funnel/SKILL.md)
 
@@ -44,9 +44,13 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 **Improve the funnel you already have.** Sync an existing FunnelsGrove funnel, make the change, and work through preview and QA. Publishing follows the target and environment you authorize.
 
+### [qa-funnel](skills/qa-funnel/SKILL.md)
+
+**Check the whole experience.** Review design, mobile layouts, every branch, checkout, registration, and subscription management. Run it independently or verify the funnel after publishing, with evidence and clear blockers.
+
 ## Put them to work
 
-**Research → Write → Preview → Build → Iterate**
+**Research → Write → Preview → Build → QA → Iterate**
 
 Start wherever your project is. For example:
 

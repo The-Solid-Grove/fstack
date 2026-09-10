@@ -101,8 +101,8 @@ fgrove env pull --dir <dest>
 fgrove publish --env preview --message 'Initial template import'
 ```
 
-QA the preview URL with the same checklist before any production talk; for a
-preview-to-production candidate, run the full [`docs/funnel-qa-checklist.md`](../../docs/funnel-qa-checklist.md) in the fstack checkout. Real Apple Pay / Google Pay buttons require the domain and checkout return URLs to be configured in the Stripe dashboard — report unconfigured Stripe as a named blocker, not a failure.
+Use `qa-funnel` for local design/flow checks and hosted preview QA. For a
+preview-to-production candidate, run its [full checklist](../qa-funnel/references/checklist.md) before production publish. Real Apple Pay / Google Pay buttons require the domain and checkout return URLs to be configured in the Stripe dashboard — report unconfigured Stripe as a named blocker, not a failure.
 
 ## Quick Reference
 

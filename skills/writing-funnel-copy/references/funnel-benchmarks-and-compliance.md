@@ -1,166 +1,46 @@
 ---
 id: funnel-benchmarks-and-compliance
 title: Web Funnel Benchmarks and Compliance Copy Rules
-summary: Conversion benchmarks, measured uplift data, monetization numbers, and paywall compliance copy constraints distilled from the WebFunnels course.
+summary: Practitioner calibration and offer disclosure checks.
 intents:
   - research
   - plan
-keywords:
-  - benchmark
-  - conversion rate
-  - drop-off
-  - paywall
-  - pricing
-  - intro offer
-  - trial
-  - upsell
-  - compliance
-  - auto-renewal
-  - click to cancel
-  - storytelling loader
 ---
 
 # Web Funnel Benchmarks and Compliance Copy Rules
 
-Use this reference to set realistic conversion expectations, prioritize which
-copy to write or test first, and keep paywall/pricing copy legally compliant.
-The full course knowledge base (acquisition, analytics, payments, growth
-process) lives in the `web2app-essentials` skill; this file carries only the parts
-that change how funnel copy is written.
+## Funnel reach calibration
 
-## Funnel drop-off benchmarks
+These are practitioner planning ranges supplied with this stack, not a representative market study or guaranteed targets. Each reach event uses **unique first-screen visitors in the same cohort** as its denominator; count the second step actually viewed, not merely a click on the first screen.
 
-Typical quiz-to-paywall web funnel, top to bottom:
-
-| Stage | Share of landings |
-|---|---|
-| Land on first screen | 100% |
-| Reach mid-onboarding | 35–60% |
+| Stage | Share of first-screen visitors |
+| --- | --- |
+| First screen | 100% |
+| Reach second step | 30–60% |
 | Reach paywall | 10–20% |
 | Reach checkout | 8–15% |
 | Purchase | 0.5–5% |
 
-- Paywall-to-purchase benchmark: 10–15%.
-- Post-purchase app install benchmark: 80–90%.
-- Benchmarks vary widely between products. Judge copy changes by CAC and ROAS
-  (CR × LTV), never by conversion to reaching the paywall or another proxy.
+The ranges describe different funnels and are not a single internally fitted cohort. Do not combine their endpoints to infer conditional conversion. A reported paywall-to-purchase rate uses paywall visitors as its denominator, and post-purchase activation uses buyers; neither is a share of landings by default.
 
-## Measured uplift mechanics
+Compare like-for-like cohorts, geography, devices, traffic, offer, and maturity. Investigate the largest meaningful loss, then judge the change on net revenue per landing, CAC/payback, and retention. Reaching a paywall is a diagnostic, not the business outcome. Removed uplift tables lacked consistent sample and experiment context; use hypotheses rather than promised lifts.
 
-Copy mechanics with impact figures observed in the course material. Apply the
-ones that match the product; keep the claims honest.
+## Copy checks
 
-| Mechanic | Shape | Measured impact |
-|---|---|---|
-| Light engaging start | Open with an easy question tied to the ad creative | +10–15% CR to purchase |
-| Score questions | Situational questions where users recognize themselves | +10–15% CR to purchase |
-| Big storytelling loader | 5–7 slides over 30–40 seconds at the end of the quiz | +15–20% CR to purchase |
-| Social proof on action screens | Testimonials on the exact screen where the user must act (paywall, checkout) | +44% CR paywall-to-purchase |
-| Try-the-solution step | Selfie capture, palm scan, or similar interactive proof | Up to 80% CR on that step |
-| Email capture | Framed as value delivery ("Enter your email to get your result"), placed after the final loader | Email sequences can drive up to 30% of revenue |
+Before the purchase commitment, show clear recurring terms: what is charged now, initial period, renewal amount and cadence, when/how to cancel to avoid the next charge, and applicable refund terms. Explain auto-renewal and obtain informed consent. Keep required notices accessible and prominent; per-day equivalents cannot obscure actual billing.
 
-Narrative rules that make these work:
+- Show mandatory fees as required for the market; make the price on the page agree with checkout.
+- Use real savings, genuine deadlines, substantiated proof, and accurate product/result claims. An evergreen countdown is not evidence of scarcity.
+- One-click upsells need separate price disclosure and authorization.
+- Keep cancellation and support easy to find. A recovery offer must preserve the ability to decline or cancel.
+- Separate service delivery messages from marketing consent where applicable.
 
-- One consistent narrative across creative, first screen, quiz, and paywall.
-  Any mismatch breaks trust.
-- One screen, one message. Never stack ideas.
-- Quizzes sell emotional purchases; utility products convert poorly through
-  quiz storytelling.
-- Positive friction (email entry, selfie, palm scan) increases conversion —
-  effort creates investment. Do not optimize for the easiest possible path,
-  and do not treat "make the onboarding shorter" as a goal; length follows
-  the amount of relevant content the audience needs.
+Read the canonical course's [risk and compliance lesson](../../web2app-essentials/references/12-risk-and-compliance.md) for the current sources and operational review. Resolve requirements per market, offer, platform, and effective date; this checklist is not a claim that every jurisdiction mandates an identical layout.
 
-## Monetization numbers for paywall copy
+## Specific distinctions retained from source verification
 
-- Three plans is the most effective configuration; the default-selected plan
-  materially changes plan mix, so choose it deliberately.
-- Intro offers dominate: 50–70% off the first transaction, renewals at full
-  price. The bigger the intro-to-full gap, the higher the post-renewal churn —
-  reflect the real renewal price honestly in the copy.
-- Trials generally perform worse than intro offers. When used, make the trial
-  paid (at least $1) and state clearly how long it lasts and the price charged
-  when it ends. Trials work well as a winback offer via email for users who
-  left an address but did not buy.
-- Payment-method shares observed: Apple Pay 60–80%, PayPal 10–20%, cards
-  10–20%. Write the checkout CTA around the default express method rather
-  than a generic button.
-- Upsells: 20–30% of new subscribers buy one; tying the upsell to the ad
-  creative's theme raises conversion.
-- Per-day price framing, anchor plans, decoy options, and .99 endings are
-  standard pricing-psychology levers.
+The FTC's amended negative-option rule was vacated in July 2025; ROSCA and applicable state laws remain relevant. Confirm current requirements through the course sources before a launch.
 
-## Compliance constraints on paywall and checkout copy
+Maine permits a checkbox, electronic signature, or another affirmative action for renewal consent; a checkbox is not its only mechanism. Maryland's cited reminder covers a free gift or trial over 14 days, with a 3–21-day notice window and statutory exceptions, not every discounted offer. Connecticut's pre-retention cancellation disclosure cited below concerns telephone cancellation; its annual reminder is a separate rule. Virginia's same-medium rule has an in-person enrollment exception.
 
-These are copy requirements, not implementation guidance. They come from
-ROSCA and FTC Act §5, state auto-renewal laws (California SB 478 / § 17602 /
-AB 2863 is the strictest and the practical national baseline; Minnesota, New
-York, and others added similar rules in 2025, and a 2026 wave keeps raising
-it — Maine SP 650 effective Jan 1, Maryland Ch. 204 effective Jun 1, and
-Virginia HB1022/SB493 plus Connecticut SB 3 both effective Jul 1, 2026), and
-Apple's subscription guidelines. The FTC's separate "click to cancel" rule was vacated in court in
-July 2025 before taking effect, but every requirement below still binds
-through ROSCA and state law — and the FTC's 2025–2026 enforcement (the $2.5B
-Amazon Prime settlement; the June 2026 case against the Wisey/Nebula
-quiz-funnel network) shows these exact rules are what gets litigated.
-
-Before the purchase button, the paywall or checkout copy must state clearly
-and conspicuously:
-
-1. That the subscription auto-renews.
-2. The amount that will be charged and the frequency of recurring charges.
-3. The deadline by which the user must act to avoid the next charge.
-4. How to cancel, with cancellation as easy as sign-up and available through
-   the same platform the user signed up on.
-5. The return and refund policy.
-
-Additional rules:
-
-- Consent must be express and informed. A dedicated auto-renewal control is
-  a useful design pattern. Maine permits a checkbox, electronic signature,
-  or another affirmative action agreeing to renewal before enrollment;
-  it does not make a checkbox the only lawful mechanism.
-  [Maine §1210-C(2)](https://www.legislature.maine.gov/statutes/10/title10sec1210-C.html).
-- The actually billed amount must be the most prominent pricing element in the
-  layout. "Clear and conspicuous" means larger type than surrounding text,
-  contrasting type or color, or set off by marks that call attention to it.
-- The price shown must be the price paid — display the total including
-  mandatory fees upfront (California SB 478).
-- Plan reminder copy around the applicable jurisdiction and offer. Maryland's
-  rule covers a free gift or trial lasting more than 14 days, with a notice
-  3–21 days before expiration and statutory exceptions; it is not a blanket
-  rule for every discount. Connecticut requires an annual renewal reminder.
-  [Maryland §14-1329](https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcl&enactments=false&section=14-1329),
-  [Connecticut §42-158ff(d)](https://www.cga.ct.gov/2026/sup/chap_742d.htm).
-- Cancellation and save-offer copy is regulated too. Virginia requires
-  cancellation at least as easy as enrollment, with an exception to its
-  same-medium rule for in-person enrollment. Connecticut's requirement to
-  disclose the right to cancel before a retention offer specifically concerns
-  telephone cancellation. Clear cancellation access above a web save offer
-  remains a design recommendation, not that telephone-specific requirement.
-  [Virginia §59.1-207.46(B)](https://law.lis.virginia.gov/vacodeupdates/title59.1/section59.1-207.46/),
-  [Connecticut §42-158ff(e)(3)](https://www.cga.ct.gov/2026/sup/chap_742d.htm).
-- One-click upsells that charge the saved payment method require their own
-  clear authorization; do not imply the upsell is free or already included.
-- Never fabricate testimonials, media mentions, guarantees, or results data
-  for social-proof or FOMO elements. Countdown timers and "limited" claims
-  must reflect a real limitation.
-
-Full regulation summaries and source links live in the `web2app-essentials`
-skill under `references/7-risks-and-compliance/`.
-
-## Optimization priorities for copy tests
-
-Course-observed order for finding growth after launch, applied to copy work:
-
-1. Compare each funnel stage against the benchmarks above; attack the largest
-   gap first.
-2. Paywall and pre-paywall copy: value proposition, plan presentation, social
-   proof placement.
-3. Quiz content: relevance of questions, feedback screens, loaders.
-4. Test one hypothesis per A/B test, judged on ARPU as the primary metric, not
-   click-through or paywall-reach.
-
-One team moved funnel CVR from 0.3% to 1.5% on creative changes alone — when
-funnel copy underperforms, check creative-to-funnel message match before
-rewriting screens.
+Sources: [Maine §1210-C](https://www.legislature.maine.gov/statutes/10/title10sec1210-C.html), [Maryland §14-1329](https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcl&enactments=false&section=14-1329), [Connecticut §42-158ff](https://www.cga.ct.gov/2026/sup/chap_742d.htm), [Virginia §59.1-207.46](https://law.lis.virginia.gov/vacodeupdates/title59.1/section59.1-207.46/). Source checks and context: [verification notes](../../../docs/research/2026-09-10-pr-source-verification.md).

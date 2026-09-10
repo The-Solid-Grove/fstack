@@ -1,36 +1,40 @@
 ---
 id: funnel-research
-title: Funnel Research Prompt
-summary: Structured research stage that enriches PRODUCT_SENSE.md before plan generation.
-version: 2.1.0
+title: Funnel research
+summary: Evidence and positioning before writing a funnel.
 intents:
   - research
   - plan
 ---
-Goal: enrich `PRODUCT_SENSE.md` with research and strategy before plan generation or funnel code edits.
 
-Process:
-1. Consolidate product context from latest user intent and current `PRODUCT_SENSE.md`.
-2. Run competitor research across iOS/Android/Web.
-3. Apply the onboarding framework prompt to synthesize onboarding psychology and step strategy.
-4. Write/update `PRODUCT_SENSE.md`.
+# Funnel research
 
-`PRODUCT_SENSE.md` must include dedicated sections for:
-- Product context summary and target audience.
-- Competitor set (5-10 across iOS/Android/Web) with source URLs.
-- Competitor breakdown (offer angle, pricing/trial, funnel/paywall pattern, copy/tone).
-- Messaging map (ad promise vs onboarding copy vs paywall framing).
-- Objection map and mitigation patterns.
-- Differentiation strategy and positioning recommendations.
-- Onboarding strategy synthesis from framework outputs:
-  - value stack
-  - entry mental state
-  - transformation narrative
-  - barrier handling strategy
-  - paywall timing rationale
-- Mascot profile seed (name/reference/style constraints) when provided.
+Use the product context and current funnel first. For a small copy change, research only the missing fact that affects it. For a new funnel or repositioning, produce or update `PRODUCT_SENSE.md` before writing screens.
 
-Behavior rules:
-- If user changes product/audience/value proposition/positioning, update `PRODUCT_SENSE.md` in the same run.
-- Do not write funnel implementation files under `src/` in this stage.
-- Do not write `PLAN.md` in this stage unless explicitly asked; planning is a separate stage.
+## Research output
+
+1. Product, audience, entry promise, offer, real proof, constraints, and open questions.
+2. A small relevant competitor set with URLs and observation dates. Compare entry hook, question sequence, meaningful personalization, result preview, paywall, checkout, and post-purchase access. Expand the set only when it changes a decision.
+3. A messaging map connecting ad → first screen → quiz → result → offer, plus objections and evidence that can answer them.
+4. Prioritized recommendations: observation → implication for this product → proposed test. Separate observed behavior, measured outcomes, and assumptions.
+
+Capture a short excerpt or paraphrase only when useful, with source, funnel location, and why it matters. Do not accumulate full copy dumps. Live variants, countries, devices, prices, and dates differ; re-open a competitor before relying on its current offer. A code teardown cannot establish what was deployed or whether it converted.
+
+## What survived the funnel research
+
+The historical walkthroughs informed these working hypotheses:
+
+- Match the opening to the ad. Begin with an easy, relevant action.
+- Use answers in real feedback and the result; a name inserted into generic copy is weak personalization.
+- Show product-specific value before asking for email or money. State what is paid before inviting effort to unlock a result.
+- Choose a value-recap or paid-result offer according to what the product actually delivers. Avoid fake computations and fabricated results.
+- Compare plan duration, total first charge, renewal, and included value. Per-day framing is secondary to actual billing terms.
+- Test supported express payment methods on the real target device; wallet visibility and payment mix vary.
+- A checkout-close offer is an optional recovery experiment. Confirm discount math and preserved choice; further discounts are not a universal requirement.
+- Post-purchase access and recovery are part of the funnel, not an afterthought.
+
+These are patterns to adapt and test, not claims of uplift or implementation contracts. See [conversion experiments](funnel-conversion-best-practices.md), [paywall guidance](funnel-paywall-best-practices.md), and [benchmark/compliance rules](funnel-benchmarks-and-compliance.md).
+
+The original walkthroughs and copy banks remain in [Git history](https://github.com/The-Solid-Grove/fstack/tree/88b3773/skills/writing-funnel-copy/references/funnels-research). They are historical evidence, not an installed dependency or a current market catalog.
+
+If the product or positioning changes, update the product-sense document in the same run. Research alone does not require implementation files or an implementation plan; produce those only when included in the request.

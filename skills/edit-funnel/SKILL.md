@@ -278,13 +278,13 @@ QA checklist.
 
 ### 10. Verify Preview Coverage for Production
 
-Before production publish or post-publish production QA, verify whether the
+Before production publish, verify whether the
 current production candidate or current production version already has a matching
 preview build. Use the current `fgrove` CLI, deployment history, version id,
 sequence, generated funnel docs, or API status available for the target.
 
 Record the production URL or target domain, preview URL, version ids, sequences,
-and how the match was verified. If there is no matching preview build, publish
+and how the match was verified. If there is no matching preview build, apply step 8 authorization and publish
 to preview first and run the full QA checklist on the preview URL before
 continuing. Missing preview QA is a blocker unless the user explicitly accepts
 the risk.
@@ -305,26 +305,11 @@ present. Run the same required QA on the production URL after publish. Do not
 claim production completion when production QA fails or cannot run unless the
 user explicitly accepts the risk.
 
-## QA Checklist
+## QA
 
-Use the narrowest QA that covers the edit for small copy/style changes. Use the
-full checklist in the fstack checkout at
-[`docs/funnel-qa-checklist.md`](../../docs/funnel-qa-checklist.md) for major edits,
-preview-to-production candidates, missing preview-build coverage, and every
-production URL after publish.
+Use `qa-funnel` for independent audits and for the local, preview, and production checks in this workflow. Its [full checklist](../qa-funnel/references/checklist.md) owns end-to-end coverage; its [design checks](../qa-funnel/references/design.md) own per-screen visual and content QA. Small edits use scoped coverage; major changes and production candidates use full coverage.
 
-Full QA verifies every step, every branch, every active A/B experiment, submit email
-or identity capture, Apple Pay and Google Pay button appearance on checkout,
-paywall and checkout experience, test payment or approved payment-path
-equivalent, closing and reopening checkout for the larger discount path, the
-complete registration page, registration and legal/support/account links, and
-the `/manage-subscription` cancellation flow when a test subscription is
-available.
-
-If a flow cannot run because test credentials, payment mode, an existing
-subscription, route support, or third-party services are unavailable, report the
-skipped flow as a named blocker or explicit unavailable item. Production QA
-blockers block the completion claim unless the user explicitly accepts the risk.
+A request only to QA an existing production URL belongs to `qa-funnel`; inspect it without publishing. For a release in this edit workflow, missing matching preview QA remains a blocker. Follow the existing target and environment authorization before publishing a missing preview.
 
 ## Completion Gate
 
@@ -345,10 +330,10 @@ Finish only after all of these are true:
    funnels without GitHub use `fgrove sync up`.
 8. If publishing, preview is published with `fgrove publish --env preview`.
 9. If preview is published, preview QA is run and reported.
-10. If production is explicitly requested or post-publish QA is requested,
+10. If production is explicitly requested,
    preview-build coverage for the current production candidate or version is
    verified and reported.
-11. If there is no matching preview build, preview is published and full QA is
+11. If production is requested and there is no matching preview build, authorized preview is published and full QA is
    run on the preview URL before continuing.
 12. If production is explicitly requested, production is published only after
    preview QA and production QA is run on the production URL.
