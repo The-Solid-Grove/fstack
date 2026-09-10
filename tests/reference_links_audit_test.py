@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from reference_links_audit import audit
+from reference_links_audit import audit, heading_slugs
 
 
 def write(path: Path, text: str) -> None:
@@ -22,7 +22,8 @@ class ReferenceLinksAuditTest(unittest.TestCase):
     def test_resolving_links_pass(self):
         write(self.root / "skills/demo/SKILL.md",
               "Read `references/guide.md` and browse `references/corpus/`.")
-        write(self.root / "skills/demo/references/guide.md", "guide")
+        write(self.root / "skills/demo/references/guide.md",
+              "# Guide\n\n## Anchor\n\nguide")
         write(self.root / "skills/demo/references/corpus/README.md",
               "See [guide](../guide.md) and [site](https://example.com) "
               "and [section](../guide.md#anchor).")
@@ -47,6 +48,66 @@ class ReferenceLinksAuditTest(unittest.TestCase):
         errors = audit(self.root)
         self.assertEqual(len(errors), 1)
         self.assertIn("old-name.md", errors[0])
+
+    def test_broken_link_in_non_readme_reference_fails(self):
+        write(self.root / "skills/demo/references/notes.md",
+              "See [companion](missing-companion.md).")
+        errors = audit(self.root)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("missing-companion.md", errors[0])
+
+    def test_broken_link_in_docs_fails(self):
+        write(self.root / "docs/checklist.md", "See [plan](plans/gone.md).")
+        errors = audit(self.root)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("plans/gone.md", errors[0])
+
+    def test_broken_link_in_root_readme_fails(self):
+        write(self.root / "README.md", "See [docs](docs/missing.md).")
+        errors = audit(self.root)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("docs/missing.md", errors[0])
+
+    def test_broken_anchor_fails(self):
+        write(self.root / "skills/demo/references/guide.md", "# Guide\n\nbody")
+        write(self.root / "skills/demo/references/notes.md",
+              "See [section](guide.md#no-such-section).")
+        errors = audit(self.root)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("broken anchor", errors[0])
+        self.assertIn("no-such-section", errors[0])
+
+    def test_same_file_anchor_is_validated(self):
+        write(self.root / "docs/guide.md",
+              "# Guide\n\n## Real Section\n\nJump to [real](#real-section) "
+              "and [fake](#fake-section).")
+        errors = audit(self.root)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("fake-section", errors[0])
+
+    def test_links_inside_code_fences_are_ignored(self):
+        write(self.root / "docs/guide.md",
+              "# Guide\n\n```md\nSee [example](not-a-real-file.md).\n```\n")
+        self.assertEqual(audit(self.root), [])
+
+    def test_anchor_to_non_markdown_target_is_not_checked(self):
+        write(self.root / "docs/guide.md", "See [style](style.css#L10).")
+        write(self.root / "docs/style.css", "body {}")
+        self.assertEqual(audit(self.root), [])
+
+    def test_heading_slugs_formatting_and_duplicates(self):
+        slugs = heading_slugs(
+            "# Paywall & Checkout\n"
+            "## Step 1: QA\n"
+            "## Repeat\n"
+            "## Repeat\n"
+            "```txt\n# Not A Heading\n```\n"
+        )
+        self.assertIn("paywall--checkout", slugs)
+        self.assertIn("step-1-qa", slugs)
+        self.assertIn("repeat", slugs)
+        self.assertIn("repeat-1", slugs)
+        self.assertNotIn("not-a-heading", slugs)
 
     def test_non_skill_paths_are_not_checked(self):
         # `AGENTS.md`, `docs/funnelsgrove/...` etc. refer to the synced funnel

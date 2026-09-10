@@ -113,9 +113,21 @@ This is where conviction forms. But System 2 uses shortcuts to process quickly:
 | --- | --- |
 | **Familiarity** | Use UI patterns everyone recognizes: progress bars, checkmarks, loading states. Familiarity means zero processing cost. |
 | **Anchoring** | People cannot judge value in isolation. Give them a reference: compare subscription cost to a coffee, manual effort in hours to your product's minutes, or industry settlement amounts before showing an estimate. |
-| **Loss aversion** | Losing something hurts about 2x more than gaining the same thing. Frame benefits as what the user will miss if they do not act, not just what they gain. |
+| **Loss aversion** | Frame benefits as what the user will miss if they do not act, not just what they gain. Strongest when the loss is concrete and feels already owned: "your results," "your plan," "your discount." Treat loss framing as a testable lever, not a law; see the calibration note below. |
 | **Social proof** | "Others like you did this" is processed faster than "this is good." Testimonials, user counts, and review scores bypass analytical skepticism. |
 | **Confirmation** | Questions that validate what the user already believes get processed instantly and create yes-momentum. |
+
+> Loss-aversion calibration (verified August 2026): the classic estimate is
+> that losses weigh about 2x gains — a 2024 meta-analysis of 607 empirical
+> estimates puts the coefficient at λ ≈ 1.955
+> ([Brown et al., Journal of Economic Literature](https://www.aeaweb.org/articles?id=10.1257%2Fjel.20221698)) —
+> but a 2025 re-meta-analysis finds λ ≈ 1.07, statistically indistinguishable
+> from no loss aversion, once gain and loss amounts are symmetric and
+> unordered
+> ([Yechiam & Zeif, Journal of Economic Psychology](https://www.sciencedirect.com/science/article/abs/pii/S0167487025000133)).
+> Design and framing drive the effect, not a fixed constant in the user's
+> head. Practical consequence: A/B test loss-framed copy against gain-framed
+> copy rather than defaulting to loss framing everywhere.
 
 ## 4. The Hitchcock Principle: Self-Generated Value
 
