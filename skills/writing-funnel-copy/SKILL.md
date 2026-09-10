@@ -62,8 +62,8 @@ upsell offer, or cancellation offer, also read and follow
 extension that refines the framework's paywall architecture requirements.
 
 When designing or optimizing quiz flow, onboarding questions, interstitials,
-answer feedback, progress screens, pre-paywall warmups, payment shortcuts, or
-down-sell recovery, also read and follow
+answer feedback, progress screens, pre-paywall warmups, payment shortcuts,
+down-sell recovery, or post-paywall email recovery, also read and follow
 `references/funnel-conversion-best-practices.md`. Treat it as a catalog of
 conversion-focused patterns to apply where they match the product and claims.
 

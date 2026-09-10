@@ -134,6 +134,36 @@ meet them with a personalized headline.
 - End with company info and trust signals, such as App Store badge or support
   email.
 
+## Close Mechanics: Transaction-Abandon Exit Offer
+
+When a user starts checkout but does not complete payment, show one discounted
+exit offer at the moment of abandonment. In web funnels this is the
+checkout-close down-sell modal (pattern 13 in
+`funnel-conversion-best-practices.md`); in-app it is a discounted paywall
+triggered when the purchase sheet is dismissed.
+
+Measured pattern (verified July 2026 - Superwall transaction-abandon case
+study, August 6, 2024: 18 apps, 438,144 new-install control users vs. 87,403
+abandoners shown the offer):
+
+- 6.3% of abandoners converted on the exit offer, and those purchases made up
+  17% of the cohort's total revenue.
+- Exit-offer buyers refunded less than standard buyers - 3.3% vs. 6.8% -
+  suggesting informed purchases rather than accidental ones.
+- Caveats: discount sizes were not disclosed, and Apple has flagged
+  transaction-abandon offers for App Review scrutiny in-app; the web
+  checkout-close version carries no app-review risk.
+
+Related single-source findings (Superwall, "The paywall tactics behind
+$100K/month apps," February 12, 2026, drawn from 4,500+ A/B tests on $100K+
+MRR apps; magnitudes are single-case and vendor-published):
+
+- A simplified bullet-list paywall beat a detailed variant by 111% in one
+  reported test; cleaning up the pricing section alone improved conversion by
+  10%. Cut before adding.
+- "No commitment, cancel anytime" microcopy near the CTA consistently lifted
+  conversions. It complements the Step 7 guarantee and must stay truthful.
+
 ## FAQ - Suggested Topics
 
 1. How does the free trial work?
