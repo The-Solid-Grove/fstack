@@ -86,21 +86,11 @@ fgrove funnels clone --funnel <source-id-or-slug> --name <new-name>
 
 ### 2. Load, Refresh, and Merge the Local Project
 
-Check/update the CLI version first, then check auth and context. Sync down only
-when there is no current synced directory or after the local tree is clean or
-checkpointed. Keep `.funnelsgrove-sync.json` in place because it carries the
-draft sync state.
-
-```bash
-<fstack-checkout>/scripts/ensure-fgrove-cli
-fgrove whoami
-fgrove use --project <project-id-or-slug> --funnel <funnel-id-or-slug>
-fgrove status
-git -C <local-dir> status --short
-fgrove github status --dir <local-dir>
-fgrove sync down --funnel <id-or-slug> --dir <local-dir>
-fgrove docs --dir <local-dir>
-```
+Run the CLI Reference sequence above through `fgrove docs --dir <local-dir>`:
+CLI version check first, then auth and context, then repository and sync state.
+Sync down only when there is no current synced directory or after the local
+tree is clean or checkpointed. Keep `.funnelsgrove-sync.json` in place because
+it carries the draft sync state.
 
 If the local tree has changes, create a checkpoint before refreshing remote
 state. Prefer a normal WIP commit on a local branch when the directory is a git
@@ -114,19 +104,15 @@ status --dir <local-dir>` until the pull job is completed or skipped. After
 that, sync the latest draft into a clean directory and merge the local
 checkpoint with normal git or file diff tools before editing further.
 
-For GitHub-connected funnels, GitHub is the write path for source changes. After
-local checks pass, commit and push with normal git, then run `fgrove github pull
---dir <local-dir>` and poll `fgrove github status --dir <local-dir>` until the
-pull job completes or skips. Do not run `fgrove sync up` for the same local
-diff.
+When GitHub is not connected, use the hosted draft as remote truth: sync the
+current draft into a temporary clean directory, compare it with the local
+checkpoint, merge intentionally, then continue from the merged local tree. If
+`fgrove sync up` later reports that the remote draft changed since the local
+directory was synced, repeat this temp-directory merge flow before retrying.
 
-When GitHub is not connected, use the hosted draft as remote truth: run `fgrove
-sync down --funnel <id-or-slug> --dir <temp-dir>` or use an already selected
-`fgrove use` context to download the current draft into a temporary clean
-directory. Compare it with the local checkpoint, merge intentionally, then
-continue from the merged local tree. If `fgrove sync up` reports that the remote
-draft changed since the local directory was synced, repeat this temp-directory
-merge flow before retrying.
+Which path writes source changes back to the hosted draft is decided once, in
+step 9: GitHub push + `fgrove github pull` for GitHub-connected funnels,
+`fgrove sync up` otherwise.
 
 ### 3. Inspect Before Editing
 
@@ -226,10 +212,9 @@ npm run lint
 npm run build
 ```
 
-`fgrove validate` is required after creating or changing a step, its metadata,
-answers, routing, analytics, or payment behavior. Resolve every blocking
-diagnostic before preview or sync; do not treat a passing framework build as a
-replacement for contract validation.
+A passing framework build does not replace contract validation: resolve every
+blocking diagnostic from the required `fgrove validate` run before preview or
+sync.
 
 If no package scripts exist, still verify the edited files structurally and open
 the local preview if the tree provides a dev command.
@@ -243,8 +228,8 @@ errors when a browser tool is available, adjust the local files, rerun checks,
 and preview locally again until the local result matches the request.
 
 For created or edited steps, the local preview inspection must include the
-content-fit audit at small `375x667`, medium `393x852`, large `402x874`, and
-desktop-small `1280x800` before considering the step ready.
+step 5 content-fit audit at all four default breakpoints before considering
+the step ready.
 
 For major edits, ask the user whether to run the full QA checklist before
 publishing. Major edits include checkout, pricing, payment, subscription,
@@ -345,8 +330,8 @@ Finish only after all of these are true:
 1. Target workspace/project/funnel and local directory are recorded.
 2. Requested edits pass available local checks.
 3. Local preview is opened or an unavailable local preview has a named reason.
-4. Every created or edited step has a reported content-fit audit at small
-   `375x667`, medium `393x852`, large `402x874`, and desktop-small `1280x800`.
+4. Every created or edited step has a reported content-fit audit at all four
+   default breakpoints from step 5.
 5. Image edits preserve build-time image optimization and manifest-driven
    next-step preloading, or any unavailable optimization/preload check is named.
 6. The user is asked whether to publish after local preview.
