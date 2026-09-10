@@ -1,4 +1,4 @@
 interface:
-  display_name: "Web2App Essentials"
-  short_description: "Answer web2app funnel questions from the course knowledge base"
-  default_prompt: "Use $web2app-essentials to answer questions about web2app funnel benchmarks, acquisition, onboarding, monetization, payments, analytics, growth process, or compliance, loading only the relevant module references."
+  display_name: "Web-to-Web Essentials"
+  short_description: "Learn Web-to-Web growth from the FunnelsGrove course"
+  default_prompt: "Use $web2app-essentials to answer this Web-to-Web growth question from the relevant course lessons and worksheets."

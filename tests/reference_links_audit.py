@@ -82,13 +82,13 @@ def heading_slugs(markdown: str) -> set[str]:
     return slugs
 
 
-def audit_markdown(md_file: Path) -> list[str]:
+def audit_markdown(md_file: Path, website_root: bool = False) -> list[str]:
     errors = []
     base = md_file.parent
     text = md_file.read_text(encoding="utf-8")
     prose = re.sub(r"(`+).*?\1", "", strip_code_fences(text))
     for link in MARKDOWN_LINK.findall(prose):
-        if link.startswith(EXTERNAL_PREFIXES):
+        if link.startswith(EXTERNAL_PREFIXES) or (website_root and link.startswith("/")):
             continue
         target_path, _, fragment = link.partition("#")
         target = base / target_path if target_path else md_file
@@ -115,7 +115,10 @@ def audit(root: Path) -> list[str]:
     for skill_md in sorted(root.glob("skills/*/SKILL.md")):
         errors.extend(audit_skill_md(skill_md))
     for md_file in markdown_files(root):
-        errors.extend(audit_markdown(md_file))
+        # Exact course source keeps public /resources and /images links. Only this
+        # provenance-checked snapshot uses website-root paths; other docs stay strict.
+        course_root = root / "skills/web2app-essentials/references"
+        errors.extend(audit_markdown(md_file, website_root=md_file.is_relative_to(course_root)))
     return errors
 
 

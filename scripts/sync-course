@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""Export the committed course verbatim; verify snapshot integrity offline or against source."""
+import argparse
+import hashlib
+import json
+from pathlib import Path, PurePosixPath
+import shutil
+import subprocess
+import tempfile
+
+CONTENT = 'apps/web/src/content/web2web'
+ONE_PAGERS = 'apps/web/src/lib/web2webOnePagers.json'
+REPOSITORY = 'https://github.com/The-Solid-Grove/funnelsgrove'
+DEFAULT_SKILL = Path(__file__).resolve().parents[1] / 'skills/web2app-essentials'
+
+
+def git(source, *args):
+    return subprocess.check_output(['git', '-C', str(source), *args], stderr=subprocess.PIPE)
+
+
+def source_snapshot(source, ref):
+    commit = git(source, 'rev-parse', '--verify', f'{ref}^{{commit}}').decode().strip()
+    listing = git(source, 'ls-tree', '-r', '-z', commit, '--', CONTENT).split(b'\0')
+    files = {}
+    for entry in filter(None, listing):
+        meta, name = entry.decode().split('\t', 1)
+        mode, kind, oid = meta.split()
+        if not name.endswith('.md'):
+            continue
+        if mode not in ('100644', '100755') or kind != 'blob':
+            raise ValueError(f'Course Markdown must be a regular file: {name}')
+        relative = str(PurePosixPath(name).relative_to(CONTENT))
+        files[relative] = git(source, 'cat-file', 'blob', oid)
+    if not {'index.md', 'templates/index.md'} <= files.keys():
+        raise ValueError('Source revision is missing the course and template indexes')
+    memo_source = git(source, 'show', f'{commit}:{ONE_PAGERS}')
+    cards = json.loads(memo_source)['cards']
+    memo = ['# Lesson one-pagers', '']
+    for card in cards:
+        memo.extend([f"## {card['title']}", '', card['thesis'], '', '### Core rule', '', card['coreRule'], ''])
+        for section in card['sections']:
+            memo.extend([f"### {section['title']}", '', *[f'- {item}' for item in section['items']], ''])
+        memo.extend(['### Decision check', '', card['decisionCheck'], ''])
+    files['one-pagers.md'] = ('\n'.join(memo)).encode()
+    manifest = {
+        'repository': REPOSITORY,
+        'commit': commit,
+        'sourcePath': CONTENT,
+        'onePagersSource': ONE_PAGERS,
+        'onePagersSha256': hashlib.sha256(memo_source).hexdigest(),
+        'site': 'https://funnelsgrove.com',
+        'courseUrl': 'https://funnelsgrove.com/learn/web2web',
+        'files': {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())},
+    }
+    return manifest, files
+
+
+def check_snapshot(skill, source=None, ref='HEAD'):
+    manifest = json.loads((skill / 'course.json').read_text())
+    references = skill / 'references'
+    actual = {str(p.relative_to(references)): hashlib.sha256(p.read_bytes()).hexdigest()
+              for p in references.rglob('*') if p.is_file()}
+    if actual != manifest['files']:
+        raise ValueError('Course export drift: restore by syncing the canonical source')
+    if source:
+        expected, _ = source_snapshot(source, ref)
+        if manifest != expected:
+            raise ValueError('Course export does not match the requested source revision')
+    print(f"Verified {len(actual)} course files at {manifest['commit']}")
+
+
+def export_snapshot(skill, source, ref):
+    manifest, files = source_snapshot(source, ref)
+    skill.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='.course-export-', dir=skill) as temp:
+        staged = Path(temp) / 'references'
+        for name, data in files.items():
+            target = staged / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(data)
+        # This directory is entirely generated. Skills and metadata live alongside it.
+        target = skill / 'references'
+        backup = Path(temp) / 'previous'
+        if target.exists():
+            target.rename(backup)
+        try:
+            staged.rename(target)
+            (skill / 'course.json').write_text(json.dumps(manifest, indent=2) + '\n')
+        except OSError:
+            if target.exists():
+                shutil.rmtree(target)
+            if backup.exists():
+                backup.rename(target)
+            raise
+    check_snapshot(skill, source, ref)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source', type=Path, help='FunnelsGrove Git checkout (required for export)')
+    parser.add_argument('--ref', default='HEAD', help='Committed source revision, default HEAD')
+    parser.add_argument('--skill-dir', type=Path, default=DEFAULT_SKILL)
+    parser.add_argument('--check', action='store_true', help='Verify without writing; --source also checks parity')
+    args = parser.parse_args()
+    if not args.check and not args.source:
+        parser.error('--source is required to export')
+    try:
+        if args.check:
+            check_snapshot(args.skill_dir, args.source, args.ref)
+        else:
+            export_snapshot(args.skill_dir, args.source, args.ref)
+    except (OSError, ValueError, KeyError, subprocess.CalledProcessError) as error:
+        parser.exit(1, f'Course sync failed: {error}\n')
+
+
+if __name__ == '__main__':
+    main()

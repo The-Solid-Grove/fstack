@@ -49,10 +49,10 @@ Because the skills are linked, pulling updates changes the installed files. Comm
 Each teammate installs the pack. Add a short pointer to your project's `AGENTS.md` or `CLAUDE.md`:
 
 ```markdown
-Use fstack for web-to-app funnel work: web2app-essentials for research,
+Use fstack for Web-to-Web funnel work: web2app-essentials for research,
 writing-funnel-copy for strategy and screen copy, preview-funnel for
 clickable copy review, create-funnel for new FunnelsGrove projects,
-and edit-funnel for hosted changes. Read the matching SKILL.md and
+edit-funnel for hosted changes, and qa-funnel for design and flow testing. Read the matching SKILL.md and
 follow the project's managed FunnelsGrove docs for implementation.
 ```
 
@@ -62,7 +62,7 @@ Remove the installed symlinks first. This preserves directories if you replaced 
 
 ```bash
 for host in ~/.codex/skills ~/.claude/skills; do
-  for skill in create-funnel edit-funnel preview-funnel writing-funnel-copy web2app-essentials; do
+  for skill in create-funnel edit-funnel preview-funnel writing-funnel-copy web2app-essentials qa-funnel; do
     link="$host/$skill"
     if [ -L "$link" ] && [ "$(readlink "$link")" = "$HOME/.fstack/skills/$skill" ]; then
       rm "$link"
@@ -84,10 +84,23 @@ Run the smoke checks or every available suite:
 ```bash
 bash tests/smoke.sh
 
-# All suites, including research and reference audits
+# All suites, including course export and reference checks
 for suite in tests/*.sh; do
   bash "$suite" || exit "$?"
 done
 ```
 
 Current version: `0.5.8`
+
+## Course references
+
+Web-to-Web Essentials keeps the existing `web2app-essentials` invocation for installed users. Its `references/` directory is a verbatim export of the published course lessons and worksheets, plus a Markdown transcription of the published one-pagers, not a separately edited curriculum. Root-relative course links and images resolve against `https://funnelsgrove.com`; relative Markdown links retain the course tree.
+
+Improve the canonical course first, regenerate and test its served content, publish it, then export the committed revision:
+
+```bash
+python3 scripts/sync-course --source <funnelsgrove-checkout> --ref <published-commit>
+python3 scripts/sync-course --check --source <funnelsgrove-checkout> --ref <published-commit>
+```
+
+The export replaces the entire References directory and records the source commit, the canonical one-pager data hash, and SHA-256 of each exported file in `course.json`. `--check` without a source checkout detects local drift offline; it does not certify that production serves that revision. Verify the live course before merging an export. Make future lesson edits in the course source and re-export.
