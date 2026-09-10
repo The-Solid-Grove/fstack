@@ -1,5 +1,7 @@
 # Coursiv (Income / AI-upskilling-to-earn) — Live Funnel Walkthrough
 
+> Walked: unknown; recorded in repository: 2026-06-15.
+
 ## Overview
 - **URL:** https://coursiv.io/en → funnel at `coursiv.io/dynamic/...` (every step is a named `block` in the URL, e.g. `question-page-7`, `magic-page`, `selling-page`).
 - **Entry promise:** "Upgrade your life with practical AI skills — Learn the tools. Build the skills. Get the certificate - in 28 days." Two entry routes on the homepage: "Get your AI certificate" and "Join the 28-Day Challenge" — both funnel into the same quiz.

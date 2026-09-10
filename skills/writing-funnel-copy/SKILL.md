@@ -44,10 +44,23 @@ its legacy `type`/`kind`, direct answer writes, routing, shell/controller code,
 helpers, or analytics behavior. When implementation is requested, use
 `edit-funnel` and the project's managed docs; a teardown cannot override them.
 
+## Task Scope
+
+For a new or substantially redesigned funnel, use the full context gathering,
+pre-work, and screen-by-screen workflow below.
+
+For an existing screen edit or scoped review, inspect the available product and
+screen context, load the references relevant to the change, and return the
+requested revision or findings. Ask only for missing information that affects
+that change. Full-funnel pre-work and the complete deliverable in workflow
+steps 9–12 apply to new or substantially redesigned funnels. The contract gate,
+source-backed claims, and applicable pricing disclosures still apply to scoped
+work.
+
 ## Required Reference
 
-After gathering product context and before writing any funnel copy, read and
-follow `references/funnel-psychology-framework.md`. Treat that reference as the
+For a new or substantially redesigned funnel, after gathering product context
+and before writing copy, read and follow `references/funnel-psychology-framework.md`. Treat that reference as the
 source of truth for:
 
 - Mental fuel and expectation match
@@ -62,8 +75,8 @@ upsell offer, or cancellation offer, also read and follow
 extension that refines the framework's paywall architecture requirements.
 
 When designing or optimizing quiz flow, onboarding questions, interstitials,
-answer feedback, progress screens, pre-paywall warmups, payment shortcuts, or
-down-sell recovery, also read and follow
+answer feedback, progress screens, pre-paywall warmups, payment shortcuts,
+down-sell recovery, or post-paywall email recovery, also read and follow
 `references/funnel-conversion-best-practices.md`. Treat it as a catalog of
 conversion-focused patterns to apply where they match the product and claims.
 
@@ -100,8 +113,9 @@ be loaded rather than drafting from memory.
 
 ## Gather Context First
 
-Do not write the funnel until the core context is known. If the user did not
-provide it, ask for the missing inputs and wait:
+For the full-funnel workflow, establish the core context before writing.
+Use provided or locally available information first; ask for any remaining
+required inputs and wait:
 
 1. Product name and what it does (one paragraph)
 2. Target audience: who, where, device, and current situation
@@ -125,7 +139,8 @@ local funnel docs and current copy before asking questions that the files answer
 3. Read `references/funnel-research.md` and
    `references/funnel-research-stage.md` when the task includes research,
    product sense, competitor analysis, positioning, or pre-plan strategy.
-4. Read `references/funnel-psychology-framework.md`.
+4. For full-funnel work, read `references/funnel-psychology-framework.md`.
+   For scoped work, read only the sections relevant to the requested change.
 5. Read `references/funnel-paywall-best-practices.md` when the output includes
    a paywall, checkout, pricing, trial, or subscription offer.
 6. Read `references/funnel-conversion-best-practices.md` when the output

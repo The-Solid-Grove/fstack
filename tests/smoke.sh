@@ -42,7 +42,7 @@ validate_skill_dir() {
   local skill="$1"
   assert_no_template_markers "$skill"
 
-  local validator="/Users/andrew/.codex/skills/.system/skill-creator/scripts/quick_validate.py"
+  local validator="${FSTACK_SKILL_VALIDATOR:-$HOME/.codex/skills/.system/skill-creator/scripts/quick_validate.py}"
   if [ -f "$validator" ] && command -v python3 >/dev/null 2>&1 && python3 -c 'import yaml' >/dev/null 2>&1; then
     python3 "$validator" "$skill"
   fi

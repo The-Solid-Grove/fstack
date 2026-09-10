@@ -1,5 +1,7 @@
 # Fastic (Nutrition / Intermittent Fasting) — Live Funnel Walkthrough
 
+> Walked: unknown; recorded in repository: 2026-06-15.
+
 ## Overview
 - **URL:** https://web.fastic.com → quiz at /en/survey/* → paywall at /en/survey/your_program
 - **Entry promise:** "Get a new you in 12 weeks / See how fast you can hit your weight loss goals with Fastic." (Shown on a deliberately slow pre-quiz "Loading the quiz" screen, 0→100%, with a woman-in-loose-jeans illustration.)

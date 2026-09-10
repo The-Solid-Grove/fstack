@@ -1,5 +1,7 @@
 # Hint (Astrology) — Live Funnel Walkthrough
 
+> Walked: unknown; recorded in repository: 2026-06-15.
+
 ## Overview
 - **URL:** https://try.hint.app → redirects to **https://hint.app/palmistry** (the palmistry-led variant)
 - **Vertical:** Astrology + **palmistry** hybrid (palm-scan reading enriched with astrology), web-to-app subscription

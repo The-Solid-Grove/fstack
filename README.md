@@ -1,4 +1,4 @@
-![An illustrated journey from a web ad through a quiz and paywall to a growing mobile app](assets/web-to-app-growth.png)
+![Skills for Web-to-App Growth — fstack, with a portrait of its creator](assets/web-to-app-growth.png)
 
 # fstack — Skills for Web-to-App Growth
 
@@ -125,7 +125,7 @@ You can enter at any point. An existing funnel may only need a copy review. A ne
 - **Project contract.** The synced project's `AGENTS.md` and `docs/funnelsgrove/START-HERE.md` define implementation behavior. Research teardowns supply ideas; the managed docs govern metadata, answers, routing, and analytics. Run `fgrove validate` before preview, sync, or publish.
 - **Screen fit.** Run a content-fit audit in local preview at small `375x667`, medium `393x852`, large `402x874`, and desktop-small `1280x800`.
 - **Complete flow.** Cover every step, branch, and active A/B experiment, including paywall discounts, checkout, wallet buttons, registration, required links, and cancellation when a test subscription is available.
-- **Publishing.** Ask whether to publish. Verify the production candidate has a matching preview build, complete preview QA before production publish, and run production QA after an explicitly requested production publish.
+- **Publishing.** Ask whether to publish when the target and environment are not already authorized. Verify the production candidate has a matching preview build, complete preview QA before production publish, and run production QA after an explicitly requested production publish.
 - **Image performance.** Keep AVIF/WebP generation enabled and verify the image-variant stage. Use manifest-driven next-step image preloading.
 - **Readable URLs.** Use meaningful route slugs for public screens, rather than `/step-1` paths.
 

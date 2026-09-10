@@ -1,5 +1,7 @@
 # Blesse / Perfect Bible (Religion / Christian Bible study) — Live Funnel Walkthrough
 
+> Walked: unknown; recorded in repository: 2026-06-15.
+
 ## Overview
 - **URL:** https://blesse.co → quiz funnel at `/perfect-bible/...`; checkout at `/perfect-bible/order/<id>/bag`.
 - **Entry promise:** "The Easiest Way to Study Bible / Customize Your Bible Study Experience." (Tab/brand framing: "inner calmness, meditation and personal prayer.") Product brand on the funnel: **"Perfect Bible."**

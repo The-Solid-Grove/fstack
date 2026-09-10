@@ -1,5 +1,7 @@
 # Addmile Funnel — Research Notes
 
+> Source: `funnels/rag-catalog/addmile` — copy and structure read from `src/steps/step-01.tsx` … `step-19.tsx`.
+
 ## 1. Overview
 
 **Vertical:** Self-help / wellbeing / life-coaching subscription app ("Wellbeing Self-Coaching Program"). Adjacent to the Noom/mental-fitness category, but framed around *life direction, motivation, and emotional state* rather than weight or fitness. Brand: **AddMile**, operated by **GTHW App Limited** (Limassol, Cyprus) — a classic EU-incorporated quiz-to-sub publisher.

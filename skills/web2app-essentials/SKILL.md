@@ -28,7 +28,13 @@ docs.
 3. Always carry the corpus caveats: benchmarks vary widely between products;
    judge changes by CAC and ROAS (CR × LTV), not proxy metrics; uplift figures
    are course-observed, not guarantees.
-4. If the corpus does not cover the question, say so rather than
+4. **Update blocks override course text.** Blockquotes starting with
+   `**Post-course update (verified <Month> <Year>): ...**` record what changed
+   after the 2024 course. Where one contradicts the surrounding text (store
+   commissions, Visa monitoring programs, FTC rules, platform features),
+   answer from the update block and mention its verified date; use the course
+   text for the underlying mechanics and playbooks.
+5. If the corpus does not cover the question, say so rather than
    extrapolating; the references note where source material was lost
    (slide-image tables, garbled transcripts).
 
@@ -61,13 +67,11 @@ how the paywall and payments monetize, how it is measured, how a team iterates
 on it, and what keeps it legal. Summarize each module from its reference files
 and go deeper where the learner asks.
 
-## Quick benchmark card
+## Benchmark lookup
 
-Keep answers anchored to these headline numbers (details and caveats in the
-module files):
-
-- Drop-off: 100% land → 35–60% mid-onboarding → 10–20% paywall → 8–15%
-  checkout → 0.5–5% purchase.
-- Paywall-to-purchase: 10–15%. Post-purchase app install: 80–90%.
-- Intro offers: 50–70% off first cycle. Upsell take rate: 20–30%.
-- Apple Pay: 60–80% of payments. Email sequences: up to 30% of revenue.
+Read numbers from the relevant module, including its dated updates and sample
+caveats: drop-off and economics in module 1.1; offers and upsells in 4.1;
+payment mix in 4.2; acquisition in 2.1; email recovery in 3.1. The routing table above
+provides the exact files. Keep the population and measured event attached to
+each number. For conflicting updates, compare date and scope; a newer native
+app study does not automatically replace a web-funnel benchmark.

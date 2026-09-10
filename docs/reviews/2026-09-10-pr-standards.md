@@ -1,5 +1,8 @@
 # Standards review — open PRs #14–29
 
+> Historical review snapshot. See the [integration follow-up](2026-09-10-integration.md) for the subsequent disposition and fixes.
+
+
 All pinned base/head refs from the GitHub PR snapshot captured for this review resolve and all three-dot diffs are nonempty. Pinned refs and commit lists are recorded in the [Spec report](2026-09-10-pr-spec.md); diffs were captured with `git diff BASE...HEAD` and logs with `git log BASE..HEAD --oneline`. Read every changed hunk and all new tests. No local AGENTS/CONTRIBUTING standards; applied supplied global AGENTS and Fowler smell baseline. No hard documented coding-standard breach found. Defects below are implementation findings; smell/value assessments are judgments, not violations.
 
 Validation: extracted each pinned head with `git archive` into a separate temporary tree and ran all its `tests/*.sh`. All newly introduced suites and all existing suites pass except the known baseline `update-blocks.sh` failure on #15–29; #14 fixes that failure. Initial smoke runs through macOS `/tmp` alias hit the existing canonical-path comparison bug; rerunning all 16 through `/private/tmp` passed. Raw test logs were retained in the temporary review workspace `/tmp/fstack-pr-review/`. This is per-head validation, not a combined-merge guarantee. External factual/legal claims were not verified on this axis.

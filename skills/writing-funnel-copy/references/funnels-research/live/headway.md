@@ -1,5 +1,7 @@
 # Headway (Self-improvement) — Live Funnel Walkthrough
 
+> Walked: unknown; recorded in repository: 2026-06-15.
+
 > NOTE: Funnel was only partially walkable. The quiz route (`/self-growth/quiz`)
 > consistently returned a hard error screen ("This quiz is tougher than we
 > thought / We've run into a little problem here. Please try again.") on every

@@ -270,6 +270,45 @@ price.
 
 **Impact pattern:** ARPU +15%.
 
+## Post-Paywall Recovery Patterns
+
+### 14. Retargeting Emails From Quiz Data
+
+**Use when:** The funnel captures email before the paywall and users leave
+without buying.
+
+**Do this:**
+
+- Segment sends by stated quiz goal, drop-off point (mid-quiz vs.
+  post-paywall), acquisition source (UTM), and behavior (opens, paywall
+  clicks).
+- Trigger from funnel events, not a fixed calendar: send a goal-focused
+  reminder without a discount 1-2 hours after email capture with no purchase;
+  add social proof at 24 hours when the email was opened but the paywall was
+  not clicked; address friction directly when the user revisits the paywall.
+- Escalate to a paid trial or discount offer only after about three
+  non-discount emails (around day 5-7), send a final message around day 10,
+  then suppress the address.
+- Mirror the user's quiz answers in subject lines and body copy; a generic
+  blast wastes the segmentation data the funnel already collected.
+
+**Why it works:** A quiz email arrives attached to a detailed preference
+record, so recovery messages can reference the user's stated goal and exact
+drop-off point instead of guessing.
+
+**Impact pattern:** Vendor-reported recovery from email and paid retargeting
+is typically 5-10% of funnel revenue, up to 20% for leaders. This is not an
+email-only causal uplift estimate.
+
+**Evidence:** FunnelFox's [email recovery guidance](https://blog.funnelfox.com/retargeting-emails-in-web2app/)
+describes the sequence. The [original 311-funnel analysis](https://blog.funnelfox.com/web-funnels-insights-and-trends/)
+attributed the revenue range to email and paid retargeting together. Source
+scope checked September 2026; treat the estimate as a vendor claim.
+
+**Compliance note:** Honor unsubscribes immediately, keep every discount and
+trial claim real, and stop the sequence after the final send instead of
+mailing indefinitely.
+
 ## Case Study: Quiz Funnel from $50k/mo to $200k/mo
 
 Use this as a reference pattern for product-aware traffic coming from long-form
@@ -404,6 +443,7 @@ immediately and stay consistent long enough to see value.
 | 11 | Future-state visualization | Paywall hero | Subscription CR | +10-15% |
 | 12 | Timer + discount sticky banner | Paywall top | Subscription CR | +10% |
 | 13 | Checkout pop-up down-sell | Checkout exit | ARPU | +15% |
+| 14 | Quiz-data retargeting emails | Post-paywall email | Funnel revenue | Email-only impact unisolated; see evidence |
 
 ## Key Principles
 
@@ -411,8 +451,8 @@ immediately and stay consistent long enough to see value.
   adaptive copy, and commitment screens increase investment before price.
 - **Remove payment friction.** Wallet payments, pre-applied discounts, and
   direct checkout CTAs reduce the gap between intent and purchase.
-- **Use recovery layers.** Checkout-close offers can recover users who reached
-  the paywall but hesitated.
+- **Use recovery layers.** Checkout-close offers and quiz-data retargeting
+  emails can recover users who reached the paywall but hesitated.
 - **Personalization beats persuasion.** Adaptive feedback, named goals, target
   dates, and personalized discounts outperform generic persuasion.
 - **Keep claims honest.** Only use authority, expert, result, discount, timer,
