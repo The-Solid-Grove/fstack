@@ -78,19 +78,29 @@ def export_snapshot(skill, source, ref):
             target = staged / name
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(data)
-        # This directory is entirely generated. Skills and metadata live alongside it.
+        staged_manifest = Path(temp) / 'course.json'
+        staged_manifest.write_text(json.dumps(manifest, indent=2) + '\n')
+        # Stage both parts before replacing either; retain both originals for rollback.
         target = skill / 'references'
+        manifest_path = skill / 'course.json'
         backup = Path(temp) / 'previous'
-        if target.exists():
+        previous_manifest = Path(temp) / 'previous.json'
+        had_references = target.exists()
+        had_manifest = manifest_path.exists()
+        if had_references:
             target.rename(backup)
         try:
+            if had_manifest:
+                manifest_path.rename(previous_manifest)
             staged.rename(target)
-            (skill / 'course.json').write_text(json.dumps(manifest, indent=2) + '\n')
+            staged_manifest.rename(manifest_path)
         except OSError:
             if target.exists():
                 shutil.rmtree(target)
             if backup.exists():
                 backup.rename(target)
+            if previous_manifest.exists():
+                previous_manifest.replace(manifest_path)
             raise
     check_snapshot(skill, source, ref)
 

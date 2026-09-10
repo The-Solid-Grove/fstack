@@ -70,9 +70,7 @@ Verify the paywall and checkout experience end to end:
   report missing configuration as a named blocker, not a pass.
 - Complete a test payment, or verify the payment path with the target-approved
   equivalent when real payment is not appropriate.
-- When the funnel supports a checkout-close offer, close checkout without paying and confirm the special-offer dialog appears,
-  accepting it applies the larger second-stage discount to the plan cards, and
-  the reopened checkout carries the upgraded coupon and prices.
+- When the funnel supports a checkout-close offer, verify the configured recovery action, acceptance, and decline path. Confirm the resulting plan, coupon, first charge, and renewal match the reopened checkout. Check a larger second-stage discount only when the product specifies that mechanic.
 - Confirm successful payment returns to the expected success, onboarding, or
   registration state and grants the purchased entitlement to the correct test account. Verify app/web access and recovery links where supported.
 - Verify declines, interruption, retry, and duplicate submission do not show false success or create duplicate charges, using supported test fixtures.

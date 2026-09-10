@@ -2,6 +2,8 @@
 import json
 from pathlib import Path
 import subprocess
+import resource
+import signal
 import tempfile
 import unittest
 
@@ -64,6 +66,19 @@ class CourseExportTest(unittest.TestCase):
         self.export()
         before = (self.dest / 'course.json').read_bytes()
         self.run_cli('--source', str(self.source), '--ref', 'missing-ref', ok=False)
+        self.assertEqual((self.dest / 'course.json').read_bytes(), before)
+        self.run_cli('--check')
+
+    def test_manifest_write_failure_preserves_previous_snapshot(self):
+        self.export()
+        before = (self.dest / 'course.json').read_bytes()
+        def constrain_writes():
+            signal.signal(signal.SIGXFSZ, signal.SIG_IGN)
+            resource.setrlimit(resource.RLIMIT_FSIZE, (256, 256))
+        result = subprocess.run(['python3', str(SCRIPT), '--skill-dir', str(self.dest),
+                                 '--source', str(self.source), '--ref', self.sha],
+                                capture_output=True, preexec_fn=constrain_writes)
+        self.assertNotEqual(result.returncode, 0)
         self.assertEqual((self.dest / 'course.json').read_bytes(), before)
         self.run_cli('--check')
 
