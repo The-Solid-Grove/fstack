@@ -50,38 +50,27 @@ validate_skill_dir() {
 
 check_readme() {
   assert_file "$ROOT/README.md"
+  assert_file "$ROOT/docs/getting-started.md"
+  assert_contains "$ROOT/README.md" 'docs/getting-started\.md'
   assert_file "$ROOT/VERSION"
   assert_file "$ROOT/docs/funnel-qa-checklist.md"
-  assert_contains "$ROOT/README.md" '^# fstack'
+  assert_contains "$ROOT/README.md" '^# Skills for Web-to-Web Growth$'
   assert_contains "$ROOT/VERSION" '^[0-9]+\.[0-9]+\.[0-9]+$'
   local version
   version="$(head -n 1 "$ROOT/VERSION")"
-  assert_contains "$ROOT/README.md" "Current version: \`${version//./\\.}\`"
-  assert_contains "$ROOT/README.md" 'Current version'
+  assert_contains "$ROOT/docs/getting-started.md" "Current version: \`${version//./\\.}\`"
+  assert_contains "$ROOT/docs/getting-started.md" 'Current version'
   assert_contains "$ROOT/README.md" 'Codex'
   assert_contains "$ROOT/README.md" 'Claude Code'
   assert_contains "$ROOT/README.md" 'Install'
-  assert_contains "$ROOT/README.md" 'Update'
-  assert_contains "$ROOT/README.md" 'Uninstall'
+  assert_contains "$ROOT/docs/getting-started.md" 'Update'
+  assert_contains "$ROOT/docs/getting-started.md" 'Uninstall'
   assert_contains "$ROOT/README.md" 'create-funnel'
   assert_contains "$ROOT/README.md" 'edit-funnel'
   assert_contains "$ROOT/README.md" 'writing-funnel-copy'
   assert_contains "$ROOT/README.md" 'preview-funnel'
   assert_contains "$ROOT/README.md" 'web2app-essentials'
   assert_contains "$ROOT/README.md" 'local preview'
-  assert_contains "$ROOT/README.md" 'Ask whether to publish'
-  assert_contains "$ROOT/README.md" 'content-fit audit'
-  assert_contains "$ROOT/README.md" 'small.*375.?x.?667'
-  assert_contains "$ROOT/README.md" 'medium.*393.?x.?852'
-  assert_contains "$ROOT/README.md" 'large.*402.?x.?874'
-  assert_contains "$ROOT/README.md" 'desktop-small.*1280.?x.?800'
-  assert_contains "$ROOT/README.md" 'preview QA'
-  assert_contains "$ROOT/README.md" 'production QA'
-  assert_contains "$ROOT/README.md" 'Image performance'
-  assert_contains "$ROOT/README.md" 'AVIF/WebP'
-  assert_contains "$ROOT/README.md" 'manifest-driven next-step image preloading'
-  assert_contains "$ROOT/README.md" 'meaningful route slugs'
-  assert_contains "$ROOT/README.md" '/step-1'
   assert_contains "$ROOT/README.md" 'docs/funnel-qa-checklist\.md'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'preview build'
   assert_contains "$ROOT/docs/funnel-qa-checklist.md" 'every step'
