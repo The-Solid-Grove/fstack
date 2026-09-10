@@ -1,210 +1,196 @@
-# fstack
+![An illustrated journey from a web ad through a quiz and paywall to a growing mobile app](assets/web-to-app-growth.png)
 
-A small skill pack for building and editing web funnels with AI agents.
+# fstack — Skills for Web-to-App Growth
 
-- `create-funnel` — scaffold a new funnel from the FunnelsGrove funnel template (copy, reskin, verify, optional hosted wiring).
-- `edit-funnel` — local editing loop for FunnelsGrove hosted funnels (sync, preview, QA, publish).
-- `writing-funnel-copy` — quiz-to-paywall copy and conversion strategy.
-- `preview-funnel` — temporary local click-through mockups for reviewing funnel copy, styled with the bundled "candlelit stationery" stylesheet.
-- `web2app-essentials` — Q&A knowledge base for web2app benchmarks, acquisition, monetization, analytics, and compliance.
+Agent skills for the work between an ad click and an app subscriber.
 
-Current version: `0.5.8`
+Building a funnel means making a lot of connected decisions. What did the ad promise? What should the quiz ask? When has the user seen enough value to pay? And does the whole thing work on their phone?
 
-## Requirements
+**fstack gives your agent a workflow for each part:** research the market, write the copy, click through a prototype, build the funnel, and improve it. Five skills, with supporting research and checklists you can read and adapt. Use the one you need, or work through them together.
 
-- Git, Bash
-- Node.js 18+ and npm (for the FunnelsGrove CLI)
-- Codex and/or Claude Code
-- FunnelsGrove CLI for hosted funnel work:
+Built for growth teams, marketers, and builders using **Codex or Claude Code**. Research and copy can be used independently; building and hosted editing use **FunnelsGrove**.
 
-  ```bash
-  npm install -g @funnelsgrove/cli
-  fgrove login
-  ```
+[Install](#install) · [Explore the skills](#the-skills) · [See the workflow](#how-the-skills-fit-together) · [Contribute](#develop)
 
 ## Install
 
+Clone the pack and link the skills to your agent:
+
 ```bash
-git clone git@github.com:The-Solid-Grove/fstack.git ~/.fstack
+git clone https://github.com/The-Solid-Grove/fstack.git ~/.fstack
 cd ~/.fstack
-./setup --host auto
+./setup --host auto --skip-fgrove-cli
 ```
 
-Single host: `./setup --host codex` or `./setup --host claude`.
+Choose a single agent with `--host codex` or `--host claude`. Auto detects installed agent commands and falls back to both when neither is found.
 
-| Host | Skill directory |
-| --- | --- |
-| Codex | `~/.codex/skills/<skill-name>` |
-| Claude Code | `~/.claude/skills/<skill-name>` |
+The installer creates symlinks in `~/.codex/skills/` and/or `~/.claude/skills/`. Keep the checkout: those links point to its files. Re-running setup refreshes the links.
 
-The installer creates idempotent symlinks back to this checkout. By default it
-also checks the installed `fgrove` CLI against the latest `@funnelsgrove/cli`
-on npm and updates it when newer. Skip that check with `--skip-fgrove-cli`.
+For research and copy, you need Git, Bash, and your agent. For clickable previews, the bundled workflow also uses Python 3 and browser access.
+
+<details>
+<summary><strong>Building or editing with FunnelsGrove</strong></summary>
+
+Hosted work also needs Node.js 18+, npm, and access to FunnelsGrove:
+
+```bash
+npm install -g @funnelsgrove/cli
+fgrove login
+```
+
+Run `./setup --host auto` without `--skip-fgrove-cli` to check and update the global CLI against npm as part of setup.
+
+`create-funnel` needs access to a FunnelsGrove monorepo checkout containing `apps/funnel-template`. The published CLI does not include that template. The skill helps locate the checkout before scaffolding.
+
+</details>
+
+Then give your agent a task:
+
+```text
+Use writing-funnel-copy to plan a quiz-to-paywall funnel for my app.
+Start by asking about the product, audience, ad promise, and screen count.
+```
+
+## The skills
+
+| Skill | Reach for it when… | What you get |
+| --- | --- | --- |
+| [web2app-essentials](skills/web2app-essentials/SKILL.md) | You need to understand the economics or choose what to investigate. | Answers grounded in the bundled research, with benchmarks, sources, and caveats. |
+| [writing-funnel-copy](skills/writing-funnel-copy/SKILL.md) | You need to turn a product and an ad promise into a convincing flow. | Funnel strategy, screen-by-screen copy, paywall structure, and experiment ideas. |
+| [preview-funnel](skills/preview-funnel/SKILL.md) | You want to feel the flow before building it. | A temporary, clickable local mockup for reviewing copy and pacing. |
+| [create-funnel](skills/create-funnel/SKILL.md) | You are starting a new FunnelsGrove funnel. | A branded project scaffolded from the funnel template and checked locally. |
+| [edit-funnel](skills/edit-funnel/SKILL.md) | You need to change an existing hosted funnel. | A local edit, preview, QA, and publishing workflow. |
+
+### Understand the funnel before changing it
+
+**[web2app-essentials](skills/web2app-essentials/SKILL.md)** covers acquisition, creatives, onboarding, experiments, pricing, payments, analytics, growth process, and compliance. It routes questions to the relevant research instead of loading the whole library. Ask a specific question, or use it to learn web2app module by module.
+
+```text
+Use web2app-essentials to explain how to diagnose drop-off between
+onboarding and purchase. Separate benchmarks from assumptions and
+show which events we would need to measure.
+```
+
+### Give every screen a job
+
+**[writing-funnel-copy](skills/writing-funnel-copy/SKILL.md)** starts with your product, audience, entry promise, and screen count. It works through the story, questions, proof, and offer before returning a screen-by-screen spec. The supporting library includes a psychology framework, paywall guidance, and funnel teardowns.
+
+```text
+Use writing-funnel-copy for a language-learning app aimed at busy adults.
+The ad promises practice for real conversations. Ask for the missing
+product context, then draft the flow, paywall, and A/B test ideas.
+```
+
+### Read the copy by clicking through it
+
+**[preview-funnel](skills/preview-funnel/SKILL.md)** turns finished copy into a small local HTML/CSS/JS mockup. A warm paper-and-copper design keeps the screens pleasant to review. Tap through choices, check the pacing, and see whether the headline and sticky CTA fit on a phone.
+
+```text
+Use preview-funnel to turn this screen-by-screen copy into a clickable
+local mockup. Check every screen and leave it open for copy review.
+```
+
+The mockup is temporary. It is a review artifact; building the product is a separate step.
+
+### Start with a working funnel template
+
+**[create-funnel](skills/create-funnel/SKILL.md)** scaffolds from the FunnelsGrove template, applies your branding, installs dependencies, and checks the flow locally. The template includes quiz screens, email capture, paywall variants, and subscription management.
+
+```text
+Use create-funnel to start a funnel for my language-learning app.
+Use the approved copy and brand assets, then verify the full local flow.
+```
+
+### Improve the funnel you already have
+
+**[edit-funnel](skills/edit-funnel/SKILL.md)** syncs the existing funnel, reads its project contract, and works through changes with local preview and QA. It accounts for local changes and GitHub sync before refreshing the draft, then checks preview coverage before production publishing.
+
+```text
+Use edit-funnel for <workspace>/<project>/<funnel>. Update the onboarding
+with this approved copy, check every branch in local preview, and report
+what is ready to publish.
+```
+
+## How the skills fit together
+
+**Research → Write → Preview → Build → Iterate**
+
+Start with `web2app-essentials` to frame a question. Use `writing-funnel-copy` to turn the product context into screens, then `preview-funnel` to review them. Build with `create-funnel`, or use `edit-funnel` when the funnel already exists.
+
+You can enter at any point. An existing funnel may only need a copy review. A new teammate may only need the research library.
+
+<details>
+<summary><strong>What the build and edit workflows check</strong></summary>
+
+- **Project contract.** The synced project's `AGENTS.md` and `docs/funnelsgrove/START-HERE.md` define implementation behavior. Research teardowns supply ideas; the managed docs govern metadata, answers, routing, and analytics. Run `fgrove validate` before preview, sync, or publish.
+- **Screen fit.** Run a content-fit audit in local preview at small `375x667`, medium `393x852`, large `402x874`, and desktop-small `1280x800`.
+- **Complete flow.** Cover every step, branch, and active A/B experiment, including paywall discounts, checkout, wallet buttons, registration, required links, and cancellation when a test subscription is available.
+- **Publishing.** Ask whether to publish. Verify the production candidate has a matching preview build, complete preview QA before production publish, and run production QA after an explicitly requested production publish.
+- **Image performance.** Keep AVIF/WebP generation enabled and verify the image-variant stage. Use manifest-driven next-step image preloading.
+- **Readable URLs.** Use meaningful route slugs for public screens, rather than `/step-1` paths.
+
+See the [full funnel QA checklist](docs/funnel-qa-checklist.md) and the [edit workflow](skills/edit-funnel/SKILL.md) for the exact steps.
+
+</details>
 
 ## Update
 
 ```bash
 cd ~/.fstack
 git pull --ff-only
-./setup --host auto
+./setup --host auto --skip-fgrove-cli
 ```
 
-## Use `create-funnel`
-
-```text
-Use $create-funnel to start a new funnel for <AppName> from the funnel
-template, verify the full flow locally at small 375x667, medium 393x852,
-large 402x874, and desktop-small 1280x800, and wire the hosted funnel only
-when I ask.
-```
-
-The skill copies `apps/funnel-template` from a funnelsgrove monorepo checkout
-(never `fgrove create` from the global CLI — the npm package does not ship
-templates), reskins the name/branding, installs dependencies, runs checks, and
-walks the full flow locally including the paywall's two-stage discount. The
-template ships working quiz steps, email capture, the ClaimBee-derived paywall
-with discount-on-close, a paywall B variant for experiments, Apple Pay/Google
-Pay slots, and subscription management. When adding steps, user-facing URLs must
-be meaningful slugs rather than `/step-1` style routes; internal ids or filenames
-may stay sequential if the project already uses that convention.
-
-## Use `edit-funnel`
-
-Ask the agent to use the skill against a target funnel:
-
-```text
-Use $edit-funnel to edit <workspace>/<project>/<funnel>. Change <copy/screen>,
-run local preview, ask whether to publish, publish preview if approved, run QA,
-verify preview coverage for the production candidate, and publish production
-only after approved preview QA.
-```
-
-The skill syncs the funnel locally, reads its `AGENTS.md`/`agent.md`, makes
-edits, runs checks, opens local preview, and loops until ready. Before
-refreshing a synced directory, it checks local git state and GitHub sync state,
-checkpoints local changes, and merges any newer remote draft intentionally.
-When GitHub is connected, source changes go through normal git commit/push,
-then `fgrove github pull` syncs GitHub into the hosted draft; the agent must not
-also run `fgrove sync up` for the same diff. When GitHub is not connected, it
-downloads the current hosted draft into a temporary clean directory and uses
-that as the merge source. After creating or editing any step, it runs a
-content-fit audit in local preview at all four default breakpoints: small
-`375x667`, medium `393x852`, large `402x874`, and desktop-small `1280x800`.
-Update local project packages with the package manager already used by the
-synced tree.
-Use `npm outdated`, `pnpm outdated`, yarn, or bun as appropriate, and never
-introduce a second lockfile. Ask whether to publish before any deploy. Publish
-returns a deployment id and preview URL; poll deployment status by id when the
-CLI/API exposes it, and watch the stage metadata (`publishBuild`,
-`stageTimings`, runtime environment, and image-variant stages) before declaring
-a deploy stuck. Before production publish or post-publish production QA, verify
-whether the current production candidate already has a matching preview build.
-If it does not, publish to preview first and run the full QA checklist on that
-preview URL. Only run production QA after an explicit production publish.
-
-For new steps, keep `path` values semantic and user-readable. Sequential ids and
-`step-NN-*` filenames are fine for code ordering, but public URLs should be
-meaningful route slugs, not `/step-1`.
-
-Image performance is part of every image-touching edit. Keep the publish build's
-raster optimization and AVIF/WebP variant generation enabled, and verify the
-`imageVariants` stage when publishing. Funnel images should be declared in
-`funnelManifest.assets` and attached to steps with `assetIds`, then preloaded
-with the ClaimBee/Blessly pattern: first-viewport images use the framework's
-normal priority/preload path, while the shell warms only likely next-step images
-at low priority instead of preloading the whole funnel.
-
-Full QA is described in `docs/funnel-qa-checklist.md`. It includes every step,
-branch, and active A/B experiment; paywall and checkout paths; Apple Pay and
-Google Pay button appearance; checkout/payment behavior; complete registration;
-required links; and `/manage-subscription` cancellation when a test subscription
-is available. Production publish is opt-in — pass the target domain explicitly.
-
-## Use `writing-funnel-copy`
-
-```text
-Use $writing-funnel-copy for a <product> funnel. Ask for the required product
-context first, then return the strategy and screen-by-screen copy.
-```
-
-The skill asks for product, audience, entry promise, and screen count, then
-returns pre-work, transformation arc, screen specs, paywall architecture, and
-A/B ideas. Reference material lives under
-`skills/writing-funnel-copy/references/`. Once copy is drafted, it should offer
-to use `preview-funnel` when a temporary local visualization would make review
-easier.
-
-## Use `preview-funnel`
-
-```text
-Use $preview-funnel to turn this finished funnel copy into a temporary local
-click-through mockup, keep the styling simple, run a local server, and verify
-the sticky CTA at small 375x667, medium 393x852, large 402x874, and
-desktop-small 1280x800.
-```
-
-The skill creates throwaway static HTML/CSS/JS outside tracked source, usually
-under a `mktemp` directory, so product-specific preview artifacts do not stay in
-the repo. It uses simple building blocks: progress header, headline, support
-copy, choice cards, notes/proof rows, and sticky bottom buttons. It reports the
-local URL, how to restart the server, and whether the temporary files were
-removed or left for review.
-
-## Use `web2app-essentials`
-
-```text
-Use $web2app-essentials: what conversion should we expect from paywall to
-purchase, and which onboarding mechanics have measured uplift?
-```
-
-The skill is a Q&A knowledge base for web2app and quiz-to-paywall funnels —
-benchmarks, paid acquisition, onboarding mechanics, monetization, payments,
-analytics, growth process, and compliance. It routes each question to the
-matching module under `skills/web2app-essentials/references/` and answers with
-the corpus's concrete numbers and caveats. Ask it to "teach web2app" for a
-module-by-module learning path. It is reference-only: implementation work
-still goes through `create-funnel`, `edit-funnel`, and `writing-funnel-copy`.
+Because the skills are linked, pulling updates changes the installed files. Commit your own adaptations before updating. Omit `--skip-fgrove-cli` when you also want setup to check and update the CLI.
 
 ## Team setup
 
-Use a shared global checkout. Add this to your project `AGENTS.md` or
-`CLAUDE.md`:
+Each teammate installs the pack. Add a short pointer to your project's `AGENTS.md` or `CLAUDE.md`:
 
 ```markdown
-Use fstack for FunnelsGrove funnel work. Use `create-funnel` to start a new
-funnel from the template, `edit-funnel` for hosted edits, `writing-funnel-copy`
-for quiz-to-paywall strategy, and `preview-funnel` for temporary local copy
-mockups. Always run local preview, ask before publishing, verify preview
-coverage for the production candidate, run preview QA before any production
-publish, and run production QA after production publish. For new steps, use
-meaningful public route paths even when ids or filenames are sequential. For
-image edits, keep build-time image optimization enabled and use
-manifest-driven next-step image preloading.
-```
-
-Each teammate runs:
-
-```bash
-git clone git@github.com:The-Solid-Grove/fstack.git ~/.fstack
-cd ~/.fstack && ./setup --host auto
+Use fstack for web-to-app funnel work: web2app-essentials for research,
+writing-funnel-copy for strategy and screen copy, preview-funnel for
+clickable copy review, create-funnel for new FunnelsGrove projects,
+and edit-funnel for hosted changes. Read the matching SKILL.md and
+follow the project's managed FunnelsGrove docs for implementation.
 ```
 
 ## Uninstall
 
+Remove the installed symlinks first. This preserves directories if you replaced a link with your own copy:
+
 ```bash
-rm -f ~/.codex/skills/create-funnel ~/.claude/skills/create-funnel
-rm -f ~/.codex/skills/edit-funnel ~/.claude/skills/edit-funnel
-rm -f ~/.codex/skills/preview-funnel ~/.claude/skills/preview-funnel
-rm -f ~/.codex/skills/writing-funnel-copy ~/.claude/skills/writing-funnel-copy
-rm -f ~/.codex/skills/web2app-essentials ~/.claude/skills/web2app-essentials
-rm -rf ~/.fstack
+for host in ~/.codex/skills ~/.claude/skills; do
+  for skill in create-funnel edit-funnel preview-funnel writing-funnel-copy web2app-essentials; do
+    link="$host/$skill"
+    if [ -L "$link" ] && [ "$(readlink "$link")" = "$HOME/.fstack/skills/$skill" ]; then
+      rm "$link"
+    fi
+  done
+done
 ```
+
+If you used a different checkout path, substitute it in the target check. You can then remove the checkout once you have saved any changes you want to keep.
 
 ## Develop
 
+Each skill has a `skills/<name>/SKILL.md` entry point. Supporting research, examples, and styles live beside it in `references/`; Codex interface metadata lives in `agents/openai.yaml`.
+
+Keep entry points focused on when to act, what to read, and what completion means. Put detailed material in linked references so it is loaded when the task needs it.
+
+Run the smoke checks or every available suite:
+
 ```bash
 bash tests/smoke.sh
+
+# All suites, including research and reference audits
+for suite in tests/*.sh; do
+  bash "$suite" || exit "$?"
+done
 ```
 
-Smoke checks validate the README, installer syntax, skill frontmatter, and
-temporary Codex/Claude Code installs.
+Current version: `0.5.8`
+
+---
+
+Made by [The Solid Grove](https://github.com/The-Solid-Grove). README organization inspired by [Matt Pocock's skills](https://github.com/mattpocock/skills): focused practices you can understand, adapt, and combine.
