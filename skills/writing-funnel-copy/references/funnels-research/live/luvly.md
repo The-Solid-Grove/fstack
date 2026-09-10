@@ -1,5 +1,7 @@
 # Luvly (Beauty / Face Yoga) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://quiz.luvly.care (landed on cohort `luvly_intro_fast`, route `/ageAsIntro`)
 - **Entry promise:** "GET YOUR 20s FACE SHAPE BACK" — anti-aging / facial rejuvenation without cosmetic procedures.

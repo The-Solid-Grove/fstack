@@ -1,5 +1,7 @@
 # Astroline (Astrology) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://sub.astroline.today (lands on `/quiz-pp` — the palm-reading quiz variant)
 - **Vertical:** Astrology / natal-chart personalization, with a relationship/"best match" angle layered on top

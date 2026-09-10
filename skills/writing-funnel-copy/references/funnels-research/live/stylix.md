@@ -1,5 +1,7 @@
 # Stylix (Style / personal styling) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://sub.stylix.app (mobile-style centered web funnel; desktop renders narrow column)
 - **Entry promise:** "Look and feel your best in clothes that flatter you" + social proof "100 000+ women changed their lives with Stylix." Hero shows a woman with an overlaid "Light Summer / Best colors" palette card — signals the core deliverable is a personal color + style analysis.

@@ -1,5 +1,7 @@
 # Promova (Language learning) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://english-improve.com (funnel slug `app-bm-v3`); paywall on `english-improve.com/sierra/amethyst-sales-page-cc/...`
 - **Entry promise:** "Speak English like a native!" — speak fluently fast.

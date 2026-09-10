@@ -1,5 +1,7 @@
 # BetterMe Chair Yoga Funnel — Research Notes
 
+> Source: `funnels/rag-catalog/betterme-chair-yoga` — 24-step clone of a BetterMe Figma (node ids preserved in `bettermeSteps`).
+
 ## 1. Overview
 
 **Product:** BetterMe Chair Yoga — short, low-impact, chair-based workouts plus a "personalized wellness plan" for **women in their 40s** who want to slim down at home without a gym. (`PRODUCT_SENSE.md`, `rag.meta.json` domain tags: `chair-yoga`, `wellness`, `weight-loss`, `women-over-40`, `subscription`; quality score 0.95.)

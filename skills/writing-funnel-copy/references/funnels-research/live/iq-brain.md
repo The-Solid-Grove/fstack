@@ -1,5 +1,7 @@
 # IQ Brain (IQ Test) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://iqbrainpro.com → `/start/iq` → `/test/iq` → `/email/<sessionId>` → `/checkout/<sessionId>`.
 - **Entry promise:** "Discover Your Accurate IQ score in 3 minutes — Test your cognitive abilities and more! Compare your results with friends and family..." Homepage shows live counters ("32,149 IQ Tests Conducted This Month", "106 Average IQ Score") and a sample certificate ("Total Score: 150").

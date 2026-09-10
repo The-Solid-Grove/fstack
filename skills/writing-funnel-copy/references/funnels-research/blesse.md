@@ -1,5 +1,7 @@
 # Blesse Funnel — Research Notes
 
+> Source: `funnels/rag-catalog/blesse` — `src/steps/step-01.tsx` … `step-09.tsx` plus shared UI in `src/steps/blesse-ui.tsx`.
+
 > **Reference mode: `step-structure-only`.** This teardown is copy, visual, and interaction research—not current FunnelsGrove contract guidance. Do not copy its `type`/`kind`, answer writes, routing, shell/controller, helpers, or analytics; implementation must follow the synced project's `AGENTS.md` and `docs/funnelsgrove/START-HERE.md`.
 
 ## 1. Overview

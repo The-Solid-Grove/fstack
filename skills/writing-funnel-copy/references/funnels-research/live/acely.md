@@ -1,5 +1,7 @@
 # Acely (Edtech / SAT-AI test prep) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://acely.ai (redirects to acely.com). Marketing homepage → "Try Acely for free" launches the onboarding quiz funnel.
 - **Entry promise:** "Your personal study trainer for the SAT & ACT. / Smarter than a prep course. More personal than a tutor. A fraction of the cost." Hero social proof: "1480 — Ava increased her SAT score by 110 points in 2 months."

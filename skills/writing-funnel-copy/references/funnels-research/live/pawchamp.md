@@ -1,5 +1,7 @@
 # PawChamp (Pets / Dog Training) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://paw-champ.com → quiz at `/questionary/quiz/quizMain` → paywall at `/questionary/landing-5/...?breed=Labrador&age=Adolescent`
 - **Entry promise:** "BECOME A BETTER PET PARENT WITH Modern Personalized Dog Training." App-based, certified-trainer, positive-reinforcement dog obedience.

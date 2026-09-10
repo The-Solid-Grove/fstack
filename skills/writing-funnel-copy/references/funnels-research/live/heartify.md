@@ -1,5 +1,7 @@
 # Heartify (Health / Heart Monitoring) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URLs:** https://heartify.world → `/auth/signin` (app login gateway); marketing site at https://heartify.io.
 - **Entry promise:** "#1 heart health app" / "Heart Health Monitor — Personalized all-in-one app to monitor your wellness." Measures heart rate + HRV using the phone camera + flashlight + finger (PPG).

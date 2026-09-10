@@ -1,5 +1,7 @@
 # Keiki (Parenting / Kids Early Learning) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://get.keiki.app (quiz) → /offer/ (paywall)
 - **Entry promise:** Mascot (dragon-fruit character) "Choose your child's age / To create personal learning plan." App store positioning: "Preschool learning games & cartoons for kids."

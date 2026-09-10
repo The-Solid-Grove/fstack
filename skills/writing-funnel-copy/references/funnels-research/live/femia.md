@@ -1,5 +1,7 @@
 # Femia (Women's health / fertility & cycle tracker) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Status: SKIPPED — interactive quiz-to-paywall not web-accessible
 The live screen-by-screen quiz and in-funnel paywall could **not** be reached on the open web. `femia.io` redirects to the marketing site `femia.health`, which is an SEO/marketing + content site, not the interactive onboarding quiz. The actual quiz-to-paywall onboarding runs **in the iOS/Android app** (and on paid-ad landing pages not linked from the public site).
 

@@ -1,5 +1,7 @@
 # Ahead (Mental Health / Habits / Emotional Intelligence) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://ahead-app.com (landing) → "Try it" → funnel at test.ahead-app.com/ahead_funnel_np/* → paywall at /paywall
 - **Entry promise (landing):** "The Duolingo for your emotional intelligence / Your AI pocket therapist, built by scientists trained at Universities of Oxford, Cambridge, and Harvard." Trust stamps: Apple Design Award Finalist 2024, App of the Day (20+ countries), 5-star from 20,000+ App Store users, 4,000,000+ members, "As seen in: TechCrunch, Bustle, NYT, Forbes."

@@ -1,5 +1,7 @@
 # Geozilla (Geo / family locator utility) — Live Funnel Walkthrough
 
+> Walked: 2026-06-15 (capture date from repo history).
+
 ## Overview
 - **URL:** https://start.geozilla.com
 - **Entry promise:** "Locate Any Phone Anywhere" / "Enter the number you want to track." Hero is a surveillance-style night-traffic photo with a "REC" badge and an orange pin over a man's face — visually frames the product as covert tracking. Badge: "25+ million users have trusted us."
