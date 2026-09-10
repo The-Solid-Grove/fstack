@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/The-Solid-Grove/funnelsgrove",
-  "commit": "2974aad5a7b3a91862d8d0423dcd2faa5855edc5",
+  "commit": "f135c36e5617d84e06103a2170da926f49726ef3",
   "sourcePath": "apps/web/src/content/web2web",
   "onePagersSource": "apps/web/src/lib/web2webOnePagers.json",
   "onePagersSha256": "c5908f6e404ef6f07027a91cc65a3a89f265d8b428333845d98469ad0dc23938",
