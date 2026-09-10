@@ -6,8 +6,8 @@ walkthroughs, when they were captured:
 
 - Top-level teardowns need a `> Source:` line near the top.
 - copy/*-copy.md swipe files need a `> Source:` line near the top.
-- live/*.md walkthroughs need a `> Walked: YYYY-MM-DD` line near the top
-  with a valid calendar date, so staleness is always visible.
+- live/*.md walkthroughs need a dated `> Walked:` line, or an explicit
+  unknown capture date with a dated repository record. Import is not capture.
 - No markdown file under skills/ or docs/ may contain a machine-specific
   absolute filesystem path (/Users/..., /home/..., C:\\Users\\...).
 """
@@ -23,16 +23,12 @@ from pathlib import Path
 
 CORPUS = "skills/writing-funnel-copy/references/funnels-research"
 
-# live/nebula.md is owned by open PR #24 (FTC annotation). Backfill its
-# `> Walked:` line and remove this exclusion once that PR merges.
-LIVE_EXCLUDED = {"nebula.md"}
-
 TEARDOWN_SOURCE_WINDOW = 25
 COPY_SOURCE_WINDOW = 5
 LIVE_WALKED_WINDOW = 6
 
-SOURCE_PATTERN = re.compile(r"^> Source:")
-WALKED_PATTERN = re.compile(r"^> Walked: (\d{4})-(\d{2})-(\d{2})\b")
+SOURCE_PATTERN = re.compile(r"^> Source:\s*\S")
+WALKED_PATTERN = re.compile(r"^> Walked: (?:unknown; recorded in repository: )?(\d{4})-(\d{2})-(\d{2})\b")
 ABSOLUTE_PATH_PATTERN = re.compile(r"(?:/Users/|/home/|[A-Za-z]:\\Users)")
 
 
@@ -109,7 +105,8 @@ def audit_live_walk_date(text: str, path: str) -> list[Diagnostic]:
         _diagnostic(
             "live-walk-date-required",
             path,
-            "live walkthrough must declare `> Walked: YYYY-MM-DD` in its "
+            "live walkthrough must declare a capture date or explicit unknown "
+            "capture date with repository record date in its "
             f"first {LIVE_WALKED_WINDOW} lines",
         )
     ]
@@ -151,7 +148,7 @@ def audit_repo(root: Path) -> list[Diagnostic]:
         )
 
     for path in sorted(corpus.glob("live/*.md")):
-        if path.name == "README.md" or path.name in LIVE_EXCLUDED:
+        if path.name == "README.md":
             continue
         diagnostics.extend(
             audit_live_walk_date(path.read_text(), _relative(root, path))

@@ -1,6 +1,6 @@
 # Heartify (Health / Heart Monitoring) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URLs:** https://heartify.world → `/auth/signin` (app login gateway); marketing site at https://heartify.io.

@@ -116,29 +116,30 @@ and conspicuously:
 
 Additional rules:
 
-- Consent must be express and informed. Safest pattern: a dedicated checkbox
-  or button specifically for the auto-renewal terms — Maine (SP 650, 2026)
-  now requires consent to the auto-renewal provision separately from the
-  rest of the purchase, which only the dedicated-element pattern satisfies.
+- Consent must be express and informed. A dedicated auto-renewal control is
+  a useful design pattern. Maine permits a checkbox, electronic signature,
+  or another affirmative action agreeing to renewal before enrollment;
+  it does not make a checkbox the only lawful mechanism.
+  [Maine §1210-C(2)](https://www.legislature.maine.gov/statutes/10/title10sec1210-C.html).
 - The actually billed amount must be the most prominent pricing element in the
   layout. "Clear and conspicuous" means larger type than surrounding text,
   contrasting type or color, or set off by marks that call attention to it.
 - The price shown must be the price paid — display the total including
   mandatory fees upfront (California SB 478).
-- Free or discounted introductory pricing requires a reminder before the price
-  changes, and subscribers must receive renewal reminder notices; requirements
-  vary by jurisdiction. The 2026 floor: Maryland requires a notice before any
-  free trial or discount period longer than 14 days ends, and Connecticut
-  requires an annual renewal reminder regardless of the subscription term —
-  write the reminder email/notice copy as part of the funnel, not as an
-  afterthought.
-- Cancellation and save-offer copy is regulated too: Virginia (Jul 2026)
-  requires cancellation at least as easy as sign-up, available through every
-  channel a user could enroll through, and removed the prior good-faith
-  safe harbor. Connecticut (Jul 2026) requires telling the subscriber they
-  can cancel at any time *before* presenting any discount or retention
-  benefit — put the cancel-anytime line above the save offer in the
-  cancellation flow.
+- Plan reminder copy around the applicable jurisdiction and offer. Maryland's
+  rule covers a free gift or trial lasting more than 14 days, with a notice
+  3–21 days before expiration and statutory exceptions; it is not a blanket
+  rule for every discount. Connecticut requires an annual renewal reminder.
+  [Maryland §14-1329](https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcl&enactments=false&section=14-1329),
+  [Connecticut §42-158ff(d)](https://www.cga.ct.gov/2026/sup/chap_742d.htm).
+- Cancellation and save-offer copy is regulated too. Virginia requires
+  cancellation at least as easy as enrollment, with an exception to its
+  same-medium rule for in-person enrollment. Connecticut's requirement to
+  disclose the right to cancel before a retention offer specifically concerns
+  telephone cancellation. Clear cancellation access above a web save offer
+  remains a design recommendation, not that telephone-specific requirement.
+  [Virginia §59.1-207.46(B)](https://law.lis.virginia.gov/vacodeupdates/title59.1/section59.1-207.46/),
+  [Connecticut §42-158ff(e)(3)](https://www.cga.ct.gov/2026/sup/chap_742d.htm).
 - One-click upsells that charge the saved payment method require their own
   clear authorization; do not imply the upsell is free or already included.
 - Never fabricate testimonials, media mentions, guarantees, or results data

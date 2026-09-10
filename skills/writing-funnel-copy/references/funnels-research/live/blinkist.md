@@ -1,6 +1,6 @@
 # Blinkist (Self-improvement) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 > NOTE: blinkist.com is a marketing site; the actual funnel lives at
 > `/en/onboarding/matrix/...` (reached via the "Get started" CTA). I walked the

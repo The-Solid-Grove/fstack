@@ -55,7 +55,7 @@ workflow before authoring steps.
 - `funnel.config.json` — `name` and `description` for the new app; leave ids for hosted wiring.
 - `src/config/funnel.manifest.ts` — `meta.title` and `meta.description`.
 - `src/theme/theme.ts` — brand palette and fonts (or keep defaults until design exists).
-- Rewriting the template's per-step copy and images in `src/steps/content/*.content.ts` is a separate, later task. When adding or replacing steps, keep user-facing `path` values meaningful, such as `/fitness-goal` or `/email-capture`, not `/step-1`. Sequential or ordered step ids and filenames are okay when they match the existing tree.
+- Rewrite the template's per-step copy and images in `src/steps/content/*.content.ts` when included in the request. For scaffolding-only requests, retain template content and identify it in the handoff. When adding or replacing steps, keep user-facing `path` values meaningful, such as `/fitness-goal` or `/email-capture`, not `/step-1`. Sequential or ordered step ids and filenames are okay when they match the existing tree.
 
 ### 3. Install and check
 
@@ -81,7 +81,7 @@ build-time image reduction.
 
 The copied `.env.local` is the template's local dev config (API on `localhost:4001`); it is never synced, and `fgrove env pull` replaces it after hosted wiring. Opening checkout, the close-checkout special offer, and test payments need a reachable FunnelsGrove API with its database (local API + DB, or the published preview). Without one, the paywall shows a fetch error where checkout would start — report those three QA items as a named blocker and finish them on the preview URL.
 
-When rewriting step images later, use the ClaimBee/Blessly image loading
+When rewriting step images, use the ClaimBee/Blessly image loading
 contract: declare images in `funnelManifest.assets`, attach them to steps with
 `assetIds`, use framework priority/preload for first-viewport images, and warm
 only likely next-step image assets from the shell instead of preloading the full
@@ -102,7 +102,7 @@ fgrove publish --env preview --message 'Initial template import'
 ```
 
 QA the preview URL with the same checklist before any production talk; for a
-preview-to-production candidate, run fstack's full `docs/funnel-qa-checklist.md`. Real Apple Pay / Google Pay buttons require the domain and checkout return URLs to be configured in the Stripe dashboard — report unconfigured Stripe as a named blocker, not a failure.
+preview-to-production candidate, run the full [`docs/funnel-qa-checklist.md`](../../docs/funnel-qa-checklist.md) in the fstack checkout. Real Apple Pay / Google Pay buttons require the domain and checkout return URLs to be configured in the Stripe dashboard — report unconfigured Stripe as a named blocker, not a failure.
 
 ## Quick Reference
 

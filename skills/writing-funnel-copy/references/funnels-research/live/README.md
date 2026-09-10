@@ -24,7 +24,6 @@ without checking them first).
 | [fastic.md](fastic.md) | Fastic | Nutrition / fasting | ~60-screen quiz; deliberately slow pre-quiz loading screen |
 | [geozilla.md](geozilla.md) | Geozilla | Family locator utility | Utility funnel: personalizes on the tracked phone number, fakes the result |
 | [hint.md](hint.md) | Hint | Astrology / palmistry | Palm scan as in-funnel product demo; entertainment disclaimer |
-| [imprint.md](imprint.md) | Imprint | Self-improvement | Mandatory account-creation gate before the paywall |
 | [iq-brain.md](iq-brain.md) | IQ Brain | IQ test | Withheld test score as the paywall hook; live counters on entry |
 | [keiki-live.md](keiki-live.md) | Keiki | Kids early learning | Parent-buyer quiz personalizing on the child's name and routine |
 | [luvly.md](luvly.md) | Luvly | Beauty / face yoga | Age-band entry screen; cohort slug visible in URL |
@@ -41,6 +40,7 @@ without checking them first).
 | [femia.md](femia.md) | Femia | Skipped — quiz lives in-app, not on the open web |
 | [headway.md](headway.md) | Headway | Partial — quiz route returned a hard error screen on every attempt |
 | [heartify.md](heartify.md) | Heartify | Partial — web entry is an app login gateway; quiz is in-app |
+| [imprint.md](imprint.md) | Imprint | Partial — stopped at mandatory account creation before the paywall |
 | [lovestrive.md](lovestrive.md) | LoveStrive | Partial — quiz could not be entered from the landing page |
 | [nebula.md](nebula.md) | Nebula | Skipped — funnel unreachable from the test environment |
 | [plantin.md](plantin.md) | PlantIn | Skipped — funnel never rendered past its splash screen |

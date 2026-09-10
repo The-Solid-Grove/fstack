@@ -1,6 +1,6 @@
 # Blesse / Perfect Bible (Religion / Christian Bible study) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://blesse.co → quiz funnel at `/perfect-bible/...`; checkout at `/perfect-bible/order/<id>/bag`.

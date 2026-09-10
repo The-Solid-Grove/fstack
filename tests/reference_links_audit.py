@@ -25,6 +25,7 @@ otherwise.
 import re
 import sys
 from pathlib import Path
+from urllib.parse import unquote
 
 BACKTICK_REF = re.compile(r"`(references/[^`\s]*)`")
 MARKDOWN_LINK = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
@@ -59,22 +60,25 @@ def strip_code_fences(text: str) -> str:
 
 
 def slugify(heading: str) -> str:
-    text = re.sub(r"[`*_]", "", heading.strip().lower())
+    text = re.sub(r"[`*]", "", heading.strip().lower())
+    text = re.sub(r"(?<!\w)_+(.+?)_+(?!\w)", r"\1", text)
     text = re.sub(r"[^\w\- ]", "", text)
     return text.replace(" ", "-")
 
 
 def heading_slugs(markdown: str) -> set[str]:
     slugs: set[str] = set()
-    counts: dict[str, int] = {}
     for line in strip_code_fences(markdown).splitlines():
         match = HEADING.match(line)
         if not match:
             continue
         slug = slugify(match.group(1))
-        seen = counts.get(slug, 0)
-        counts[slug] = seen + 1
-        slugs.add(slug if seen == 0 else f"{slug}-{seen}")
+        candidate = slug
+        suffix = 0
+        while candidate in slugs:
+            suffix += 1
+            candidate = f"{slug}-{suffix}"
+        slugs.add(candidate)
     return slugs
 
 
@@ -82,7 +86,8 @@ def audit_markdown(md_file: Path) -> list[str]:
     errors = []
     base = md_file.parent
     text = md_file.read_text(encoding="utf-8")
-    for link in MARKDOWN_LINK.findall(strip_code_fences(text)):
+    prose = re.sub(r"(`+).*?\1", "", strip_code_fences(text))
+    for link in MARKDOWN_LINK.findall(prose):
         if link.startswith(EXTERNAL_PREFIXES):
             continue
         target_path, _, fragment = link.partition("#")
@@ -92,7 +97,7 @@ def audit_markdown(md_file: Path) -> list[str]:
             continue
         if fragment and target.is_file() and target.suffix == ".md":
             slugs = heading_slugs(target.read_text(encoding="utf-8"))
-            if slugify(fragment) not in slugs:
+            if unquote(fragment) not in slugs:
                 errors.append(f"{md_file}: broken anchor `{link}`")
     return errors
 

@@ -296,11 +296,14 @@ without buying.
 record, so recovery messages can reference the user's stated goal and exact
 drop-off point instead of guessing.
 
-**Impact pattern:** Recovered revenue 5-20% of funnel revenue.
+**Impact pattern:** Vendor-reported recovery from email and paid retargeting
+is typically 5-10% of funnel revenue, up to 20% for leaders. This is not an
+email-only causal uplift estimate.
 
-**Evidence:** Verified July 2026 - FunnelFox, "Retargeting emails in web2app:
-how to use quiz data and event triggers" (July 6, 2026); the 5-20% recovery
-range comes from Kirill Makarov's analysis of 311 web funnels cited there.
+**Evidence:** FunnelFox's [email recovery guidance](https://blog.funnelfox.com/retargeting-emails-in-web2app/)
+describes the sequence. The [original 311-funnel analysis](https://blog.funnelfox.com/web-funnels-insights-and-trends/)
+attributed the revenue range to email and paid retargeting together. Source
+scope checked September 2026; treat the estimate as a vendor claim.
 
 **Compliance note:** Honor unsubscribes immediately, keep every discount and
 trial claim real, and stop the sequence after the final send instead of
@@ -440,7 +443,7 @@ immediately and stay consistent long enough to see value.
 | 11 | Future-state visualization | Paywall hero | Subscription CR | +10-15% |
 | 12 | Timer + discount sticky banner | Paywall top | Subscription CR | +10% |
 | 13 | Checkout pop-up down-sell | Checkout exit | ARPU | +15% |
-| 14 | Quiz-data retargeting emails | Post-paywall email | Funnel revenue | 5-20% recovered |
+| 14 | Quiz-data retargeting emails | Post-paywall email | Funnel revenue | Email-only impact unisolated; see evidence |
 
 ## Key Principles
 

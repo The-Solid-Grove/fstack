@@ -39,12 +39,16 @@ class TagResolutionTest(unittest.TestCase):
     def test_hyphen_insensitive(self):
         self.assertTrue(tag_resolves("iqbrain", STEMS))
 
-    def test_tag_is_prefix_of_stem(self):
+    def test_betterme_alias_resolves(self):
         self.assertTrue(tag_resolves("betterme", STEMS))
 
-    def test_stem_is_prefix_of_tag(self):
+    def test_headway_live_alias_resolves(self):
         # `[headway-live]` means "the live walkthrough of headway".
         self.assertTrue(tag_resolves("headway-live", STEMS))
+
+    def test_invented_tag_suffix_is_rejected(self):
+        self.assertEqual(codes(audit_text('- "copy" [headway-typo]\n', STEMS)),
+                         {'copy-bank-unresolved-tag'})
 
     def test_unknown_tag_does_not_resolve(self):
         self.assertFalse(tag_resolves("colonbroom", STEMS))

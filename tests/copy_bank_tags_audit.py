@@ -11,13 +11,9 @@ walkthrough it came from. That provenance silently rots in two ways:
 2. A tag stops resolving — the note file it pointed at was renamed or
    removed, or the tag was a typo from the start.
 
-This audit enforces both mechanically. A tag resolves when its normalized
-form (lowercase, alphanumerics only) matches a corpus note's filename stem by
-exact or prefix relation in either direction — so `[iqbrain]` finds
-`live/iq-brain.md`, `[betterme]` finds `betterme-chair-yoga.md`, and
-`[headway-live]` finds `live/headway.md`. Index/synthesis files (`00-*`) and
-READMEs are not source notes and never satisfy a tag. Tags shorter than three
-characters must match a stem exactly.
+This audit enforces both mechanically. Tags match normalized filename stems
+exactly, with explicit aliases for the copy bank's historical short names.
+Index/synthesis files (`00-*`) and READMEs are not source notes.
 
 Exit code 0 when every list line is tagged and every tag resolves, 1 with one
 line per violation otherwise.
@@ -36,7 +32,7 @@ COPY_BANK = "copy/00-COPY-BANK-by-screen-type.md"
 TAG_SUFFIX_RE = re.compile(r"\[([a-z0-9-]+(?:\s*,\s*[a-z0-9-]+)*)\]$")
 LIST_ITEM_RE = re.compile(r"^\s*-\s+\S")
 FENCE_RE = re.compile(r"^\s*(```|~~~)")
-MIN_PREFIX_TAG_LENGTH = 3
+SOURCE_ALIASES = {"betterme": "bettermechairyoga", "headwaylive": "headway", "claimbee": "claimbeefunnel"}
 
 
 @dataclass(frozen=True)
@@ -64,16 +60,7 @@ def corpus_stems(corpus_root: Path) -> set[str]:
 
 def tag_resolves(tag: str, stems: set[str]) -> bool:
     normalized = normalize(tag)
-    if not normalized:
-        return False
-    if len(normalized) < MIN_PREFIX_TAG_LENGTH:
-        return normalized in stems
-    return any(
-        stem == normalized
-        or stem.startswith(normalized)
-        or normalized.startswith(stem)
-        for stem in stems
-    )
+    return normalized in stems or SOURCE_ALIASES.get(normalized) in stems
 
 
 def audit_text(text: str, stems: set[str]) -> list[Diagnostic]:

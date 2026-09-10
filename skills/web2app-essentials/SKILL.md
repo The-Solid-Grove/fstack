@@ -67,13 +67,11 @@ how the paywall and payments monetize, how it is measured, how a team iterates
 on it, and what keeps it legal. Summarize each module from its reference files
 and go deeper where the learner asks.
 
-## Quick benchmark card
+## Benchmark lookup
 
-Keep answers anchored to these headline numbers (details and caveats in the
-module files):
-
-- Drop-off: 100% land → 35–60% mid-onboarding → 10–20% paywall → 8–15%
-  checkout → 0.5–5% purchase.
-- Paywall-to-purchase: 10–15%. Post-purchase app install: 80–90%.
-- Intro offers: 50–70% off first cycle. Upsell take rate: 20–30%.
-- Apple Pay: 60–80% of payments. Email sequences: up to 30% of revenue.
+Read numbers from the relevant module, including its dated updates and sample
+caveats: drop-off and economics in module 1.1; offers and upsells in 4.1;
+payment mix in 4.2; acquisition in 2.1; email recovery in 3.1. The routing table above
+provides the exact files. Keep the population and measured event attached to
+each number. For conflicting updates, compare date and scope; a newer native
+app study does not automatically replace a web-funnel benchmark.

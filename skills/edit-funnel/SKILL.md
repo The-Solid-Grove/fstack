@@ -231,16 +231,17 @@ For created or edited steps, the local preview inspection must include the
 step 5 content-fit audit at all four default breakpoints before considering
 the step ready.
 
-For major edits, ask the user whether to run the full QA checklist before
-publishing. Major edits include checkout, pricing, payment, subscription,
+For major edits, run the full QA checklist before publishing. Major edits include checkout, pricing, payment, subscription,
 cancellation, identity/email capture, routing, analytics, or broad visual/flow
 changes.
 
-### 8. Ask Before Publishing
+### 8. Check Publishing Authorization
 
-Ask the user whether to publish after local preview verification. Do not sync up
-or publish only because local checks passed. If the user declines publishing,
-stop after reporting the local checks and local preview status.
+Reuse explicit authorization already given for this target and environment.
+Ask the user whether to publish after local preview verification only when that
+publication is not already authorized. Passing checks alone is not permission.
+If the user declines publishing, report the local result and stop there.
+Authorization never replaces validation or required QA.
 
 ### 9. Sync, Publish Preview, and Run QA
 
@@ -290,8 +291,9 @@ the risk.
 
 ### 11. Publish Production and Run Production QA
 
-Publish production only when the user explicitly approves production after the
-preview URL has passed QA. Use the production publish command required by the
+Publish production after the preview URL has passed QA and production is
+explicitly authorized for the target domain. Reuse authorization already given
+in this session; preview-only approval does not authorize production. Use the production publish command required by the
 generated docs or current `fgrove` CLI, for example:
 
 ```bash
@@ -306,7 +308,8 @@ user explicitly accepts the risk.
 ## QA Checklist
 
 Use the narrowest QA that covers the edit for small copy/style changes. Use the
-full checklist in `docs/funnel-qa-checklist.md` for major edits,
+full checklist in the fstack checkout at
+[`docs/funnel-qa-checklist.md`](../../docs/funnel-qa-checklist.md) for major edits,
 preview-to-production candidates, missing preview-build coverage, and every
 production URL after publish.
 
@@ -334,7 +337,9 @@ Finish only after all of these are true:
    default breakpoints from step 5.
 5. Image edits preserve build-time image optimization and manifest-driven
    next-step preloading, or any unavailable optimization/preload check is named.
-6. The user is asked whether to publish after local preview.
+6. If publishing, authorization for the target and environment is established
+   under step 8, reusing permission already given. Otherwise, report local-only
+   completion after the applicable local checks.
 7. If publishing, requested edits are synced through the correct source path:
    GitHub-connected funnels use normal `git push` plus `fgrove github pull`;
    funnels without GitHub use `fgrove sync up`.
@@ -358,6 +363,6 @@ Finish only after all of these are true:
 - Do not bypass the publish pipeline's image optimization with unoptimized
   remote image URLs for funnel-critical artwork.
 - Do not edit production-critical checkout/pricing flows directly when cloning is safer.
-- Do not publish before the user approves publishing after local preview.
+- Apply the publishing authorization rule in step 8 before hosted writes.
 - Do not call work complete based only on local tests; local preview and the
   relevant hosted QA gate are required.

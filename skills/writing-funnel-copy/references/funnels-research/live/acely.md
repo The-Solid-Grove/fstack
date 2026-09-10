@@ -1,6 +1,6 @@
 # Acely (Edtech / SAT-AI test prep) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://acely.ai (redirects to acely.com). Marketing homepage → "Try Acely for free" launches the onboarding quiz funnel.

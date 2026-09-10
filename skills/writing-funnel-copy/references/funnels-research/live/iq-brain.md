@@ -1,6 +1,6 @@
 # IQ Brain (IQ Test) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://iqbrainpro.com → `/start/iq` → `/test/iq` → `/email/<sessionId>` → `/checkout/<sessionId>`.

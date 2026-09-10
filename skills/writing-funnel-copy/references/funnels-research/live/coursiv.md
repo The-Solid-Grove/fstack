@@ -1,6 +1,6 @@
 # Coursiv (Income / AI-upskilling-to-earn) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://coursiv.io/en → funnel at `coursiv.io/dynamic/...` (every step is a named `block` in the URL, e.g. `question-page-7`, `magic-page`, `selling-page`).

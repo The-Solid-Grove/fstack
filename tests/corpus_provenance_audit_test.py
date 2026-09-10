@@ -90,6 +90,10 @@ class TeardownSourceTest(unittest.TestCase):
             audit_teardown_source(TEARDOWN_WITH_SOURCE, "example.md"), []
         )
 
+    def test_empty_source_is_rejected(self):
+        self.assertTrue(audit_teardown_source('# Note\n> Source:   \n', 'note.md'))
+        self.assertTrue(audit_copy_source('# Copy\n> Source:   \n', 'copy.md'))
+
     def test_missing_source_is_rejected(self):
         self.assertEqual(
             codes(audit_teardown_source(TEARDOWN_WITHOUT_SOURCE, "example.md")),
@@ -118,6 +122,10 @@ class CopySourceTest(unittest.TestCase):
 class LiveWalkDateTest(unittest.TestCase):
     def test_walked_line_passes(self):
         self.assertEqual(audit_live_walk_date(LIVE_WITH_WALKED, "live.md"), [])
+
+    def test_unknown_capture_date_can_declare_recorded_date(self):
+        text = '# Note\n> Walked: unknown; recorded in repository: 2026-06-15.\n'
+        self.assertEqual(audit_live_walk_date(text, 'live.md'), [])
 
     def test_missing_walked_line_is_rejected(self):
         self.assertEqual(
@@ -190,7 +198,7 @@ class AuditRepoTest(unittest.TestCase):
         (corpus / "copy" / "README.md").write_text("# Index\n")
         (corpus / "live" / "example.md").write_text(LIVE_WITH_WALKED)
         (corpus / "live" / "README.md").write_text("# Index\n")
-        (corpus / "live" / "nebula.md").write_text(LIVE_WITHOUT_WALKED)
+        (corpus / "live" / "nebula.md").write_text(LIVE_WITH_WALKED)
         return root
 
     def test_conforming_tree_passes(self):

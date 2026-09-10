@@ -1,6 +1,6 @@
 # PawChamp (Pets / Dog Training) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://paw-champ.com → quiz at `/questionary/quiz/quizMain` → paywall at `/questionary/landing-5/...?breed=Labrador&age=Adolescent`

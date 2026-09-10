@@ -1,6 +1,6 @@
 # Ahead (Mental Health / Habits / Emotional Intelligence) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://ahead-app.com (landing) → "Try it" → funnel at test.ahead-app.com/ahead_funnel_np/* → paywall at /paywall

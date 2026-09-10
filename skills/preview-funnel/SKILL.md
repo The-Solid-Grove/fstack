@@ -11,7 +11,9 @@ Build a simple, temporary click-through that makes funnel copy easy to read,
 tap through, and critique. Favor plain static HTML/CSS/JS and one reusable
 screen renderer. Structure stays low-fidelity, but the preview should look
 good by default: use the bundled warm-editorial stylesheet
-(`references/preview-style.css`) instead of inventing ad-hoc neutral styling.
+(`references/preview-style.css`). Explicit user design, branding, and asset
+requests take precedence over this default; adapt the mockup to them while
+preserving navigation, content fit, and sticky CTA checks.
 
 ## Workflow
 
@@ -28,8 +30,8 @@ good by default: use the bundled warm-editorial stylesheet
    them.
 3. Build the smallest useful static app:
    - `index.html` for the shell
-   - `styles.css` — copy `references/preview-style.css` from this skill into
-     the preview directory verbatim; do not write styles from scratch
+   - `styles.css` — start from `references/preview-style.css` unless the user
+     supplied another design; adapt styles to the requested result
    - `steps.mjs` or `steps.json` for copy data
    - `app.mjs` for navigation and choice state
 4. Render one reusable mobile screen: progress header, headline, support copy,
@@ -63,7 +65,8 @@ everything else. It is defined once in `references/preview-style.css` — copy
 it in as `styles.css` and build markup from its class names.
 `references/example.html` is a working three-screen sample (choice, info with
 a proof card, projection with a stat box) that shows the expected markup and
-renderer wiring — mirror its structure rather than inventing new markup:
+renderer wiring. Use it as the default structure; adapt markup when the
+requested design needs it:
 
 - Stage (page): `.stage-title` (italic serif) / `.stage-subtitle` (small caps;
   put the source copy path here) above the phone, `.stage-nav` for
@@ -88,14 +91,12 @@ renderer wiring — mirror its structure rather than inventing new markup:
 
 Rules:
 
-- Never introduce pure black, pure white, or default-blue anything; every
-  color on screen must come from the `:root` custom properties.
+- With the default theme, keep colors in its `:root` custom properties.
 - Headlines use the display serif; do not set body copy in it.
-- If the product has its own established brand palette and the user wants it,
-  swap only the `:root` custom properties (accent, screen, stage, text tones)
-  and keep every class and layout rule unchanged.
-- Emojis are fine as lightweight visual anchors (matching the copy spec), but
-  no external images or icon fonts.
+- For requested branding, start with the `:root` properties and change
+  typography, markup, or layout where needed to match the supplied design.
+- Use simple visual anchors by default. Include user-requested images or
+  assets when they help review the intended screens.
 
 ## Copy Data Shape
 

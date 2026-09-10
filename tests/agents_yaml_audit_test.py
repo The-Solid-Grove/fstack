@@ -70,6 +70,11 @@ class AgentsYamlAuditTest(unittest.TestCase):
             codes(audit_yaml(WRONG_SKILL_REF, "openai.yaml", "edit-funnel")),
         )
 
+    def test_prompt_rejects_a_different_skill_with_shared_prefix(self):
+        text = CONFORMING.replace('$edit-funnel ', '$edit-funnel-old ')
+        self.assertIn('openai-yaml-prompt-skill-ref',
+                      codes(audit_yaml(text, 'openai.yaml', 'edit-funnel')))
+
     def test_long_short_description_is_rejected(self):
         self.assertIn(
             "openai-yaml-short-description-length",

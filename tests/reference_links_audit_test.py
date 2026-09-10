@@ -77,6 +77,20 @@ class ReferenceLinksAuditTest(unittest.TestCase):
         self.assertIn("broken anchor", errors[0])
         self.assertIn("no-such-section", errors[0])
 
+    def test_fragment_punctuation_is_not_silently_removed(self):
+        write(self.root / 'docs/guide.md', '# Foo\n[bad](#foo!)\n')
+        self.assertEqual(len(audit(self.root)), 1)
+
+    def test_literal_underscores_and_colliding_duplicate_headings(self):
+        write(self.root / 'docs/guide.md',
+              '# foo_bar\n# repeat\n# repeat\n# repeat-1\n'
+              '[underscore](#foo_bar) [collision](#repeat-1-1)\n')
+        self.assertEqual(audit(self.root), [])
+
+    def test_link_examples_in_inline_code_are_ignored(self):
+        write(self.root / 'docs/guide.md', '`[bad](#foo!)` is an example.\n')
+        self.assertEqual(audit(self.root), [])
+
     def test_same_file_anchor_is_validated(self):
         write(self.root / "docs/guide.md",
               "# Guide\n\n## Real Section\n\nJump to [real](#real-section) "

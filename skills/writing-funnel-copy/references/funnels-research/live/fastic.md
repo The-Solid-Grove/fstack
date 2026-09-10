@@ -1,6 +1,6 @@
 # Fastic (Nutrition / Intermittent Fasting) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://web.fastic.com → quiz at /en/survey/* → paywall at /en/survey/your_program

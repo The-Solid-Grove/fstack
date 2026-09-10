@@ -85,7 +85,7 @@ def audit_yaml(text: str, path: str, skill_name: str) -> list[Diagnostic]:
 
     if "default_prompt" in interface:
         line, prompt = interface["default_prompt"]
-        if prompt.strip() and f"${skill_name}" not in prompt:
+        if prompt.strip() and not re.search(r"\$" + re.escape(skill_name) + r"(?![\w-])", prompt):
             diagnostics.append(
                 Diagnostic(
                     code="openai-yaml-prompt-skill-ref",

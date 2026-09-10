@@ -1,6 +1,6 @@
 # LoveStrive (Relationship / Dating-coaching) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://lovestrive.com

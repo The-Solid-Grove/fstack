@@ -1,6 +1,6 @@
 # Astroline (Astrology) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://sub.astroline.today (lands on `/quiz-pp` — the palm-reading quiz variant)

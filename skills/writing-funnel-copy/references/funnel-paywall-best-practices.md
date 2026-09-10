@@ -144,12 +144,13 @@ triggered when the purchase sheet is dismissed.
 
 Measured pattern (verified July 2026 - Superwall transaction-abandon case
 study, August 6, 2024: 18 apps, 438,144 new-install control users vs. 87,403
-abandoners shown the offer):
+abandoners shown the offer; [primary case study](https://superwall.com/blog/17-revenue-boost-with-transaction-abandon-paywalls-a-case-study/)):
 
 - 6.3% of abandoners converted on the exit offer, and those purchases made up
-  17% of the cohort's total revenue.
-- Exit-offer buyers refunded less than standard buyers - 3.3% vs. 6.8% -
-  suggesting informed purchases rather than accidental ones.
+  17% of the cohort's total revenue. This is contribution, not proven
+  incremental lift: the counterfactual conversions were not measured.
+- Exit-offer buyers refunded less than standard buyers - 3.3% vs. 6.8%.
+  Refund rates alone do not establish informed consent.
 - Caveats: discount sizes were not disclosed, and Apple has flagged
   transaction-abandon offers for App Review scrutiny in-app; the web
   checkout-close version carries no app-review risk.

@@ -1,6 +1,6 @@
 # Headway (Self-improvement) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 > NOTE: Funnel was only partially walkable. The quiz route (`/self-growth/quiz`)
 > consistently returned a hard error screen ("This quiz is tougher than we

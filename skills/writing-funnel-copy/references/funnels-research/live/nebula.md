@@ -1,5 +1,7 @@
 # Nebula (Astrology) — Live Funnel Walkthrough
 
+> Walked: unknown; recorded in repository: 2026-06-15.
+
 ## Overview
 - **URL attempted:** https://appnebula.co (also tried https://appnebula.co/en/ and https://appnebula.co/en/witch-power/)
 - **Vertical:** Astrology / spiritual guidance (web-to-app subscription quiz)
@@ -23,5 +25,4 @@ Nebula's operator, Obrio Ltd., is a defendant in *FTC v. GM Universeapps Ltd.*, 
 
 Two consequences for this corpus:
 
-- **The outage above now has a plausible cause.** The walkthrough attempt found appnebula.co serving gateway errors and non-hydrating stubs; that is consistent with an operator under an asset freeze winding infrastructure down, though the outage itself was recorded before the connection was known and the link is inferred, not confirmed.
 - **Use Nebula as a structure reference only, never a compliance reference.** The quiz architecture (progressive personalization, per-day price reframe, checkout-exit downsell) remains a widely copied pattern. But the enrollment-and-cancellation posture — the part the FTC complaint targets — is now a documented anti-pattern: clear auto-renewal disclosure and easy cancellation are the compliance floor, and this case shows the enforcement downside of treating them as conversion levers.

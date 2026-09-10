@@ -1,6 +1,6 @@
 # Imprint (Self-improvement) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 > NOTE: I walked the ENTIRE Imprint quiz live to completion (welcome →
 > demographics → topics → behavior → self-assessment → path → daily goal →

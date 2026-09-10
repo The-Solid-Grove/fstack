@@ -1,6 +1,6 @@
 # Blushed (AI companion / AI characters) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **Target URL (from brief):** https://blushedapp.com — **DOWN / unreachable.** Both the apex (`blushedapp.com`) and `www.blushed.app` returned a browser error page ("Frame with ID 0 is showing error page") on the initial load and again after one retry each. No content rendered.

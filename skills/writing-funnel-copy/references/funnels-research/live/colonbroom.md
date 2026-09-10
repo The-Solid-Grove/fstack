@@ -1,6 +1,6 @@
 # Colonbroom (Physical goods / supplement subscription) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://colonbroom.com (homepage = ecommerce store); quiz funnel at `/glp-1/...`, checkout at `/glp-1/shipping`.

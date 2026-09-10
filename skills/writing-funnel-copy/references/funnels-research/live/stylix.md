@@ -1,6 +1,6 @@
 # Stylix (Style / personal styling) — Live Funnel Walkthrough
 
-> Walked: 2026-06-15 (capture date from repo history).
+> Walked: unknown; recorded in repository: 2026-06-15.
 
 ## Overview
 - **URL:** https://sub.stylix.app (mobile-style centered web funnel; desktop renders narrow column)
