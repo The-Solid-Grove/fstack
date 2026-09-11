@@ -58,6 +58,8 @@ preserving navigation, content fit, and sticky CTA checks.
 
 ## Visual Style
 
+For encouragement, social proof or value screens, inspect the [local energy-screen library](../writing-funnel-copy/references/energy-screens/index.md) and use the chosen visual in the mockup and export. For a requested polished design, use the actual proposed screen UI; keep review numbering outside the phone and base progress on the full journey.
+
 The default look is "candlelit stationery": a dark warm stage with a vignette
 and film grain around a cream paper phone screen, a single copper accent, a
 serif display face (Fraunces) for headlines, and a humanist sans (DM Sans) for
