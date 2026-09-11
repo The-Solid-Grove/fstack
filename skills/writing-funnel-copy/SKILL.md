@@ -23,6 +23,7 @@ These gates remain mandatory when tests and builds pass, the change looks small,
 - New funnel narrative and screen-by-screen spec: [psychology framework](references/funnel-psychology-framework.md).
 - Pricing, checkout, trial, upsell, or renewal copy: [paywall guidance](references/funnel-paywall-best-practices.md) and [benchmark/compliance rules](references/funnel-benchmarks-and-compliance.md).
 - Conversion diagnosis and A/B ideas: [conversion experiments](references/funnel-conversion-best-practices.md).
+- Encouragement, social proof, mechanism or other value screens; opening mockups dominated by questions: [local energy-screen references](references/energy-screens/index.md). Inspect the images and adapt a pattern to the current doubt and client identity.
 - Design and functional testing of a built funnel: `qa-funnel`.
 - Acquisition, economics, analytics, and the full course: `web2app-essentials` (Web-to-Web Essentials).
 
