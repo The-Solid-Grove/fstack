@@ -16,7 +16,7 @@ Use when an opening sequence feels like a questionnaire, or when designing encou
 1. Identify the preceding answer, the unresolved doubt and the next useful action. Choose the pattern that bridges them.
 2. Design one dominant visual and one typographic emphasis: highlighted phrase, oversized supported fact, human scene, illustrative comparison or product demonstration. Put the real visual into the mockup and PDF.
 3. In the opening five screens, aim for one or two substantial value moments where the narrative warrants them. Vary their jobs and composition. Keep a single clear CTA on informational screens; single-answer questions advance on selection.
-4. Show the actual intended screen UI. Derive any progress indicator from the full proposed journey and branches; keep PDF page labels and review numbering outside the phone.
+4. Show the actual intended screen UI. Follow the [preview numbering and progress rules](../../../preview-funnel/SKILL.md#visual-style).
 5. Adapt to the client's palette, audience and mechanism. Verify text and CTA contrast, mobile fit and continuity into the next step.
 
 Evidence selection: prefer a real product demonstration; use factual community or outcome proof only with a source and its scope/date. When proof is unavailable, use a clearly illustrative mechanism or useful answer-based example. Quantitative graphs, survey figures, ratings and testimonials in this library describe the reference only and do not substantiate another product.
@@ -27,7 +27,7 @@ Completion: the screen has a specific job, source-backed claims or clearly illus
 
 Captured 2026-09-11 from fourteen user-selected frames in the private reference collection “App Deals Web2web Funnels”. IDs preserve traceability without requiring Figma links or a live Figma session. Images are cropped browser captures at the observed zoom (286×576), not native editable exports; fine text may need the transcription below. Copy transcribed from the visible frames, not independently fact-checked. These are comparative design references, not licensed production assets, verified results or validated conversion experiments. Keep client production imagery original or appropriately licensed.
 
-[Contact sheet](contact-sheet.jpg) · [Structured text and notes](catalog.json)
+[Contact sheet](contact-sheet.jpg)
 
 ## 60-674 · AddMile · community collage
 
@@ -280,4 +280,3 @@ Captured 2026-09-11 from fourteen user-selected frames in the private reference 
 > Continue
 
 **Evidence boundary:** Personalization must correspond to actual answer use; adapt the illustration rather than copying another brand mascot.
-

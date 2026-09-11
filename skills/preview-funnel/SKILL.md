@@ -34,7 +34,7 @@ preserving navigation, content fit, and sticky CTA checks.
      supplied another design; adapt styles to the requested result
    - `steps.mjs` or `steps.json` for copy data
    - `app.mjs` for navigation and choice state
-4. Render one reusable mobile screen: progress header, headline, support copy,
+4. Render one reusable mobile screen: optional journey progress, headline, support copy,
    optional choice cards, optional notes/proof rows, and a sticky bottom CTA.
 5. Follow the Visual Style section below. The goal is still copy flow review,
    not final design approval — but the preview should be pleasant to read and
@@ -58,7 +58,7 @@ preserving navigation, content fit, and sticky CTA checks.
 
 ## Visual Style
 
-For encouragement, social proof or value screens, inspect the [local energy-screen library](../writing-funnel-copy/references/energy-screens/index.md) and use the chosen visual in the mockup and export. For a requested polished design, use the actual proposed screen UI; keep review numbering outside the phone and base progress on the full journey.
+For encouragement, social proof or value screens, inspect the [local energy-screen library](../writing-funnel-copy/references/energy-screens/index.md) for composition examples and mockup guidance.
 
 The default look is "candlelit stationery": a dark warm stage with a vignette
 and film grain around a cream paper phone screen, a single copper accent, a
@@ -76,8 +76,8 @@ requested design needs it:
 - Phone: `.phone > .screen` — the bezel, notch, copper edge glow, and paper
   grain all come from `.phone`'s own CSS; no extra markup.
 - Screen anatomy, top to bottom: `.app-name` (small caps between hairlines),
-  `.progress > i` (fill width = step progress), `.step-num`
-  (`<strong>03</strong> / 12`), `.content` (scrollable; children get a
+  optional `.progress > i` (fill width reflects the full journey and branches),
+  `.content` (scrollable; children get a
   staggered entrance animation, and short content auto-centers vertically),
   `.cta` (pinned to the bottom).
 - Copy: `.hero` (serif headline, one per screen; wrap a key phrase in `<em>`
@@ -93,6 +93,8 @@ requested design needs it:
 
 Rules:
 
+- Put review numbering outside `.phone`. Show progress inside the phone only
+  when the full journey is known; a sampled subset is not the full journey.
 - With the default theme, keep colors in its `:root` custom properties.
 - Headlines use the display serif; do not set body copy in it.
 - For requested branding, start with the `:root` properties and change
