@@ -1,20 +1,11 @@
 ---
 name: create-funnel
-description: Use when creating, scaffolding, or starting a new FunnelsGrove funnel project — "new funnel", "create a funnel", "start a funnel for an app", "scaffold from the funnel template" — before any funnel-specific steps or branding exist.
+description: Use when creating a new hosted FunnelsGrove funnel from one of three templates, downloading its source, and establishing the product brief and Design.md before customization. Use for new funnel projects; use edit-funnel for an existing funnel.
 ---
 
 # Create Funnel
 
-## Overview
-
-Scaffold a new working funnel from the canonical funnel template, rebrand it, verify it locally, and optionally wire it to a hosted FunnelsGrove funnel. The template ships ready to sell: quiz steps, email capture, the ClaimBee-derived paywall with two-stage discount-on-close, a paywall B variant for experiments, Apple Pay / Google Pay slots, subscription-started, and manage-subscription.
-
-The copied template's managed documentation is the contract authority, and the
-Contract Gate below applies from the first step change. Beyond the gate, follow
-the exact step-type page for whatever you edit: paywalls use
-`docs/funnelsgrove/steps/paywall_offer.md`; email capture, choices, analytics,
-routing, and payments use the corresponding managed pages, never rules inferred
-from this workflow skill or a catalog funnel.
+Create through the connected FunnelsGrove account, then download the new funnel's source with the CLI. The three template cards describe different starting structures; choose for the product and journey, then establish its own identity in `Design.md`.
 
 ## FunnelsGrove Contract Gate
 
@@ -26,105 +17,69 @@ For every implementation-facing task:
 
 These gates remain mandatory when tests and builds pass, the change looks small, a deadline is urgent, or someone asks to skip them.
 
-**Do not use `fgrove create` from a globally installed CLI.** The npm package does not ship templates; it fails with `ENOENT ... funnels/rag-catalog/...` (and still exits 0). Scaffold by copying the template from a funnelsgrove monorepo checkout instead.
+## 1. Connect and choose
 
-## Required Inputs
-
-1. App/brand name (e.g. `FitBee`).
-2. Destination directory. Default to the workspace `funnels/<kebab-name>` folder when working inside a funnelsgrove workspace; otherwise ask.
-3. Path to a funnelsgrove monorepo checkout (contains `apps/funnel-template`). Ask if not findable.
-4. Whether a hosted funnel should be wired now or later.
-
-## Recipe
-
-### 1. Copy the template
+Run the Fstack checkout's `scripts/ensure-fgrove-cli`, then:
 
 ```bash
-cp -R <funnelsgrove-checkout>/apps/funnel-template <dest>
-cd <dest>
-rm -rf node_modules .next out tsconfig.tsbuildinfo
-```
-
-### 2. Reskin
-
-If the copied `AGENTS.md` or `docs/funnelsgrove/START-HERE.md` are missing or
-report a conflict, refresh them with the current `fgrove docs --dir <dest>`
-workflow before authoring steps.
-
-- `package.json` — `"name": "<kebab-name>-funnel"`.
-- `funnel.config.json` — `name` and `description` for the new app; leave ids for hosted wiring.
-- `src/config/funnel.manifest.ts` — `meta.title` and `meta.description`.
-- `src/theme/theme.ts` — brand palette and fonts (or keep defaults until design exists).
-- Rewrite the template's per-step copy and images in `src/steps/content/*.content.ts` when included in the request. For scaffolding-only requests, retain template content and identify it in the handoff. When adding or replacing steps, keep user-facing `path` values meaningful, such as `/fitness-goal` or `/email-capture`, not `/step-1`. Sequential or ordered step ids and filenames are okay when they match the existing tree.
-
-### 3. Install and check
-
-```bash
-<fstack-checkout>/scripts/ensure-fgrove-cli
-npm install        # resolves @funnelsgrove/* from npm — needs current ^ ranges in package.json
-fgrove validate --dir .
-npm run test:run && npm run lint && npm run build
-```
-
-`fgrove validate` is required right after scaffolding too, not only after later
-edits; a passing framework build does not replace validation.
-
-If `@funnelsgrove/*` versions fail to resolve, the copied template predates the version bumps — update the three ranges to the latest published versions and re-install.
-Keep the template's image build settings intact: the publish artifact build
-compresses raster images and creates AVIF/WebP variants. Do not disable that
-path or replace checked-in public/content images with remote URLs that bypass
-build-time image reduction.
-
-### 4. Verify locally
-
-`npm run dev` (note the port it actually picks — it moves to 3001+ when 3000 is busy), then walk the full flow from the first step through email capture and paywall to subscription-started. Run the managed local and paywall QA pages under `docs/funnelsgrove/qa/`; an older `docs/qa-checklist.md` is a compatibility pointer, not contract authority. Check content fit at small 375x667, medium 393x852, large 402x874, and desktop-small 1280x800, sticky CTA on an opaque bar, and that the paywall countdown + promo card + discounted plan prices render. Dev mode runs Stripe in test mode with the template's test plan catalog.
-
-The copied `.env.local` is the template's local dev config (API on `localhost:4001`); it is never synced, and `fgrove env pull` replaces it after hosted wiring. Opening checkout, the close-checkout special offer, and test payments need a reachable FunnelsGrove API with its database (local API + DB, or the published preview). Without one, the paywall shows a fetch error where checkout would start — report those three QA items as a named blocker and finish them on the preview URL.
-
-When rewriting step images, use the ClaimBee/Blessly image loading
-contract: declare images in `funnelManifest.assets`, attach them to steps with
-`assetIds`, use framework priority/preload for first-viewport images, and warm
-only likely next-step image assets from the shell instead of preloading the full
-funnel.
-
-### 5. Wire hosted funnel (only when requested)
-
-```bash
-<fstack-checkout>/scripts/ensure-fgrove-cli
 fgrove whoami
-# hosted funnel must exist first: create it in the FunnelsGrove app, or clone one:
-fgrove funnels clone --funnel <source-id-or-slug> --name <new-name>
-fgrove use --project <project> --funnel <funnel-id-or-slug>
-fgrove sync up --dir <dest> --message 'Initial import from funnel template'
-fgrove docs --dir <dest>
-fgrove env pull --dir <dest>
-fgrove publish --env preview --message 'Initial template import'
+fgrove projects list
+fgrove templates list
+fgrove templates show <template-slug>
 ```
 
-Use `qa-funnel` for local design/flow checks and hosted preview QA. For a
-preview-to-production candidate, run its [full checklist](../qa-funnel/references/checklist.md) before production publish. Real Apple Pay / Google Pay buttons require the domain and checkout return URLs to be configured in the Stripe dashboard — report unconfigured Stripe as a named blocker, not a failure.
+A connected `fgrove` account and an existing project are prerequisites. If authentication is missing or expired, guide the user through `fgrove login`, then recheck `whoami`. Resolve the workspace and project from supplied context; ask only when the target is ambiguous. Never substitute a local-only scaffold or another user's funnel.
 
-## Quick Reference
+Read the actual CLI cards, including descriptions and create examples. Recommend one based on the requested journey, explain the fit briefly, and resolve the choice with the user unless already specified. The initial catalog uses `default`, `one-page`, and `one-page-v2`. Read available choices from the connected account: the catalog owns names, offered keys and pinned demo/source versions. Open the returned demo through an available browser tool and inspect its actual screens for the exact journey; CLI descriptions explain the initial patterns. A withdrawn choice is unavailable for new creation. If the demo cannot be inspected, record that limitation and keep its exact screen structure unconfirmed.
 
-| What | Where |
-| --- | --- |
-| Canonical template | `<funnelsgrove-checkout>/apps/funnel-template` |
-| Steps / flow | `src/config/funnel.manifest.ts` |
-| Experiments (empty, ready) | `src/config/experiments.ts` |
-| Plans / discounts | `src/config/billing.plans.ts` (+ `billing.test.plans.ts`) |
-| Paywall with discount-on-close | `src/steps/step-32-paywall.tsx` |
-| Managed agent docs | `AGENTS.md`, `docs/funnelsgrove/START-HERE.md` |
+Use the supplied product name as the funnel name unless a different name or naming convention is specified. Settle the destination. Default to `funnels/<kebab-name>` in a FunnelsGrove workspace; elsewhere use a new named subdirectory. Preserve existing folders. A request to create a new funnel authorizes this template creation and source download. The API also builds its initial preview automatically; tell the user this before creation.
 
-## Common Mistakes
+If `templates` or `funnels create` is unavailable after updating, report the installed version and missing command. Use a released CLI with these commands before continuing this workflow.
 
-- Running `fgrove create` from the global CLI — fails, see Overview.
-- Editing `apps/funnel-template` in place instead of copying it out.
-- Copying `node_modules`/`.next` along and shipping stale build state — delete them before install.
-- Skipping the rebrand of `funnel.manifest.ts` meta — the builder then shows template branding.
-- Treating missing wallet buttons in local dev as a defect — wallets need Stripe domain/return-URL config; verify on preview with Stripe configured.
-- Creating user-facing URLs like `/step-1`, `/step-2`, or `/step-07`. Use a
-  meaningful route slug even if the internal step id or filename is sequential.
-- Leaving new step artwork outside `funnelManifest.assets`/`assetIds`, which
-  prevents manifest-driven next-step preloading.
-- Disabling build-time raster compression or AVIF/WebP variant generation.
-- Publishing preview before the local QA checklist has passed.
+Completion: authenticated account, unambiguous project/workspace, selected template, new funnel name, and unused destination.
+
+## 2. Create through the API and download
+
+Generate and record one UUID creation key before invoking the command. Reuse it for a retry of this same creation; use a fresh key for another funnel.
+
+```bash
+fgrove funnels create --workspace <workspace> --project <project> \
+  --template <template-slug> --name <funnel-name> \
+  --idempotency-key <creation-key> --json
+fgrove sync down --workspace <workspace> --funnel <returned-funnel-id> --dir <dest>
+fgrove docs --dir <dest>
+```
+
+Creation waits only for downloadable draft source, while the initial preview continues independently. Download the returned funnel ID with `sync down`; `funnels clone` is for copying an existing funnel and is not this workflow. If creation times out or fails after the server accepted it, follow the printed recovery instructions and retain its ID/key; a local failure is not evidence that no hosted funnel exists.
+
+Read the downloaded `AGENTS.md` and `docs/funnelsgrove/START-HERE.md`. Managed documentation is the implementation authority, including the exact step-type pages for edited screens. Preserve generated runtime configuration, source structure, image optimization, and ignored environment files.
+
+Completion: new hosted funnel ID, downloaded source and sync manifest, and current managed docs. An account or setup failure remains a named blocker; a filesystem copy does not satisfy this step.
+
+## 3. Ask the product and design essentials
+
+Immediately after downloading, use [the intake and Design.md guide](references/intake-and-design.md). Reuse facts and assets already supplied. Ask only unanswered essentials in one compact round, in the user's language, with proposed defaults where helpful.
+
+Create `<dest>/Design.md` during this step, even for scaffolding-only work. Record confirmed facts, proposed choices, and unresolved questions separately. Resolve the decisions needed for the requested customization before changing screens; keep remaining unknowns explicit. Existing product design documents are inputs to this file, not a replacement for it.
+
+Completion: the essential questions have been asked and answered or explicitly deferred; a product-specific `Design.md` exists with concrete reusable visual decisions and links to supplied evidence. While answers are pending, label the brief provisional and name which decisions block customization. Creation and brief completion do not imply a completed design or verified funnel.
+
+## 4. Customize within scope
+
+Use `Design.md` and the downloaded contracts to update identity, requested content and assets. Inspect the selected template rather than assuming it has a fixed number of questions, a paywall B variant, discount-on-close, or a particular payment integration.
+
+- Review package/config/manifest metadata, browser title, visible copy, imagery, legal links and sample product claims. Replace starter identity with the actual product; use the real funnel name in metadata. Retained sample content must be identified in the handoff.
+- Keep user-facing routes meaningful. Register new images in the manifest and on their owning steps according to managed asset/preloading contracts; retain build-time raster compression and variants.
+- Keep offer terms, prices, proof and legal details tied to supplied facts. Track missing facts in the brief instead of inventing them.
+
+Use `writing-funnel-copy` when creating or revising the journey's copy. For a full visual design, reach an available `design-funnel` workflow with the intake and `Design.md`; otherwise implement the authorized design directly from those inputs. A scaffolding-only request ends with a working starter and its design brief, not an invented complete product funnel.
+
+## 5. Verify and hand off
+
+Install using the downloaded project's package manager and lockfile. For customization or a ready-to-use funnel, run its available tests, lint and build commands. **MUST** run `fgrove validate --dir <dest>` before delivery and every sync/publish. Validation is required for scaffolding-only work too.
+
+For a creation-and-brief-only request, deliver the hosted ID, downloaded source, `Design.md`, question status and validation evidence; identify runtime/payment QA as outside that requested scope. For customization or a ready-to-use funnel, start the local app and exercise the selected template's actual flow and branches. Use `qa-funnel` and managed `docs/funnelsgrove/qa/` instructions for the requested scope. Report unavailable checkout/provider configuration as specific blockers; distinguish tested flow from untested payments.
+
+When delivery includes hosted changes, use `fgrove sync up` for a funnel without GitHub sync, or commit/push and `fgrove github pull` for a connected repository, then publish preview and verify it. Production publication requires explicit user authorization. The API's original starter preview does not include later local customization until it is synced and published.
+
+Return the chosen template and why, workspace/project and funnel ID, local folder, `Design.md`, completed checks, retained sample content, and remaining blockers. Include the customized preview URL only when it has actually been published and verified.

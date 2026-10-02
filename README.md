@@ -38,7 +38,7 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ### [create-funnel](skills/create-funnel/SKILL.md)
 
-**Start with a working template.** Scaffold a FunnelsGrove funnel, apply your branding and requested content, and check the flow locally. Requires access to the FunnelsGrove template checkout.
+**Start from the right template.** Use your connected `fgrove` account to choose one of three templates, create a hosted funnel, download its source, and establish the product brief and `Design.md` before customization.
 
 ### [edit-funnel](skills/edit-funnel/SKILL.md)
 
