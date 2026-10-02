@@ -1,236 +1,236 @@
 # Lesson one-pagers
 
-## Web2Web changes the whole growth system
+## Web2Web connects acquisition, payment, and access
 
-The ad click and purchase happen on the web; the customer then enters the app with paid access. The advantage comes from redesigning acquisition, selling, billing, and delivery together.
+Acquisition and purchase happen on the web; the buyer uses the paid product in an app or browser.
 
 ### Core rule
 
-Ad → web funnel → web checkout → app access
+Ad → web funnel → checkout → paid access → first useful action
 
 ### What changes
 
-- The click is captured on the web before store friction.
-- The funnel explains and personalizes the offer before install.
-- Your team owns web billing and the customer lifecycle.
+- Measure pre-purchase behavior, with consent and attribution limits.
+- Explain the value before full product use.
+- Own web billing, support, and the subscription lifecycle.
 
 ### What must connect
 
-- Creative promise → first screen → offer.
-- Purchase identity → app sign-in → entitlement.
+- Ad promise → first screen → offer.
+- Purchase identity → sign-in → paid access.
 - Acquisition spend → net cohort value.
 
-### What can break it
+### What can fail
 
-- Judging the funnel separately from traffic and product activation.
-- A strong promise that the product cannot deliver.
-- Scaling before refunds, renewals, and payback are visible.
-
-### Decision check
-
-Can you trace one customer from ad click to first useful action and net cohort value?
-
-## Prove channel fit before building the funnel
-
-Web2Web works when a real problem can be explained before install, personalized with consequences, and paid back by retained customer value.
-
-### Core rule
-
-Message → intent → offer → first useful action
-
-### Strong fit signals
-
-- The user wants to start solving the problem now.
-- Answers can change the result, offer, or product start.
-- A clear first useful action follows purchase.
-
-### Score before build
-
-- 11–14: design a controlled launch.
-- 7–10: close weak spots, then validate small.
-- 0–6: the channel adds more complexity than growth.
-
-### Cheapest validation
-
-- One promising creative angle.
-- A 5–10 screen clickable concept and result preview.
-- A real offer with an honest interest or payment test.
+- Evaluating conversion without traffic quality or activation.
+- Promising value the product cannot deliver.
+- Scaling before renewals, refunds, and payback are understood.
 
 ### Decision check
 
-Can you finish the fit sentence without guessing the segment, mechanism, offer, first value, or payback condition?
+Can you trace a buyer from ad click to first useful action and net cohort value?
 
-## Scale on cohort economics, not first purchases
+## Check channel fit with evidence
 
-A cheap conversion can hide weak renewal, slow payback, refunds, and fees. Budget decisions need predicted net cohort value and cash timing.
+A web funnel needs a clear promise, useful delivery, and realistic net economics. A long quiz is optional.
 
 ### Core rule
 
-pLTV > CAC — with margin and an affordable payback window
+Record evidence: ready / uncertain / blocked
+
+### Check the fit
+
+- Demand now, value before purchase, and useful questions if used.
+- First useful action, net economics, reliable access, and operating owners.
+- Mark each ready, uncertain, or blocked, with evidence.
+
+### Choose the next step
+
+- Test when the promise, offer, delivery, and loss limit are clear.
+- Research assumed demand, willingness to pay, or retention.
+- Fix payment-to-access or support blockers before charging.
+
+### Keep the test small
+
+- One audience and creative promise.
+- A short clickable journey, credible preview, and real offer.
+- Use an honest interest test, or payment only when delivery is ready.
+
+### Decision check
+
+What evidence supports the audience, mechanism, offer, first useful action, and payback condition?
+
+## Scale on net cohort value and cash payback
+
+Cheap first purchases can hide weak renewals, refunds, fees, and slow cash recovery.
+
+### Core rule
+
+Net pLTV > CAC, with margin and affordable payback
 
 ### Model the chain
 
 - CPM → CTR → CPC → purchase rate → CAC.
-- First charge → renewals → refunds → net pLTV.
-- Payout timing → cash payback → safe spend.
+- First charge + renewals − refunds, disputes, fees, taxes, and variable costs.
+- Payout timing and reserves → cash payback → affordable spend.
 
-### Separate cohorts
+### Define the cohort
 
-- Split by geo, source, funnel, plan, and offer.
-- State the pLTV horizon and prediction method.
-- Replace predictions with observed renewals as cohorts mature.
+- Separate geography, source, funnel, plan, and offer.
+- State the value horizon and prediction method.
+- Replace forecasts with observed renewals as cohorts mature.
 
-### Scale gate
+### Before scaling
 
-- Economics stay positive after refunds, fees, and variable cost.
-- Payback fits the available cash reserve.
-- The result survives more than one creative and traffic mix.
+- Test conservative, base, and optimistic assumptions.
+- Keep contribution positive and payback within available cash.
+- Verify results across creatives and traffic mixes.
 
 ### Decision check
 
-If spend doubles tomorrow, when does that cash return and what evidence supports the pLTV forecast?
+When will the next acquisition spend return as cash, and what supports the forecast?
 
-## One journey needs five connected identities
+## Connect payment, identity, and paid access
 
-The customer sees one path, but acquisition, funnel, billing, product, and analytics each need a durable identity and a clear source of truth.
+Each system needs a durable identifier, a source of truth, and a recovery path.
 
 ### Core rule
 
-A browser success page is never proof of payment
+A browser success page does not prove payment
 
 ### Keep distinct
 
-- Attribution answers where the customer came from.
-- Authentication answers who the customer is.
-- Entitlement answers what paid access is active.
+- Attribution: where the customer came from.
+- Authentication: who the customer is.
+- Entitlement: which paid access is active.
 
-### Trusted purchase flow
+### Verify the purchase
 
-- Create checkout for a known internal user ID.
-- Verify signed payment webhooks idempotently.
-- Update billing, entitlement, and analytics from server state.
+- Link checkout to an internal user ID.
+- Verify signed webhooks and process duplicates idempotently.
+- Update billing, access, and analytics from trusted server state.
 
-### Design failure paths
+### Plan recovery
 
-- Delayed or duplicate webhook; failed or processing payment.
-- Lost deep link, wrong email, or app already installed.
-- Cancel, refund, dispute, renewal failure, or repeat purchase.
+- Delayed webhooks; processing, failed, or repeated payments.
+- Lost links, wrong accounts, and existing app installs.
+- Cancellation, expiry, renewal failure, refunds, and disputes.
 
 ### Decision check
 
-Can the team name the source of truth, retry rule, and user-facing state for both purchase and paid access?
+Who owns each purchase and access state, its source of truth, and its recovery rule?
 
-## Research the decision before designing screens
+## Research the decision before the screens
 
-A funnel becomes persuasive when it reflects a specific trigger, failed attempts, desired progress, emotional stakes, and proof the product can honestly support.
+Use customer evidence and real product capabilities to choose the promise, mechanism, and offer.
 
 ### Core rule
 
 Evidence → promise → mechanism → result → offer
 
-### Collect evidence
+### Find evidence
 
 - Product behavior, retained cohorts, support, and reviews.
 - Customer language from interviews and sales conversations.
-- Competitor patterns as hypotheses, never proof.
+- Competitor patterns as hypotheses to test.
 
-### Build the promise
+### Define the promise
 
-- Name one segment and the moment that starts the search.
-- Explain why earlier attempts failed and what changes now.
-- Show an observable result the product can deliver.
+- Choose an audience and trigger for seeking help.
+- Explain current barriers, desired progress, and emotional stakes.
+- Support the promised result with product evidence.
 
-### Choose the mechanism
+### Choose the format
 
-- Assessment when answers change the diagnosis.
-- Plan builder or calculator when inputs create a concrete result.
-- Guided demo or direct response when value is clearer in action.
-
-### Decision check
-
-Can every claim, branch, and personalized result be traced to evidence or real product behavior?
-
-## Every screen adds or spends mental energy
-
-The funnel earns attention by alternating small asks with useful feedback. By the paywall, enough desire and confidence must remain to make the purchase feel like the next step.
-
-### Core rule
-
-Expectation → recognition → mechanism → future → commitment → offer
-
-### Add energy
-
-- Match the ad promise immediately.
-- Give feedback, progress, proof, or a useful interpretation.
-- Show how answers change the result.
-
-### Spend carefully
-
-- Ask only questions that improve the story or result.
-- Keep each screen to one thought and one action.
-- Remove repetition, vague loaders, and decorative personalization.
-
-### Audit each screen
-
-- Job: why does this screen exist?
-- Payoff: what does the customer receive for the action?
-- Next: how does the answer affect what follows?
+- Assessment when answers support a meaningful result.
+- Plan or calculator when inputs change the output.
+- Demo or direct offer when value is clear without a quiz.
 
 ### Decision check
 
-If this screen disappeared, would understanding, desire, confidence, or personalization get worse?
+Can each claim and personalized result be traced to evidence or product behavior?
 
-## The paywall must complete the funnel's promise
+## Make every screen worth the effort
 
-The paywall turns accumulated desire into a specific offer; checkout removes payment friction; an upsell extends the same outcome without blocking paid access.
+Questions ask for attention; useful feedback and evidence help people decide whether to continue. Mental energy is a metaphor, not a score.
 
 ### Core rule
 
-Value continuity first; pricing mechanics second
+Recognize the problem → explain value → demonstrate fit → offer
 
-### Paywall mechanics
+### Return useful value
 
-- A real, time-bound discount when the deadline is genuine.
-- A clear money-back guarantee with visible terms.
-- Inline Apple Pay or Google Pay when available.
+- Continue the ad promise.
+- Give relevant feedback, explanation, or proof.
+- Show what the answers actually change.
 
-### Checkout clarity
+### Limit effort
 
-- Show what is charged today, renewal amount, and frequency.
-- Keep selected plan, displayed price, and charged product aligned.
-- Handle wallet absence, decline, retry, and checkout close.
+- Ask questions that affect feedback, fit, or product use.
+- Give each screen one main idea and next action.
+- Remove repetition, fake processing, and decorative personalization.
 
-### Judge the offer
+### Check the sequence
 
-- Compare verified purchase ARPU and cohort value, not clicks.
-- Watch renewal, refunds, and disputes after the first charge.
-- Measure upsell take rate without delaying app access.
+- Purpose: what does this screen help the person understand?
+- Value: what do they receive for their effort?
+- Transition: does the next screen fulfill the action’s promise?
 
 ### Decision check
 
-Can a customer state what they get, what they pay now, and what renews without reading fine print?
+Would removing this screen weaken understanding, confidence, or useful personalization?
 
-## Identity is the durable bridge to paid access
+## Make the offer and payment clear
 
-Deep links improve the fast path but can be lost. Paid access must recover through account identity and verified subscription state.
+The paywall explains the purchase; checkout supports payment. Optional upsells must preserve access to what was already bought.
 
 ### Core rule
 
-Purchase email → sign in → server-verified entitlement
+Clear value, billed totals, and next action
+
+### Explain the offer
+
+- Connect included value to the funnel’s demonstrated result.
+- Use genuine discounts and deadlines only.
+- Show conditions for any guarantee or refund offer.
+
+### Support payment
+
+- Keep the selected plan, charge today, and renewal terms consistent.
+- Offer supported wallets with a card fallback.
+- Handle processing, declines, retries, and checkout closure.
+
+### Evaluate results
+
+- Compare verified purchase ARPU and net cohort value.
+- Track renewals, refunds, and disputes.
+- Measure upsell take rate; require separate authorization.
+
+### Decision check
+
+Can the buyer explain what they get, pay now, and pay at renewal?
+
+## Recover paid access through account identity
+
+Deep links ease handoff. Account identity and verified subscription state must recover access when links fail.
+
+### Core rule
+
+Purchase identity → sign-in → server-verified access
 
 ### Fast path
 
-- Success page offers open app or the correct store.
-- Deep link carries an opaque, short-lived handoff reference.
-- Installed users land near the first useful action.
+- Offer the installed app or correct store after purchase.
+- Use an opaque, short-lived handoff reference.
+- Bring the buyer near the first useful action.
 
-### Recovery path
+### Recovery
 
-- Receipt email repeats the app link and purchase identity.
-- The app supports sign-in with the purchase email.
-- Support can recover access by internal or payment customer ID.
+- Include the app link and purchase identity in the receipt.
+- Support sign-in with the purchase email.
+- Let support resolve access using internal or payment customer IDs.
 
-### Measure separately
+### Measure each step
 
 - Verified purchase → handoff click → first open.
 - First open → sign-in → entitlement granted.
@@ -238,154 +238,154 @@ Purchase email → sign in → server-verified entitlement
 
 ### Decision check
 
-If the redirect and deep link both disappear, can the buyer still sign in and receive the correct access?
+Can the buyer recover correct access without the redirect or deep link?
 
-## Connect every funnel event to cohort value
+## Connect events to net cohort value
 
-Product, marketing, and financial analytics answer different questions. Stable identities and reconciled events let the team move from clicks to verified net revenue.
+Stable IDs and reconciled events connect product behavior, acquisition, and financial results.
 
 ### Core rule
 
-Spend → customer identity → verified revenue → net cohort value
+Spend → identity → verified revenue → net cohort value
 
-### Instrument the path
+### Record completion
 
-- Track rendered views and valid completions, not button intent.
-- Send verified purchases and renewals from the server.
-- Keep event IDs for deduplication and reconciliation.
+- Track rendered views and valid completions, not clicks alone.
+- Verify purchases and renewals on the server.
+- Use event IDs to deduplicate and reconcile.
 
-### Share dimensions
+### Keep shared dimensions
 
 - User, funnel version, experiment, source, and creative.
-- Offer, plan, payment method, geo, device, and currency.
+- Offer, plan, payment method, geography, device, and currency.
 - Cohort date and value horizon.
 
-### Run two views
+### Read three views
 
-- Daily view for delivery, breakage, and current spend.
-- Cohort view for renewals, refunds, pLTV, and payback.
-- Reconciliation view for analytics vs payment-provider totals.
+- Daily: spend, delivery, and breakage.
+- Cohort: renewals, refunds, net pLTV, and payback.
+- Reconciliation: analytics against payment-provider records.
 
 ### Decision check
 
-Can finance, UA, and product explain the same cohort with the same IDs, amounts, and value definition?
+Do acquisition, product, and finance use the same IDs, amounts, and value definition?
 
-## The creative is the first screen of the funnel
+## Continue the ad promise in the funnel
 
-A winning ad defines the audience, trigger, angle, and promise. The landing experience must confirm that promise before asking the customer to continue.
+The ad sets an expectation for a specific audience. The opening, result, and offer must fulfill it.
 
 ### Core rule
 
-Creative promise = first-screen expectation
+Creative promise → first-screen expectation
 
-### Map the chain
+### Map the promise
 
-- Segment → trigger → pain or desire → angle.
-- Hook → promise → first screen → personalized result.
+- Audience → trigger → problem or desire → angle.
+- Hook → promise → first screen → relevant result.
 - Result → offer → first useful action.
 
-### Test deliberately
+### Test clearly
 
-- Separate angle, hook, format, talent, and execution variables.
-- Use distinct creatives and enough spend to read the signal.
-- Keep browser and server purchase events deduplicated.
+- Separate angle, hook, format, talent, and execution changes.
+- Use distinct creatives and sufficient exposure.
+- Deduplicate browser and server purchase events.
 
-### Scale safely
+### Expand with evidence
 
-- Expand proven angles into multiple executions.
-- Watch downstream activation, renewal, and refunds by creative.
-- Refresh before one asset becomes the whole acquisition system.
+- Develop several executions of proven angles.
+- Track activation, renewals, and refunds by creative.
+- Avoid depending on one successful asset.
 
 ### Decision check
 
-Does the first funnel screen feel like the exact next frame of the ad that produced the click?
+Does the opening fulfill the expectation created by the ad?
 
-## Diagnose the bottleneck before choosing the test
+## Test the largest verified bottleneck
 
-Growth comes from a repeatable learning system. Fix correctness first, then test the largest economic bottleneck with a written hypothesis and decision rule.
+Fix correctness first. Then test a written hypothesis with a primary outcome, guardrails, and a decision rule.
 
 ### Core rule
 
-Priority = Impact × Confidence ÷ Effort
+Prioritization aid: Impact × Confidence ÷ Effort
 
-### Write the hypothesis
+### State the hypothesis
 
-- Change X for segment Y.
-- Expect metric Z to move by a stated range.
-- Name the evidence and mechanism before building.
+- Change X for audience Y.
+- State the expected metric change and meaningful effect to detect.
+- Explain the evidence and expected mechanism.
 
-### Order the backlog
+### Choose the work
 
-- Broken routes, payments, events, access, and disclosures first.
-- Then the largest funnel or economic constraint.
-- Cosmetic ideas only after structural problems.
+- Fix broken routes, payments, events, access, and disclosures.
+- Then address the largest economic constraint.
+- Treat priority scores as estimates, not experimental evidence.
 
 ### Protect the decision
 
-- Fix exposure, sample, duration, primary metric, and stopping rule.
-- Use net economics plus refund, activation, and risk guardrails.
-- Record rollout, rollback, result, and learning.
+- Set exposure, allocation, sample, and duration; choose fixed-horizon or sequential analysis.
+- Check allocation/exposure quality; follow the planned stopping rule.
+- Evaluate net economics, activation, refunds, and risk; record rollout or rollback.
 
 ### Decision check
 
-Will this experiment change a business decision or what the team knows, even if it produces no uplift?
+What decision or learning will the test produce, including when it shows no uplift?
 
-## Web billing moves the risk onto your team
+## Own the risks of web billing
 
-Payment acceptance is only the start. Clear terms, reliable access, support, refunds, subscription management, and dispute monitoring keep the channel operable.
+Clear terms, reliable access, subscription management, and support keep the channel operable.
 
 ### Core rule
 
-Prevent confusion before you defend a charge
+Prevent billing confusion and access failures
 
 ### Prevent
 
-- Match the ad, offer, descriptor, receipt, and delivered access.
-- Show charge today, renewal terms, guarantee, and cancellation.
-- Test privacy, consent, storefront, tax, and billing obligations.
+- Align the ad, offer, descriptor, receipt, and delivered access.
+- Show charges, renewal terms, cancellation, and any guarantee conditions.
+- Check applicable privacy, consent, storefront, tax, and billing requirements.
 
 ### Operate
 
-- Separate failed payments, refunds, and chargebacks.
-- Give support the customer, payment, and entitlement context.
-- Maintain accessible cancel, recovery, and refund paths.
+- Distinguish failed payments, refunds, and chargebacks.
+- Give support payment, customer, and access context.
+- Maintain cancellation, refund, and access-recovery paths.
 
 ### Monitor
 
-- Track disputes by reason, offer, geo, source, and cohort.
-- Set provider-specific thresholds and named owners.
-- Use chargeback prevention services as scale and risk require.
+- Track disputes by reason, offer, geography, source, and cohort.
+- Assign owners and provider-specific action thresholds.
+- Use dispute-prevention services when scale and risk justify them.
 
 ### Decision check
 
-Can the team detect and resolve paid-without-access, renewal surprise, and dispute spikes before the provider intervenes?
+Can you detect and resolve missing access, renewal confusion, and dispute spikes promptly?
 
-## Cut launch breadth, never the critical path
+## Launch one complete, measurable journey
 
-The first launch needs one complete, measurable customer journey. Start controlled, read downstream quality, and earn the right to add spend, geos, offers, and automation.
+Start with a controlled test. Add spend, markets, and offers as delivery and cohort evidence justify it.
 
 ### Core rule
 
-One segment → one offer → paid access → cohort economics
+One audience → one offer → paid access → net cohort value
 
 ### Before traffic
 
-- Fit score, downside/base/upside economics, budget, and loss limit.
-- Evidence-backed promise, prototype, checkout, and first value.
-- Verified payment, entitlement, recovery, analytics, and support.
+- Fit evidence, three economics scenarios, budget, and loss limit.
+- Supported promise, prototype, checkout, and first useful action.
+- Verified payment, access, recovery, analytics, and support.
 
 ### First traffic
 
-- One primary geo and a small set of distinct creatives.
-- Daily technical, payment, access, support, and risk review.
-- Read the first and second step before downstream conversion.
+- One primary market and a few distinct creatives.
+- Daily checks of delivery, payment, access, support, and risk.
+- Find the earliest broken step before interpreting later conversion.
 
-### Earn scale
+### Before scaling
 
-- pLTV exceeds CAC with margin and affordable payback.
-- Access, reconciliation, retention, refunds, and disputes are stable.
-- Several creatives work and the next experiment is ready.
+- Net pLTV exceeds CAC with margin and affordable payback.
+- Access, reconciliation, retention, refunds, and disputes remain stable.
+- Several creatives work; the next test has a clear purpose.
 
 ### Decision check
 
-If the first cohort disappoints, will the data reveal whether the problem is traffic, funnel, offer, payment, access, or retention?
+Can the data distinguish traffic, funnel, offer, payment, access, and retention problems?
