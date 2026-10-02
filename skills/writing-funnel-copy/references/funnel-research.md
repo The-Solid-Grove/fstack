@@ -9,13 +9,13 @@ intents:
 
 # Funnel research
 
-Use the product context and current funnel first. For a small copy change, research only the missing fact that affects it. For a new funnel or repositioning, produce or update `PRODUCT_SENSE.md` before writing screens.
+Use the product context and current funnel first. For a small copy change, research only the missing fact that affects it. For a new funnel or repositioning, produce or update `PRODUCT_SENSE.md` during product understanding, before Pre-work. Follow the [main workflow](../SKILL.md#workflow-for-a-new-or-redesigned-funnel) for the subsequent approvals and drafting stages.
 
 ## Research output
 
-1. Product, audience, entry promise, offer, real proof, constraints, and open questions.
+1. Product and actual mechanism, audience and entry mental state, advertised promise, offer and access, real proof, limitations, and open questions. Separate demonstrated capabilities from expected benefits and hypotheses.
 2. A small relevant competitor set with URLs and observation dates. Compare entry hook, question sequence, meaningful personalization, result preview, paywall, checkout, and post-purchase access. Expand the set only when it changes a decision.
-3. A messaging map connecting ad → first screen → quiz → result → offer, plus objections and evidence that can answer them.
+3. For an existing funnel, a messaging map connecting ad → first screen → quiz → result → offer, plus objections and evidence that can answer them. For a new funnel, capture the promise, objections, and available evidence as inputs to Pre-work; author its screen sequence during Emotional Arc after Pre-work approval.
 4. Prioritized recommendations: observation → implication for this product → proposed test. Separate observed behavior, measured outcomes, and assumptions.
 
 Capture a short excerpt or paraphrase only when useful, with source, funnel location, and why it matters. Do not accumulate full copy dumps. Live variants, countries, devices, prices, and dates differ; re-open a competitor before relying on its current offer. A code teardown cannot establish what was deployed or whether it converted.
