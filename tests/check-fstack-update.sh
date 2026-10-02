@@ -125,3 +125,5 @@ contains 'Usage:'
 if bash "$CHECK" --unknown >/dev/null 2>&1; then fail 'accepted unknown option'; fi
 if bash "$CHECK" --repo-root >/dev/null 2>&1; then fail 'accepted missing repo path'; fi
 echo 'ok: public usage errors are reported'
+
+python3 "$ROOT/tests/check_fstack_update_timeout.py" "$CHECK" "$REPO"
