@@ -42,7 +42,7 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ### [edit-funnel](skills/edit-funnel/SKILL.md)
 
-**Improve the funnel you already have.** Sync an existing FunnelsGrove funnel, make the change, and work through preview and QA. Publishing follows the target and environment you authorize.
+**Improve the funnel you already have.** Reuse its remembered working folder, preserve local changes while refreshing source, and work through preview and QA. Publishing follows the target and environment you authorize.
 
 ### [qa-funnel](skills/qa-funnel/SKILL.md)
 

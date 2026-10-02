@@ -32,6 +32,8 @@ Run `./setup --host auto` without `--skip-fgrove-cli` to check and update the gl
 
 `create-funnel` requires a connected `fgrove` account, an existing project, and a CLI release with `fgrove templates` and `fgrove funnels create`. It creates from one of three hosted templates through the API, downloads the new funnel source, and establishes `Design.md`; no template checkout is needed.
 
+Creation and editing [remember one working folder per funnel](../skills/edit-funnel/references/local-workspace.md). Later edits resume there, including across conversations. The local registry stores API/workspace/funnel identity and the folder path; it contains no credentials or funnel source.
+
 </details>
 
 ## Update

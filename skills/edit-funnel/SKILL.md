@@ -1,18 +1,16 @@
 ---
 name: edit-funnel
-description: Use when editing FunnelsGrove hosted funnels through local CLI sync, including scoped local edits, local preview, QA, preview publish, or production publish.
+description: Use when editing an existing FunnelsGrove funnel in its remembered local folder, previewing changes, or delivering an authorized preview or production release.
 ---
 
 # Edit Funnel
 
 Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
 
-## Overview
-
-Use this skill to turn a hosted FunnelsGrove funnel edit request into a locally
-previewed change, then a verified preview or production deployment when the user
-explicitly wants to publish. Work from the local synced funnel tree, keep edits
-scoped, and default to a local preview loop before any hosted publish.
+Reuse one working folder for each hosted funnel. Make the requested change there,
+verify it locally, and deliver only to the environments the user authorized.
+An edit normally keeps the same hosted funnel and local folder. A separate hosted
+clone is a product decision for a separately requested copy, not a routine setup step.
 
 ## FunnelsGrove Contract Gate
 
@@ -24,332 +22,108 @@ For every implementation-facing task:
 
 These gates remain mandatory when tests and builds pass, the change looks small, a deadline is urgent, or someone asks to skip them.
 
-## Required Inputs
-
-Collect these before editing, asking one question at a time only when local
-context cannot answer them:
-
-1. Target workspace, project, and funnel id or slug.
-2. Requested edit and success criteria.
-3. Whether the original funnel may be edited directly or a clone is safer.
-4. Target local directory, if the funnel is already synced.
-5. API URL when the default `FUNNELSGROVE_API_URL` is not the target.
-6. QA credentials or test payment details when checkout or subscription QA is
-   required.
-
-## CLI Reference
-
-Prefer the installed `funnelsgrove-cli` skill when available for full command
-help. Use the command shape below as the minimum hosted CLI workflow. Local
-preview and contract commands come from the managed funnel docs and should run before
-syncing any hosted draft.
-
-```bash
-<fstack-checkout>/scripts/ensure-fgrove-cli
-fgrove whoami
-fgrove use --project <project-id-or-slug> --funnel <funnel-id-or-slug>
-fgrove status
-git -C <local-dir> status --short
-fgrove github status --dir <local-dir>
-fgrove sync down --funnel <id-or-slug> --dir <local-dir>
-fgrove docs --dir <local-dir>
-# read AGENTS.md and docs/funnelsgrove/START-HERE.md
-# run fgrove validate and local preview as directed before hosted sync
-# if GitHub is connected: git push, then fgrove github pull
-# if GitHub is not connected:
-fgrove sync up --message '<summary>'
-fgrove publish --env preview --message '<summary>'
-```
-
-Add `--api-url <api-url>` or `--workspace <workspace-id>` when the target is not
-covered by defaults.
-
-Run the fstack `scripts/ensure-fgrove-cli` helper before every hosted funnel
-edit. It checks the installed `fgrove` version against npm and installs
-`@funnelsgrove/cli@latest` when the CLI is missing or outdated. If the helper is
-not available, do the equivalent check manually before continuing. Always run
-`fgrove docs --dir <local-dir>` after that check so a newly installed CLI can
-refresh the funnel-specific editing docs.
-
-## Workflow
-
-### 1. Establish the Target
-
-Identify the workspace, project, and funnel before loading or editing. If the
-request affects a production funnel, changes pricing or checkout, or is
-experimental, prefer a clone unless the user explicitly wants the original
-edited.
-
-```bash
-fgrove projects list
-fgrove funnels list
-fgrove funnels clone --funnel <source-id-or-slug> --name <new-name>
-```
-
-### 2. Load, Refresh, and Merge the Local Project
-
-Run the CLI Reference sequence above through `fgrove docs --dir <local-dir>`:
-CLI version check first, then auth and context, then repository and sync state.
-Sync down only when there is no current synced directory or after the local
-tree is clean or checkpointed. Keep `.funnelsgrove-sync.json` in place because
-it carries the draft sync state.
-
-If the local tree has changes, create a checkpoint before refreshing remote
-state. Prefer a normal WIP commit on a local branch when the directory is a git
-checkout; otherwise copy the changed files or sync the latest draft into a temp
-directory. Do not run `fgrove sync down` over a dirty synced directory unless
-the user explicitly wants to discard local changes and you pass `--force`.
-
-When GitHub is connected and remote is ahead, run `fgrove github pull --dir
-<local-dir>` to pull GitHub into the hosted draft, then poll `fgrove github
-status --dir <local-dir>` until the pull job is completed or skipped. After
-that, sync the latest draft into a clean directory and merge the local
-checkpoint with normal git or file diff tools before editing further.
-
-When GitHub is not connected, use the hosted draft as remote truth: sync the
-current draft into a temporary clean directory, compare it with the local
-checkpoint, merge intentionally, then continue from the merged local tree. If
-`fgrove sync up` later reports that the remote draft changed since the local
-directory was synced, repeat this temp-directory merge flow before retrying.
-
-Which path writes source changes back to the hosted draft is decided once, in
-step 9: GitHub push + `fgrove github pull` for GitHub-connected funnels,
-`fgrove sync up` otherwise.
-
-### 3. Inspect Before Editing
-
-Read the local docs produced by `fgrove docs`, especially the generated
-`AGENTS.md`, then open `docs/funnelsgrove/START-HERE.md` and follow its task
-route. Treat this managed bundle as the contract source of truth for step
-metadata, choices, email capture, lifecycle and semantic analytics, routing,
-payments, and validation. Read the exact step-type page plus any linked
-contract page before editing behavior. An older `agent.md`, this fstack skill,
-or a research teardown may help with workflow or visual structure, but cannot
-override or supply implementation contracts. Find the exact pages, steps,
-content files, styles, assets, and tests that control the requested behavior.
-
-```bash
-rg --files <local-dir>
-```
-
-### 4. Update Local Project Packages
-
-When the user asks to update packages, or when stale dependencies block local
-checks or preview, update the synced funnel project with the package manager
-already used by the tree. Detect it from lockfiles and generated docs:
-
-| Lockfile | Package manager | Inspect | Update | Install |
-| --- | --- | --- | --- | --- |
-| `package-lock.json` | npm | `npm outdated` | `npm update` | `npm install` |
-| `pnpm-lock.yaml` | pnpm | `pnpm outdated` | `pnpm update` | `pnpm install` |
-| `yarn.lock` | yarn | `yarn outdated` | `yarn upgrade` | `yarn install` |
-| `bun.lockb` | bun | `bun outdated` | `bun update` | `bun install` |
-
-Use one package manager per project. Do not create a new lockfile with a
-different tool. If no lockfile exists, follow `packageManager` in `package.json`
-or ask before choosing. After updating, run the install command for that manager
-so the lockfile and installed dependencies match, then run the local checks.
-
-Keep package updates separate from unrelated funnel edits when possible. Report
-the package manager, update command, install command, changed lockfile, and any
-security or peer-dependency warnings.
-
-### 5. Make Scoped Updates
-
-Edit only the local funnel tree. Keep code simple and DRY. Avoid unrelated
-refactors, metadata churn, generated output, and secret files. Treat `.env` and
-`.env.*` as local runtime material, not uploadable source.
-
-After creating or editing any funnel step, run a content-fit audit for that step
-in the local preview. Verify all four default breakpoints: small `375x667`,
-medium `393x852`, large `402x874`, and desktop-small `1280x800`. Fix clipped,
-overflowing, overlapping, or hidden content before moving on to another step.
-
-When creating a step, keep the public route meaningful. `path` should describe
-the screen's purpose, such as `/motivation`, `/fitness-goal`, `/email-capture`,
-or `/paywall`; do not create user-facing paths like `/step-1` or `/step-07`.
-Sequential ids and `step-NN-*` filenames are acceptable when the existing funnel
-uses them for ordering, but URLs should be readable product routes.
-
-### Experiment Source of Truth
-
-For new or edited experiments, prefer the FunnelsGrove UI/API as the source of
-truth. It owns the database row, PostHog flag, and generated
-`src/config/experiments.generated.ts`; `src/config/experiments.ts` should usually
-stay as the generated compatibility wrapper. If a user asks for a code-authored
-experiment or the UI/API path is unavailable, keep the object source-readable:
-explicit `sourceStepId` or `stepId`, explicit variant route step ids, labels,
-traffic percentages, and normal manifest steps/edges for every variant.
-
-### Image Performance Lock
-
-For any new or edited image, image-heavy step, or route that changes which
-images appear next, preserve the ClaimBee/Blessly pattern:
-
-- Keep raster assets in paths the FunnelsGrove publish artifact pipeline can
-  optimize. Do not replace local public/content-managed images with remote
-  image URLs that bypass build-time compression and AVIF/WebP variant creation.
-- Keep build-time image reduction enabled. When publishing, check
-  `publishBuild.stageTimings.imageVariants`, CLI stage output, or deployment
-  metadata so image optimization is confirmed or named as unavailable.
-- Declare image metadata in `funnelManifest.assets` with stable `src`, `width`,
-  and `height`, then attach each step's images with `assetIds`. Update
-  `assetIds` whenever step artwork or routing changes.
-- Use the normal framework priority/preload path for first-viewport images.
-  In the flow shell, warm only likely next-step image assets at low priority
-  after the active step loads; do not preload the whole funnel up front.
-- For image-heavy funnels, add or keep a contract test that every declared
-  `assetId` exists and that the shell uses manifest-driven next-step preloads
-  instead of a component-local hardcoded preload map.
-
-### 6. Run Local Checks
-
-Run the checks that exist in the synced tree. Prefer the narrowest relevant
-check first, then a build or full smoke pass when available.
-
-```bash
-fgrove validate --dir <local-dir>
-npm test
-npm run lint
-npm run build
-```
-
-A passing framework build does not replace contract validation: resolve every
-blocking diagnostic from the required `fgrove validate` run before preview or
-sync.
-
-If no package scripts exist, still verify the edited files structurally and open
-the local preview if the tree provides a dev command.
-
-### 7. Preview Locally and Adjust
-
-Start or open the local preview by default before any hosted publish. Use the
-generated funnel docs first, then package scripts such as `npm run dev` when the
-docs point there. Inspect the changed flow in the browser, check console/runtime
-errors when a browser tool is available, adjust the local files, rerun checks,
-and preview locally again until the local result matches the request.
-
-For created or edited steps, the local preview inspection must include the
-step 5 content-fit audit at all four default breakpoints before considering
-the step ready.
-
-For major edits, run the full QA checklist before publishing. Major edits include checkout, pricing, payment, subscription,
-cancellation, identity/email capture, routing, analytics, or broad visual/flow
-changes.
-
-### 8. Check Publishing Authorization
-
-Reuse explicit authorization already given for this target and environment.
-Ask the user whether to publish after local preview verification only when that
-publication is not already authorized. Passing checks alone is not permission.
-If the user declines publishing, report the local result and stop there.
-Authorization never replaces validation or required QA.
-
-### 9. Sync, Publish Preview, and Run QA
-
-Use a clear message that names the edit. Do not publish production from this
-skill unless the user explicitly asks for production and provides the target
-domain.
-
-For GitHub-connected funnels, push source changes through GitHub and pull them
-into the hosted draft:
-
-```bash
-git push
-fgrove github pull --dir <local-dir>
-fgrove github status --dir <local-dir>
-fgrove publish --env preview --message '<summary>'
-```
-
-Poll `fgrove github status` until the pull job has completed or skipped before
-publishing. Do not also run `fgrove sync up` for the same source change.
-
-For funnels without GitHub, sync local source directly to the hosted draft:
-
-```bash
-fgrove sync up --message '<summary>'
-fgrove publish --env preview --message '<summary>'
-```
-
-Save the returned preview URL, published version id, and sequence when present.
-
-Run QA on the preview URL before any production publish. At minimum, check the
-first step, the edited step, and any paywall, checkout, or conversion step
-affected by the request. For major edits and production candidates, run the full
-QA checklist.
-
-### 10. Verify Preview Coverage for Production
-
-Before production publish, verify whether the
-current production candidate or current production version already has a matching
-preview build. Use the current `fgrove` CLI, deployment history, version id,
-sequence, generated funnel docs, or API status available for the target.
-
-Record the production URL or target domain, preview URL, version ids, sequences,
-and how the match was verified. If there is no matching preview build, apply step 8 authorization and publish
-to preview first and run the full QA checklist on the preview URL before
-continuing. Missing preview QA is a blocker unless the user explicitly accepts
-the risk.
-
-### 11. Publish Production and Run Production QA
-
-Publish production after the preview URL has passed QA and production is
-explicitly authorized for the target domain. Reuse authorization already given
-in this session; preview-only approval does not authorize production. Use the production publish command required by the
-generated docs or current `fgrove` CLI, for example:
-
-```bash
-fgrove publish --env production --message '<summary>'
-```
-
-Save the returned production URL, published version id, and sequence when
-present. Run the same required QA on the production URL after publish. Do not
-claim production completion when production QA fails or cannot run unless the
-user explicitly accepts the risk.
-
-## QA
-
-Use `qa-funnel` for independent audits and for the local, preview, and production checks in this workflow. Its [full checklist](../qa-funnel/references/checklist.md) owns end-to-end coverage; its [design checks](../qa-funnel/references/design.md) own per-screen visual and content QA. Small edits use scoped coverage; major changes and production candidates use full coverage.
-
-A request only to QA an existing production URL belongs to `qa-funnel`; inspect it without publishing. For a release in this edit workflow, missing matching preview QA remains a blocker. Follow the existing target and environment authorization before publishing a missing preview.
-
-## Completion Gate
-
-Finish only after all of these are true:
-
-1. Target workspace/project/funnel and local directory are recorded.
-2. Requested edits pass available local checks.
-3. Local preview is opened or an unavailable local preview has a named reason.
-4. Every created or edited step has a reported content-fit audit at all four
-   default breakpoints from step 5.
-5. Image edits preserve build-time image optimization and manifest-driven
-   next-step preloading, or any unavailable optimization/preload check is named.
-6. If publishing, authorization for the target and environment is established
-   under step 8, reusing permission already given. Otherwise, report local-only
-   completion after the applicable local checks.
-7. If publishing, requested edits are synced through the correct source path:
-   GitHub-connected funnels use normal `git push` plus `fgrove github pull`;
-   funnels without GitHub use `fgrove sync up`.
-8. If publishing, preview is published with `fgrove publish --env preview`.
-9. If preview is published, preview QA is run and reported.
-10. If production is explicitly requested,
-   preview-build coverage for the current production candidate or version is
-   verified and reported.
-11. If production is requested and there is no matching preview build, authorized preview is published and full QA is
-   run on the preview URL before continuing.
-12. If production is explicitly requested, production is published only after
-   preview QA and production QA is run on the production URL.
-13. Checks and QA flows run are listed, including unavailable checks or skipped
-   flows.
-14. Any blockers have a named root cause and concrete next step.
-
-## Safety Rules
-
-- Never sync secrets, `.env*`, `node_modules`, `.next`, `out`, or local build output.
-- Do not overwrite non-target funnel files to make a broad visual pass easier.
-- Do not bypass the publish pipeline's image optimization with unoptimized
-  remote image URLs for funnel-critical artwork.
-- Do not edit production-critical checkout/pricing flows directly when cloning is safer.
-- Apply the publishing authorization rule in step 8 before hosted writes.
-- Do not call work complete based only on local tests; local preview and the
-  relevant hosted QA gate are required.
+## 1. Resolve and reuse the working folder
+
+Run the fstack checkout's `scripts/ensure-fgrove-cli` before hosted funnel work.
+It checks and updates the installed CLI; if unavailable, use the installed CLI's
+current update guidance. Resolve the requested API, workspace, project and funnel
+from supplied context. Confirm the connected account with
+`fgrove --api-url <api-url> whoami`.
+Ask only for missing information that prevents selecting the right target.
+
+**First follow [Local workspace](references/local-workspace.md)** to find,
+verify, reuse and remember the funnel's canonical folder. Download only when no
+usable folder exists. Preserve local changes and the sync manifest when refreshing;
+temporary recovery files do not become another permanent checkout.
+
+Run commands from that verified folder or pass its explicit `--dir`. Its
+`.funnelsgrove-sync.json` supplies the local target; `fgrove use` is only a global
+fallback for commands outside a synced folder. Use current `fgrove --help` and
+subcommand help for flags rather than guessing from an older example.
+
+Completion: an unambiguous target, one verified working folder, its remembered
+location or a reported registration blocker, and local/remote changes accounted for.
+
+## 2. Read the current implementation contracts
+
+Refresh managed documentation with `fgrove docs --dir <local-dir>`, then read
+the local `AGENTS.md` and `docs/funnelsgrove/START-HERE.md`. Follow the task route
+to the exact step-type and contract pages before editing behavior. Also read
+existing `AGENTS.project.md` and `Design.md` for product-specific constraints.
+
+The managed bundle owns metadata, answers, routing, analytics, payments and
+validation. For experiment work, read its `recipes/add-experiment.md`; use that
+current workflow instead of maintaining experiment definitions from old source
+examples. Research, screenshots and this skill supply context, not contracts.
+
+Locate the files controlling the requested change and state the observable
+success criteria. Install dependencies with the existing package manager and
+lockfile when needed. Update packages only when requested or needed to unblock
+the work; keep those changes scoped and report them.
+
+Completion: the relevant contracts and product constraints are understood,
+and the files and checks needed for the requested edit are identified.
+
+## 3. Edit and verify locally
+
+Work in the canonical folder. Preserve unrelated edits, generated/runtime
+configuration and ignored secrets. Keep `.env*`, dependencies and build output
+out of delivered source. Use meaningful product routes for new screens; follow
+the existing project's ordering conventions for internal IDs and filenames.
+
+For image or image-routing changes, read the managed asset/preload contract and
+the [image QA checks](../qa-funnel/references/checklist.md#image-performance).
+Keep raster artwork on the publish optimization path, register dimensions and
+step `assetIds`, and preserve first-viewport priority plus low-priority loading
+of likely next-step images. Verify the shell actually consumes that metadata.
+For image-heavy funnels, keep a contract test covering valid asset references
+and manifest-driven next-step preloading. Remote artwork must not bypass the
+build-time compression and AVIF/WebP pipeline.
+
+**MUST** run `fgrove validate --dir <local-dir>` after the change and resolve
+blocking diagnostics. Run the tree's relevant tests, lint and build commands;
+use its scripts and managed QA guidance to choose the checks.
+
+Start the local preview using the project's instructions. Exercise the changed
+screens through their real incoming and outgoing flow, inspect runtime errors,
+and fix failures before delivery. Verify every created or edited screen at
+`375x667`, `393x852`, `402x874`, and `1280x800`; also apply the managed local QA
+requirements, including available viewport height and interaction states.
+Check actual long copy, answers and validation errors for clipping, overlap,
+hidden controls and horizontal overflow.
+
+Use `qa-funnel` for [design checks](../qa-funnel/references/design.md) and scoped
+flow QA. Checkout, pricing, payments, subscriptions, identity/email capture,
+routing, analytics and broad visual/flow changes require its
+[full checklist](../qa-funnel/references/checklist.md). Use approved test
+identities and payment paths; name unavailable checks instead of treating them
+as passed. Revalidate and retest after fixes.
+
+Completion: contract validation and applicable local checks pass; the changed
+flow and all four baseline layouts have evidence. If local preview cannot run,
+report its specific blocker and the checks that remain unverified.
+
+## 4. Deliver within the authorized scope
+
+For local-only work, keep the result in the remembered folder and finish with
+the verification report. A local edit does not authorize `git push`,
+`fgrove github pull`, `fgrove sync up`, or a hosted publish.
+
+For hosted delivery, follow [Publishing](references/publishing.md). Reuse
+authorization already given for the target and environment. Ask only for the
+missing authorization, after the local result is concrete and reviewable.
+Choose one source path, verify the candidate on preview, and publish production
+only when explicitly authorized for its target domain.
+
+Completion: the requested delivery stage is reached and verified, or the
+remaining authorization or technical blocker is named. A returned deployment
+URL alone does not establish successful QA.
+
+## 5. Hand off
+
+Report the target and canonical folder so the next edit resumes there. Include
+the change, checks and viewports exercised, and any blocked or skipped checks.
+For hosted delivery, include URLs, version evidence, preview coverage and
+post-publish results. Report image optimization/preload evidence when applicable.
+Distinguish a verified local edit, synced draft, preview release and production
+release; claim only the stage actually completed.

@@ -54,6 +54,8 @@ fgrove docs --dir <dest>
 
 Creation waits only for downloadable draft source, while the initial preview continues independently. Download the returned funnel ID with `sync down`; `funnels clone` is for copying an existing funnel and is not this workflow. If creation times out or fails after the server accepted it, follow the printed recovery instructions and retain its ID/key; a local failure is not evidence that no hosted funnel exists.
 
+After a successful download, [remember this folder](../edit-funnel/references/local-workspace.md#remember-the-folder) with its API, workspace ID, and returned funnel ID so later edits reuse it.
+
 Read the downloaded `AGENTS.md` and `docs/funnelsgrove/START-HERE.md`. Managed documentation is the implementation authority, including the exact step-type pages for edited screens. Preserve generated runtime configuration, source structure, image optimization, and ignored environment files.
 
 Completion: new hosted funnel ID, downloaded source and sync manifest, and current managed docs. An account or setup failure remains a named blocker; a filesystem copy does not satisfy this step.
