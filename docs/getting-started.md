@@ -36,13 +36,36 @@ Run `./setup --host auto` without `--skip-fgrove-cli` to check and update the gl
 
 ## Update
 
+Setup checks fstack automatically. Agents also check once per conversation, before the first fstack skill runs. The check compares the checkout with `origin/main`, so it detects improvements even when `VERSION` has not changed. It fetches Git metadata and leaves installed files and local edits intact. A failed network check leaves the current skills usable.
+
+Run the check manually with:
+
 ```bash
-cd ~/.fstack
-git pull --ff-only
-./setup --host auto --skip-fgrove-cli
+./scripts/check-fstack-update
 ```
 
-Because the skills are linked, pulling updates changes the installed files. Commit your own adaptations before updating. Omit `--skip-fgrove-cli` when you also want setup to check and update the CLI.
+For an offline installation, use `./setup --skip-update-check --skip-fgrove-cli`. The two flags control the pack and CLI checks independently.
+
+### Agent update check
+
+Before the first fstack skill in a conversation, resolve the loaded skill directory to its physical location. Installed skills are symlinks; derive the checkout from their target, not from `~/.codex` or `~/.claude`.
+
+```bash
+fstack_skill_dir="$(cd "<directory-containing-the-loaded-SKILL.md>" && pwd -P)"
+fstack_checkout="$(cd "$fstack_skill_dir/../.." && pwd -P)"
+"$fstack_checkout/scripts/check-fstack-update"
+```
+
+When an update is available, show the installed and latest revisions and offer to update. Continue the requested work with the current skills while awaiting the answer. Ask once per conversation; a declined or unavailable update does not block the task.
+
+When the user accepts, inspect the checkout first. For a clean `main` branch that can fast-forward, run:
+
+```bash
+git -C "$fstack_checkout" pull --ff-only origin main
+"$fstack_checkout/setup" --host auto --skip-fgrove-cli --skip-update-check
+```
+
+Preserve the user's original host/custom skill-directory options when rerunning setup. Keep local edits, custom branches, detached checkouts, and divergent history intact; explain the specific state and agree how to retain that work before updating it. After an update, reread the active `SKILL.md` and its needed references before continuing. The check itself never applies an update.
 
 ## Team setup
 
@@ -90,7 +113,7 @@ for suite in tests/*.sh; do
 done
 ```
 
-Current version: `0.6.0`
+The pack version is recorded in [`VERSION`](../VERSION).
 
 ## Course references
 

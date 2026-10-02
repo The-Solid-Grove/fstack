@@ -5,6 +5,8 @@ description: Use when editing FunnelsGrove hosted funnels through local CLI sync
 
 # Edit Funnel
 
+Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+
 ## Overview
 
 Use this skill to turn a hosted FunnelsGrove funnel edit request into a locally

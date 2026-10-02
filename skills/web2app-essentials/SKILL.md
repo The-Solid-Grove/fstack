@@ -5,6 +5,8 @@ description: Use when answering Web-to-Web growth questions about channel fit, e
 
 # Web-to-Web Essentials
 
+Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+
 Concise lessons and worksheets for acquiring customers and selling subscriptions on the web. The product can be an app or a browser product. References stay synchronized with the [course](https://funnelsgrove.com/learn/web2web); the invocation remains `web2app-essentials` for compatibility.
 
 ## Use the course

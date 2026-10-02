@@ -5,6 +5,8 @@ description: Use when turning finished funnel copy, screen-by-screen funnel spec
 
 # Preview Funnel
 
+Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+
 ## Overview
 
 Build a simple, temporary click-through that makes funnel copy easy to read,

@@ -18,7 +18,7 @@ cd ~/.fstack
 ./setup --host auto --skip-fgrove-cli
 ```
 
-Requires Git and Bash. Keep the checkout: the installer links your agent's skills to these files.
+Requires Git and Bash. Keep the checkout: the installer links your agent's skills to these files. Setup and the first fstack skill used in a conversation check for updates and offer an update when one is available.
 
 [Host options, FunnelsGrove setup, and updates →](docs/getting-started.md)
 
@@ -60,7 +60,7 @@ Start with the product, audience, and ad promise. Then use preview-funnel
 to make the approved copy clickable for review.
 ```
 
-[Setup and maintenance](docs/getting-started.md) · [Funnel QA checklist](docs/funnel-qa-checklist.md)
+[Setup and maintenance](docs/getting-started.md) · [Funnel QA](skills/qa-funnel/SKILL.md)
 
 ---
 

@@ -9,8 +9,8 @@ scanning frontmatter to pick references saw an inconsistent contract. This
 audit locks the convention for the files that opted into it.
 
 Scope is deliberately narrow: only direct children of the writing-funnel-copy
-references directory. The `funnels-research/` corpus below it and the
-web2app-essentials modules use different conventions with their own audits.
+references directory. The web2app-essentials modules use a different
+convention with their own audits.
 
 Checks per file:
 
