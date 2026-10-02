@@ -1,31 +1,27 @@
-# Channel-fit scorecard
+# Channel-fit worksheet
 
-Product:
+Product / audience:
 
-Owner:
+Owner / date:
 
-Date:
-
-Target segment:
-
-| Criterion | Evidence | Score 0–2 | Unknown / next action |
-| --- | --- | ---: | --- |
-| Customer wants to start now | | | |
-| Value is explainable before install | | | |
-| Answers can change result/offer/start | | | |
-| First useful action is immediate | | | |
-| Retention can support paid CAC | | | |
-| Identity and entitlement are feasible | | | |
+| Check | Evidence | Ready / uncertain / blocked | Next action |
+| --- | --- | --- | --- |
+| Reason to start now | | | |
+| Value is clear before purchase | | | |
+| Questions have a useful effect, if used | | | |
+| Clear first useful action | | | |
+| Realistic net value and payback | | | |
+| Reliable purchase-to-access path | | | |
 | Support and risk have owners | | | |
 
-Total:
+Decision: controlled test / research first / fix a blocker first.
 
-Decision: build test / research first / postpone
+Main evidence gap or blocker:
 
-- 11–14: design a controlled test.
-- 7–10: research or close the weak constraints first.
-- 0–6: postpone a full Web2Web build.
+Next test and owner:
 
-One-sentence model:
+Maximum test loss:
 
-> For ___ with ___, the funnel will show ___ and offer ___. After purchase they will ___. The channel works if ___.
+> For ___ facing ___, the funnel demonstrates ___ and offers ___. After purchase the buyer can ___. The channel is viable if ___.
+
+[Channel-fit guide](../02-channel-fit.md)

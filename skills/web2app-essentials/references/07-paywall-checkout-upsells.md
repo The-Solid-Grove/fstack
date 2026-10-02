@@ -1,179 +1,60 @@
 # 7. Paywall, checkout, and upsells
 
-## Lesson outcome
+Turn demonstrated value into an informed purchase decision. The paywall should answer: does this fit, what is included, what is charged now and later, and how does access begin?
 
-You'll design a payment sequence that turns accumulated desire into a clear offer, removes payment friction, and doesn't hide recurring terms.
+## Offer and pricing
 
-## The paywall continues the funnel
+Reflect the answers that genuinely shaped the recommendation. Test supported plan durations, ordering, defaults, introductory prices, and price framing. Explain a recommended plan's fit.
 
-The paywall shouldn't be the first place you explain the product. It gathers value that has already been loaded into a single decision.
+Keep these together before purchase:
 
-At this moment the user has four questions:
+- Included access and the actual initial charge and covered period.
+- Renewal amount, timing/condition, and automatic-renewal terms.
+- Trial or introductory terms, if offered.
+- Cancellation, support, and applicable refund information.
+- What happens immediately after payment.
 
-1. Is this actually for my situation?
-2. What exactly do I get?
-3. How much do I pay today, and later?
-4. What happens after I pay?
+Per-day or per-week equivalents remain secondary to billed totals. Judge introductory offers by renewal, cancellation, failed collection, refunds/disputes, and net value over time—not first-payment conversion alone. Use the [economics model](03-economics.md) for D0 actuals and later realized or forecast ROAS.
 
-If the funnel promised a personal result, the paywall has to repeat it. If the quiz identified a goal, plan duration, or barrier, the offer should show how that shaped the recommendation.
+## Optional mechanics
 
-## Three conversion mechanics worth testing
+| Mechanic | Conditions |
+| --- | --- |
+| Timed discount | A real discount, persistent expiry, a changed offer after expiry, and the same price in checkout. |
+| Money-back guarantee | A real policy with a clear window, conditions, request path, and support process. |
+| Wallet payment | Show only available methods and provide a supported fallback. Availability depends on device, browser, domain, and configuration. |
 
-### 1. A real discount with a countdown
+Treat these as experiments, not required paywall sections or guaranteed conversion improvements.
 
-A timer keeps the offer in short-term memory and adds urgency. It only works if the mechanics are honest:
+## Checkout and recovery
 
-- the discount exists;
-- the end time survives a refresh;
-- the offer changes once it expires;
-- checkout gets the same price the paywall showed.
+Use one clear action, necessary fields only, mobile/in-app-browser support, and an exact match to the selected plan. Handle authentication challenges, returns, processing, failure, cancellation, and retries. Verify payment on the server before showing a successful purchase; a browser callback or redirect is insufficient.
 
-In one production funnel we built a staged offer state: the initial timed discount persisted, and closing checkout could open a separate recovery offer. This is harder than a visual timer: it needs persistent timestamps, consistent price logic, and protection against a flash of the wrong price.
+After checkout closes, a recovery step can clarify terms, offer another plan or a genuine discount, or restore the selected plan. Preserve the ability to decline. Use a no-offer holdout to distinguish incremental purchases from customers who would have returned at full price. Compare net revenue, order value, refunds, and pLTV.
 
-### 2. Money-back guarantee
+### Unpaid follow-up
 
-A guarantee reduces perceived risk if it:
+Email recovery is separate from helping a paid customer obtain access. For eligible people with the required permission, define the trigger, timing, useful message, offer, and stopping condition. Use the actual goal or drop-off point without exposing sensitive answers.
 
-- actually applies;
-- states the window and the conditions;
-- has a simple request path;
-- is backed by a support process.
+Before each send, exclude purchasers, unsubscribed recipients, and anyone otherwise ineligible. Keep unsubscribe available, distinguish marketing from service delivery, and reference only results or offers that remain available.
 
-Don't write "no questions asked" if the team then demands lengthy proof or hides the contact channel.
+Test against an eligible no-send holdout. Measure incremental net revenue after discounts/refunds, complaints, and opt-outs; attributed sales alone do not prove recovery. Choose timing for the product.
 
-### 3. Inline Apple Pay / Google Pay
-
-A wallet button next to the selected plan shortens the gap between the decision and the payment. Show only a method that is genuinely available, and keep a clear card fallback.
-
-Wallet availability depends on device, browser, domain, and payment configuration. A disabled shell shouldn't look like a working button.
-
-A card payment may require 3-D Secure or another form of Strong Customer Authentication. Design the challenge, return URL, processing, and failure states. Don't treat the redirect after a challenge as confirmation of payment before server verification.
-
-## Pricing architecture
-
-It usually makes sense to start with 2–3 options so you can test:
-
-- plan duration;
-- default selection;
-- order;
-- first-period price;
-- renewal price;
-- price framing per day/week/month;
-- intro offer vs regular subscription.
-
-The default plan is a product recommendation, not a decorative badge. Explain why that duration matches the outcome.
-
-Show these together:
-
-- amount charged today;
-- billing period;
-- next charge amount and date/condition;
-- auto-renewal;
-- cancellation path.
-
-The smallest number on the screen shouldn't create a false impression of the real charge.
-
-## Intro offers and trials
-
-A cheap entry point raises first-purchase conversion but changes buyer quality. The bigger the gap between the initial and the renewal price, the higher the risk of cancellation, failed rebill, refund, and dispute.
-
-Our $1 weekly-trial test produced a lot of Meta purchases but weak renewal afterwards. It became a good example of why you can't judge an offer by the CPA of the first payment. The economics of that experience are covered in [the lesson on CAC, pLTV, and cash payback](03-economics.md).
-
-For every intro offer, model these in advance:
-
-- conversion to first payment;
-- first renewal success;
-- voluntary cancellation;
-- insufficient-funds failures;
-- refund/dispute rate;
-- D0/D30/D365 net ROAS.
-
-## Checkout
-
-A minimal checkout has:
-
-- one clear action;
-- a suitable wallet as the fast path;
-- a card fallback;
-- as few required fields as possible;
-- mobile/in-app-browser compatibility;
-- visible support and secure-payment context;
-- an exact match with the selected plan;
-- handling for processing, failure, cancel, and retry.
-
-Don't send the user to a success state from a frontend callback before server verification.
-
-## Checkout-close recovery
-
-Someone who opened checkout and closed it is different from a random visitor. You can test one recovery step:
-
-- explain a term that wasn't clear;
-- offer a different plan;
-- show a legitimate additional discount;
-- return them to the selected plan without losing state.
-
-A recovery offer can cannibalize full-price sales if it appears too early or to everyone. Keep a holdout group with no offer and measure separately:
-
-- recovered purchases;
-- how many control users came back and bought without a discount;
-- changes in AOV, refunds, and pLTV.
-
-## Follow up with people who have not purchased
-
-Unpaid checkout recovery is different from helping a paid customer get access. If the person supplied an email and the required permission, a short follow-up sequence can return them to a useful result, clarify the offer, or address a specific objection. Use the actual goal or drop-off point without exposing sensitive quiz answers.
-
-Define eligibility, trigger, timing, message purpose, offer, and sequence end. Before every send, suppress people who purchased, unsubscribed, or otherwise became ineligible. Keep unsubscribe available and keep service-delivery communication separate from marketing where required. A reminder must not claim a result or discount that is no longer available.
-
-Test the sequence against an eligible no-send holdout. Measure incremental net revenue after discounts and refunds, alongside complaints and opt-outs. Revenue attributed to recovery messages does not prove that those sales would otherwise have been lost. Start with a timing hypothesis suited to the product instead of treating another funnel's schedule or claimed uplift as a benchmark.
-
-[FunnelFox's email recovery guide](https://blog.funnelfox.com/retargeting-emails-in-web2app/) illustrates the sequence pattern; it is vendor guidance, not a causal estimate of email-only impact.
+[FunnelFox's email recovery guide](https://blog.funnelfox.com/retargeting-emails-in-web2app/) offers a useful sequence example; its vendor guidance is not a causal estimate of email impact.
 
 ## Post-purchase upsell
 
-An upsell appears after the main purchase is confirmed and solves an adjacent problem. It should:
+Offer an adjacent benefit only after the main purchase is verified. State its separate price and whether it recurs, obtain explicit authorization, and allow an easy decline with access to the original purchase intact.
 
-- follow logically from the creative/funnel theme;
-- state clearly whether the payment is one-time or recurring;
-- have its own explicit authorization;
-- not disguise itself as a confirmation button;
-- not block access to the product already purchased.
+Keep subscription and one-time purchases distinct in billing, verified events, refunds, and support. A saved payment method is not authorization for another charge.
 
-In our actual implementation we separated the subscription purchase and the one-click one-time offer into different product types and server-verified events. That matters for analytics, refunds, and support.
+## Measurement and exercise
 
-## What to measure
+Track paywall-to-checkout and checkout-to-purchase rates with their respective stage denominators. Also track method availability/share, failure reasons, plan mix, first-payment value, upsell take rate, first renewal, cancellations/refunds/disputes by offer, and ARPU/pLTV.
 
-- paywall view → checkout open;
-- checkout open → purchase;
-- method availability and method share;
-- failure rate and reason;
-- plan mix;
-- first payment value;
-- upsell take rate;
-- first renewal;
-- cancel/refund/dispute by offer;
-- ARPU and pLTV, not just conversion.
+Write the specification: relevant result and preview; supported plans and any recommended default; exact charges and terms; payment methods and failure states; any genuine guarantee; support/cancellation/refund links; recovery behavior; optional upsell consent; and events for each state.
 
-## Exercise
-
-Write a paywall spec:
-
-1. personalized result headline;
-2. result/plan preview;
-3. pricing options and a deliberate default;
-4. exact today/renewal disclosure;
-5. wallet and card flow;
-6. guarantee;
-7. support/cancel/refund links;
-8. checkout-close behavior;
-9. optional upsell with separate consent;
-10. events for every state.
-
-Then run a test: show the screen to someone with no context for five seconds. They should correctly state the amount charged today, the renewal, and what they get.
-
-## Sources
-
-- [Stripe: payment status updates](https://docs.stripe.com/payments/payment-intents/verifying-status)
-- [Apple App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/)
+Ask a reader to explain what they receive, what is charged now, what renews, and how access starts. Revise anything they misunderstand.
 
 ## Worksheet
 

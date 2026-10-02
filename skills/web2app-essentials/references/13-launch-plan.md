@@ -1,184 +1,70 @@
 # 13. Your first launch plan
 
-## Lesson outcome
+Reduce markets, offers, and integrations for the first launch while preserving the complete customer path:
 
-You'll leave with a launch sequence that tests the channel with a small controlled test and preserves the data you need for the next decision.
+**One segment → one promise → funnel → clear offer → checkout → identity → paid access → first value → lifecycle/support → cohort economics.**
 
-## Don't start with a production-perfect system
+## 1. Decide whether the channel can work
 
-Your first launch has to be complete enough to measure economics and deliver the value people paid for. It does not have to support every geo, payment method, language, and experiment type.
+Complete the [fit worksheet](templates/01-channel-fit-scorecard.md) and [economics model](templates/02-economics-model.md). Set segment, target CAC, margin, maximum cash payback, test budget, and loss limit. Check the market's distribution and billing rules.
 
-A good MVP cuts breadth, not the critical path.
+**Gate:** if even a credible upside case cannot pay back acquisition, revise the plan before building.
 
-Critical path:
+## 2. Define the promise and offer
 
-```text
-one segment
-→ one creative promise
-→ one funnel
-→ one clear offer
-→ one reliable checkout
-→ one identity path
-→ paid access
-→ first useful action
-→ lifecycle/support
-→ cohort economics
-```
+In the [research and offer brief](templates/03-research-offer-brief.md), explain the problem, mechanism, result, first product action, included access, price, renewal terms, and supporting evidence.
 
-## Phase 1. Decision and economics
+**Gate:** the value must be understandable before install, and the product must deliver what is promised.
 
-- Fill in the channel-fit scorecard.
-- Pick the segment and problem.
-- Build a downside/base/upside model.
-- Set target CAC, required margin, and max payback.
-- Set the test budget and loss limit.
-- Check storefront and policy constraints for the target geo.
+## 3. Prototype the whole journey
 
-**Gate:** if even the upside case doesn't pay back, don't build the funnel. Change the offer, the product, or the economics.
+Use the [screen map](templates/05-screen-map.md) and [paywall spec](templates/06-paywall-checkout-spec.md) to connect the creative, questions, feedback, branches, result, offer, and handoff. Identity requests need a useful purpose.
 
-## Phase 2. Research and offer
+Test comprehension with the target segment: what are they buying, what do they pay, and what happens next? Resolve misunderstandings before implementation.
 
-- Collect reviews, interviews, support tickets, and product data.
-- Write the entry promise.
-- Define the mechanism and the result.
-- Describe the price today and at renewal.
-- Choose the first useful action.
-- List the proof and claims you're allowed to use.
+## 4. Build reliable delivery and measurement
 
-**Gate:** if you can't honestly explain the value before install, test a different funnel model or angle.
+Connect acquisition, visitor/user IDs, funnel versions, payments, entitlement, login, and events. Use the [identity map](templates/07-identity-entitlement-map.md), [event dictionary](templates/08-event-dictionary.md), and [join worksheet](templates/12-end-to-end-join.md). Include idempotent payment processing, subscription management, recovery, and service messages.
 
-## Phase 3. Funnel prototype
+**Gate:** verify payment on the server and provide paid-access recovery when the deep link fails.
 
-- Creative-to-first-screen match.
-- Screen map with energy impact.
-- Relevant questions and give screens.
-- Real branching.
-- Personalized result.
-- Email capture with a functional reason.
-- Paywall and checkout prototype.
-- Handoff journeys.
+## 5. Verify the critical paths
 
-Run moderated tests with several people from the target segment. Test comprehension, not preference: what they expect, what they're buying, how much they pay, and what happens next.
+Complete the [launch QA checklist](templates/11-launch-qa.md), including:
 
-## Phase 4. Technical build
+- Branches, invalid input, back/refresh, and return visits.
+- Relevant devices and in-app browsers.
+- Matching plan, coupon, displayed price, and charge.
+- Wallet/card payment, processing, failure, retry, and checkout close.
+- One verified purchase and deduplicated events.
+- Installed/new app, desktop-to-phone, and lost-link recovery.
+- Correct access, first value, cancellation, refund, and support.
+- Disclosures and event/payment reconciliation.
 
-- Stable visitor and user IDs.
-- UTM and click capture.
-- Versioned funnel manifest and routes.
-- Payment customer and subscription binding.
-- Verified webhook processing.
-- Entitlement states.
-- App login and recovery.
-- Subscription management.
-- Transactional email.
-- Event dictionary and dashboards.
+**Gate:** resolve payment, access, measurement, and required customer-control failures before traffic.
 
-**Stop condition:** if a frontend success page is still the only proof of payment, or a deep link is the only access path, don't send real traffic until that's fixed.
+## 6. Run controlled traffic
 
-## Phase 5. QA
+Use a small set of creatives, recorded campaign IDs/funnel versions, and predefined spend limits. Monitor technical, payment, and support issues. Avoid simultaneous changes that obscure the baseline. Stop at critical failures or the agreed loss limit.
 
-Use the full [launch QA checklist](templates/11-launch-qa.md). The list below is a short route through it, not a replacement.
+## 7. Read the cohort before scaling
 
-Walk through:
+Follow the chain: traffic quality → entry-screen reach → paywall → checkout → verified purchase → product activation → cancellations/refunds → renewal → forecast versus actual.
 
-- Every answer and branch.
-- Invalid and empty inputs.
-- Refresh, back, and re-entry.
-- Meta, Instagram, and TikTok in-app browsers.
-- iOS and Android.
-- Small and large mobile, plus desktop.
-- Every payment method.
-- Checkout close, retry, and failure.
-- A test payment.
-- Success → install/open → login → access.
-- Paid-without-deep-link recovery.
-- Cancellation and refund.
-- Event and amount reconciliation.
-- Privacy, terms, and refund links.
+Increase spend when:
 
-A visible button is not proof. Confirm that the selected plan, coupon, wallet, and charged product all match.
+- Mature or defensibly forecast net cohort value exceeds CAC by the agreed margin.
+- Cash payback and payout timing fit the reserve.
+- Payments reconcile; access and recovery work.
+- Activation, retention, refunds, and disputes support the model.
+- Support/risk owners are ready; results extend beyond one lucky day or creative.
 
-## Phase 6. Controlled traffic
+Recheck these conditions after increasing budget because traffic quality can change.
 
-- One primary geo.
-- A small number of distinct creatives.
-- Separate IDs and a naming convention.
-- Spend gates set in advance.
-- Daily technical monitoring.
-- No parallel funnel tests in the first days.
-- Manual review of support and payment cases.
+## 8. Choose the next experiment
 
-The goal of the first phase is a readable baseline, not maximum revenue.
+Prioritize correctness, then the largest economic constraint. Use the [experiment card](templates/09-experiment-card.md) to record the hypothesis, metric, guardrails, evidence, decision, and learning.
 
-## Phase 7. Read the first cohort
+Expand markets or funnels when economics and operating capacity support them. Calendar milestones alone do not justify scale.
 
-Look at these in order:
-
-1. Traffic delivery and creative diagnostics.
-2. First and second screen drop.
-3. Paywall reach.
-4. Checkout and purchase.
-5. App sign-in and first value.
-6. Early cancellations and refunds.
-7. First renewal and payment failures.
-8. Prediction vs actual.
-
-Don't raise spend on a cheap first purchase until downstream signals confirm the offer quality.
-
-## Phase 8. First experiments
-
-Prioritize:
-
-1. Correctness bugs.
-2. The largest funnel drop with a clear hypothesis.
-3. An offer or pricing hypothesis with a financial model.
-4. Creative angle expansion.
-5. Handoff and activation improvement.
-
-Run one meaningful change per area. Document the result and the learning.
-
-## 30/60/90-day view
-
-### Days 0–30
-
-- A stable end-to-end flow.
-- A baseline for the funnel and payments.
-- First cohorts.
-- Support and risk process.
-- Correctness issues fixed.
-
-### Days 31–60
-
-- First structural experiments.
-- Refined pLTV prediction.
-- Creative refresh.
-- Activation and refund improvements.
-- A decision on the next segment or geo.
-
-### Days 61–90
-
-- Controlled scale, once the economics gate is met.
-- A second funnel or angle, once you have enough evidence.
-- Automated reporting and operations.
-- A roadmap for the infrastructure that actually limits growth.
-
-## Definition of ready to scale
-
-- pLTV exceeds CAC with the agreed margin.
-- Payback fits the cash plan.
-- Event and payment reconciliation are stable.
-- App access works, including the recovery path.
-- The first useful action is measured.
-- Early retention and refund signals don't contradict the model.
-- Support answers billing and access cases.
-- Dispute monitoring is on.
-- Several creatives can sustain traffic.
-- The next experiment pipeline is ready.
-
-## Next step
-
-FunnelsGrove helps app teams launch and scale web funnels. You can use this course as a standalone specification: fill in the worksheets first, then turn them into a funnel, integration, and experiment plan. The final worksheet combines those decisions into the short document your team uses for a go/no-go review.
-
-## Worksheet
-
-[Open the Web2Web launch brief](templates/13-launch-brief.md)
+**Output:** a [launch brief](templates/13-launch-brief.md) with decisions, QA evidence, risks, owners, budget, stop/scale rules, and first experiments.

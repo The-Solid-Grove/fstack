@@ -1,6 +1,6 @@
 # End-to-end join worksheet
 
-Use one test buyer and prove that every system can resolve the same journey without a manual email search.
+Trace one test buyer across systems using linked IDs, without manual email searches.
 
 | Layer | ID/object | Created by | Stored where | Joined through | Verified? |
 | --- | --- | --- | --- | --- | --- |

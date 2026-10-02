@@ -1,6 +1,6 @@
 # Economics model
 
-Use one currency throughout, and record whether each rate is a decimal or a percentage.
+Use one currency and decimal rates in calculations: 2% = 0.02.
 
 ## Assumptions
 
@@ -53,6 +53,4 @@ Scale condition:
 
 `Closing cash = opening cash − ad spend − other cash costs + payouts received`.
 
-The model passes a unit check only when every multiplication and division uses compatible units. For CPM and CTR, use `CPC = (CPM ÷ 1,000) ÷ CTR`.
-
-Reference check: with `$20 CPM` and `2% CTR`, `($20 ÷ 1,000) ÷ 0.02 = $1 CPC`.
+Check units: `CPC = (CPM ÷ 1,000) ÷ CTR`. At $20 CPM and 2% CTR, CPC is $1.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Web-to-Web Essentials"
-  short_description: "Learn Web-to-Web growth from the FunnelsGrove course"
+  short_description: "Practical Web-to-Web growth lessons and worksheets"
   default_prompt: "Use $web2app-essentials to answer this Web-to-Web growth question from the relevant course lessons and worksheets."

@@ -1,18 +1,18 @@
-# Screen map and energy audit
+# Screen map and effort/value audit
 
-Map every funnel screen, the value it gives the customer, and the energy it adds or removes from the journey.
+Map each screen's purpose, useful value, and effort asked. Assess effort qualitatively.
 
-| # | Screen ID | Job | Main message | User action | Value given | Energy +/−/0 | Data captured | Branch/next | Event | Proof needed |
+| # | Screen ID | Job | Main message | User action | Value given | Effort asked | Data captured | Branch/next | Event | Proof needed |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | | | | | | | | | | |
 
 ## Audit
 
-- Does screen 1 continue the promise made in the creative?
-- Does every question affect feedback, the result, the offer, or the start of the product?
-- Does every cluster of asks get a useful give screen in return?
-- Is personalization tied to real answers?
-- Has the user already seen every value point that appears on the paywall?
-- Are projections qualified and supported?
-- Does every branch end correctly?
-- Is a single message understandable in a five-second glance?
+- Does the opening match the ad promise?
+- Do questions affect feedback, fit, the result, the offer, or product start?
+- Does useful feedback justify the effort asked?
+- Does personalization reflect real answers?
+- Has the journey explained the value offered at the paywall?
+- Are projections supported and qualified?
+- Does every branch reach the correct destination?
+- Are the main message and next action clear at a glance?

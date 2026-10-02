@@ -1,19 +1,19 @@
 ---
 name: web2app-essentials
-description: Use when answering Web-to-Web growth questions or teaching the FunnelsGrove course: channel fit, economics, acquisition, onboarding, payments, analytics, experiments, launch, and subscription risk. Also applies to web-to-app with web checkout.
+description: Use when answering Web-to-Web growth questions about channel fit, economics, funnel design, payments, analytics, experiments, launch, and subscription operations. Also applies to web-to-app with web checkout.
 ---
 
 # Web-to-Web Essentials
 
-The text of the [FunnelsGrove course](https://funnelsgrove.com/learn/web2web), with lessons and worksheets exported verbatim into `references/` and the published one-pager text transcribed from its canonical data. The invocation remains `web2app-essentials` for compatibility. Web-to-Web describes web acquisition and web purchase; the product can be an app or a browser product.
+Concise lessons and worksheets for acquiring customers and selling subscriptions on the web. The product can be an app or a browser product. References stay synchronized with the [course](https://funnelsgrove.com/learn/web2web); the invocation remains `web2app-essentials` for compatibility.
 
 ## Use the course
 
-Start with [the course index](references/index.md) for the learning path, or load the relevant lesson below. Read linked worksheets when the user needs an applied output. Preserve source dates, populations, denominators, and uncertainty when explaining numbers. Check current primary sources for time-sensitive platform, pricing, or legal decisions; report newer findings separately and update the canonical course before re-exporting.
+Start with [the index](references/index.md), or read the relevant lesson below. Use its worksheet when the user needs a plan or decision. Keep metric definitions, denominators, forecast uncertainty, and source populations clear. Verify current platform, pricing, and legal requirements for the user's actual market and offer; the short [industry reading list](references/index.md#industry-guides) provides context.
 
 | Question | Lesson |
 | --- | --- |
-| What the channel is and evidence of scale | [Introduction](references/01-what-is-web2web.md) |
+| Purchase paths and responsibilities | [Introduction](references/01-what-is-web2web.md) |
 | Whether it fits the product | [Channel fit](references/02-channel-fit.md) |
 | CAC, pLTV, ROAS, reach, cash payback | [Economics](references/03-economics.md) |
 | System components and ownership | [Architecture](references/04-system-architecture.md) |
@@ -27,7 +27,7 @@ Start with [the course index](references/index.md) for the learning path, or loa
 | Failed renewals, disputes, compliance | [Risk](references/12-risk-and-compliance.md) |
 | Launch sequence and gates | [Launch plan](references/13-launch-plan.md) |
 
-[Templates index](references/templates/index.md) routes all 13 worksheets. [Lesson one-pagers](references/one-pagers.md) preserve the published field memos. Root-relative links and images in the exact export resolve against `https://funnelsgrove.com`; they are public website resources, not local files.
+[Templates](references/templates/index.md) provide 13 worksheets; [one-pagers](references/one-pagers.md) summarize the lessons. Root-relative links resolve against `https://funnelsgrove.com`.
 
 ## Ownership
 
