@@ -35,11 +35,11 @@ Before the purchase commitment, show clear recurring terms: what is charged now,
 - Keep cancellation and support easy to find. A recovery offer must preserve the ability to decline or cancel.
 - Separate service delivery messages from marketing consent where applicable.
 
-Read the canonical course's [risk and compliance lesson](../../web2app-essentials/references/12-risk-and-compliance.md) for the current sources and operational review. Resolve requirements per market, offer, platform, and effective date; this checklist is not a claim that every jurisdiction mandates an identical layout.
+Read the canonical course's [risk and compliance lesson](../../web2app-essentials/references/12-risk-and-compliance.md) for operational review. Verify current requirements against primary sources for the market, offer, platform, and effective date; this checklist is not a claim that every jurisdiction mandates an identical layout.
 
 ## Specific distinctions retained from source verification
 
-The FTC's amended negative-option rule was vacated in July 2025; ROSCA and applicable state laws remain relevant. Confirm current requirements through the course sources before a launch.
+The FTC's amended negative-option rule was vacated in July 2025; ROSCA and applicable state laws remain relevant. Confirm current requirements against current regulator guidance and applicable law before a launch.
 
 Maine permits a checkbox, electronic signature, or another affirmative action for renewal consent; a checkbox is not its only mechanism. Maryland's cited reminder covers a free gift or trial over 14 days, with a 3–21-day notice window and statutory exceptions, not every discounted offer. Connecticut's pre-retention cancellation disclosure cited below concerns telephone cancellation; its annual reminder is a separate rule. Virginia's same-medium rule has an in-person enrollment exception.
 
