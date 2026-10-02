@@ -22,7 +22,7 @@ for skill in ('create-funnel', 'edit-funnel'):
     assert 'qa-funnel' in (r / 'skills' / skill / 'SKILL.md').read_text()
 for skill in r.glob('skills/*/SKILL.md'):
     assert str(skill.relative_to(r)) in (r / 'README.md').read_text(), skill
-assert len(list((r / 'skills/writing-funnel-copy/references').rglob('*.md'))) == 5
+assert len(list((r / 'skills/writing-funnel-copy/references').rglob('*.md'))) == 6
 assert not (r / 'skills/writing-funnel-copy/references/funnels-research').exists()
 assert 'Reach second step | 30–60%' in (r / 'skills/writing-funnel-copy/references/funnel-benchmarks-and-compliance.md').read_text()
 for p in r.glob('skills/**/*.md'):
