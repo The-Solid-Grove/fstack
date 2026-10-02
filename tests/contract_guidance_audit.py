@@ -309,6 +309,7 @@ def audit_repo(root: Path) -> list[Diagnostic]:
         "skills/create-funnel/SKILL.md",
         "skills/edit-funnel/SKILL.md",
         "skills/writing-funnel-copy/SKILL.md",
+        "skills/design-funnel/SKILL.md",
     )
     skill_text = {path: (root / path).read_text() for path in skill_paths}
     for path, text in skill_text.items():

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Funnel"
+  short_description: "Design every funnel pattern with a coherent shared style"
+  default_prompt: "Use $design-funnel with my existing Design.md, approved Pre-work and Emotional Arc, and complete screen copy to inspect references, mock up every actual screen pattern, establish a coherent style, and implement and verify the journey."

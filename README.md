@@ -18,7 +18,7 @@ cd ~/.fstack
 ./setup --host auto --skip-fgrove-cli
 ```
 
-Requires Git and Bash. Keep the checkout: the installer links your agent's skills to these files.
+Requires Git and Bash. Keep the checkout: the installer links your agent's skills to these files. Setup and the first fstack skill used in a conversation check for updates and offer an update when one is available.
 
 [Host options, FunnelsGrove setup, and updates →](docs/getting-started.md)
 
@@ -36,21 +36,25 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 **Feel the flow before building it.** Turn finished copy into a temporary clickable mockup. Review the questions, pacing, and calls to action in a local preview before committing to implementation.
 
+### [design-funnel](skills/design-funnel/SKILL.md)
+
+**Make the whole journey feel coherent.** Reuse `Design.md`, approved strategy and emotional arc, and complete copy. Inspect references and generate a representative mockup for every actual screen pattern, settle the shared style, then implement and review every screen. Optional reference discovery uses your configured `fgrove` account and reference access; otherwise continue with supplied references and `Design.md`.
+
 ### [create-funnel](skills/create-funnel/SKILL.md)
 
 **Start from the right template.** Use your connected `fgrove` account to choose one of three templates, create a hosted funnel, download its source, and establish the product brief and `Design.md` before customization.
 
 ### [edit-funnel](skills/edit-funnel/SKILL.md)
 
-**Improve the funnel you already have.** Sync an existing FunnelsGrove funnel, make the change, and work through preview and QA. Publishing follows the target and environment you authorize.
+**Improve the funnel you already have.** Reuse its remembered working folder, preserve local changes while refreshing source, and work through preview and QA. Publishing follows the target and environment you authorize.
 
 ### [qa-funnel](skills/qa-funnel/SKILL.md)
 
-**Check the whole experience.** Review design, mobile layouts, every branch, checkout, registration, and subscription management. Run it independently or verify the funnel after publishing, with evidence and clear blockers.
+**Check the whole experience.** Review screen images, rendered design, mobile layouts, every branch, checkout, registration, and subscription management. Run it independently or verify the funnel after publishing, with evidence and clear blockers.
 
 ## Put them to work
 
-**Research → Write → Preview → Build → QA → Iterate**
+**Research → Write → Preview copy → Design → Build → QA → Iterate**
 
 Start wherever your project is. For example:
 
@@ -60,7 +64,7 @@ Start with the product, audience, and ad promise. Then use preview-funnel
 to make the approved copy clickable for review.
 ```
 
-[Setup and maintenance](docs/getting-started.md) · [Funnel QA checklist](docs/funnel-qa-checklist.md)
+[Setup and maintenance](docs/getting-started.md) · [Funnel QA](skills/qa-funnel/SKILL.md)
 
 ---
 

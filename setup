@@ -3,7 +3,7 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Usage: ./setup [--host codex|claude|auto] [--repo-root PATH] [--skills-dir PATH] [--skip-fgrove-cli] [--quiet]
+Usage: ./setup [--host codex|claude|auto] [--repo-root PATH] [--skills-dir PATH] [--skip-fgrove-cli] [--skip-update-check] [--quiet]
 
 Links fstack skills into Codex and/or Claude Code skill directories.
 
@@ -13,6 +13,8 @@ Options:
   --skills-dir  Override skill install directory. Use with --host codex or --host claude.
   --skip-fgrove-cli
                 Do not check or update the global fgrove CLI.
+  --skip-update-check
+                Do not check for fstack updates.
   --quiet       Print only errors.
   -h, --help    Show this help.
 EOF
@@ -23,6 +25,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 SKILLS_DIR=""
 QUIET=0
 SKIP_FGROVE_CLI=0
+SKIP_UPDATE_CHECK=0
 
 log() {
   [ "$QUIET" -eq 1 ] || echo "$@"
@@ -59,6 +62,10 @@ while [ "$#" -gt 0 ]; do
       ;;
     --skip-fgrove-cli)
       SKIP_FGROVE_CLI=1
+      shift
+      ;;
+    --skip-update-check)
+      SKIP_UPDATE_CHECK=1
       shift
       ;;
     --quiet|-q)
@@ -100,6 +107,20 @@ ensure_fgrove_cli() {
     "$helper" --quiet
   else
     "$helper"
+  fi
+}
+
+check_fstack_update() {
+  [ "$SKIP_UPDATE_CHECK" -eq 1 ] && return 0
+  local helper="$REPO_ROOT/scripts/check-fstack-update"
+  if [ ! -x "$helper" ]; then
+    log 'fstack: update check unavailable; continue with setup.'
+    return 0
+  fi
+  if [ "$QUIET" -eq 1 ]; then
+    "$helper" --repo-root "$REPO_ROOT" --quiet
+  else
+    "$helper" --repo-root "$REPO_ROOT"
   fi
 }
 
@@ -156,6 +177,7 @@ if [ -n "$SKILLS_DIR" ] && [ "$HOST" = "auto" ]; then
   exit 1
 fi
 
+check_fstack_update
 ensure_fgrove_cli
 
 if [ "$HOST" = "auto" ]; then

@@ -1,4 +1,4 @@
 interface:
   display_name: "QA Funnel"
-  short_description: "Test funnel design, flows, and published behavior"
-  default_prompt: "Use $qa-funnel to test this funnel's design and end-to-end behavior, and report evidence and blockers."
+  short_description: "Review screen images, rendered designs, and funnel flows"
+  default_prompt: "Use $qa-funnel to review these screen images or the rendered funnel against its copy, references and Design.md, test the requested functional scope, and report revision evidence and blockers."

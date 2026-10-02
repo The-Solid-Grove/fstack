@@ -229,7 +229,7 @@ For the reading example, a headline such as “A session for your available time
 
 ### Paywall architecture
 
-Use [paywall guidance](funnel-paywall-best-practices.md) and [benchmark/compliance rules](funnel-benchmarks-and-compliance.md) for the detailed offer requirements. Connect the offer to the approved transformation and the result just demonstrated.
+Use [offer, checkout, and access practices](funnel-best-practices.md#offers-checkout-and-access) for the detailed offer requirements. Connect the offer to the approved transformation and the result just demonstrated.
 
 Make the included value, actual first charge, covered period, renewal/trial terms, and purchase action easy to locate before commitment. Use supporting proof and FAQs to resolve specific remaining objections. Explain delivery and access; show cancellation, support, and any verified refund conditions where needed. Keep per-day framing secondary to actual billed totals.
 
@@ -253,10 +253,6 @@ Order the sections around the person's remaining decision, not a universal paywa
 
 Check ad → opening → questions → demonstrated value → result → offer → access for one consistent promise. Read the path as a person with minimal context: what have they learned, what remains uncertain, and what are they being asked to do now? Follow each material branch, not only the happy path.
 
-Return the screen specification together with its approved strategic sources and unresolved gaps. Where useful, add a short prioritized experiment list with hypothesis, primary outcome, and guardrails using [conversion experiments](funnel-conversion-best-practices.md). Suggested tests do not establish an uplift before measurement.
+Return the screen specification together with its approved strategic sources and unresolved gaps. Where useful, add a short prioritized experiment list with hypothesis, primary outcome, and guardrails using [measurement and experiment practices](funnel-best-practices.md#measurement-and-experiments). Suggested tests do not establish an uplift before measurement.
 
 For a built result, use [qa-funnel design checks](../../qa-funnel/references/design.md) and the rest of `qa-funnel` within the requested testing scope. A clickable copy mockup is a separate `preview-funnel` task when requested.
-
-## Historical source
-
-This framework restores the practical detail of the [historical Funnel Psychology Framework](https://github.com/The-Solid-Grove/fstack/blob/88b37738dc36571fb28acf9a292cbd3fb781ce5b/skills/writing-funnel-copy/references/funnel-psychology-framework.md): the five-column strategy, mental fuel, evidence-led value, attention, trust, progressive effort, narrative sections, Emotional Arc, and full screen specification. The current methods treat psychological models as planning heuristics and preserve evidence requirements and meaningful user choice. The staged approvals are defined in the main skill.

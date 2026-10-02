@@ -18,6 +18,14 @@ The installer creates symlinks in `~/.codex/skills/` and/or `~/.claude/skills/`.
 
 For research and copy, you need Git, Bash, and your agent. For clickable previews, the bundled workflow also uses Python 3 and browser access.
 
+`design-funnel` uses existing `Design.md` and approved copy artifacts, an
+image-generation tool for representative mockups, and image/browser inspection
+for QA. Optional [CLI reference access](../skills/design-funnel/references/cli-references.md)
+requires a configured `fgrove` account and reference access. Follow the installed
+CLI's help; if authenticated access is unavailable, continue with supplied
+references, product assets and `Design.md`, recording missing reference coverage.
+A hosted implementation also requires access to its FunnelsGrove project.
+
 <details>
 <summary><strong>Building or editing with FunnelsGrove</strong></summary>
 
@@ -32,17 +40,42 @@ Run `./setup --host auto` without `--skip-fgrove-cli` to check and update the gl
 
 `create-funnel` requires a connected `fgrove` account, an existing project, and a CLI release with `fgrove templates` and `fgrove funnels create`. It creates from one of three hosted templates through the API, downloads the new funnel source, and establishes `Design.md`; no template checkout is needed.
 
+Creation and editing [remember one working folder per funnel](../skills/edit-funnel/references/local-workspace.md). Later edits resume there, including across conversations. The local registry stores API/workspace/funnel identity and the folder path; it contains no credentials or funnel source.
+
 </details>
 
 ## Update
 
+Setup checks fstack automatically. Agents also check once per conversation, before the first fstack skill runs. The check compares the checkout with `origin/main`, so it detects improvements even when `VERSION` has not changed. It fetches Git metadata and leaves installed files and local edits intact. A failed network check leaves the current skills usable.
+
+Run the check manually with:
+
 ```bash
-cd ~/.fstack
-git pull --ff-only
-./setup --host auto --skip-fgrove-cli
+./scripts/check-fstack-update
 ```
 
-Because the skills are linked, pulling updates changes the installed files. Commit your own adaptations before updating. Omit `--skip-fgrove-cli` when you also want setup to check and update the CLI.
+For an offline installation, use `./setup --skip-update-check --skip-fgrove-cli`. The two flags control the pack and CLI checks independently.
+
+### Agent update check
+
+Before the first fstack skill in a conversation, resolve the loaded skill directory to its physical location. Installed skills are symlinks; derive the checkout from their target, not from `~/.codex` or `~/.claude`.
+
+```bash
+fstack_skill_dir="$(cd "<directory-containing-the-loaded-SKILL.md>" && pwd -P)"
+fstack_checkout="$(cd "$fstack_skill_dir/../.." && pwd -P)"
+"$fstack_checkout/scripts/check-fstack-update"
+```
+
+When an update is available, show the installed and latest revisions and offer to update. Continue the requested work with the current skills while awaiting the answer. Ask once per conversation; a declined or unavailable update does not block the task.
+
+When the user accepts, inspect the checkout first. For a clean `main` branch that can fast-forward, run:
+
+```bash
+git -C "$fstack_checkout" pull --ff-only origin main
+"$fstack_checkout/setup" --host auto --skip-fgrove-cli --skip-update-check
+```
+
+Preserve the user's original host/custom skill-directory options when rerunning setup. Keep local edits, custom branches, detached checkouts, and divergent history intact; explain the specific state and agree how to retain that work before updating it. After an update, reread the active `SKILL.md` and its needed references before continuing. The check itself never applies an update.
 
 ## Team setup
 
@@ -51,7 +84,8 @@ Each teammate installs the pack. Add a short pointer to your project's `AGENTS.m
 ```markdown
 Use fstack for Web-to-Web funnel work: web2app-essentials for research,
 writing-funnel-copy for strategy and screen copy, preview-funnel for
-clickable copy review, create-funnel for new FunnelsGrove projects,
+clickable copy review, design-funnel for visual patterns and shared style,
+create-funnel for new FunnelsGrove projects,
 edit-funnel for hosted changes, and qa-funnel for design and flow testing. Read the matching SKILL.md and
 follow the project's managed FunnelsGrove docs for implementation.
 ```
@@ -62,7 +96,7 @@ Remove the installed symlinks first. This preserves directories if you replaced 
 
 ```bash
 for host in ~/.codex/skills ~/.claude/skills; do
-  for skill in create-funnel edit-funnel preview-funnel writing-funnel-copy web2app-essentials qa-funnel; do
+  for skill in create-funnel edit-funnel preview-funnel design-funnel writing-funnel-copy web2app-essentials qa-funnel; do
     link="$host/$skill"
     if [ -L "$link" ] && [ "$(readlink "$link")" = "$HOME/.fstack/skills/$skill" ]; then
       rm "$link"
@@ -90,7 +124,7 @@ for suite in tests/*.sh; do
 done
 ```
 
-Current version: `0.6.0`
+The pack version is recorded in [`VERSION`](../VERSION).
 
 ## Course references
 

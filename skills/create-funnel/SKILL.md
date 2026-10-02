@@ -5,6 +5,8 @@ description: Use when creating a new hosted FunnelsGrove funnel from one of thre
 
 # Create Funnel
 
+Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+
 Create through the connected FunnelsGrove account, then download the new funnel's source with the CLI. The three template cards describe different starting structures; choose for the product and journey, then establish its own identity in `Design.md`.
 
 ## FunnelsGrove Contract Gate
@@ -52,6 +54,8 @@ fgrove docs --dir <dest>
 
 Creation waits only for downloadable draft source, while the initial preview continues independently. Download the returned funnel ID with `sync down`; `funnels clone` is for copying an existing funnel and is not this workflow. If creation times out or fails after the server accepted it, follow the printed recovery instructions and retain its ID/key; a local failure is not evidence that no hosted funnel exists.
 
+After a successful download, [remember this folder](../edit-funnel/references/local-workspace.md#remember-the-folder) with its API, workspace ID, and returned funnel ID so later edits reuse it.
+
 Read the downloaded `AGENTS.md` and `docs/funnelsgrove/START-HERE.md`. Managed documentation is the implementation authority, including the exact step-type pages for edited screens. Preserve generated runtime configuration, source structure, image optimization, and ignored environment files.
 
 Completion: new hosted funnel ID, downloaded source and sync manifest, and current managed docs. An account or setup failure remains a named blocker; a filesystem copy does not satisfy this step.
@@ -72,7 +76,7 @@ Use `Design.md` and the downloaded contracts to update identity, requested conte
 - Keep user-facing routes meaningful. Register new images in the manifest and on their owning steps according to managed asset/preloading contracts; retain build-time raster compression and variants.
 - Keep offer terms, prices, proof and legal details tied to supplied facts. Track missing facts in the brief instead of inventing them.
 
-Use `writing-funnel-copy` when creating or revising the journey's copy. For a full visual design, reach an available `design-funnel` workflow with the intake and `Design.md`; otherwise implement the authorized design directly from those inputs. A scaffolding-only request ends with a working starter and its design brief, not an invented complete product funnel.
+Use `writing-funnel-copy` when creating or revising the journey's copy. For a full visual design, use [design-funnel](../design-funnel/SKILL.md) with the existing `Design.md`, approved Pre-work and Emotional Arc, and complete screen content. Establish the shared style with references and mockups for every actual pattern before full implementation. Resume in the remembered downloaded folder and retain its managed contracts. A scaffolding-only request ends with a working starter and its design brief, not an invented complete product funnel.
 
 ## 5. Verify and hand off
 

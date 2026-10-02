@@ -5,6 +5,8 @@ description: Use when turning finished funnel copy, screen-by-screen funnel spec
 
 # Preview Funnel
 
+Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+
 ## Overview
 
 Build a simple, temporary click-through that makes funnel copy easy to read,
@@ -14,6 +16,11 @@ good by default: use the bundled warm-editorial stylesheet
 (`references/preview-style.css`). Explicit user design, branding, and asset
 requests take precedence over this default; adapt the mockup to them while
 preserving navigation, content fit, and sticky CTA checks.
+
+For a full visual design, use [design-funnel](../design-funnel/SKILL.md) with the
+approved content and existing `Design.md`. It develops references and reviewed
+mockups for every actual screen pattern before implementing the shared style.
+This temporary preview remains the workflow for reviewing copy and pacing.
 
 ## Workflow
 

@@ -5,6 +5,8 @@ description: Use when writing or revising quiz-to-paywall funnel copy, positioni
 
 # Writing Funnel Copy
 
+Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+
 Turn the product, audience, and ad promise into a coherent purchase journey. For a new or substantially redesigned funnel, work in this order:
 
 **Understand the product → Pre-work → user approval → Emotional Arc → user approval → screen copy.**
@@ -24,11 +26,9 @@ These gates remain mandatory when tests and builds pass, the change looks small,
 ## References by task
 
 - New or redesigned funnel: **read the complete [Funnel Psychology Framework](references/funnel-psychology-framework.md) before preparing Pre-work.** It contains the detailed strategy, emotional progression, worked examples, and screen-writing criteria.
-- Product understanding, positioning, or `PRODUCT_SENSE.md`: read [funnel research](references/funnel-research.md) during step 1 when evidence is missing.
-- Pricing, checkout, trial, upsell, or renewal copy: [paywall guidance](references/funnel-paywall-best-practices.md) and [benchmark/compliance rules](references/funnel-benchmarks-and-compliance.md).
-- Conversion diagnosis and A/B ideas: [conversion experiments](references/funnel-conversion-best-practices.md).
-- Design and functional testing of a built funnel: `qa-funnel`.
-- Acquisition, economics, analytics, and the full course: `web2app-essentials` (Web-to-Web Essentials).
+- Research, drafting, or review: read the relevant sections of [Funnel Best Practices](references/funnel-best-practices.md). Its task index routes to product research, journey, screen copy, offers, and experiments. Cite stable `FBP-###` IDs in findings and experiment proposals.
+
+Use `qa-funnel` for design and functional testing of a built funnel; use `web2app-essentials` for acquisition, economics, analytics, and the full Web-to-Web course.
 
 ## Workflow for a new or redesigned funnel
 
@@ -58,18 +58,18 @@ Present **Emotional Arc** with a short explanation of the overall progression an
 
 ### 4. Write the screen copy
 
-Use the approved arc's screen IDs and follow the framework's [screen-copy specification](references/funnel-psychology-framework.md#screen-copy). Write the headline, body, choices, CTA, visible proof, visual direction, actual personalization, and intended transition for each screen. Read the paywall and benchmark/compliance references before drafting offer terms. Clearly mark unresolved proof slots and product facts for confirmation.
+Use the approved arc's screen IDs and follow the framework's [screen-copy specification](references/funnel-psychology-framework.md#screen-copy). Write the headline, body, choices, CTA, visible proof, visual direction, actual personalization, and intended transition for each screen. Apply the relevant [screen-copy practices](references/funnel-best-practices.md#screen-copy) and read [offer practices](references/funnel-best-practices.md#offers-checkout-and-access) before drafting billing or renewal terms. Clearly mark unresolved proof slots and product facts for confirmation.
 
 **Done when:** each screen fulfills its approved role, all required copy fields are present, claims have sources or explicit unresolved slots, and the [review checks](references/funnel-psychology-framework.md#review-checks) pass. Return the full screen copy with links to its approved Pre-work and Emotional Arc, plus any remaining gaps and useful experiments.
 
 ### 5. Hand off within the requested scope
 
-When visualization is requested, use `preview-funnel` for a temporary local mockup. When implementation is requested, use `create-funnel` or `edit-funnel`, then `qa-funnel` to test the built result. Strategy or copy approval is not permission to publish.
+For a temporary copy-review clickthrough, use [preview-funnel](../preview-funnel/SKILL.md). For full visual design, use [design-funnel](../design-funnel/SKILL.md) with the existing `Design.md`, approved Pre-work and Emotional Arc, and complete screen content. It establishes references and representative mockups for the journey's actual patterns before implementing the shared style. When implementation is requested, use `create-funnel` or `edit-funnel`, then `qa-funnel` to test the built result. Strategy or copy approval is not permission to publish.
 
 ## Continuing, revising, or reviewing existing work
 
 - Reuse explicitly approved Pre-work and Emotional Arc when they still match the product, audience, promise, offer, and current requested scope. State what approval you are relying on; an existing file or silence alone is not approval.
-- For a local wording correction that preserves the existing strategy, offer, sequence, and emotional progression, inspect the affected screen and adjacent transitions, read the relevant framework rules, and return the scoped revision. Historical approval records are not required for this narrow correction; avoid rebuilding unrelated screens.
+- For a local wording correction that preserves the existing strategy, offer, sequence, and emotional progression, inspect the affected screen and adjacent transitions, read the relevant best practices, and return the scoped revision. Historical approval records are not required for this narrow correction; avoid rebuilding unrelated screens.
 - A change to the strategic focus, audience, promise, mechanism, or offer reopens Pre-work approval and then arc approval for the affected scope. A change to the sequence or emotional progression reopens arc approval before rewriting the affected screens.
 - For a new or redesigned flow with missing approvals, prepare the missing stage for the requested scope and obtain approval in order. Keep an unchanged approved stage intact.
 - A review-only request can return findings and recommendations directly. Apply the workflow above when moving from findings into rewritten copy.

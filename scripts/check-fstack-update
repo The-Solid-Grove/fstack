@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+QUIET=0
+
+usage() {
+  cat <<'EOF'
+Usage: scripts/check-fstack-update [--repo-root PATH] [--quiet]
+
+Checks the checkout against origin/main. Fetches Git metadata only; updates
+require the user's approval. Offline checks leave the installed skills usable.
+
+Options:
+  --repo-root PATH  fstack checkout. Default: this script's checkout.
+  --quiet          Suppress check results.
+  -h, --help       Show this help.
+EOF
+}
+
+log() { [ "$QUIET" -eq 1 ] || printf '%s\n' "$*"; }
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --repo-root)
+      [ -n "${2:-}" ] || { echo 'Missing value for --repo-root' >&2; exit 1; }
+      REPO_ROOT="$2"; shift 2 ;;
+    --repo-root=*) REPO_ROOT="${1#--repo-root=}"; shift ;;
+    --quiet|-q) QUIET=1; shift ;;
+    --help|-h) usage; exit 0 ;;
+    *) echo "Unknown option: $1" >&2; usage >&2; exit 1 ;;
+  esac
+done
+
+fetch_latest() (
+  # Keep the Git transport in its own process group so the deadline stops it too.
+  set -m
+  GIT_TERMINAL_PROMPT=0 git -C "$REPO_ROOT" \
+    -c credential.interactive=never \
+    -c core.sshCommand='ssh -o BatchMode=yes -o ConnectTimeout=5' \
+    -c http.lowSpeedLimit=1 -c http.lowSpeedTime=10 \
+    fetch --quiet --no-tags origin main >/dev/null 2>&1 &
+  local fetch_pid=$! watchdog_pid status=0
+  (
+    trap 'exit 0' TERM
+    trap 'kill "${timer_pid:-}" 2>/dev/null || true' EXIT
+    sleep 15 & timer_pid=$!
+    wait "$timer_pid"
+    kill -- "-$fetch_pid" 2>/dev/null || true
+  ) &
+  watchdog_pid=$!
+  wait "$fetch_pid" 2>/dev/null || status=$?
+  kill "$watchdog_pid" 2>/dev/null || true
+  wait "$watchdog_pid" 2>/dev/null || true
+  return "$status"
+)
+
+if ! fetch_latest; then
+  log 'fstack: update check unavailable; continue with the installed skills.'
+  exit 0
+fi
+installed="$(git -C "$REPO_ROOT" rev-parse HEAD)"
+latest="$(git -C "$REPO_ROOT" rev-parse FETCH_HEAD)"
+version="$(git -C "$REPO_ROOT" show HEAD:VERSION 2>/dev/null || printf 'unversioned')"
+
+if git -C "$REPO_ROOT" merge-base --is-ancestor "$latest" "$installed"; then
+  log "fstack: current ($version; ${installed:0:8})."
+else
+  latest_version="$(git -C "$REPO_ROOT" show "$latest:VERSION" 2>/dev/null || printf 'unversioned')"
+  log "fstack: update available ($version ${installed:0:8} -> $latest_version ${latest:0:8})."
+  if ! git -C "$REPO_ROOT" merge-base --is-ancestor "$installed" "$latest"; then
+    log 'Local and remote history have diverged; review both before updating.'
+  fi
+  branch="$(git -C "$REPO_ROOT" symbolic-ref --quiet --short HEAD || true)"
+  if [ "$branch" != main ]; then
+    log "Checkout is on ${branch:-a detached HEAD}; review it before updating main."
+  fi
+  if [ -n "$(git -C "$REPO_ROOT" status --porcelain)" ]; then
+    log 'Checkout has local changes; preserve them before updating.'
+  fi
+  log 'Ask the user whether to update fstack before changing this checkout.'
+fi
