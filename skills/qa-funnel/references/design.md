@@ -2,9 +2,30 @@
 
 Apply these checks to every in-scope screen. Product and accessibility requirements are defects when broken; preferences about screen count, word count, colors, illustrations, and persuasion are test hypotheses.
 
+## Evidence scope
+
+Read the screen ID/revision, exact copy, selected reference, `Design.md`, artifact
+or URL, and prior findings. Open the actual artifact before judging it.
+
+- **Image:** check copy fidelity, option count and selection cues, hierarchy,
+  reference composition, target brand/style, consistency with the other mockups,
+  legibility, complete offer disclosures, clipping and visible defects. Inspect
+  the full composition for long screens. A reference supplies design inspiration,
+  not permission to reuse its claims or brand assets.
+- **Rendered:** apply the image checks to the actual screen, then verify the
+  layouts and states below. Reach the screen through its real flow and inspect
+  incoming/outgoing navigation, selected/error/loading states and relevant long
+  content. Whole-journey business-flow and release QA use the parent skill.
+
+An image-direction pass leaves responsive behavior, semantic accessibility,
+keyboard operation, font loading, CSS-pixel target sizes and functional checks
+unverified. Mark required runtime checks **blocked — requires rendered UI**;
+mark checks outside the requested scope **not applicable** with a reason.
+Image evidence alone cannot establish a completed rendered design.
+
 ## Layout and accessibility
 
-Inspect `375x667`, `393x852`, `402x874`, and `1280x800` CSS-pixel viewports. Also check reflow at 320 CSS pixels and enlarged text; the four baseline layouts alone are not an accessibility audit.
+For rendered screens, inspect `375x667`, `393x852`, `402x874`, and `1280x800` CSS-pixel viewports. Also check reflow at 320 CSS pixels and enlarged text; the four baseline layouts alone are not an accessibility audit.
 
 - Headline, visual, and primary action communicate one clear job. The main action is easy to find. Longer paywalls and enlarged text may scroll; content remains reachable.
 - No horizontal overflow, overlap, clipped copy, broken images, or sticky bars covering content, focused controls, disclosures, or the last option. Bottom action bars have an opaque background and safe-area spacing.
@@ -25,6 +46,20 @@ Inspect `375x667`, `393x852`, `402x874`, and `1280x800` CSS-pixel viewports. Als
 
 ## Evidence
 
-Capture screenshots for the relevant viewport and state, with the defect annotated or described. Record measured contrast and keyboard/zoom results separately from visual impressions. Browser screenshots alone cannot establish a complete accessibility conformance claim.
+Record results in the task's `design-qa.md` or existing QA report: screen ID,
+pattern/variant, revision, image/rendered scope, artifact/URL, copy/reference and
+`Design.md` sources, viewport/state, check status, evidence and expected versus
+actual result. Use **pass**, **fail**, **blocked** or **not applicable**, with reasons.
+For defects, include severity and reproduction details. Capture screenshots for
+the relevant viewport and state, with the defect annotated or described. Record
+measured contrast and keyboard/zoom results separately from visual impressions.
+Browser screenshots alone cannot establish a complete accessibility conformance claim.
+
+Reopen corrected images/screens and update the evidence for that revision.
+Shared token/component changes invalidate affected screen results. A screen's
+required checks must pass or have a specifically accepted exception before it
+is marked final; unavailable inspection capability remains blocked. Report
+image-direction and rendered-design completion separately from function and
+release readiness.
 
 Sources: [WCAG text contrast](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), [non-text contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html), [target size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html), [reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html).

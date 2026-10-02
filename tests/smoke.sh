@@ -6,7 +6,7 @@ trap 'rm -rf "$TMP"' EXIT
 bash -n "$ROOT/setup" "$ROOT/scripts/ensure-fgrove-cli" "$ROOT/scripts/check-fstack-update"
 for host in codex claude; do
   HOME="$TMP/$host" "$ROOT/setup" --host "$host" --skip-fgrove-cli --skip-update-check --quiet
-  for skill in create-funnel edit-funnel preview-funnel writing-funnel-copy web2app-essentials qa-funnel; do
+  for skill in create-funnel edit-funnel preview-funnel design-funnel writing-funnel-copy web2app-essentials qa-funnel; do
     link="$TMP/$host/.$host/skills/$skill"
     test -L "$link"
     test "$(cd "$link" && pwd -P)" = "$ROOT/skills/$skill"

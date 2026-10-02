@@ -76,7 +76,7 @@ Use `Design.md` and the downloaded contracts to update identity, requested conte
 - Keep user-facing routes meaningful. Register new images in the manifest and on their owning steps according to managed asset/preloading contracts; retain build-time raster compression and variants.
 - Keep offer terms, prices, proof and legal details tied to supplied facts. Track missing facts in the brief instead of inventing them.
 
-Use `writing-funnel-copy` when creating or revising the journey's copy. For a full visual design, reach an available `design-funnel` workflow with the intake and `Design.md`; otherwise implement the authorized design directly from those inputs. A scaffolding-only request ends with a working starter and its design brief, not an invented complete product funnel.
+Use `writing-funnel-copy` when creating or revising the journey's copy. For a full visual design, use [design-funnel](../design-funnel/SKILL.md) with the existing `Design.md`, approved Pre-work and Emotional Arc, and complete screen content. Establish the shared style with references and mockups for every actual pattern before full implementation. Resume in the remembered downloaded folder and retain its managed contracts. A scaffolding-only request ends with a working starter and its design brief, not an invented complete product funnel.
 
 ## 5. Verify and hand off
 

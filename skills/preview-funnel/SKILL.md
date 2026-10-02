@@ -17,6 +17,11 @@ good by default: use the bundled warm-editorial stylesheet
 requests take precedence over this default; adapt the mockup to them while
 preserving navigation, content fit, and sticky CTA checks.
 
+For a full visual design, use [design-funnel](../design-funnel/SKILL.md) with the
+approved content and existing `Design.md`. It develops references and reviewed
+mockups for every actual screen pattern before implementing the shared style.
+This temporary preview remains the workflow for reviewing copy and pacing.
+
 ## Workflow
 
 1. Find the source copy: `PLAN.md`, screen-by-screen spec, content files, or

@@ -64,7 +64,7 @@ Use the approved arc's screen IDs and follow the framework's [screen-copy specif
 
 ### 5. Hand off within the requested scope
 
-When visualization is requested, use `preview-funnel` for a temporary local mockup. When implementation is requested, use `create-funnel` or `edit-funnel`, then `qa-funnel` to test the built result. Strategy or copy approval is not permission to publish.
+For a temporary copy-review clickthrough, use [preview-funnel](../preview-funnel/SKILL.md). For full visual design, use [design-funnel](../design-funnel/SKILL.md) with the existing `Design.md`, approved Pre-work and Emotional Arc, and complete screen content. It establishes references and representative mockups for the journey's actual patterns before implementing the shared style. When implementation is requested, use `create-funnel` or `edit-funnel`, then `qa-funnel` to test the built result. Strategy or copy approval is not permission to publish.
 
 ## Continuing, revising, or reviewing existing work
 

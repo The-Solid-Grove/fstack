@@ -18,6 +18,13 @@ The installer creates symlinks in `~/.codex/skills/` and/or `~/.claude/skills/`.
 
 For research and copy, you need Git, Bash, and your agent. For clickable previews, the bundled workflow also uses Python 3 and browser access.
 
+`design-funnel` uses existing `Design.md` and approved copy artifacts, an
+image-generation tool for representative mockups, and image/browser inspection
+for QA. Funnel Screens lookup through `fgrove references` is optional: use it
+when the installed CLI supports it, and otherwise continue with supplied or
+browser references and record any missing reference coverage. A hosted account
+is needed only when the requested implementation uses FunnelsGrove.
+
 <details>
 <summary><strong>Building or editing with FunnelsGrove</strong></summary>
 
@@ -76,7 +83,8 @@ Each teammate installs the pack. Add a short pointer to your project's `AGENTS.m
 ```markdown
 Use fstack for Web-to-Web funnel work: web2app-essentials for research,
 writing-funnel-copy for strategy and screen copy, preview-funnel for
-clickable copy review, create-funnel for new FunnelsGrove projects,
+clickable copy review, design-funnel for visual patterns and shared style,
+create-funnel for new FunnelsGrove projects,
 edit-funnel for hosted changes, and qa-funnel for design and flow testing. Read the matching SKILL.md and
 follow the project's managed FunnelsGrove docs for implementation.
 ```
@@ -87,7 +95,7 @@ Remove the installed symlinks first. This preserves directories if you replaced 
 
 ```bash
 for host in ~/.codex/skills ~/.claude/skills; do
-  for skill in create-funnel edit-funnel preview-funnel writing-funnel-copy web2app-essentials qa-funnel; do
+  for skill in create-funnel edit-funnel preview-funnel design-funnel writing-funnel-copy web2app-essentials qa-funnel; do
     link="$host/$skill"
     if [ -L "$link" ] && [ "$(readlink "$link")" = "$HOME/.fstack/skills/$skill" ]; then
       rm "$link"

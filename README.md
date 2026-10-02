@@ -36,6 +36,10 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 **Feel the flow before building it.** Turn finished copy into a temporary clickable mockup. Review the questions, pacing, and calls to action in a local preview before committing to implementation.
 
+### [design-funnel](skills/design-funnel/SKILL.md)
+
+**Make the whole journey feel coherent.** Reuse `Design.md`, approved strategy and emotional arc, and complete copy. Inspect references and generate a representative mockup for every actual screen pattern, settle the shared style, then implement and review every screen. Funnel Screens references are available through the CLI when supported.
+
 ### [create-funnel](skills/create-funnel/SKILL.md)
 
 **Start from the right template.** Use your connected `fgrove` account to choose one of three templates, create a hosted funnel, download its source, and establish the product brief and `Design.md` before customization.
@@ -46,11 +50,11 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ### [qa-funnel](skills/qa-funnel/SKILL.md)
 
-**Check the whole experience.** Review design, mobile layouts, every branch, checkout, registration, and subscription management. Run it independently or verify the funnel after publishing, with evidence and clear blockers.
+**Check the whole experience.** Review screen images, rendered design, mobile layouts, every branch, checkout, registration, and subscription management. Run it independently or verify the funnel after publishing, with evidence and clear blockers.
 
 ## Put them to work
 
-**Research → Write → Preview → Build → QA → Iterate**
+**Research → Write → Preview copy → Design → Build → QA → Iterate**
 
 Start wherever your project is. For example:
 
