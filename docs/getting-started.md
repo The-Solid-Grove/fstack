@@ -30,7 +30,7 @@ fgrove login
 
 Run `./setup --host auto` without `--skip-fgrove-cli` to check and update the global CLI against npm as part of setup.
 
-`create-funnel` needs access to a FunnelsGrove monorepo checkout containing `apps/funnel-template`. The published CLI does not include that template. The skill helps locate the checkout before scaffolding.
+`create-funnel` requires a connected `fgrove` account, an existing project, and a CLI release with `fgrove templates` and `fgrove funnels create`. It creates from one of three hosted templates through the API, downloads the new funnel source, and establishes `Design.md`; no template checkout is needed.
 
 </details>
 
