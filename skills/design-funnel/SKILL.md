@@ -60,8 +60,9 @@ Distinct layouts or states needing a different composition get their own variant
 These are design categories, not FunnelsGrove runtime metadata.
 
 Select and inspect a reference for every actual pattern and variant. Use
-[Funnel Screens access](references/funnel-screens.md) through the CLI when
-available; the reference explains discovery, inspection and fallbacks. Preserve
+[optional CLI references](references/cli-references.md) with a configured `fgrove`
+account and reference access; the guide covers discovery, inspection and the
+fallback when authenticated access is unavailable. Preserve
 supplied reference selections and inspect their surrounding journey. Prefer a
 coherent reference approach, adding complementary examples for gaps rather than
 collecting an unrelated look for each screen.

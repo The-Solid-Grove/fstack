@@ -1,30 +1,23 @@
-# Funnel Screens references
+# CLI references
 
-Use [Funnel Screens](https://www.funnelsgrove.com/funnel-screens) as an optional
-reference source. When its CLI capability is available, inspect it for the
-journey's actual patterns. Existing user-selected references remain authoritative
-for the selection; service availability does not change that choice.
+Reference discovery is optional and requires a configured `fgrove` account with
+reference access. Use it only through the authenticated CLI. Existing user-selected
+references remain authoritative for the selection; access availability does not
+change that choice.
 
 ## Discover and inspect through the CLI
 
 Check `fgrove references --help` and each relevant subcommand's help for the
-installed release. These read operations discover reference material; they do
-not select or modify the user's hosted funnel.
+installed release's supported commands and authentication requirements. CLI help
+is the authority for command syntax and options. These read operations discover
+reference material; they do not select or modify the user's hosted funnel.
 
-```bash
-fgrove references categories --json
-fgrove references list --json
-fgrove references list --category <category> --step-type <step-type> --json
-fgrove references show <funnel-id> --json
-fgrove references steps <funnel-id> --json
-fgrove references step <funnel-id> <step-id-or-position> --json
-```
-
-Use the supported `--site-url <site-url>` option when a different Funnel Screens
-site is requested. Select category/type values from the CLI's returned values,
-and use returned identities and URLs instead of constructing image paths.
-For a supplied link containing funnel and screen IDs, retain both and inspect
-the surrounding ordered journey as context.
+Use the supported reference commands to discover categories and filtered funnels,
+read a full journey or ordered step descriptions, and inspect an individual step's
+text, controls and image. Select category/type values from the returned catalog,
+and retain returned funnel/screen identities and image locations. For a selected
+screen, inspect its surrounding ordered journey as context. Keep library access
+within the authenticated CLI and use only the image locations it returns.
 
 Read the available recognized visible text (`content.text`), buttons/options, and
 `visualDescription` alongside each step's image and provenance. Open the actual
@@ -47,11 +40,13 @@ its content; managed FunnelsGrove docs own implementation contracts. Incomplete
 captures, unknown types and loading/retry states require visual judgment; reaching
 a paywall does not certify the journey's quality or branch coverage.
 
-## When the service or a pattern is unavailable
+## When access or a pattern is unavailable
 
-If the command is missing, access fails, the response cannot be interpreted or
-a needed pattern is absent, report the specific limitation and continue with
-supplied reference images, the browser library, or inspected product/brand screens.
+If the command, configured account or reference access is missing, authentication
+fails, the response cannot be interpreted or a needed pattern is absent, report
+the specific limitation and continue with user-supplied reference images and
+inspected product/brand assets. Do not bypass unavailable CLI access through a
+website or public endpoint.
 Keep the user's selected reference and use complementary material for a named
 gap. When no reference for a pattern is accessible, record that absence and
 create its mockup from the approved content and shared `Design.md`; do not claim

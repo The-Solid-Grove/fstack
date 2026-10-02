@@ -20,10 +20,11 @@ For research and copy, you need Git, Bash, and your agent. For clickable preview
 
 `design-funnel` uses existing `Design.md` and approved copy artifacts, an
 image-generation tool for representative mockups, and image/browser inspection
-for QA. Funnel Screens lookup through `fgrove references` is optional: use it
-when the installed CLI supports it, and otherwise continue with supplied or
-browser references and record any missing reference coverage. A hosted account
-is needed only when the requested implementation uses FunnelsGrove.
+for QA. Optional [CLI reference access](../skills/design-funnel/references/cli-references.md)
+requires a configured `fgrove` account and reference access. Follow the installed
+CLI's help; if authenticated access is unavailable, continue with supplied
+references, product assets and `Design.md`, recording missing reference coverage.
+A hosted implementation also requires access to its FunnelsGrove project.
 
 <details>
 <summary><strong>Building or editing with FunnelsGrove</strong></summary>

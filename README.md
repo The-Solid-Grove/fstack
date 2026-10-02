@@ -38,7 +38,7 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ### [design-funnel](skills/design-funnel/SKILL.md)
 
-**Make the whole journey feel coherent.** Reuse `Design.md`, approved strategy and emotional arc, and complete copy. Inspect references and generate a representative mockup for every actual screen pattern, settle the shared style, then implement and review every screen. Funnel Screens references are available through the CLI when supported.
+**Make the whole journey feel coherent.** Reuse `Design.md`, approved strategy and emotional arc, and complete copy. Inspect references and generate a representative mockup for every actual screen pattern, settle the shared style, then implement and review every screen. Optional reference discovery uses your configured `fgrove` account and reference access; otherwise continue with supplied references and `Design.md`.
 
 ### [create-funnel](skills/create-funnel/SKILL.md)
 
