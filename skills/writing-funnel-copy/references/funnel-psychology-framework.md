@@ -11,7 +11,7 @@ intents:
 
 A funnel should help a person move from an entry situation to an informed decision about a specific product. Pre-work chooses the promise and the reason to believe it. Emotional Arc determines what the person needs to understand and feel along the way. Screen copy expresses that approved journey.
 
-The [main skill](../SKILL.md#workflow-for-a-new-or-redesigned-funnel) owns the workflow and its two separate approval gates. Use this reference for the methods, artifact formats, and quality criteria at each stage. [Funnel Best Practices](funnel-best-practices.md) is the numbered catalog for research, writing, offers, and experiments; cite its IDs when applying a rule or reporting a finding.
+The [main skill](../SKILL.md#workflow-for-a-new-or-redesigned-funnel) owns the workflow and its two separate approval gates. Use this reference for the methods, artifact formats, and quality criteria at each stage.
 
 ## Contents
 
@@ -214,17 +214,26 @@ After the arc is approved, turn each row into a screen specification. Keep the s
 
 These fields express messaging intent. Derive implementation details from the managed project contract as required by the main skill.
 
-### Apply the writing practices
+### Writing guidance
 
-Use [FBP-005–011](funnel-best-practices.md#journey-and-personalization) for continuity, useful questions, value, actual personalization, proof, effort, and processing. Use [FBP-012–017](funnel-best-practices.md#screen-copy) to turn the approved role into the headline, body, options, CTA, tone, and visual direction.
+- **Headline:** lead with the relevant idea. Around six words can be a useful editing target, not a maximum. Keep necessary meaning rather than compressing it into vague hype.
+- **Body:** use one or two short sentences when enough; give additional explanation for a complex choice, result, or disclosure. Each sentence should answer a question or support the decision.
+- **Questions:** ask one clear thing at a time. Make options meaningfully distinct and include uncertainty or another appropriate answer when the product supports it. Explain how a personal question will help.
+- **Value screens:** demonstrate or explain something specific. “Great choice” alone is not a return of value after a demanding question.
+- **Results:** reflect actual inputs and explain the connection. Describe recommendations with appropriate uncertainty; do not invent scores, diagnoses, earnings, timelines, or guarantees.
+- **CTAs:** make the next step predictable. “See the sample” should lead to the sample; a paid action should be clear before commitment.
+- **Processing:** describe only actual work. A storytelling sequence should be presented as content, not a fabricated analysis or fake personalized calculation.
+- **Tone:** use the audience's language without humiliation, exaggerated urgency, or moral judgments about declining the product.
 
 For the reading example, a headline such as “A session for your available time” can introduce a real sample matched to the selected duration. A supporting sentence should identify what the sample shows and what purchase would add. Its purpose is to demonstrate fit, not promise that the person will read every day.
 
 ### Paywall architecture
 
-Apply [FBP-018–028](funnel-best-practices.md#offers-checkout-and-access) for offer structure, billing, consent, checkout, recovery, and access. Connect the offer to the approved transformation and demonstrated result, then order its sections around the person's remaining objections. In the reading example, that means explaining what paid access adds to the sample and how the chosen session length carries into the product.
+Use [offer, checkout, and access practices](funnel-best-practices.md#offers-checkout-and-access) for the detailed offer requirements. Connect the offer to the approved transformation and the result just demonstrated.
 
-A claim or offer fact awaiting confirmation stays visibly unresolved in the draft and cannot be treated as ready to publish.
+Make the included value, actual first charge, covered period, renewal/trial terms, and purchase action easy to locate before commitment. Use supporting proof and FAQs to resolve specific remaining objections. Explain delivery and access; show cancellation, support, and any verified refund conditions where needed. Keep per-day framing secondary to actual billed totals.
+
+Order the sections around the person's remaining decision, not a universal paywall length. Add an upsell or recovery offer only when it is within scope and supported by the product. A claim or offer fact awaiting confirmation stays visibly unresolved in the draft and cannot be treated as ready to publish.
 
 ## Review checks
 
@@ -244,6 +253,6 @@ A claim or offer fact awaiting confirmation stays visibly unresolved in the draf
 
 Check ad → opening → questions → demonstrated value → result → offer → access for one consistent promise. Read the path as a person with minimal context: what have they learned, what remains uncertain, and what are they being asked to do now? Follow each material branch, not only the happy path.
 
-Return the screen specification together with its approved strategic sources and unresolved gaps. Where useful, add a short prioritized experiment list with hypothesis, primary outcome, and guardrails using [FBP-029–033](funnel-best-practices.md#measurement-and-experiments). Cite relevant practice IDs in findings and proposals.
+Return the screen specification together with its approved strategic sources and unresolved gaps. Where useful, add a short prioritized experiment list with hypothesis, primary outcome, and guardrails using [measurement and experiment practices](funnel-best-practices.md#measurement-and-experiments). Suggested tests do not establish an uplift before measurement.
 
 For a built result, use [qa-funnel design checks](../../qa-funnel/references/design.md) and the rest of `qa-funnel` within the requested testing scope. A clickable copy mockup is a separate `preview-funnel` task when requested.
