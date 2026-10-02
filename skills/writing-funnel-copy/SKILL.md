@@ -69,9 +69,9 @@ When visualization is requested, use `preview-funnel` for a temporary local mock
 ## Continuing, revising, or reviewing existing work
 
 - Reuse explicitly approved Pre-work and Emotional Arc when they still match the product, audience, promise, offer, and current requested scope. State what approval you are relying on; an existing file or silence alone is not approval.
-- For a local wording correction within that approved direction, inspect the affected screen and adjacent transitions, read the relevant framework rules, and return the scoped revision. Avoid rebuilding unrelated screens.
+- For a local wording correction that preserves the existing strategy, offer, sequence, and emotional progression, inspect the affected screen and adjacent transitions, read the relevant framework rules, and return the scoped revision. Historical approval records are not required for this narrow correction; avoid rebuilding unrelated screens.
 - A change to the strategic focus, audience, promise, mechanism, or offer reopens Pre-work approval and then arc approval for the affected scope. A change to the sequence or emotional progression reopens arc approval before rewriting the affected screens.
-- If required approvals are missing, prepare the missing stage for the requested scope and obtain approval in order. Keep an unchanged approved stage intact.
+- For a new or redesigned flow with missing approvals, prepare the missing stage for the requested scope and obtain approval in order. Keep an unchanged approved stage intact.
 - A review-only request can return findings and recommendations directly. Apply the workflow above when moving from findings into rewritten copy.
 
 Copy research owns messaging and observed structure only. The synced project's `AGENTS.md` and `docs/funnelsgrove/START-HERE.md` own step metadata, answer persistence, routing, analytics, payments, and helpers. Follow their exact step-type and contract pages when translating copy into code.
