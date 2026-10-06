@@ -103,10 +103,12 @@ and selection semantics. If the user requests another format or image generation
 is unavailable, use a scoped alternative such as rendered mockups and identify
 the format/limitation. Keep the same coverage and review requirements.
 
-After each revision, use [qa-funnel](../qa-funnel/SKILL.md) with the exact copy,
-reference, `Design.md` and prior findings. Compare target and compatible source
-screens using the [reference comparison checks](../qa-funnel/references/design.md#reference-comparison).
-Correct in-scope failures and record current evidence in `design-qa.md`.
+For every new or revised screen, use [qa-funnel](../qa-funnel/SKILL.md) with
+exact copy, reference, `Design.md` and prior findings. Follow its
+[per-screen calibration loop](../qa-funnel/references/design.md#per-screen-calibration-loop):
+compare the source, review text and composition together, correct, reopen and
+recheck. Reconcile copy, design, screen map, QA and approval/status documents
+before presenting that revision. Current evidence belongs in `design-qa.md`.
 
 **Show the three actual target screens to the user**, with their matched source
 screens alongside or linked, and a short explanation of borrowed composition and
@@ -157,7 +159,7 @@ is explicitly in scope.
 
 Run [qa-funnel](../qa-funnel/SKILL.md) design scope whenever a screen reaches its
 final revision. Supply screen ID/revision, artifact or URL, copy, reference,
-`Design.md` and prior findings. Apply the shared [design checks](../qa-funnel/references/design.md),
+`Design.md` and prior findings. Apply the shared [calibration loop and design checks](../qa-funnel/references/design.md#per-screen-calibration-loop),
 fix in-scope failures and recheck the changed revision. Shared style/component
 changes invalidate affected screen results; refresh their evidence.
 

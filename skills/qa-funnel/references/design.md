@@ -43,6 +43,18 @@ inspect against the approved content/style; do not report a reference comparison
 as passed. The [opening feedback checkpoint](../../design-funnel/SKILL.md#first-three-screen-feedback-checkpoint)
 uses these comparisons when presenting the first actual designs to the user.
 
+## Per-screen calibration loop
+
+For every new or revised target screen in an authorized design/edit task, repeat **compare → Design QA → correct → recheck** before marking the revision ready for review or extending its pattern. An inspection-only QA request reports findings and returns corrections/document edits to the owning workflow unless those edits are already authorized:
+
+1. Open the actual target, exact copy, `Design.md` and matched source. Compare hierarchy, density, controls and action placement; record borrowed structure, intentional differences and defects. If the source is unavailable, name the limitation and review against the target contract.
+2. Review text and composition together. Identify what the visitor must understand and decide now; remove repetition, shorten wording and move optional explanation to an appropriate detail surface. Retain meaningful choices, evidence qualifications, fit limits and all required offer/billing disclosures. A source's word count is context, not a quota.
+3. Correct the target and canonical copy together. Preserve approved strategy, answer semantics and transitions. Return consequential strategy/arc changes to their existing approval workflow; ordinary wording/layout corrections proceed within scope. Keep readable type and reachable content rather than shrinking essential text to fit.
+4. Reopen the corrected artifact and rerun affected checks. A previous revision's pass never transfers automatically; shared style/copy changes invalidate affected screens. Record current screen ID/revision, comparison, findings, corrections, evidence and pass/fail/blocked status in `design-qa.md`.
+5. Reconcile the output documents: current `COPY.md` or equivalent, `Design.md`, screen map, QA report and approval/status record must describe the same revision. Remove stale active instructions, obsolete duplicate copy and broken links. Keep superseded assets or history clearly labeled and outside the current handoff; preserve unrelated work.
+
+Completion: every in-scope screen has a current comparison or named source limitation, a text/design review, resolved required defects or an explicit exception, and consistent output documents. State image-direction results separately from pending rendered behavior; this loop does not replace the first-three-screen user feedback checkpoint.
+
 ## Layout and accessibility
 
 For rendered screens, inspect `375x667`, `393x852`, `402x874`, and `1280x800` CSS-pixel viewports. Also check reflow at 320 CSS pixels and enlarged text; the four baseline layouts alone are not an accessibility audit.

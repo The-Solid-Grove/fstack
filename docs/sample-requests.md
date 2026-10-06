@@ -28,6 +28,9 @@ writing the screen copy.
 For design, inspect the reference funnel and match source screens by job and
 interaction. Show the first three actual target designs, with readable matched
 reference comparisons, and wait for my feedback before extending the rest.
+For every screen, compare → Design QA of text and design → correct → recheck.
+Keep the current copy, Design.md, screen map, QA report and status consistent;
+remove stale active instructions and clearly label superseded artifacts.
 Keep unresolved offer facts visible and do not publish or collect payments.
 ```
 
