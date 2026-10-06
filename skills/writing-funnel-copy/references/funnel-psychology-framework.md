@@ -1,7 +1,7 @@
 ---
 id: funnel-psychology-framework
 title: Funnel Psychology Framework
-summary: Detailed Pre-work, Emotional Arc, and screen-copy methods with worked examples and review criteria.
+summary: A structured strategy-to-copy method with a compact, cause-based Emotional Arc and review checks.
 intents:
   - research
   - plan
@@ -9,250 +9,230 @@ intents:
 
 # Funnel Psychology Framework
 
-A funnel should help a person move from an entry situation to an informed decision about a specific product. Pre-work chooses the promise and the reason to believe it. Emotional Arc determines what the person needs to understand and feel along the way. Screen copy expresses that approved journey.
+Build a journey that helps a person understand a real product and decide whether it fits. Work in three artifacts: **Pre-work chooses the promise; Emotional Arc earns each change in belief; screen copy expresses the approved journey.**
 
-The [main skill](../SKILL.md#workflow-for-a-new-or-redesigned-funnel) owns the workflow and its two separate approval gates. Use this reference for the methods, artifact formats, and quality criteria at each stage.
+The [main skill](../SKILL.md#workflow-for-a-new-or-redesigned-funnel) owns the separate Pre-work and Emotional Arc approval handoffs. This reference owns their method and output format. An emotional arc describes intended feelings and beliefs, not animation or measured psychological outcomes.
 
 ## Contents
 
-- [Pre-work](#pre-work): five-column strategy, worked example, transformation, and approval-ready output.
-- [Emotional Arc](#emotional-arc): feelings, beliefs, narrative jobs, screen map, and effort/value review.
-- [Psychology in practice](#psychology-in-practice): mental fuel, evidence-led value, trust, attention, and progressive effort.
-- [Screen copy](#screen-copy): fields, writing rules, and offer architecture.
-- [Review checks](#review-checks): screen-level and whole-journey checks before handoff.
+- [Pre-work](#pre-work): establish evidence, choose one transformation and present the strategy.
+- [Emotional Arc](#emotional-arc): write one progression and one compact table, then review its causes.
+- [Psychology in practice](#psychology-in-practice): use effort, trust and attention as design questions.
+- [Screen copy](#screen-copy): turn approved rows into complete screen specifications.
+- [Review checks](#review-checks): verify each screen and the whole journey.
 
 ## Pre-work
 
-Pre-work is the strategic argument behind the funnel. Complete it from the product brief and audience evidence before proposing screens. A list of features or a list of attractive headlines is not a substitute.
+### 1. Establish the foundation
 
-### Build the five-column table
+Read the product brief, actual product evidence and any supplied acquisition creative. Fill these six items in short statements; label missing facts and hypotheses rather than inventing them:
 
-Use one row per meaningful problem or decision tension. Connect the columns across each row; avoid five unrelated lists. Use audience language from supplied interviews, reviews, support, or research where available. Mark an inferred pain or emotional outcome as a hypothesis rather than presenting it as a customer quote.
+| Item | Establish |
+| --- | --- |
+| Product and mechanism | What the product actually does, how it works, and its limitations. |
+| Audience and situation | Who is deciding, what they are trying to do, and what makes it difficult now. |
+| Entry state and promise | Actual source/ad/referral when supplied; likely expectations and doubts. A proposed acquisition context stays a hypothesis. |
+| Offer and access | Free versus paid value, confirmed billing terms and the actual post-purchase path. Unknown prices, trials or entitlements remain open. |
+| Evidence | Feature demonstrations, source-linked customer observations and permitted proof. Separate evidence of a capability from evidence of an outcome. |
+| Brand feeling | One primary and optionally one supporting tone grounded in the product, audience and existing brand. This is a messaging direction; design tokens and motion belong in `Design.md`. |
 
-| Column | What to establish | How it changes the funnel |
-| --- | --- | --- |
-| **Problems** | The specific situation, friction, and consequence. What is the person trying to do? What do they do now? When does it become difficult, confusing, slow, unreliable, or easy to abandon? | Selects the recognizable entry situation and the discovery questions worth asking. |
-| **Why current solutions fail** | The structural mismatch in the person's current approach: setup burden, rigid schedule, scattered information, missing feedback, or another evidenced limitation. Distinguish this from blaming the person. | Creates the explanatory bridge between the problem and the product's mechanism. Choose a primary failure to address. |
-| **Purchase barriers** | Reasons this person might doubt, postpone, or decline: relevance, trust, complexity, time, privacy, price, prior disappointment, or a viable free alternative. | Determines which evidence, explanation, or disclosure must appear before the associated request. |
-| **Concrete benefits** | What the product actually lets the person do differently. Connect each benefit to a verified feature or mechanism and a demonstrable example. | Supplies the value demonstrations, result, and offer recap. “AI-powered” alone is a feature claim, not a benefit. |
-| **Desired emotional outcome** | How that useful change could feel: more capable, clear, in control, supported, or confident. Tie it to the actual problem rather than promising a transformed identity from a purchase. | Gives the Emotional Arc its destination and helps choose tone and imagery. |
+Do the available research before asking for facts. Ask only for missing facts or decisions that materially change the strategy. A minimal request can start the work; it cannot establish pricing, audience motives or capabilities by itself.
 
-Cover the important tensions rather than filling a row quota. Identify the strongest row as the **primary anchor**: it should matter to the audience, match the entry promise, and be addressable by the real product. Supporting rows can answer objections or explain value later; they need not each become a screen.
+### 2. Build the five-column table
 
-### Worked example: a reading-practice app
-
-This is an illustrative product brief, not evidence about a real app: a paid app offers short reading sessions, adjustable reminders, a session-length preference, and a progress history. It has no evidence that it improves reading speed. Assume the audience situations below came from interviews; in a real task, attach the actual sources.
+Use one row per meaningful problem or decision tension. Connect the columns across the row. Use sourced audience language when available; mark inferred pains and feelings as hypotheses.
 
 | Problems | Why current solutions fail | Purchase barriers | Concrete benefits | Desired emotional outcome |
 | --- | --- | --- | --- | --- |
-| P1: I plan to read after work, then skip when the evening gets busy. | My plan depends on finding one uninterrupted long block. | Another plan may demand more time than I have. | Choose a short session and see what fits that time preference. | Reading feels manageable; I can choose a realistic next step. |
-| P2: I forget where I left off and spend time getting started again. | My notes and reading materials are scattered. | Setup may cost more effort than it saves. | Resume from a saved session with the material in one place. | I feel oriented and ready to continue. |
-| P3: I cannot tell whether I have been consistent. | I rely on memory instead of a visible history. | I doubt whether a subscription will be useful after the first week. | Review an accurate history of completed sessions. | I can see what I have done and make my own adjustment. |
+| Specific situation, friction and consequence. | Structural mismatch in the current approach, rather than blame. | The reason this person might doubt, postpone or decline. | A verified mechanism enabling a useful change. | The bounded feeling that useful change could support. |
 
-For this brief, P1 is a plausible primary anchor. The mechanism is a short session matched to a stated time preference. The benefit is a manageable session, not a guaranteed daily habit or faster reading. P2 and P3 provide supporting value only if those capabilities are confirmed.
+Cover consequential tensions, not a row quota. Choose one **primary anchor** that matches the audience, entry promise and product. Order supporting benefits by relevance to that decision and strength of evidence; explain the priority in a few lines. This is a value priority, not an invented emotional score. Supporting rows need not become separate screens.
 
-### Make the strategic choice explicit
+### 3. State one transformation
 
-After the table, write:
+Complete: **From [entry situation and belief] to [credible destination and belief], through [real mechanism].**
 
-1. **Primary anchor:** the problem and failure of the current approach the funnel will lead with, and why they fit this audience and acquisition promise.
-2. **Mechanism → benefit → emotional destination:** what the product does, what useful change that enables, and why that matters to the person.
-3. **Transformation:** “From [entry situation and belief] to [credible destination and belief], through [real mechanism].” Distinguish confidence gained in the funnel from outcomes that require later product use.
-4. **Entry promise:** the expectation created by the ad or referral and the useful thing the funnel can honestly deliver. Identify what is free and what requires purchase when that affects the expectation.
-5. **Evidence and open decisions:** attach sources to capabilities and claims; identify proof gaps, assumptions, offer facts, and any strategic choice the user must resolve.
+Distinguish what the funnel can demonstrate now from what requires later product use. For example, seeing a manageable reading-session sample is an immediate benefit; building a lasting habit is a later outcome that has not been proved by the sample.
 
-For the example: “From expecting reading to require a free evening to seeing a manageable session option, through a preview matched to the time I can set aside.” The funnel can demonstrate the option now; sustained practice depends on later use. An ad promising a free reading-speed assessment would be a mismatch that must be resolved before proceeding.
+### 4. Present approval-ready Pre-work
 
-### Pre-work checks
+Return the foundation, five-column table and these decisions:
 
-- Can the primary row be traced from a concrete problem through an actual mechanism to a credible benefit?
-- Is the failure of the old approach specific and fair, rather than “other apps are bad” or “you lack willpower”?
-- Does every important purchase barrier have evidence that could answer it, an honest limitation, or an explicit unresolved slot?
-- Are facts, audience observations, hypotheses, and illustrative examples distinguishable?
-- Do the transformation, entry promise, and paid offer agree?
-- Can the user approve the strategic direction without first evaluating screen copy?
+1. **Primary anchor and value priority:** what leads, what supports, and why.
+2. **Mechanism → benefit → emotional destination:** the causal argument behind the promise.
+3. **Transformation:** the single before/after statement.
+4. **Entry promise and paid boundary:** what the visitor expects and what the funnel can honestly deliver.
+5. **Evidence and open decisions:** sources, proof gaps, offer facts and choices needing approval.
 
-The approval-ready artifact contains the table and the five strategic items above. End with the decisions needing approval. The proposed screen sequence belongs to the next stage.
+Check that important barriers have relevant evidence, a truthful limitation or an explicit open slot. Facts, audience observations, hypotheses and examples must remain distinguishable. The strategy should be reviewable without screen copy. The proposed screen sequence belongs to the next stage.
+
+### Worked example: a reading-practice app
+
+Illustrative brief: a paid app offers short reading sessions, reminders and a session history. Assume the problem observations came from interviews; a real task must attach their sources. Reading-speed improvement has not been established.
+
+| Problems | Why current solutions fail | Purchase barriers | Concrete benefits | Desired emotional outcome |
+| --- | --- | --- | --- | --- |
+| P1: I skip reading when evenings are busy. | My plan depends on one uninterrupted long block. | Another plan may demand too much time. | Inspect a short sample matched to available time. | A realistic next step feels manageable. |
+| P2: I cannot see whether I have been consistent. | I rely on memory rather than a record. | I doubt ongoing subscription value. | Review actual completed-session history. | I can see effort and decide how to adjust. |
+
+Lead with P1. The entry promise is a free sample adapted to stated time; paid app access is a separate decision. The transformation is from expecting to need a free evening to seeing a manageable session option. Show the sample rather than promise faster reading or a guaranteed habit.
 
 ## Emotional Arc
 
-An Emotional Arc is a screen-by-screen plan for the person's changing feeling and belief. It turns the approved strategy into a journey with a reason for every screen. “Hook → quiz → result → paywall” is only a list of formats; it does not explain why the person should continue or what they learn.
+### 1. Write the feeling journey
 
-Start with the approved entry state and destination. Describe the movement in plain language, for example: **skeptical and pressed for time → recognized → curious → understands the mechanism → sees a relevant option → ready to consider the offer**. These are intended responses to test, not measured or guaranteed emotions. The person may reasonably decide the product is not for them.
+An Emotional Arc is a plan for **what the person thinks/feels before a screen, what useful content could change that, and what they can decide next**. A list of formats such as quiz/result/paywall is not an arc.
 
-### Build the screen map
+Start from approved Pre-work and write one plain-language progression. For example:
 
-Give screens stable IDs and structural labels. Keep the arc in planning language; exact headlines, question wording, answer labels, and CTAs come after approval.
+**Unsure it fits → recognizes the situation → understands the mechanism → sees credible evidence → can choose a next step.**
 
-| Field | What to record |
-| --- | --- |
-| Screen ID and narrative job | What this screen must accomplish; link to the relevant Pre-work row or barrier. |
-| Incoming feeling / belief | What the person plausibly feels and believes after the preceding screen or acquisition promise. |
-| Intended shift | The specific useful change in understanding, confidence, or readiness. Avoid “excited” on every row. |
-| Value / evidence returned | The actual explanation, feedback, preview, comparison, or proof that could cause that shift. |
-| Effort / information asked | The decision, reading burden, input, disclosure, or payment requested, and why it is needed now. |
-| Objection addressed | Which doubt is answered here, or “none” if this screen serves another job. |
-| Personalization / transition | Which real answer changes the result or next screen; the expectation carried forward. Include material branches, skip paths, or an out-of-fit outcome where relevant. |
+Use these five narrative beats as an optional starting point, not five mandatory screens:
 
-Use two linked tables or short screen blocks if a single table becomes too wide. Preserve the fields and stable IDs, not a particular layout. Recommend a screen budget from the information needed and the intended device; explain trade-offs if the requested budget cannot support the promise.
-
-### Narrative jobs and placement
-
-| Job | What the person needs here | Useful content and placement rationale |
+| Beat | Visitor's question | Useful response |
 | --- | --- | --- |
-| **Hook and orientation** | “Is this what brought me here? Is it relevant?” | Continue the acquisition promise, establish the kind of value and paid boundary, and offer an easy relevant start. |
-| **Discovery** | “You understand my situation, and this question has a purpose.” | Ask for information that changes fit, feedback, or the recommended option. Begin with low-effort, low-sensitivity choices. |
-| **Value and recognition** | “That explains my difficulty; there is something useful here.” | Return a relevant insight or example after effort. Acknowledge the difficulty without diagnosing or shaming. |
-| **Mechanism and proof** | “I see how this could help, and why I should believe it.” | Demonstrate a verified capability or actual preview, address the primary barrier, and explain limitations near the claim. |
-| **Result and consideration** | “This option fits these answers; I understand the next decision.” | Reflect meaningful inputs, explain why the result follows, and connect it to the offer. Keep alternatives and uncertainty legible. |
-| **Identity or delivery** | “I understand why you need this information.” | Ask for an identifier only where the product needs it; explain delivery, access, and consent. Placement follows the real workflow. |
-| **Offer and access** | “I know what I am buying and how I will use it.” | Recap relevant value, show price and billing terms, answer remaining objections, and explain the real post-purchase path. |
+| Recognize | Is this relevant to me? | Match the entry promise and acknowledge the situation. |
+| Understand | What makes this difficult, and what could help? | Give a specific, fair explanation or useful insight. |
+| See | How does the product help? | Demonstrate a real mechanism or inspectable sample. |
+| Trust | Why should I believe it, and will it fit? | Match evidence to the doubt, with limits visible. |
+| Choose | What is my next decision? | Explain the result, offer and actual access path. |
 
-These are jobs, not a fixed inventory or screen count. Combine jobs when one screen can do them clearly; repeat discovery or value only when it adds something useful. A separate commitment screen, email gate, loader, or upsell needs a product-specific reason.
+Combine or reorder beats when the product and entry context warrant it. Discovery questions earn a place only when answers change feedback, fit, a recommendation or a required action. Recommend a screen budget from the useful value and decisions needed, rather than expanding to a fixed length.
+
+### 2. Build one compact screen map
+
+Use stable IDs and structural job labels. Keep exact headlines, question wording, answer labels and CTAs for the subsequent copy stage.
+
+| Step / job | Before → after | What earns the shift | Ask / barrier | Answer use / next |
+| --- | --- | --- | --- | --- |
+| ID and narrative job; link to Pre-work problem or barrier. | Specific incoming belief/feeling and intended change. | Concrete explanation, demonstration, feedback or proof, with its source or open slot. | Effort/information requested and why now; relevant doubt addressed, or none. | Which input changes what; next screen, edits, skip, decline or fit branch. |
+
+An agent should be able to explain every row with: **The visitor thinks [before]. We show [specific value/evidence], so they can understand [after]. We ask [effort] because [use], then [next].** Avoid generic reassurance or repeating confidence/excitement in every row.
+
+Keep the normal path in this table. Add short branch notes only for materially different experiences, including an out-of-fit path where needed. Reuse table fields rather than creating a second personalization table that repeats the same sequence. Complex rules can be linked as a separate contract when genuinely needed.
+
+### 3. Review the opening and effort/value balance
+
+Ask what a person understands if they inspect only the first three screens: **who this is for, the core useful change, and a credible explanation or example**. If the opening spends attention without returning value, combine questions, bring a demonstration forward or explain why the early input is necessary. For a journey shorter than three screens, inspect the whole opening. This is a design check, not a claim about a universal drop-off rate or a requirement to add filler.
+
+Then check the whole map:
+
+- Each intended shift has a concrete cause on that screen.
+- Each row inherits a plausible state from the previous row and relevant branches.
+- Each answer has a named effect; edits refresh dependent content.
+- Meaningful effort is followed by useful value before the next consequential request.
+- Relevant evidence and the primary objection appear before the associated decision.
+- The result and offer preserve the entry promise; purchase is not presented as proof of the final outcome.
+- Free/paid boundaries, fit, exit choices and actual access remain clear.
+
+Write a short effort/value assessment: where effort is requested, where value is returned, why trust is warranted and why the offer appears there. The mental-fuel metaphor below is qualitative, not an additive score.
+
+### 4. Present approval-ready Emotional Arc
+
+Return **one feeling journey + the compact screen map + brief branch/budget/effort notes + open decisions**. Use short structural labels and keep each row readable. The user should be able to evaluate the sequence without reading finished copy or a motion storyboard.
+
+The [main skill](../SKILL.md#3-build-emotional-arc-and-obtain-approval) owns arc approval. Preserve approved strategy; if positioning changes, reopen Pre-work for the changed scope. When visual design follows, the [first-three-screen feedback checkpoint](../../design-funnel/SKILL.md#first-three-screen-feedback-checkpoint) happens after actual designs exist, separately from approval of this narrative plan.
 
 ### Worked arc for the reading-practice example
 
-Assume the product can show a sample session using a selected time preference, without registration. The offer and access method still need confirmation. This example illustrates planning granularity, not a template to copy into every product.
+Assume a free sample can reflect selected time without registration. Offer/access facts still require confirmation.
 
-| ID / job | Incoming → intended state | Value / evidence returned | Effort, objection, and transition |
-| --- | --- | --- | --- |
-| S1 · Orientation · P1 | Skeptical about time → recognizes a relevant possibility | Explain the short-session approach and what the preview contains. | Easy start; address relevance. Continue to time preference without implying a free subscription. |
-| S2 · Discovery · P1 | Interested but unsure it fits → feels the plan can reflect real constraints | Explain how the time preference will shape the preview. | One time-preference choice; address time burden. Branch to the matching supported session length. |
-| S3 · Mechanism · P1 | Unsure a short session is useful → understands what the session includes | Show an actual sample appropriate to the selected length and explain its limits. | Inspect a small preview; address credibility. Continue to deciding whether that option suits the person. |
-| S4 · Result / consideration · P1 | Understands the sample → can evaluate personal fit | Recap the selected time and the corresponding session option with an editable preference. | Review or adjust; address fit. Adjusting returns to S2; continuing leads to the paid offer. |
-| S5 · Offer · P1, P3 | Sees a relevant option → can make an informed purchase decision | Confirmed plan, included access, billing terms, and any verified history feature. | Purchase or leave; address price and ongoing value. State actual delivery/access; confirm its details before drafting. |
+| Step / job | Before → after | What earns the shift | Ask / barrier | Answer use / next |
+| --- | --- | --- | --- | --- |
+| S1 · Orient · P1 | Short on time → recognizes a manageable possibility. | Explain the short-session sample and paid boundary. | One time preference; address relevance/time. | Duration changes the sample; continue to S2. |
+| S2 · Demonstrate · P1 | Unsure short sessions help → understands what one includes. | Show the real sample for the selected duration and its limits. | Inspect the sample; address credibility. | Selected duration is visible; continue to S3. |
+| S3 · Consider · P1 | Understands sample → can evaluate personal fit. | Recap the session with an editable preference. | Review/adjust; address fit. | Edit returns to S1; continue to S4 or leave with the sample. |
+| S4 · Offer · P1/P2 | Sees fit → can evaluate paid access. | Confirmed plan, billing terms, included history and access path. | Optional purchase; address price/ongoing value. | Decline remains available; purchase follows verified access workflow. |
 
-This shorter example leaves P2 out of the journey because it does not need its own screen to resolve P1. If research identifies setup as the decisive barrier, revise the arc to demonstrate resuming before the offer. Add an account or access screen only if the real product requires it, and include that path in the proposed arc.
-
-### Review the progression before presenting it
-
-Write a short **effort/value balance** assessment: where the person contributes effort, where the funnel returns something useful, where trust is earned, and why the purchase request is placed there. Use the [mental-fuel model](#mental-fuel-and-effortvalue-balance) qualitatively; do not total invented points.
-
-- Does each intended shift have a concrete cause on the screen?
-- Does each row inherit a plausible state from the previous one, including important branches?
-- Do answers actually affect feedback, fit, or the experience? Remove questions without a defensible use.
-- Is useful value returned before the next substantial request? Remove unsupported reassurance and filler interstitials.
-- Are the primary barrier and reason to believe addressed before the purchase decision?
-- Does the offer continue the approved transformation without promising the end result merely from completing the quiz?
-- Is there a coherent path to the real access handoff, including any facts still to confirm?
-
-The approval-ready artifact includes the overall arc, complete screen map, branch notes, proposed budget, effort/value assessment, and unresolved decisions. Changes to positioning belong back in Pre-work; wording refinements belong after arc approval.
+P2 supports the offer without requiring a separate discovery screen. If setup is the primary barrier, revise the demonstration. Add account/email steps only for a real product purpose; do not invent them to reproduce another funnel.
 
 ## Psychology in practice
 
 ### Mental fuel and effort/value balance
 
-**Mental fuel** is a design metaphor for willingness to invest further attention. It is not a measured psychological quantity, an additive score, or a conversion formula. Use it to question the sequence:
+**Mental fuel** describes willingness to invest further attention. It is a design metaphor, not a psychological measurement or conversion formula. Use it to identify friction and a useful response:
 
-| Helps a person continue | Drains attention or confidence | Design response |
-| --- | --- | --- |
-| The opening matches the ad's expectation. | The promise changes on arrival. | Fix the mismatch before optimizing later screens. |
-| Feedback reflects a meaningful answer. | Questions accumulate with no visible use. | Show the useful result of an answer, combine questions, or remove them. |
-| A preview makes the mechanism understandable. | Generic praise or a claim asks for trust without evidence. | Replace the assertion with an actual demonstration or state the limitation. |
-| Each action has a clear next step. | Ambiguous choices, repetition, and dense explanation create work. | Make the choice intelligible and reduce unnecessary decisions. |
-| A request follows an understood purpose. | Sensitive information or payment arrives as a surprise. | Explain the purpose and paid boundary before requesting commitment. |
+| Observation | Response |
+| --- | --- |
+| Arrival does not match the acquisition promise. | Repair continuity before optimizing later screens. |
+| Questions accumulate without visible use. | Return relevant feedback, combine questions or remove an unused input. |
+| A reassurance asks for belief without evidence. | Show a real example or state the limitation. |
+| Navigation or the next commitment is unclear. | Make the choice and its consequences intelligible. |
+| Payment or personal information arrives as a surprise. | Explain purpose and boundaries before requesting commitment. |
 
-Check a cluster of questions for a meaningful return of value. A rigid “give every third screen” rule can create filler; the right cadence follows the cost of the questions and the usefulness of the feedback. A short funnel can still be exhausting, and a longer one can be justified when each step earns its place.
+Cadence follows actual effort and returned value. A rigid refill-every-N-screens rule can produce filler; a short funnel can still be exhausting.
 
 ### Fast scanning and deliberate understanding
 
-The historical framework used “System 1 / System 2” as shorthand. In practice, support both a quick initial scan and the slower evaluation needed for consequential choices. Treat the following as design hypotheses, not universal psychological laws:
-
-- **Continuity and familiarity:** preserve the audience's language and the acquisition context so the next screen feels relevant. Familiar phrasing should clarify a real problem, not imitate a competitor's unsupported claims.
-- **Anchoring and comparison:** give a meaningful basis for evaluating a benefit or price. Compare like periods and actual alternatives; verify reference prices and keep billed totals clear.
-- **Social proof:** place sourced, relevant evidence beside the doubt it answers. Popularity does not prove an individual outcome, and borrowed logos do not establish endorsement.
-- **Personal relevance:** reflect actual answers and allow correction. Agreement with a statement is not proof of a diagnosis, identity, or need to buy.
-- **Gain and loss framing:** compare a credible benefit with the real cost of the current problem when useful. Treat framing as an experiment; do not assume a universal loss-aversion multiplier or amplify shame and fear.
+Support a quick initial scan and enough explanation for a consequential decision. Historical System 1/System 2 framing is shorthand, not a numerical rule for users' attention. Use familiarity, comparison, relevant proof and novelty as hypotheses to test. Compare equivalent prices and periods; support customer claims with their sources. Refusal remains legitimate.
 
 ### Evidence-led value: the Hitchcock principle
 
-The useful idea behind the historical “Hitchcock principle” is to **show enough concrete evidence for the person to understand the value**, instead of repeatedly declaring that the product is valuable.
+Show enough concrete evidence for a person to evaluate the benefit instead of repeatedly asserting value. Use **relevant input → visible mechanism/evidence → bounded result → next useful step**.
 
-Use this chain: **relevant input → visible mechanism or evidence → bounded result → explanation of the next useful step**.
-
-In the reading example, a time preference changes the sample session shown. Explain which part changed and let the person inspect the sample. That is stronger than saying “Your perfect reading transformation is ready” after a decorative animation.
-
-Choose evidence that matches the claim: an actual product preview for a capability, sourced customer experience for that customer's experience, or a reproducible calculation for a numerical result. State the limits alongside the result. The overall impression and implied promise must also be supportable; a person's inferred expectation is still a reason to check the presentation. Ranges do not repair an unsupported outcome claim.
+An actual sample demonstrates a capability; a sourced customer account describes that person's experience; a reproducible calculation supports a numerical claim. Explicit and implied promises both need support. A person's inference is not a loophole for an unsupported claim, and a range does not repair an invented outcome.
 
 ### Attention and value-carrying visuals
 
-Give each screen one dominant message and one primary next action. Use a quick-glance check: can a reader identify the subject, benefit or question, and next action without studying the entire screen? Treat a three-second check as an editing exercise, not a scientific threshold.
+Give each screen one dominant message and primary action. In a quick-glance check, identify the idea the person can retain and the next action. A three-second scan is an editing exercise, not a scientific threshold.
 
-Choose the visual for its explanatory job:
+Choose the dominant visual for its explanatory job: product interface or sample, sourced data chart, verified comparison, or relevant authentic person. Fixed attention percentages are not established here. Required qualifications and billing details stay readable.
 
-- A real sample or interface can demonstrate how the product works.
-- A chart can explain actual data, with source, scale, and uncertainty visible.
-- A comparison can clarify a verified difference with an alternative.
-- A person or testimonial can support recognition when relevant and authentic.
-
-Decorative imagery should not compete with the decision. There is no fixed percentage of attention that belongs to faces, numbers, or animation. Necessary qualifications and billing terms remain readable even when they are not the dominant visual element.
+Animation is optional and belongs in design. If motion clarifies a mechanism, specify its explanatory purpose and a reduced-motion/static equivalent. Motion, illustrations and theme changes do not replace evidence or establish an emotional outcome.
 
 ### Trust, reassurance, and progressive effort
 
-Anticipate three questions: **Is this legitimate? Does it understand my situation? Can it actually help?** Answer each at the point it becomes consequential, using product identity, a clear mechanism, relevant proof, and truthful expectations about data and payment.
+Anticipate: **Is this legitimate? Does it understand my situation? Can it help?** Answer at the consequential moment through product identity, a clear mechanism, relevant evidence and honest expectations about data/payment.
 
-Use **recognize → reassure → empower**: acknowledge a specific difficulty, explain a plausible cause without blaming the person, then offer an achievable action supported by the product. Avoid manufacturing a vulnerability for the product to resolve.
-
-Increase effort only as the purpose becomes clear. A simple preference can precede a detailed constraint; a preview can precede a request to save it. Explain why identifiers or sensitive inputs are needed and offer supported skip or edit paths. Past effort does not justify pressuring the person to finish or buy. Progress indicators should reflect the real journey, including meaningful branches.
+Use **recognize → reassure → empower**: acknowledge a specific difficulty, explain it fairly and offer an achievable product-supported action. Keep the person free to edit, skip or decline where supported. Past effort does not justify pressure to buy; progress reflects the actual journey and branches.
 
 ## Screen copy
 
-After the arc is approved, turn each row into a screen specification. Keep the same IDs so the user can review copy against the intended progression.
-
-### Required specification
+After arc approval, expand each row into a complete specification with the same IDs.
 
 | Field | What to write |
 | --- | --- |
-| ID, role, and strategic link | Approved arc ID, narrative job, relevant Pre-work problem/benefit/barrier, and intended shift. |
-| Headline | The one idea the screen needs to communicate in the person's language. |
-| Body | Enough explanation to understand the value, choice, or limitation. Use “none” when the headline and visual genuinely suffice. |
-| Question and choices | Exact wording, selection behavior, appropriate neutral options, and why the answer is needed; “not applicable” for a non-question screen. |
-| CTA and secondary actions | Exact labels that describe the real next action, including supported back, edit, skip, or decline paths. |
-| Visible evidence | The exact claim, supporting source, and necessary qualification; mark unverified proof as an unresolved slot rather than inventing it. |
-| Visual direction | What the visual must demonstrate and why it supports this screen's job. |
-| Personalization and transition | Which confirmed input changes what content, the ordinary next screen, and meaningful branch or recovery behavior. |
+| ID, role and strategic link | Approved arc ID, narrative job, Pre-work link and intended shift. |
+| Headline and body | One relevant idea and enough explanation for the choice, value or limitation; body may be none when genuinely unnecessary. |
+| Question and choices | Exact wording, selection behavior, appropriate neutral options and the input's purpose; not applicable on non-question screens. |
+| CTA and secondary actions | Exact labels matching the next action; supported back/edit/skip/decline paths. |
+| Visible evidence | Exact claim, source and qualifications, or an explicit unresolved proof slot. |
+| Visual direction | The mechanism/benefit/choice to demonstrate; references and motion are developed in design. |
+| Personalization and transition | Actual input-to-content mapping, ordinary destination and meaningful branch/recovery behavior. |
 
-These fields express messaging intent. Derive implementation details from the managed project contract as required by the main skill.
+These are messaging fields. Implementation metadata, persistence, routing, analytics and helpers come from the managed project contract required by the main skill.
 
 ### Writing guidance
 
-- **Headline:** lead with the relevant idea. Around six words can be a useful editing target, not a maximum. Keep necessary meaning rather than compressing it into vague hype.
-- **Body:** use one or two short sentences when enough; give additional explanation for a complex choice, result, or disclosure. Each sentence should answer a question or support the decision.
-- **Questions:** ask one clear thing at a time. Make options meaningfully distinct and include uncertainty or another appropriate answer when the product supports it. Explain how a personal question will help.
-- **Value screens:** demonstrate or explain something specific. “Great choice” alone is not a return of value after a demanding question.
-- **Results:** reflect actual inputs and explain the connection. Describe recommendations with appropriate uncertainty; do not invent scores, diagnoses, earnings, timelines, or guarantees.
-- **CTAs:** make the next step predictable. “See the sample” should lead to the sample; a paid action should be clear before commitment.
-- **Processing:** describe only actual work. A storytelling sequence should be presented as content, not a fabricated analysis or fake personalized calculation.
-- **Tone:** use the audience's language without humiliation, exaggerated urgency, or moral judgments about declining the product.
+Use concrete, audience-language headlines; around six words is an editing aid, not a maximum. One or two body sentences often suffice, but give necessary explanation for complex choices and disclosures. Ask one clear thing at a time. Answers must be distinct enough to express a real preference, including uncertainty when appropriate.
 
-For the reading example, a headline such as “A session for your available time” can introduce a real sample matched to the selected duration. A supporting sentence should identify what the sample shows and what purchase would add. Its purpose is to demonstrate fit, not promise that the person will read every day.
+Value screens explain or demonstrate something specific. Results reflect inputs and explain their connection with appropriate uncertainty. Avoid invented scores, diagnoses, earnings, timelines or guarantees. CTAs predict the immediate destination and paid commitment. Processing describes work actually performed; a storytelling sequence is content, not fake analysis. Recognition should not shame the person or imply that declining is a failure.
 
 ### Paywall architecture
 
-Use [offer, checkout, and access practices](funnel-best-practices.md#offers-checkout-and-access) for the detailed offer requirements. Connect the offer to the approved transformation and the result just demonstrated.
+Use [offer, checkout and access practices](funnel-best-practices.md#offers-checkout-and-access). Place relevant demonstrated value, the actual first charge, covered period, trial/renewal terms and access path before commitment. Include readable cancellation, support and verified refund conditions. Per-day equivalents remain secondary to billed totals.
 
-Make the included value, actual first charge, covered period, renewal/trial terms, and purchase action easy to locate before commitment. Use supporting proof and FAQs to resolve specific remaining objections. Explain delivery and access; show cancellation, support, and any verified refund conditions where needed. Keep per-day framing secondary to actual billed totals.
-
-Order the sections around the person's remaining decision, not a universal paywall length. Add an upsell or recovery offer only when it is within scope and supported by the product. A claim or offer fact awaiting confirmation stays visibly unresolved in the draft and cannot be treated as ready to publish.
+Choose section order around the person's remaining decision. Upsells or recovery offers require their own scope and product support. Unresolved claims or terms remain visibly open and cannot be treated as publication-ready.
 
 ## Review checks
 
 ### Per screen
 
-| Check | Passing condition | Repair when it fails |
-| --- | --- | --- |
-| Strategic purpose | The screen advances a specific approved arc job and Pre-work priority. | Remove it or revise the arc through the appropriate approval gate. |
-| Emotional movement | A concrete explanation, action, or piece of evidence supports the intended shift. | Replace generic reassurance with something useful or make the intended shift more modest. |
-| Effort and value | The input has a real use and its cost is warranted at this point. | Simplify, move, combine, or remove the request. |
-| Scan and hierarchy | The main idea and next action are readily understandable; required detail is legible. | Clarify the headline, reduce competing ideas, and improve the visual's explanatory role. |
-| Evidence and limits | Explicit and implied claims are supported and qualifications are visible. | Narrow the claim, add real evidence, or mark the gap for confirmation. |
-| Trust and choice | The purpose of sensitive requests and the available choices are clear. | Explain the purpose and restore supported edit, skip, or decline paths. |
-| Continuity | The next screen fulfills the previous action's promise, including branch paths. | Repair the transition or return to arc approval if the journey changes. |
+| Check | Passing condition |
+| --- | --- |
+| Purpose and shift | The approved job advances a specific strategy priority; content causes the intended change. |
+| Effort and value | The input has a named use, the burden is warranted and useful feedback is returned. |
+| Hierarchy | Idea, visual and next action are understandable; required detail remains readable. |
+| Evidence and limits | Explicit/implied claims have matching support and visible qualifications. |
+| Trust and choice | Consequences and personal-data requests are clear; supported edits/exits remain available. |
+| Continuity | The next screen fulfills the previous action's promise, including branches. |
 
 ### Whole journey
 
-Check ad → opening → questions → demonstrated value → result → offer → access for one consistent promise. Read the path as a person with minimal context: what have they learned, what remains uncertain, and what are they being asked to do now? Follow each material branch, not only the happy path.
+Check acquisition → opening → discovery → demonstration → result → offer → access for one promise and consistent content. Read every material branch with minimal context. Return links to approved strategy and arc, unresolved gaps and, when useful, experiments using [measurement practices](funnel-best-practices.md#measurement-and-experiments). A hypothesis is not measured uplift.
 
-Return the screen specification together with its approved strategic sources and unresolved gaps. Where useful, add a short prioritized experiment list with hypothesis, primary outcome, and guardrails using [measurement and experiment practices](funnel-best-practices.md#measurement-and-experiments). Suggested tests do not establish an uplift before measurement.
+Built results use [qa-funnel design checks](../../qa-funnel/references/design.md). Temporary copy clickthroughs use [preview-funnel](../../preview-funnel/SKILL.md). Full designs use [design-funnel](../../design-funnel/SKILL.md), including reference comparison and its early feedback checkpoint.
 
-For a built result, use [qa-funnel design checks](../../qa-funnel/references/design.md) and the rest of `qa-funnel` within the requested testing scope. A clickable copy mockup is a separate `preview-funnel` task when requested.
+### Adaptation note
+
+The structure was informed by a user-supplied premium onboarding brief reviewed on 6 October 2026: explicit entry state, one transformation, benefit priority, one emotional shift per step and value-carrying visuals. It is adapted to web funnels rather than assuming installed-app onboarding. The brief's unsourced numerical attention/drop-off/effect claims, fuel arithmetic, mandatory fear/guilt tactics and fixed 5/7/8/10-screen prescriptions are not adopted as evidence or requirements.

@@ -25,7 +25,7 @@ These gates remain mandatory when tests and builds pass, the change looks small,
 
 ## References by task
 
-- New or redesigned funnel: **read the complete [Funnel Psychology Framework](references/funnel-psychology-framework.md) before preparing Pre-work.** It contains the detailed strategy, emotional progression, worked examples, and screen-writing criteria.
+- New or redesigned funnel: **read the complete [Funnel Psychology Framework](references/funnel-psychology-framework.md) before preparing Pre-work.** It contains the structured foundation, five-column strategy, compact Emotional Arc, worked examples, and screen-writing criteria.
 - Research, drafting, or review: read the relevant sections of [Funnel Best Practices](references/funnel-best-practices.md). Its task index routes to product research, journey, screen copy, offers, and experiments. Cite stable `FBP-###` IDs in findings and experiment proposals.
 
 Use `qa-funnel` for design and functional testing of a built funnel; use `web2app-essentials` for acquisition, economics, analytics, and the full Web-to-Web course.
@@ -50,7 +50,7 @@ Present **Pre-work** as a reviewable artifact and ask the user to approve it or 
 
 ### 3. Build Emotional Arc and obtain approval
 
-From the approved Pre-work, follow [Emotional Arc](references/funnel-psychology-framework.md#emotional-arc). Recommend a screen budget if none was supplied. Map each proposed screen's narrative job, incoming feeling/belief, intended emotional shift, useful value/evidence, effort asked, objection, and transition. Cover meaningful branches and the offer/access handoff.
+From the approved Pre-work, follow [Emotional Arc](references/funnel-psychology-framework.md#emotional-arc). Return one feeling journey and the framework's compact screen map: job, before → after, what earns the shift, ask/barrier, and answer use/next. Recommend a screen budget if none was supplied. Add only material branch, opening-value, effort and offer/access notes. Keep the user-facing arc concise; link detailed rules when genuinely needed.
 
 Present **Emotional Arc** with a short explanation of the overall progression and effort/value balance. Use structural screen labels; finished headlines, question wording, body copy, and CTAs belong to step 4. Ask the user to approve the arc or request changes. **Stop here until the user explicitly approves this Emotional Arc.**
 
@@ -64,7 +64,7 @@ Use the approved arc's screen IDs and follow the framework's [screen-copy specif
 
 ### 5. Hand off within the requested scope
 
-For a temporary copy-review clickthrough, use [preview-funnel](../preview-funnel/SKILL.md). For full visual design, use [design-funnel](../design-funnel/SKILL.md) with the existing `Design.md`, approved Pre-work and Emotional Arc, and complete screen content. It establishes references and representative mockups for the journey's actual patterns before implementing the shared style. When implementation is requested, use `create-funnel` or `edit-funnel`, then `qa-funnel` to test the built result. Strategy or copy approval is not permission to publish.
+For a temporary copy-review clickthrough, use [preview-funnel](../preview-funnel/SKILL.md). For full visual design, use [design-funnel](../design-funnel/SKILL.md) with the existing `Design.md`, approved Pre-work and Emotional Arc, and complete screen content. It compares similar reference screens, presents the first three actual designs for feedback, then establishes the remaining pattern mockups before extending the shared style. When implementation is requested, use `create-funnel` or `edit-funnel`, then `qa-funnel` to test the built result. Strategy or copy approval is not permission to publish.
 
 ## Continuing, revising, or reviewing existing work
 
