@@ -59,13 +59,21 @@ only when one composition and control system genuinely serves their content.
 Distinct layouts or states needing a different composition get their own variant.
 These are design categories, not FunnelsGrove runtime metadata.
 
+When accessible, prefer one coherent reference funnel with comparable audience,
+journey and interactions. Reuse a user-selected funnel first; otherwise discover
+a suitable source through the available reference access. Inspect the actual
+screens and surrounding flow before borrowing a composition. Use complementary
+sources only for named gaps, and record unavailable reference access rather than
+claiming an inspection. A category match alone does not establish screen fit.
+
 Select and inspect a reference for every actual pattern and variant. Use
 [optional CLI references](references/cli-references.md) with a configured `fgrove`
 account and reference access; the guide covers discovery, inspection and the
-fallback when authenticated access is unavailable. Preserve
-supplied reference selections and inspect their surrounding journey. Prefer a
-coherent reference approach, adding complementary examples for gaps rather than
-collecting an unrelated look for each screen.
+fallback when authenticated access is unavailable.
+
+For each target screen, match a source screen by narrative job, control type,
+option/content density and stage of the journey. Record why the pair is
+compatible; matching source and target positions is not required.
 
 Record the reference URL/image, source screen identity, inspected content and
 composition being adapted beside each pattern. Map every target screen to a
@@ -78,38 +86,62 @@ has an inspected reference or a named reference limitation, and the representati
 screen plus necessary variants are selected from the actual journey. Coverage
 comes from the funnel, not a fixed count or invented screens.
 
-## 3. Mock up every pattern and settle the shared style
+## 3. Review the opening, then settle the remaining patterns
 
-Use the normal available image-generation skill/tool to create a separate screen
-image for every pattern and necessary layout/state variant. Pass the inspected
-references, existing `Design.md`, exact target copy, real option counts and
-selection semantics. Use actual screens from the screen map, including long
-content and complete offer disclosures where present. Show the full composition
-of long screens; a cropped viewport cannot establish the rest of the design.
+### First-three-screen feedback checkpoint
 
-Save images and their prompt/reference provenance in the project's design artifact
-directory and link each revision to its screen ID and pattern. Supply prior
-accepted mockups to later generations so typography, imagery and controls remain
-consistent. A prompt or contact sheet alone is not a completed screen mockup.
-If the user requests another format or image generation is unavailable, use a
-scoped alternative such as rendered mockups, identify the format and limitation,
-and retain the same pattern coverage and review requirements.
+For a new full journey or a redesign of its opening, design the **first three
+actual screens in journey order** before extending the rest. If the journey has
+fewer than three screens, show all of them. This is a review of actual target
+content, not three arbitrary pattern examples. A scoped edit does not require
+building unrelated screens; reuse explicit feedback on unchanged accepted
+revisions and review the changed scope.
 
-After each revision, use [qa-funnel](../qa-funnel/SKILL.md) in image or rendered
-design scope with the exact copy, reference, `Design.md` and prior findings.
-Correct in-scope failures and retain current evidence in `design-qa.md`.
+Use the normal available image-generation skill/tool to create screen images,
+with inspected references, existing `Design.md`, exact copy, real option counts
+and selection semantics. If the user requests another format or image generation
+is unavailable, use a scoped alternative such as rendered mockups and identify
+the format/limitation. Keep the same coverage and review requirements.
 
-Review the representative set together before implementing the full journey.
-Reconcile font families/weights/sizes, semantic colors, spacing, widths, radii,
-controls and states, imagery, progress, motion and responsive intent in the
-existing `Design.md`. Preserve confirmed brand decisions and record new accepted
-choices there. Present the set and incorporate existing feedback; ask for a
-style decision only when one remains unresolved.
+After each revision, use [qa-funnel](../qa-funnel/SKILL.md) with the exact copy,
+reference, `Design.md` and prior findings. Compare target and compatible source
+screens using the [reference comparison checks](../qa-funnel/references/design.md#reference-comparison).
+Correct in-scope failures and record current evidence in `design-qa.md`.
 
-Completion: every actual pattern and necessary variant has a reviewed mockup,
-the set shares one coherent visual system recorded in `Design.md`, and remaining
-image-versus-runtime checks are explicit. Required unresolved design decisions
-or defects block extending that affected design to the full journey.
+**Show the three actual target screens to the user**, with their matched source
+screens alongside or linked, and a short explanation of borrowed composition and
+intentional brand/content differences. Supply readable individual images or a
+reachable preview; a prompt or tiny contact sheet alone is insufficient.
+Ask for feedback on hierarchy, tone and style. **Wait for the user's feedback
+before designing later screens or implementing the full journey.** Record the
+reviewed screen IDs/revisions and accepted feedback; revise and recheck affected
+screens. Reuse explicit acceptance of those revisions instead of asking again.
+This feedback is separate from strategy/arc approval and from runtime QA.
+
+### Complete the pattern set
+
+After incorporating opening feedback, create a separate mockup for each remaining
+actual pattern and necessary layout/state variant. Use actual screen-map content,
+including long copy and complete offer disclosures. Inspect the full composition
+of long screens rather than a cropped viewport. Reuse accepted opening mockups
+as visual context so later typography, imagery and controls stay coherent.
+
+Save images and prompt/reference provenance in the existing design artifact
+directory; link revisions to screen IDs and patterns. Every target screen keeps
+its compatible reference mapping. Apply the same QA and reference comparison to
+remaining mockups; correct failures before extending the affected pattern.
+
+Review the representative set together and reconcile font families, weights,
+sizes, semantic colors, spacing, widths, radii, controls/states, imagery, progress,
+motion and responsive intent in the existing `Design.md`. Preserve confirmed
+brand decisions; record accepted new choices. Ask for an additional style decision
+only when one remains unresolved after the opening feedback.
+
+Completion: the opening screens have been shown and feedback incorporated;
+every actual pattern/necessary variant has a reviewed mockup; one coherent
+visual system is recorded in `Design.md`; remaining image-versus-runtime checks
+are explicit. Required unresolved decisions or defects block extension of the
+affected design. Name unavailable reference coverage without inventing a comparison.
 
 ## 4. Implement the journey and verify every screen
 
@@ -143,6 +175,8 @@ scope; local or hosted delivery follows the user's existing authorization.
 
 Return the representative mockups, clickable entry or implementation location,
 updated `Design.md`, approved content/arc links, screen map and QA report.
+Include the first-three-screen feedback record and source/target comparison
+evidence so the accepted direction is reviewable.
 Report pattern coverage, reference limitations, image-direction results,
 rendered checks and remaining blockers separately. Include the canonical funnel
 folder when applicable so the next edit resumes there. Design and copy approval

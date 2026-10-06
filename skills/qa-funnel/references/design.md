@@ -23,6 +23,26 @@ unverified. Mark required runtime checks **blocked — requires rendered UI**;
 mark checks outside the requested scope **not applicable** with a reason.
 Image evidence alone cannot establish a completed rendered design.
 
+## Reference comparison
+
+When an inspected source is available, open the target and the matched source
+screen at comparable readable size. Check that their narrative jobs and controls
+are compatible before comparing composition. A question grid and a result chart
+are not interchangeable because they share colors or a source funnel.
+
+Compare headline/visual/action hierarchy, content density, choice grouping,
+spacing and CTA placement. Record **borrowed composition**, **intentional target
+brand/copy differences**, and **unintended drift or defects** separately. The
+approved copy and `Design.md` remain authoritative: preserving target meaning,
+option counts, offer disclosures and brand can require a deliberate departure.
+Reference prices, claims, logos and testimonials are not evidence for the target.
+
+Save or link the source and target artifacts with screen IDs/revisions in the
+QA record. If no compatible source is accessible, record that limitation and
+inspect against the approved content/style; do not report a reference comparison
+as passed. The [opening feedback checkpoint](../../design-funnel/SKILL.md#first-three-screen-feedback-checkpoint)
+uses these comparisons when presenting the first actual designs to the user.
+
 ## Layout and accessibility
 
 For rendered screens, inspect `375x667`, `393x852`, `402x874`, and `1280x800` CSS-pixel viewports. Also check reflow at 320 CSS pixels and enlarged text; the four baseline layouts alone are not an accessibility audit.

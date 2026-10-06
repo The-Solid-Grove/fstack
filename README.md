@@ -30,7 +30,7 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ### [writing-funnel-copy](skills/writing-funnel-copy/SKILL.md)
 
-**Give every screen a job.** Turn your product, audience, and ad promise into a quiz-to-paywall story. Write a complete flow, improve a single screen, or review an offer using the concise frameworks and research patterns.
+**Give every screen a job.** Turn your product, audience, and ad promise into a quiz-to-paywall story. Use a structured foundation and compact cause-based Emotional Arc before writing a complete flow. Improve a single screen or review an offer within its existing scope.
 
 ### [preview-funnel](skills/preview-funnel/SKILL.md)
 
@@ -38,7 +38,7 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ### [design-funnel](skills/design-funnel/SKILL.md)
 
-**Make the whole journey feel coherent.** Reuse `Design.md`, approved strategy and emotional arc, and complete copy. Inspect references and generate a representative mockup for every actual screen pattern, settle the shared style, then implement and review every screen. Optional reference discovery uses your configured `fgrove` account and reference access; otherwise continue with supplied references and `Design.md`.
+**Make the whole journey feel coherent.** Reuse `Design.md`, approved strategy and emotional arc, and complete copy. Compare similar screens from an inspected reference funnel, show the first three actual designs for feedback, then complete the pattern set and implement/review the journey. Optional reference discovery uses your configured `fgrove` account and reference access; otherwise continue with supplied references and `Design.md`.
 
 ### [create-funnel](skills/create-funnel/SKILL.md)
 
@@ -64,7 +64,7 @@ Start with the product, audience, and ad promise. Then use preview-funnel
 to make the approved copy clickable for review.
 ```
 
-[Setup and maintenance](docs/getting-started.md) · [Funnel QA](skills/qa-funnel/SKILL.md)
+[Sample requests](docs/sample-requests.md) · [Setup and maintenance](docs/getting-started.md) · [Funnel QA](skills/qa-funnel/SKILL.md)
 
 ---
 
