@@ -1,0 +1,12 @@
+{"version": 1, "funnel": {"id": "sample", "name": "Sample", "industry": "Music", "steps": [
+  {"position": 1, "screenType": "image-choice", "content": {"text": "What motivates you?"}},
+  {"position": 2, "screenType": "social-proof", "content": {"text": "You're in good hands!"}},
+  {"position": 3, "screenType": "single-choice", "content": {"text": "Age"}},
+  {"position": 4, "screenType": "single-choice", "content": {"text": "Experience"}},
+  {"position": 5, "screenType": "multi-choice", "content": {"text": "Goals"}},
+  {"position": 6, "screenType": "information", "content": {"text": "No worries"}},
+  {"position": 7, "screenType": "loading", "content": {"text": "Creating your plan"}},
+  {"position": 8, "screenType": "result", "content": {"text": "Your plan is ready"}},
+  {"position": 9, "screenType": "email", "content": {"text": "Where should we send your plan?"}},
+  {"position": 10, "screenType": "paywall", "content": {"text": "Start your plan"}}
+]}}

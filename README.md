@@ -30,7 +30,7 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ### [writing-funnel-copy](skills/writing-funnel-copy/SKILL.md)
 
-**Give every screen a job.** Turn your product, audience, and ad promise into a quiz-to-paywall story. Use a structured foundation and compact cause-based Emotional Arc before writing a complete flow. Improve a single screen or review an offer within its existing scope.
+**Give every screen a job.** Turn your product, audience, and ad promise into a quiz-to-paywall story with an energetic rhythm: easy questions broken up by energy screens that reassure, prove, and excite, then a plan reveal, email, and a paywall cloned from a proven structure. Built on reference funnels from the public Funnel Screens library, a data-derived rhythm template, an energy screen catalog, and paywall blueprints. Improve a single screen or review an offer within its existing scope.
 
 ### [preview-funnel](skills/preview-funnel/SKILL.md)
 
@@ -38,7 +38,7 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ### [design-funnel](skills/design-funnel/SKILL.md)
 
-**Make the whole journey feel coherent.** Reuse `Design.md`, approved strategy and emotional arc, and complete copy. Compare similar screens from an inspected reference funnel, show the first three actual designs for feedback, then complete the pattern set and implement/review the journey. Optional reference discovery uses your configured `fgrove` account and reference access; otherwise continue with supplied references and `Design.md`.
+**Make the whole journey feel coherent.** Reuse `Design.md`, approved strategy and emotional arc, and complete copy. Compare similar screens from an inspected reference funnel, keep a distinct composition per energy screen, clone the paywall's section structure from its reference, show the first three actual designs for feedback, then complete the pattern set and implement/review the journey. Reference discovery uses the public `fgrove references` library (no login); otherwise continue with supplied references and `Design.md`.
 
 ### [create-funnel](skills/create-funnel/SKILL.md)
 

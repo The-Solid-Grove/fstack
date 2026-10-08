@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""Print the rhythm strip of a recorded Funnel Screens journey.
+
+Usage:
+  scripts/reference-strip <funnel-id> [<funnel-id> ...]
+  scripts/reference-strip --file journey.json
+
+Reads `fgrove references show <funnel-id> --json` (public, no login) or a saved
+response, then prints the strip (Q question, E energy, P result/plan, L loading,
+@ email, $ paywall), its pacing stats and one line per screen. The mapping is a
+first pass from the library's recorded screen kinds: read the screens to tell a
+profile mirror (M) from a plan reveal (P) before using the strip in an arc.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+
+CODES = {
+    "single-choice": "Q", "multi-choice": "Q", "image-choice": "Q", "scale": "Q",
+    "text-input": "Q", "first-step": "Q", "information": "E", "social-proof": "E",
+    "result": "P", "loading": "L", "email": "@", "paywall": "$", "checkout": "$",
+}
+ENERGY = {"E", "P", "M"}
+
+
+def load(funnel_id: str | None, path: str | None) -> dict:
+    if path:
+        with open(path, encoding="utf-8") as handle:
+            data = json.load(handle)
+    else:
+        result = subprocess.run(
+            ["fgrove", "references", "show", funnel_id, "--json"],
+            capture_output=True, text=True, check=False,
+        )
+        if result.returncode != 0:
+            raise SystemExit(f"fgrove references show {funnel_id} failed: {result.stderr.strip()}")
+        data = json.loads(result.stdout)
+    return data.get("funnel", data)
+
+
+def summarize(funnel: dict) -> str:
+    steps = funnel.get("steps", [])
+    codes = [CODES.get(step.get("screenType") or "", "?") for step in steps]
+    paywalls = [i for i, code in enumerate(codes) if code == "$"]
+    body = codes[: paywalls[0]] if paywalls else codes
+    energy = sum(code in ENERGY for code in body)
+    run = longest = 0
+    first_energy = None
+    for position, code in enumerate(body, start=1):
+        if code == "Q":
+            run += 1
+            longest = max(longest, run)
+        elif code in ENERGY:
+            run = 0
+            first_energy = first_energy or position
+    lines = [
+        f"{funnel.get('name', '')} [{funnel.get('id', '')}] · {funnel.get('industry', '')} · {len(steps)} screens",
+        "Strip: " + " ".join(codes),
+        f"Before paywall: {len(body)} screens · energy share {energy / max(1, len(body)):.0%} · "
+        f"longest question run {longest} · first energy screen {first_energy or 'none'}",
+    ]
+    for step, code in zip(steps, codes):
+        text = ((step.get("content") or {}).get("text") or "").replace("\n", " / ")
+        lines.append(f"  {step.get('position', '?'):>3} {code} {step.get('screenType', '')}: {text[:90]}")
+    return "\n".join(lines)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("funnel_ids", nargs="*")
+    parser.add_argument("--file", help="saved `fgrove references show --json` response")
+    args = parser.parse_args()
+    if not args.funnel_ids and not args.file:
+        parser.error("give at least one funnel ID or --file")
+    sources = [(None, args.file)] if args.file else [(fid, None) for fid in args.funnel_ids]
+    print("\n\n".join(summarize(load(fid, path)) for fid, path in sources))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

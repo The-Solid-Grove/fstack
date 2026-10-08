@@ -1,6 +1,6 @@
 ---
 name: design-funnel
-description: Use when designing a funnel's visual system and full journey from existing Design.md, approved strategy and emotional arc, and complete screen copy, with inspected references and a representative image for every actual screen pattern. Use preview-funnel for copy-only review.
+description: Use when designing a funnel's visual system and full journey from existing Design.md, approved strategy and emotional arc, and complete screen copy, with inspected references, distinct energy-screen compositions, a paywall cloned from a reference structure, and a representative image for every actual screen pattern. Use preview-funnel for copy-only review.
 ---
 
 # Design Funnel
@@ -59,17 +59,27 @@ only when one composition and control system genuinely serves their content.
 Distinct layouts or states needing a different composition get their own variant.
 These are design categories, not FunnelsGrove runtime metadata.
 
-When accessible, prefer one coherent reference funnel with comparable audience,
-journey and interactions. Reuse a user-selected funnel first; otherwise discover
-a suitable source through the available reference access. Inspect the actual
-screens and surrounding flow before borrowing a composition. Use complementary
-sources only for named gaps, and record unavailable reference access rather than
-claiming an inspection. A category match alone does not establish screen fit.
+Start from the references the approved Emotional Arc already assigned: each
+screen's reference funnel ID and position, each energy screen's archetype from
+the [energy screen catalog](../writing-funnel-copy/references/energy-screens.md),
+and the paywall reference from the [paywall blueprints](../writing-funnel-copy/references/paywall-blueprints.md).
+Reuse a user-selected funnel first. Otherwise prefer one coherent reference funnel
+with comparable audience, journey and interactions, discovered through the
+public [CLI references](references/cli-references.md) (no login required).
+Inspect the actual screens and surrounding flow before borrowing a composition.
+Use complementary sources only for named gaps, and record unavailable reference
+access rather than claiming an inspection. A category match alone does not
+establish screen fit.
 
-Select and inspect a reference for every actual pattern and variant. Use
-[optional CLI references](references/cli-references.md) with a configured `fgrove`
-account and reference access; the guide covers discovery, inspection and the
-fallback when authenticated access is unavailable.
+Select and inspect a reference for every actual pattern and variant. Energy
+screens keep a distinct composition per archetype (authority block, level bar,
+comparison chart, testimonial card, product mockup) so the rhythm stays visible;
+give each its own pattern rather than one generic "info" layout. For the
+paywall, **clone the reference paywall's structure**: open its full-height image
+in slices, list its sections in order (sticky header, hero, plan cards, CTA,
+guarantee, benefits, reviews, FAQ, repeated plans, disclosures), keep that order,
+density and hierarchy, and fill each section with the approved paywall copy and
+`Design.md` styling. Record the section list beside the paywall pattern.
 
 For each target screen, match a source screen by narrative job, control type,
 option/content density and stage of the journey. Record why the pair is
@@ -82,9 +92,10 @@ the approved copy and `Design.md` remain the target's content and brand authorit
 Mark uncertain observations and unsupported source claims explicitly.
 
 Completion: every in-scope screen belongs to a documented pattern, each pattern
-has an inspected reference or a named reference limitation, and the representative
-screen plus necessary variants are selected from the actual journey. Coverage
-comes from the funnel, not a fixed count or invented screens.
+has an inspected reference or a named reference limitation, the paywall pattern
+lists its cloned section order, and the representative screen plus necessary
+variants are selected from the actual journey. Coverage comes from the funnel,
+not a fixed count or invented screens.
 
 ## 3. Review the opening, then settle the remaining patterns
 

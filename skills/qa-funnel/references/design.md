@@ -37,6 +37,12 @@ approved copy and `Design.md` remain authoritative: preserving target meaning,
 option counts, offer disclosures and brand can require a deliberate departure.
 Reference prices, claims, logos and testimonials are not evidence for the target.
 
+For a paywall cloned from a reference, list both section orders side by side.
+The target keeps the reference's section order, repeated CTAs and sticky
+elements unless the approved copy records a deliberate change; every section
+has target content or a visible open slot, and billing disclosures remain
+readable before the CTA.
+
 Save or link the source and target artifacts with screen IDs/revisions in the
 QA record. If no compatible source is accessible, record that limitation and
 inspect against the approved content/style; do not report a reference comparison
@@ -71,7 +77,8 @@ For rendered screens, inspect `375x667`, `393x852`, `402x874`, and `1280x800` CS
 - The first screen continues the actual ad promise. Each question has a product purpose, and later summaries reflect the user's answers accurately.
 - Short, scannable headlines and concise supporting text form a clear hierarchy. Six-word headlines are a useful editing target, not a release blocker.
 - A visual explains the benefit, mechanism, or choice. Decorative faces and animation should not obscure the offer. Test relevant portraits rather than imposing a ban.
-- Alternate effort with useful feedback. Neither a fixed question cadence nor a prescribed funnel length guarantees conversion.
+- Check the rhythm against the approved arc and the [cadence rules](../../writing-funnel-copy/references/funnel-rhythm-template.md#cadence-rules): an energy screen by screen 3, no more than 3 questions in a row early (4 later), energy screens that reflect the preceding answer, varied archetypes, and plan reveal → email → paywall at the close. Report a deviation the arc does not explain as a content finding; cadence is a tested default, not a conversion guarantee.
+- Each energy screen's dominant visual carries its proof (rating block, chart, level bar, product UI, testimonial) rather than decoration, and keeps the composition of its archetype so the rhythm stays visible.
 - Loaders describe work actually performed; progress and wait time are honest. Avoid fabricated searches, diagnoses, scores, and simulated certainty.
 - Results, ranges, testimonials, ratings, logos, and before/after imagery need substantiation and permission where applicable. A range can still mislead.
 - Email collection states its real purpose. Separate marketing permission where required. All prices, renewal terms, savings, timers, and guarantees agree with the real offer.

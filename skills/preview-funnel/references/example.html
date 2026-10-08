@@ -24,50 +24,81 @@
     <span id="navlabel">Recipient</span>
     <button id="restart">Restart</button>
   </div>
+  <div class="rhythm" id="rhythm"></div>
 <script type="module">
 const steps = [
   {
-    id: "step-03", title: "Recipient", kind: "choice",
+    id: "S01", title: "Hook · recipient", kind: "question",
     headline: "Who matters enough to really know you?",
-    choices: ["My kids", "My partner", "My parent(s)", "A friend", "My future self", "Future generations"],
+    choices: ["My kids", "My partner", "My parent(s)", "A friend", "My future self"],
     primaryAction: "Continue",
   },
   {
-    id: "step-08", title: "Reframe effort", kind: "info",
-    headline: "You don't need to write much.",
+    id: "S02", title: "Authority burst", kind: "energy", archetype: "Authority burst",
+    headline: "You're in <em>good hands.</em>",
+    visual: "Rating block: [PROOF: App Store rating] · [PROOF: letters delivered]",
+    primaryAction: "Continue",
+  },
+  {
+    id: "S03", title: "Frequency", kind: "question",
+    headline: "How often could you write?",
+    choices: ["Every week", "Twice a month", "Once a month", "Not sure yet"],
+    primaryAction: "Continue",
+  },
+  {
+    id: "S04", title: "Answer reassurance", kind: "energy", archetype: "Answer reassurance",
+    headline: "Once a month is <em>plenty.</em>",
     supportingText: "One sentence. One photo. That's already a letter.",
     proof: { from: "Example letter", text: "“Proud of you today.”" },
     primaryAction: "Got it",
   },
   {
-    id: "step-14", title: "Projection", kind: "info",
-    headline: "Write once a week, and in a year your kids will have real moments of you.",
-    stat: { num: "52", label: "letters in your first year (from your own answers)" },
-    note: "You can fine-tune this for each letter, anytime.",
-    primaryAction: "I want this",
+    id: "S05", title: "Plan reveal", kind: "plan", archetype: "Plan reveal",
+    headline: "In a year your kids will have <em>real moments</em> of you.",
+    stat: { num: "12", label: "letters in your first year (from your answers)" },
+    note: "Illustrative, based on your answers. Change it anytime.",
+    primaryAction: "Get my plan",
+  },
+  {
+    id: "S06", title: "Paywall", kind: "paywall",
+    headline: "Your letter plan is ready",
+    sections: [
+      ["Plan summary", "For: {recipient} · {frequency}"],
+      ["Plan cards", "[OFFER: plans, billed totals, renewal]"],
+      ["Guarantee", "[OFFER: refund terms]"],
+      ["Disclosure", "[OFFER: auto-renewal and cancellation terms]"],
+    ],
+    primaryAction: "Start my plan",
   },
 ];
+const code = { question: "Q", energy: "E", mirror: "M", loading: "L", plan: "P", email: "@", paywall: "$" };
 let i = 0, picked = null;
 const content = document.getElementById("content"), cta = document.getElementById("cta");
 function render() {
   const s = steps[i]; picked = null;
   document.getElementById("bar").style.width = ((i + 1) / steps.length * 100) + "%";
   document.getElementById("stepnum").innerHTML = "<strong>" + String(i + 1).padStart(2, "0") + "</strong> / " + String(steps.length).padStart(2, "0");
-  document.getElementById("navlabel").textContent = s.title;
-  let h = `<div class="hero">${s.headline}</div>`;
+  document.getElementById("navlabel").textContent = s.id + " · " + s.title;
+  document.getElementById("rhythm").innerHTML = steps.map((x, j) =>
+    `<span class="${["energy", "mirror", "plan"].includes(x.kind) ? "energy" : ""}${j === i ? " on" : ""}" data-j="${j}" title="${x.id} · ${x.title}">${code[x.kind]}</span>`).join("");
+  let h = s.archetype ? `<div class="archetype">${s.archetype}</div>` : "";
+  h += `<div class="hero">${s.headline}</div>`;
   if (s.supportingText) h += `<div class="body-text">${s.supportingText}</div>`;
+  if (s.visual) h += `<div class="visual-slot">${s.visual}</div>`;
   if (s.proof) h += `<div class="card-paper"><div class="from">${s.proof.from}</div><div class="letter-text">${s.proof.text}</div></div>`;
   if (s.stat) h += `<div class="stat-box"><div class="num">${s.stat.num}</div><div class="label">${s.stat.label}</div></div>`;
+  if (s.sections) h += s.sections.map(([label, text]) => `<div class="pw-section"><div class="label">${label}</div><div class="body-text">${text}</div></div>`).join("");
   if (s.choices) h += `<div class="options">` + s.choices.map((c, j) => `<button class="opt" data-j="${j}">${c}</button>`).join("") + `</div>`;
   if (s.note) h += `<div class="note">${s.note}</div>`;
   content.innerHTML = h;
-  cta.innerHTML = `<button class="btn" id="next" ${s.kind === "choice" ? "disabled" : ""}>${s.primaryAction}</button>`;
+  cta.innerHTML = `<button class="btn" id="next" ${s.kind === "question" ? "disabled" : ""}>${s.primaryAction}</button>`;
   content.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
     content.querySelectorAll(".opt").forEach(x => x.classList.remove("selected"));
     b.classList.add("selected"); picked = b.dataset.j;
     document.getElementById("next").disabled = false;
   }));
   document.getElementById("next").addEventListener("click", () => { if (i < steps.length - 1) { i++; render(); } });
+  document.querySelectorAll("#rhythm span").forEach(b => b.addEventListener("click", () => { i = +b.dataset.j; render(); }));
 }
 document.getElementById("back").addEventListener("click", () => { if (i > 0) { i--; render(); } });
 document.getElementById("restart").addEventListener("click", () => { i = 0; render(); });

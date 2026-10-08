@@ -16,15 +16,14 @@ Choose a single agent with `--host codex` or `--host claude`. Auto detects insta
 
 The installer creates symlinks in `~/.codex/skills/` and/or `~/.claude/skills/`. Keep the checkout: those links point to its files. Re-running setup refreshes the links.
 
-For research and copy, you need Git, Bash, and your agent. For clickable previews, the bundled workflow also uses Python 3 and browser access.
+For research and copy, you need Git, Bash, and your agent. For clickable previews, the bundled workflow also uses Python 3 and browser access. Reference funnels (rhythm, energy screens and paywall structures) come from the public Funnel Screens library through [`fgrove references`](../skills/design-funnel/references/cli-references.md), which needs the `fgrove` CLI but no login; `scripts/ensure-fgrove-cli` installs it.
 
 `design-funnel` uses existing `Design.md` and approved copy artifacts, an
 image-generation tool for representative mockups, and image/browser inspection
-for QA. Optional [CLI reference access](../skills/design-funnel/references/cli-references.md)
-requires a configured `fgrove` account and reference access. Follow the installed
-CLI's help; if authenticated access is unavailable, continue with supplied
-references, product assets and `Design.md`, recording missing reference coverage.
-A hosted implementation also requires access to its FunnelsGrove project.
+for QA. If reference access is unavailable, continue with supplied references,
+the recorded reference IDs, product assets and `Design.md`, recording missing
+reference coverage. A hosted implementation also requires access to its
+FunnelsGrove project.
 
 <details>
 <summary><strong>Building or editing with FunnelsGrove</strong></summary>

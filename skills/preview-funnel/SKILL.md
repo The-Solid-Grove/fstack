@@ -43,6 +43,13 @@ This temporary preview remains the workflow for reviewing copy and pacing.
    - `app.mjs` for navigation and choice state
 4. Render one reusable mobile screen: progress header, headline, support copy,
    optional choice cards, optional notes/proof rows, and a sticky bottom CTA.
+   Render every screen kind from the copy: questions, energy screens (archetype
+   label, evidence block or a labelled `.visual-slot` describing the planned
+   visual), mirror, loading, plan reveal, email and paywall (sections in the
+   reference order). Under the stage nav, show the **rhythm strip**
+   (`Q E Q Q E … P @ $`) with the current screen highlighted and each cell
+   clickable, and label the nav with the arc ID and screen title, so pacing can
+   be reviewed at a glance.
 5. Follow the Visual Style section below. The goal is still copy flow review,
    not final design approval — but the preview should be pleasant to read and
    feel like a real product, not a wireframe.
@@ -70,9 +77,10 @@ and film grain around a cream paper phone screen, a single copper accent, a
 serif display face (Fraunces) for headlines, and a humanist sans (DM Sans) for
 everything else. It is defined once in `references/preview-style.css` — copy
 it in as `styles.css` and build markup from its class names.
-`references/example.html` is a working three-screen sample (choice, info with
-a proof card, projection with a stat box) that shows the expected markup and
-renderer wiring. Use it as the default structure; adapt markup when the
+`references/example.html` is a working six-screen sample (hook question,
+authority burst with a proof slot, question, answer reassurance with a proof
+card, plan reveal with a stat box, paywall sections) with the rhythm strip, and
+shows the expected markup and renderer wiring. Use it as the default structure; adapt markup when the
 requested design needs it:
 
 - Stage (page): `.stage-title` (italic serif) / `.stage-subtitle` (small caps;
@@ -95,6 +103,11 @@ requested design needs it:
   `.stat-box` with `.num` and `.label` for counters.
 - Buttons: `.btn` primary (disable until a required choice is made),
   `.btn-ghost` secondary.
+- Energy and paywall: `.archetype` small-caps label above the headline,
+  `.visual-slot` dashed box for a planned visual or open proof slot,
+  `.pw-section > .label` for each paywall section.
+- Rhythm: `.rhythm > span` under the stage nav; add `.energy` to energy,
+  mirror and plan cells and `.on` to the current one.
 
 Rules:
 
@@ -107,19 +120,31 @@ Rules:
 
 ## Copy Data Shape
 
-Use a compact data object so copy changes are easy:
+Use a compact data object so copy changes are easy. `kind` is one of
+`question`, `energy`, `mirror`, `loading`, `plan`, `email` or `paywall`; it drives
+the rhythm strip (`Q`, `E`, `M`, `L`, `P`, `@`, `$`) and the renderer. These are
+preview labels, not FunnelsGrove step metadata.
 
 ```js
 export const steps = [
   {
-    id: "step-01",
-    title: "Goal qualifier",
-    kind: "choice",
-    headline: "What matters most right now?",
-    supportingText: "Choose the outcome that would make this feel worthwhile.",
+    id: "S03",
+    title: "Experience",
+    kind: "question",
+    headline: "Have you played before?",
+    supportingText: "We'll adjust to your level.",
     primaryAction: "Continue",
-    secondaryAction: "Not now",
-    choices: ["Save time", "Reduce stress", "Make progress"],
+    choices: ["Never", "A little", "I used to", "Yes, regularly"],
+  },
+  {
+    id: "S04",
+    title: "Answer reassurance",
+    kind: "energy",
+    archetype: "Answer reassurance",
+    headline: "No worries, you're in the <em>right place!</em>",
+    supportingText: "Lessons start from your level and grow with you.",
+    visual: "Level path illustration + [PROOF: learners who started here]",
+    primaryAction: "Continue",
   },
 ];
 ```

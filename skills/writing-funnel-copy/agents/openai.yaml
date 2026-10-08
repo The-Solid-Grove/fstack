@@ -1,4 +1,4 @@
 interface:
   display_name: "Writing Funnel Copy"
-  short_description: "Develop funnel strategy, emotional arc, and screen copy"
-  default_prompt: "Use $writing-funnel-copy to understand the product, prepare Pre-work for my approval, then prepare an Emotional Arc for my approval before writing screen-by-screen funnel copy."
+  short_description: "Plan funnel rhythm, energy screens, and paywall copy"
+  default_prompt: "Use $writing-funnel-copy to understand the product and scan reference funnels, prepare Pre-work for my approval, then an Emotional Arc on the rhythm template (questions, energy screens, plan, email, paywall) for my approval, then write and self-test screen-by-screen copy."
