@@ -24,14 +24,33 @@ Verify the funnel as a user would move through it:
 
 ## Visual Pass
 
-Run at all four default breakpoints:
+This table is the single source of viewport sizes for every fstack skill.
+Check each breakpoint twice: **layout** at the full screen size and **first
+view** at the area actually visible when the page loads.
 
-| Breakpoint | Size | Baseline |
-| --- | --- | --- |
-| small | `375x667` | iPhone SE and smaller-width stress check |
-| medium | `393x852` | iPhone 15 |
-| large | `402x874` | iPhone 17 Pro |
-| desktop-small | `1280x800` | 13-inch MacBook |
+| Breakpoint | Layout | First view (≈) | Baseline |
+| --- | --- | --- | --- |
+| small | `375x667` | `375x548` | iPhone SE and smaller-width stress check |
+| medium | `393x852` | `393x660` | iPhone 15/16 |
+| large | `402x874` | `402x680` | iPhone 17 Pro |
+| desktop-small | `1280x800` | `1280x700` | 13-inch MacBook, Chrome |
+
+First-view sizes are approximate: mobile Safari with its bars expanded at page
+load (Instagram and Facebook in-app browsers are similar), and a maximised
+desktop browser below the menu bar. When a real phone or the target in-app
+browser is available, measure `window.innerHeight` there and use that value;
+record whether measured or default sizes were used.
+
+**First view** — resize the browser window (or emulated viewport) to the
+first-view size and load each screen:
+
+- Question and energy screens show the headline, every single-choice option
+  (or the dominant evidence) and the primary or sticky CTA without scrolling.
+- The sticky CTA covers no option, input, validation message or disclosure.
+- Long screens (long multi-select lists, paywalls) may scroll, but the headline
+  and the CTA are visible at load.
+
+**Layout** — at the full size:
 
 - Nothing intersects or overlaps: text never collides with images, cards,
   badges, dialogs, or the action bar.
@@ -107,8 +126,9 @@ Report the QA result with:
 - Payment method or payment-path equivalent used.
 - Apple Pay and Google Pay button result.
 - Subscription-management result.
-- Browser and breakpoint assumptions, including visual pass results for small
-  `375x667`, medium `393x852`, large `402x874`, and desktop-small `1280x800`.
+- Browser and breakpoint assumptions, including layout and first-view results
+  for each [visual pass](#visual-pass) breakpoint and whether first-view sizes
+  were measured or the defaults.
 - Image optimization and next-step preload result when images changed or the
   run is a preview-to-production candidate.
 - Blockers, skipped checks, unavailable third-party services, missing test

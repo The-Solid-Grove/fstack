@@ -86,9 +86,10 @@ use its scripts and managed QA guidance to choose the checks.
 
 Start the local preview using the project's instructions. Exercise the changed
 screens through their real incoming and outgoing flow, inspect runtime errors,
-and fix failures before delivery. Verify every created or edited screen at
-`375x667`, `393x852`, `402x874`, and `1280x800`; also apply the managed local QA
-requirements, including available viewport height and interaction states.
+and fix failures before delivery. Verify every created or edited screen at the
+[visual pass](../qa-funnel/references/checklist.md#visual-pass) breakpoints: layout
+at the full size and first view at the visible size; also apply the managed local
+QA requirements, including available viewport height and interaction states.
 Check actual long copy, answers and validation errors for clipping, overlap,
 hidden controls and horizontal overflow.
 

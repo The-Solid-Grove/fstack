@@ -62,10 +62,11 @@ This temporary preview remains the workflow for reviewing copy and pacing.
    If the port is busy, choose another available port and report the actual URL.
 7. Open the URL in the browser. If the Browser plugin is available, use it for
    local preview and verification.
-8. Click through the whole flow. Check small `375x667`, medium `393x852`,
-   large `402x874`, and desktop-small `1280x800` for sticky CTA visibility, no
-   clipped headline text, no overlapping controls, and scrollability where
-   content exceeds the viewport.
+8. Click through the whole flow at the [visual pass](../qa-funnel/references/checklist.md#visual-pass)
+   breakpoints. At each layout size: no clipped headline text, no overlapping
+   controls, and scrollability where content exceeds the viewport. At each
+   first-view size: headline, single-choice options and the sticky CTA are
+   visible without scrolling.
 9. Leave the server running only while the user is reviewing. Stop it and remove
    the temporary directory when the preview is no longer needed unless the user
    explicitly asks to keep it.

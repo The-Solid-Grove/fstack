@@ -63,7 +63,7 @@ Completion: every in-scope screen has a current comparison or named source limit
 
 ## Layout and accessibility
 
-For rendered screens, inspect `375x667`, `393x852`, `402x874`, and `1280x800` CSS-pixel viewports. Also check reflow at 320 CSS pixels and enlarged text; the four baseline layouts alone are not an accessibility audit.
+For rendered screens, inspect each [visual pass](checklist.md#visual-pass) breakpoint at its layout size and at its first-view size (what is visible at page load). Also check reflow at 320 CSS pixels and enlarged text; the four baseline layouts alone are not an accessibility audit.
 
 - Headline, visual, and primary action communicate one clear job. The main action is easy to find. Longer paywalls and enlarged text may scroll; content remains reachable.
 - No horizontal overflow, overlap, clipped copy, broken images, or sticky bars covering content, focused controls, disclosures, or the last option. Bottom action bars have an opaque background and safe-area spacing.
