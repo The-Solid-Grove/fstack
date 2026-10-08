@@ -5,7 +5,7 @@ description: Use when creating a new hosted FunnelsGrove funnel from one of thre
 
 # Create Funnel
 
-Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
 
 Create through the connected FunnelsGrove account, then download the new funnel's source with the CLI. The three template cards describe different starting structures; choose for the product and journey, then establish its own identity in `Design.md`.
 

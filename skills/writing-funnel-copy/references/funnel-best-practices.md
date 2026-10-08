@@ -1,7 +1,7 @@
 ---
 id: funnel-best-practices
 title: Funnel Best Practices
-summary: Stable practice IDs for product research, screen copy, offers, recovery, and conversion experiments.
+summary: Stable practice IDs for product research, journey rhythm and energy screens, screen copy, offers, recovery, and conversion experiments.
 intents:
   - research
   - plan
@@ -19,8 +19,9 @@ IDs remain stable when a practice is edited or moved; add new IDs without renumb
 
 - [Product research](#product-research): FBP-001–004.
 - [Journey and personalization](#journey-and-personalization): FBP-005–011.
+- [Rhythm and energy screens](#rhythm-and-energy-screens): FBP-034–037, FBP-039.
 - [Screen copy](#screen-copy): FBP-012–017.
-- [Offers, checkout, and access](#offers-checkout-and-access): FBP-018–028.
+- [Offers, checkout, and access](#offers-checkout-and-access): FBP-018–028, FBP-038.
 - [Measurement and experiments](#measurement-and-experiments): FBP-029–033.
 
 ## Product research
@@ -71,6 +72,28 @@ IDs remain stable when a practice is edited or moved; add new IDs without renumb
 
 **Describe real processing.** Match progress text and duration to work the product actually performs. Present a story sequence as content; decorative animation cannot imply a personalized calculation or analysis that never occurred.
 
+## Rhythm and energy screens
+
+### FBP-034
+
+**Repay every 2–3 questions.** Follow a run of questions with an energy screen that returns reassurance, insight, proof or a visible use of the answers; keep runs to 3 early and 4 later. Use the [cadence rules](funnel-rhythm-template.md#cadence-rules); a deviation needs a reason in the arc.
+
+### FBP-035
+
+**Pass the trust gate right after the first tap.** Place an authority or expert energy screen by screen 3, built from confirmed ratings, scale, awards or credentials. When those facts are missing, use an expert or mechanism screen and leave open proof slots rather than inventing numbers.
+
+### FBP-036
+
+**Link each energy screen to the last answer.** Open by reflecting the answer or the doubt it raises, then show what the product does with it. Generic praise that would fit any answer does not repay the effort.
+
+### FBP-037
+
+**Vary archetypes and climb toward personal proof.** Avoid repeating an archetype back to back; move from trust (authority, reassurance) to understanding (insight, mechanism, comparison) to proof built from their answers (mirror, projection, plan). Each archetype's formula and references are in the [energy screen catalog](energy-screens.md).
+
+### FBP-039
+
+**Build suspense before the reveal.** Close with mirror → loading that names the answer groups actually used → plan reveal → email → paywall (or an email gate before the plan). The paywall repeats the plan; the reveal labels projections as illustrative and uses ranges for body, health or money outcomes.
+
 ## Screen copy
 
 ### FBP-012
@@ -101,7 +124,11 @@ IDs remain stable when a practice is edited or moved; add new IDs without renumb
 
 ### FBP-018
 
-**Connect the offer to demonstrated value.** Recap the relevant result, included product value, and remaining objections; make the initial offer and primary action easy to find. Plan count, selected default, price, trial, proof placement, and page length are product-specific hypotheses, not universal structures.
+**Connect the offer to demonstrated value.** Recap the relevant result, included product value, and remaining objections; make the initial offer and primary action easy to find. Start from a proven reference structure (FBP-038); plan count, selected default, price, trial, proof placement, and page length remain product-specific hypotheses to test.
+
+### FBP-038
+
+**Clone a proven paywall structure.** Choose one reference paywall whose price model fits the offer, copy its section order, repeated CTAs and sticky elements, and replace every section's content with the product's approved copy and confirmed offer facts. Follow the [paywall blueprints](paywall-blueprints.md#clone-procedure); a reference's prices, timers, discounts and reviews are never evidence for the target.
 
 ### FBP-019
 

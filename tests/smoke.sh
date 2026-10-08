@@ -24,7 +24,13 @@ for skill in r.glob('skills/*/SKILL.md'):
     assert str(skill.relative_to(r)) in (r / 'README.md').read_text(), skill
 assert {p.name for p in (r / 'skills/writing-funnel-copy/references').rglob('*.md')} == {
     'funnel-best-practices.md', 'funnel-psychology-framework.md',
+    'funnel-rhythm-template.md', 'energy-screens.md', 'paywall-blueprints.md',
 }
+copy_skill = (r / 'skills/writing-funnel-copy/SKILL.md').read_text()
+for ref in ('funnel-rhythm-template.md', 'energy-screens.md', 'paywall-blueprints.md'):
+    assert f'references/{ref}' in copy_skill, ref
+rhythm = (r / 'skills/writing-funnel-copy/references/funnel-rhythm-template.md').read_text()
+assert '## Cadence rules' in rhythm and 'fgrove references steps' in rhythm
 assert not (r / 'skills/writing-funnel-copy/references/funnels-research').exists()
 assert 'Reach second step | 30–60%' in (r / 'skills/writing-funnel-copy/references/funnel-best-practices.md').read_text()
 for p in r.glob('skills/**/*.md'):

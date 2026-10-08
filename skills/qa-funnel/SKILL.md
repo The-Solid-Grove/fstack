@@ -1,11 +1,11 @@
 ---
 name: qa-funnel
-description: Use when reviewing funnel screen images or rendered designs, or testing built funnels independently or after an edit or publish: content, responsive layout, branches, checkout, registration, subscription management, and production verification.
+description: "Use when reviewing funnel screen images or rendered designs, or testing built funnels independently or after an edit or publish: content, responsive layout, branches, checkout, registration, subscription management, and production verification."
 ---
 
 # QA Funnel
 
-Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
 
 Inspect the requested screen artifact or local, preview, or production URL and produce an evidence-backed report. A QA request authorizes inspection and ordinary test interactions; publishing, changing source, real charges, and changing real customer subscriptions require their own authorization. Reuse permission already given for the target.
 
@@ -22,7 +22,7 @@ For a synced FunnelsGrove project, read its `AGENTS.md` and `docs/funnelsgrove/S
 
 ## 2. Inspect and collect evidence
 
-For image scope, open each actual artifact and compare its copy, reference composition and shared style using the design reference. For rendered scope, walk the actual flow, not just direct links to isolated screens. Record which branches and variants you reached and how. Verify design at `375x667`, `393x852`, `402x874`, and `1280x800`; include keyboard, zoom/reflow, and supported-device checks from the design reference.
+For each new or revised design screen, use the [per-screen calibration loop](references/design.md#per-screen-calibration-loop) to compare its matched reference and review text/composition together. With existing edit authorization, correct, reopen and recheck, then reconcile output documents; inspection-only QA returns findings to the owning design/edit workflow. For image scope, open each actual artifact and compare its copy, reference composition and shared style using the design reference. For rendered scope, walk the actual flow, not just direct links to isolated screens. Record which branches and variants you reached and how. Verify design at `375x667`, `393x852`, `402x874`, and `1280x800`; include keyboard, zoom/reflow, and supported-device checks from the design reference.
 
 Use test identities and test-mode payments or the already approved payment-path equivalent. When unavailable, inspect the remaining reachable paths and name the untested transaction or subscription check as a blocker. An emulator can establish layout; it cannot establish real device wallet support.
 

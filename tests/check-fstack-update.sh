@@ -40,6 +40,52 @@ contains 'Ask the user'
 [ ! -e "$REPO/content.md" ] || fail 'checker applied the update'
 echo 'ok: newer commit with the same VERSION is offered, not applied'
 
+mkdir -p "$TMP/source/skills/old-skill"
+printf '# Old skill\n' > "$TMP/source/skills/old-skill/SKILL.md"
+git -C "$TMP/source" add skills
+git -C "$TMP/source" commit -qm 'add old skill'
+git -C "$TMP/source" push -q origin main
+git clone -q "$TMP/remote.git" "$TMP/auto pack"
+AUTO="$TMP/auto pack"
+HOSTS="$TMP/host skills"
+OTHER="$TMP/other host"
+mkdir -p "$OTHER"
+bash "$ROOT/setup" --host codex --repo-root "$AUTO" --skills-dir "$HOSTS" \
+  --skip-fgrove-cli --skip-update-check --quiet
+ln -s "$TMP/source" "$HOSTS/foreign-skill"
+git -C "$TMP/source" rm -rq skills/old-skill
+mkdir -p "$TMP/source/skills/new-skill"
+printf '# New skill\n' > "$TMP/source/skills/new-skill/SKILL.md"
+printf '0.7.0\n' > "$TMP/source/VERSION"
+git -C "$TMP/source" add -A
+git -C "$TMP/source" commit -qm 'replace old skill with new skill'
+git -C "$TMP/source" push -q origin main
+OUT="$(FSTACK_SKILL_DIRS="$HOSTS:$OTHER" bash "$CHECK" --repo-root "$AUTO" --apply)"
+contains 'fstack: updated'
+contains '0.7.0'
+contains 'Reread the active SKILL.md'
+[ "$(git -C "$AUTO" rev-parse HEAD)" = "$(git -C "$TMP/source" rev-parse HEAD)" ] || fail 'apply did not fast-forward'
+[ -f "$HOSTS/new-skill/SKILL.md" ] || fail 'apply did not link the new skill'
+[ ! -L "$HOSTS/old-skill" ] || fail 'apply kept a link to a removed skill'
+[ -L "$HOSTS/foreign-skill" ] || fail 'apply removed another pack link'
+[ -z "$(ls -A "$OTHER")" ] || fail 'apply linked into a host that does not use this checkout'
+OUT="$(FSTACK_SKILL_DIRS="$HOSTS" bash "$CHECK" --repo-root "$AUTO" --apply)"
+contains 'fstack: current'
+echo 'ok: --apply fast-forwards clean main and refreshes links only where used'
+
+printf 'local note\n' > "$AUTO/note.md"
+printf 'more\n' >> "$TMP/source/content.md"
+git -C "$TMP/source" commit -qam 'another update'
+git -C "$TMP/source" push -q origin main
+before="$(git -C "$AUTO" rev-parse HEAD)"
+OUT="$(FSTACK_SKILL_DIRS="$HOSTS" bash "$CHECK" --repo-root "$AUTO" --apply)"
+contains 'fstack: update available'
+contains 'local changes'
+contains 'Ask the user'
+[ "$(git -C "$AUTO" rev-parse HEAD)" = "$before" ] || fail 'apply moved a dirty checkout'
+[ "$(cat "$AUTO/note.md")" = 'local note' ] || fail 'apply changed local work'
+echo 'ok: --apply leaves a checkout with local changes untouched'
+
 git clone -q "$TMP/remote.git" "$TMP/ahead"
 printf 'local adaptation\n' > "$TMP/ahead/local.md"
 git -C "$TMP/ahead" add local.md

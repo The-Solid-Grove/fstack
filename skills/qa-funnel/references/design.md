@@ -37,11 +37,29 @@ approved copy and `Design.md` remain authoritative: preserving target meaning,
 option counts, offer disclosures and brand can require a deliberate departure.
 Reference prices, claims, logos and testimonials are not evidence for the target.
 
+For a paywall cloned from a reference, list both section orders side by side.
+The target keeps the reference's section order, repeated CTAs and sticky
+elements unless the approved copy records a deliberate change; every section
+has target content or a visible open slot, and billing disclosures remain
+readable before the CTA.
+
 Save or link the source and target artifacts with screen IDs/revisions in the
 QA record. If no compatible source is accessible, record that limitation and
 inspect against the approved content/style; do not report a reference comparison
 as passed. The [opening feedback checkpoint](../../design-funnel/SKILL.md#first-three-screen-feedback-checkpoint)
 uses these comparisons when presenting the first actual designs to the user.
+
+## Per-screen calibration loop
+
+For every new or revised target screen in an authorized design/edit task, repeat **compare → Design QA → correct → recheck** before marking the revision ready for review or extending its pattern. An inspection-only QA request reports findings and returns corrections/document edits to the owning workflow unless those edits are already authorized:
+
+1. Open the actual target, exact copy, `Design.md` and matched source. Compare hierarchy, density, controls and action placement; record borrowed structure, intentional differences and defects. If the source is unavailable, name the limitation and review against the target contract.
+2. Review text and composition together. Identify what the visitor must understand and decide now; remove repetition, shorten wording and move optional explanation to an appropriate detail surface. Retain meaningful choices, evidence qualifications, fit limits and all required offer/billing disclosures. A source's word count is context, not a quota.
+3. Correct the target and canonical copy together. Preserve approved strategy, answer semantics and transitions. Return consequential strategy/arc changes to their existing approval workflow; ordinary wording/layout corrections proceed within scope. Keep readable type and reachable content rather than shrinking essential text to fit.
+4. Reopen the corrected artifact and rerun affected checks. A previous revision's pass never transfers automatically; shared style/copy changes invalidate affected screens. Record current screen ID/revision, comparison, findings, corrections, evidence and pass/fail/blocked status in `design-qa.md`.
+5. Reconcile the output documents: current `COPY.md` or equivalent, `Design.md`, screen map, QA report and approval/status record must describe the same revision. Remove stale active instructions, obsolete duplicate copy and broken links. Keep superseded assets or history clearly labeled and outside the current handoff; preserve unrelated work.
+
+Completion: every in-scope screen has a current comparison or named source limitation, a text/design review, resolved required defects or an explicit exception, and consistent output documents. State image-direction results separately from pending rendered behavior; this loop does not replace the first-three-screen user feedback checkpoint.
 
 ## Layout and accessibility
 
@@ -59,7 +77,8 @@ For rendered screens, inspect `375x667`, `393x852`, `402x874`, and `1280x800` CS
 - The first screen continues the actual ad promise. Each question has a product purpose, and later summaries reflect the user's answers accurately.
 - Short, scannable headlines and concise supporting text form a clear hierarchy. Six-word headlines are a useful editing target, not a release blocker.
 - A visual explains the benefit, mechanism, or choice. Decorative faces and animation should not obscure the offer. Test relevant portraits rather than imposing a ban.
-- Alternate effort with useful feedback. Neither a fixed question cadence nor a prescribed funnel length guarantees conversion.
+- Check the rhythm against the approved arc and the [cadence rules](../../writing-funnel-copy/references/funnel-rhythm-template.md#cadence-rules): an energy screen by screen 3, no more than 3 questions in a row early (4 later), energy screens that reflect the preceding answer, varied archetypes, and plan reveal → email → paywall at the close. Report a deviation the arc does not explain as a content finding; cadence is a tested default, not a conversion guarantee.
+- Each energy screen's dominant visual carries its proof (rating block, chart, level bar, product UI, testimonial) rather than decoration, and keeps the composition of its archetype so the rhythm stays visible.
 - Loaders describe work actually performed; progress and wait time are honest. Avoid fabricated searches, diagnoses, scores, and simulated certainty.
 - Results, ranges, testimonials, ratings, logos, and before/after imagery need substantiation and permission where applicable. A range can still mislead.
 - Email collection states its real purpose. Separate marketing permission where required. All prices, renewal terms, savings, timers, and guarantees agree with the real offer.
