@@ -45,7 +45,10 @@ def parse_frontmatter(text: str) -> dict[str, str] | None:
             return fields
         match = re.match(r"^([A-Za-z][\w-]*):\s*(.*)$", line)
         if match:
-            fields[match.group(1)] = match.group(2).strip()
+            value = match.group(2).strip()
+            if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+                value = value[1:-1]
+            fields[match.group(1)] = value
     return None
 
 

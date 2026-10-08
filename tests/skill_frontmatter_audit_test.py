@@ -79,6 +79,10 @@ class SkillFrontmatterAuditTest(unittest.TestCase):
         self.assertEqual(len(errors), 1)
         self.assertIn("does not start with 'Use when'", errors[0])
 
+    def test_quoted_description_passes(self):
+        write_skill(self.root, "edit-funnel", "edit-funnel", f'"{VALID_DESCRIPTION}: with a colon"')
+        self.assertEqual(audit(self.root), [])
+
     def test_stub_description_fails(self):
         write_skill(self.root, "edit-funnel", "edit-funnel", "Use when editing.")
         errors = audit(self.root)
