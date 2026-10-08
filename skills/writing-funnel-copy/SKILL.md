@@ -97,7 +97,7 @@ Required before showing copy to the user:
 
 1. **Per-screen rubric:** run the [review checks](references/funnel-psychology-framework.md#review-checks) (value, fuel, scan, attention, Hitchcock, answer link, commitment, trust, truth) and fix every failure.
 2. **Journey checks:** re-read the final rhythm strip against the cadence rules, the promise chain from ad to paywall, the Hitchcock moments and paywall section parity with its reference.
-3. **Rendered check:** render the copy with [preview-funnel](../preview-funnel/SKILL.md) and inspect every screen at `375x667`: headline within three lines, single-choice options visible without scrolling, CTA visible, energy screens showing their evidence block or labelled visual, paywall sections in reference order. Fix copy that does not fit and re-check.
+3. **Rendered check:** render the copy with [preview-funnel](../preview-funnel/SKILL.md) and inspect every screen at the small first-view size from the [visual pass](../qa-funnel/references/checklist.md#visual-pass) (`375x548`): headline within three lines, single-choice options and the CTA visible without scrolling, energy screens showing their evidence block or labelled visual, paywall sections in reference order. Fix copy that does not fit and re-check.
 
 **Done when:** every screen passes or has a named open slot, and the result is returned with the full screen copy, the final rhythm strip, a compact self-test table (screen → failures fixed → remaining open slots), the preview URL when it is running, links to the approved Pre-work and Emotional Arc, and useful experiments.
 

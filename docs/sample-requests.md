@@ -26,7 +26,7 @@ journey on the rhythm template: one feeling journey, the rhythm strip
 (Q E Q Q E … M L P @ $) and the screen map with energy archetypes, fuel marks and
 reference screens, plus the chosen paywall blueprint and its reference. Wait for
 arc approval before writing the screen copy. Self-test the copy (rubric and a
-375x667 preview) before showing it.
+phone-size first-view preview) before showing it.
 
 For design, inspect the reference funnel and match source screens by job and
 interaction. Show the first three actual target designs, with readable matched

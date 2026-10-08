@@ -31,6 +31,16 @@ for ref in ('funnel-rhythm-template.md', 'energy-screens.md', 'paywall-blueprint
     assert f'references/{ref}' in copy_skill, ref
 rhythm = (r / 'skills/writing-funnel-copy/references/funnel-rhythm-template.md').read_text()
 assert '## Cadence rules' in rhythm and 'fgrove references steps' in rhythm
+import re
+viewport = re.compile(r'(?<![\w.])\d{3,4}x\d{3}(?![\w])')
+checklist = (r / 'skills/qa-funnel/references/checklist.md').read_text()
+table = set(viewport.findall(checklist[checklist.index('## Visual Pass'):]))
+assert {'375x667', '375x548', '1280x800'} <= table, table
+for p in [*r.glob('skills/**/*.md'), *r.glob('skills/**/*.yaml'), *r.glob('docs/*.md')]:
+    stray = set(viewport.findall(p.read_text())) - table
+    assert not stray, (p, stray)
+for skill in ('qa-funnel/SKILL.md', 'edit-funnel/SKILL.md', 'preview-funnel/SKILL.md'):
+    assert 'checklist.md#visual-pass' in (r / 'skills' / skill).read_text(), skill
 assert not (r / 'skills/writing-funnel-copy/references/funnels-research').exists()
 assert 'Reach second step | 30–60%' in (r / 'skills/writing-funnel-copy/references/funnel-best-practices.md').read_text()
 for p in r.glob('skills/**/*.md'):
