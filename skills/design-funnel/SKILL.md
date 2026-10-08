@@ -5,7 +5,7 @@ description: Use when designing a funnel's visual system and full journey from e
 
 # Design Funnel
 
-Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
 
 Turn approved content and the product's existing design direction into a coherent
 visual system, prove it across the journey's actual screen patterns, then extend

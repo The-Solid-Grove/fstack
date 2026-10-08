@@ -5,7 +5,7 @@ description: Use when writing or revising quiz-to-paywall funnel copy, positioni
 
 # Writing Funnel Copy
 
-Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
 
 Turn the product, audience and ad promise into a quiz-to-paywall journey that keeps the visitor's energy high: easy questions broken up every 2–3 screens by **energy screens** that reassure, prove and excite, a personal **plan** reveal, **email**, and a **paywall** cloned from a proven reference structure. Every screen is a psychological instrument with one job, and value is shown so the visitor concludes it themselves (the Hitchcock principle).
 

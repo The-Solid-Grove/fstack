@@ -18,7 +18,7 @@ cd ~/.fstack
 ./setup --host auto --skip-fgrove-cli
 ```
 
-Requires Git and Bash. Keep the checkout: the installer links your agent's skills to these files. Setup and the first fstack skill used in a conversation check for updates and offer an update when one is available.
+Requires Git and Bash. Keep the checkout: the installer links your agent's skills to these files. The first fstack skill used in a conversation updates a clean `main` checkout to the latest release automatically; custom branches and local changes are left alone and an update is offered instead.
 
 [Host options, FunnelsGrove setup, and updates →](docs/getting-started.md)
 

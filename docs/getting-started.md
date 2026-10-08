@@ -45,12 +45,13 @@ Creation and editing [remember one working folder per funnel](../skills/edit-fun
 
 ## Update
 
-Setup checks fstack automatically. Agents also check once per conversation, before the first fstack skill runs. The check compares the checkout with `origin/main`, so it detects improvements even when `VERSION` has not changed. It fetches Git metadata and leaves installed files and local edits intact. A failed network check leaves the current skills usable.
+Agents update fstack once per conversation, before the first fstack skill runs: when the checkout is a clean `main` branch behind `origin/main`, the check fast-forwards it and refreshes skill links (see [Agent update check](#agent-update-check)). It compares commits, so it picks up improvements even when `VERSION` has not changed. Custom branches, detached checkouts, local edits and diverged history are never changed; the agent offers the update instead. Setup only checks. A failed network check leaves the current skills usable.
 
-Run the check manually with:
+Check or update manually with:
 
 ```bash
-./scripts/check-fstack-update
+./scripts/check-fstack-update          # report only
+./scripts/check-fstack-update --apply  # fast-forward a clean main and refresh links
 ```
 
 For an offline installation, use `./setup --skip-update-check --skip-fgrove-cli`. The two flags control the pack and CLI checks independently.
@@ -62,19 +63,14 @@ Before the first fstack skill in a conversation, resolve the loaded skill direct
 ```bash
 fstack_skill_dir="$(cd "<directory-containing-the-loaded-SKILL.md>" && pwd -P)"
 fstack_checkout="$(cd "$fstack_skill_dir/../.." && pwd -P)"
-"$fstack_checkout/scripts/check-fstack-update"
+"$fstack_checkout/scripts/check-fstack-update" --apply
 ```
 
-When an update is available, show the installed and latest revisions and offer to update. Continue the requested work with the current skills while awaiting the answer. Ask once per conversation; a declined or unavailable update does not block the task.
+- **`fstack: updated (…)`** — a clean `main` checkout was fast-forwarded to the latest release and skill links were refreshed in the hosts that already use this checkout (new skills linked, removed ones unlinked). Tell the user the old and new versions in one line, then reread the active `SKILL.md` and the references it needs before continuing.
+- **`fstack: current`** or **`update check unavailable`** — continue with the installed skills.
+- **`fstack: update available (…)`** — the checkout is on a custom branch, detached, has local changes or has diverged, so nothing was changed. Show the installed and latest revisions and offer to update once per conversation; continue the task with the current skills while awaiting the answer. When the user accepts, keep local edits, custom branches and divergent history intact: explain the specific state and agree how to retain that work before moving the checkout to `main` and running `git -C "$fstack_checkout" pull --ff-only origin main`.
 
-When the user accepts, inspect the checkout first. For a clean `main` branch that can fast-forward, run:
-
-```bash
-git -C "$fstack_checkout" pull --ff-only origin main
-"$fstack_checkout/setup" --host auto --skip-fgrove-cli --skip-update-check
-```
-
-Preserve the user's original host/custom skill-directory options when rerunning setup. Keep local edits, custom branches, detached checkouts, and divergent history intact; explain the specific state and agree how to retain that work before updating it. After an update, reread the active `SKILL.md` and its needed references before continuing. The check itself never applies an update.
+After any update that adds or removes skills in a custom skills directory, rerun `"$fstack_checkout/setup"` with the user's original host/skills-directory options (`--skip-fgrove-cli --skip-update-check`). Set `FSTACK_SKILL_DIRS` (colon-separated) to refresh custom directories during `--apply`. Without `--apply`, the check only fetches metadata and never changes the checkout.
 
 ## Team setup
 

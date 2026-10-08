@@ -5,7 +5,7 @@ description: Use when turning finished funnel copy, screen-by-screen funnel spec
 
 # Preview Funnel
 
-Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
 
 ## Overview
 

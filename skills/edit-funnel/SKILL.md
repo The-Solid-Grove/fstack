@@ -5,7 +5,7 @@ description: Use when editing an existing FunnelsGrove funnel in its remembered 
 
 # Edit Funnel
 
-Before the first fstack skill in a conversation, follow the [update check](../../docs/getting-started.md#agent-update-check); offer available updates without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
 
 Reuse one working folder for each hosted funnel. Make the requested change there,
 verify it locally, and deliver only to the environments the user authorized.

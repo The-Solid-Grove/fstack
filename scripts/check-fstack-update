@@ -3,18 +3,27 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 QUIET=0
+APPLY=0
 
 usage() {
   cat <<'EOF'
-Usage: scripts/check-fstack-update [--repo-root PATH] [--quiet]
+Usage: scripts/check-fstack-update [--repo-root PATH] [--apply] [--quiet]
 
-Checks the checkout against origin/main. Fetches Git metadata only; updates
-require the user's approval. Offline checks leave the installed skills usable.
+Checks the checkout against origin/main. Without --apply it fetches Git
+metadata only. With --apply it fast-forwards a clean `main` checkout and
+refreshes skill links in hosts that already use this checkout; custom branches,
+local changes and diverged history are reported and left untouched. Offline
+checks leave the installed skills usable.
 
 Options:
   --repo-root PATH  fstack checkout. Default: this script's checkout.
-  --quiet          Suppress check results.
-  -h, --help       Show this help.
+  --apply           Apply a safe fast-forward update and refresh skill links.
+  --quiet           Suppress check results.
+  -h, --help        Show this help.
+
+Environment:
+  FSTACK_SKILL_DIRS  Colon-separated skill directories to refresh after --apply.
+                     Default: ~/.claude/skills:~/.codex/skills
 EOF
 }
 
@@ -26,6 +35,7 @@ while [ "$#" -gt 0 ]; do
       [ -n "${2:-}" ] || { echo 'Missing value for --repo-root' >&2; exit 1; }
       REPO_ROOT="$2"; shift 2 ;;
     --repo-root=*) REPO_ROOT="${1#--repo-root=}"; shift ;;
+    --apply) APPLY=1; shift ;;
     --quiet|-q) QUIET=1; shift ;;
     --help|-h) usage; exit 0 ;;
     *) echo "Unknown option: $1" >&2; usage >&2; exit 1 ;;
@@ -55,6 +65,44 @@ fetch_latest() (
   return "$status"
 )
 
+REPO_ROOT="$(cd "$REPO_ROOT" 2>/dev/null && pwd -P)" || {
+  echo "fstack: checkout not found; continue with the installed skills." >&2
+  exit 0
+}
+
+# Link every skill of this checkout into host directories that already use it,
+# and drop links to skills that no longer exist. Other packs' links are kept.
+refresh_links() {
+  local dirs="${FSTACK_SKILL_DIRS-$HOME/.claude/skills:$HOME/.codex/skills}"
+  [ -n "$dirs" ] || return 0
+  local dir link target skill_dir uses
+  local IFS=':'
+  for dir in $dirs; do
+    [ -d "$dir" ] || continue
+    uses=0
+    for link in "$dir"/*; do
+      [ -L "$link" ] || continue
+      target="$(readlink "$link")"
+      case "$target" in "$REPO_ROOT/skills/"*) uses=1 ;; esac
+    done
+    [ "$uses" -eq 1 ] || continue
+    for skill_dir in "$REPO_ROOT"/skills/*; do
+      [ -f "$skill_dir/SKILL.md" ] || continue
+      link="$dir/$(basename "$skill_dir")"
+      if [ -L "$link" ]; then
+        case "$(readlink "$link")" in "$REPO_ROOT/skills/"*) ;; *) continue ;; esac
+      elif [ -e "$link" ]; then
+        continue
+      fi
+      ln -sfn "$skill_dir" "$link"
+    done
+    for link in "$dir"/*; do
+      [ -L "$link" ] && [ ! -e "$link" ] || continue
+      case "$(readlink "$link")" in "$REPO_ROOT/skills/"*) rm -f "$link" ;; esac
+    done
+  done
+}
+
 if ! fetch_latest; then
   log 'fstack: update check unavailable; continue with the installed skills.'
   exit 0
@@ -67,11 +115,20 @@ if git -C "$REPO_ROOT" merge-base --is-ancestor "$latest" "$installed"; then
   log "fstack: current ($version; ${installed:0:8})."
 else
   latest_version="$(git -C "$REPO_ROOT" show "$latest:VERSION" 2>/dev/null || printf 'unversioned')"
+  branch="$(git -C "$REPO_ROOT" symbolic-ref --quiet --short HEAD || true)"
+  if [ "$APPLY" -eq 1 ] && [ "$branch" = main ] \
+    && [ -z "$(git -C "$REPO_ROOT" status --porcelain)" ] \
+    && git -C "$REPO_ROOT" merge-base --is-ancestor "$installed" "$latest" \
+    && git -C "$REPO_ROOT" merge --ff-only --quiet "$latest" >/dev/null 2>&1; then
+    refresh_links
+    log "fstack: updated ($version ${installed:0:8} -> $latest_version ${latest:0:8})."
+    log 'Reread the active SKILL.md and the references it needs before continuing.'
+    exit 0
+  fi
   log "fstack: update available ($version ${installed:0:8} -> $latest_version ${latest:0:8})."
   if ! git -C "$REPO_ROOT" merge-base --is-ancestor "$installed" "$latest"; then
     log 'Local and remote history have diverged; review both before updating.'
   fi
-  branch="$(git -C "$REPO_ROOT" symbolic-ref --quiet --short HEAD || true)"
   if [ "$branch" != main ]; then
     log "Checkout is on ${branch:-a detached HEAD}; review it before updating main."
   fi
