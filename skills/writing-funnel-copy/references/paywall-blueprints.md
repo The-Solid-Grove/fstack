@@ -1,7 +1,7 @@
 ---
 id: paywall-blueprints
 title: Paywall Blueprints
-summary: Six section-by-section paywall structures observed in the public Funnel Screens library, with two inspected reference paywalls each, a clone procedure and truthful replacements for risky devices.
+summary: Six section-by-section paywall structures observed in the public Funnel Screens library, with two inspected reference paywalls each, a clone procedure and how to keep timers, discounts and terms as the reference shows them.
 intents:
   - research
   - plan
@@ -25,7 +25,7 @@ Source: all 132 paywall and checkout screens in the 76 recorded funnels of the p
 - [B4 · Trial first](#b4--trial-first)
 - [B5 · Compact single offer](#b5--compact-single-offer)
 - [B6 · Locked result](#b6--locked-result)
-- [Truthful replacements](#truthful-replacements)
+- [Urgency, discounts and terms](#urgency-discounts-and-terms)
 - [Clone procedure](#clone-procedure)
 
 ## Most common order
@@ -150,7 +150,7 @@ Order:
 | Reference | Why |
 | --- | --- |
 | `fgrove references step vocal-image-2ef0b5846e 37` (Vocal, 4,820px) | Offer above the fold with a personal plan header, plan preview, benefit cards that state their basis, reviews, press, ratings, FAQ, repeated cards, payment selector, plain renewal paragraph ("deleting the app does not cancel"). |
-| `fgrove references step smartfood-ai-70d9067a68 32` (Nutrition, 5,736px) | The most cloned template: product hero, plan-ready bullets, three named cards, secure-checkout row, mockups, reviews, community, guarantee, press, promise, bullet disclosure, inline PayPal/card form. **Do not copy its two different countdowns.** |
+| `fgrove references step smartfood-ai-70d9067a68 32` (Nutrition, 5,736px) | The most cloned template: product hero, plan-ready bullets, three named cards, secure-checkout row, mockups, reviews, community, guarantee, press, promise, bullet disclosure, inline PayPal/card form. Show one countdown value on the page. |
 
 Put renewal terms under **every** CTA instance, not only above the final Subscribe button.
 
@@ -217,19 +217,20 @@ Order:
 | `fgrove references step iq-brain-a6b78b73f9 46` (IQ test, 4,576px) | The best order summary in the library (due today, trial, after trial, first charge date), auto-renewal line, price in the CTA, consent with cancellation path. Use 46, not 45 (error modal). |
 | `fgrove references step clever-b9ffd52437 25` (IQ test, 3,626px) | Compact teaser → unlock bullets → single card → CTA → secure checkout → reviews → press → bullet disclosure → inline form. **Relabel its card:** it shows a 7-day trial as a discounted monthly price. |
 
-## Truthful replacements
+## Urgency, discounts and terms
 
-Keep each structure and replace the risky device:
+Copy these devices as the reference shows them — same timer bar, countdown position, strike-through price, "-60%" badge, promo panel, per-day number and small-print placement — and make each one real so it survives payment-provider, ad-platform and consumer-law review:
 
-- **Timers (72% of recorded paywalls; resets and mismatched values observed):** use a real, fixed deadline whose expiry changes the price, a persistent non-countdown bar ("Your plan is saved — continue"), or no timer. Never reset on reload; never show two values.
-- **Promo-code panel:** only for a code the visitor actually received; the same code and terms at checkout.
-- **Cards:** the billed-today total is the largest number; the per-day equivalent is secondary. Inside each card: "{intro price} today, then {renewal price} every {period}". Crossed-out prices only for a price genuinely charged (usually the renewal price). Badges must be true ("Most popular" needs data).
-- **Renewal terms under every CTA instance** (including repeats and inline forms): today's charge, intro length or end date, renewal price and period, how and by when to cancel, refund link; trials add the charge date and a reminder only if one is sent. Readable size and contrast, never collapsed.
-- **Social proof:** real reviews with source and date; counts with basis and date; no live-purchase tickers without real data.
-- **Guarantee:** headline the actual conditions ("30-day refund after completing 7 sessions").
-- **Result visuals:** keep now/goal and goal-date graphs, label them illustrative, derive them from answers, keep body/health/money outcomes within typical ranges.
+- **Countdown timer:** keep the reference's sticky bar and inline countdown exactly. Back it with a real intro offer: the visitor's expiry is stored once (it does not restart on reload or a new tab), every instance on the page shows the same time, and at zero the intro price is actually withdrawn (cards switch to the regular price).
+- **Promo-code panel:** keep it; the code shown is the one actually applied at checkout, with the same terms.
+- **Strike-through price and "-X%" badge:** keep them as in the reference. The crossed-out amount is a price the product really charges — normally the renewal or regular price — and the percentage is calculated from it. In markets with price-reduction rules (for example the EU), use the price required there.
+- **Per-day number:** may be the largest number on the card, as in the reference, when the card also shows the amount billed today and the renewal price and period.
+- **Renewal terms:** keep the reference's position and compact small-print style directly under the CTA, under **every** CTA instance including repeats and inline forms. They state today's charge, the intro length or end date, the renewal price and period, and how to cancel, at a readable size and contrast.
+- **Social proof and counters:** real reviews, ratings and counts with their basis; live "people bought" tickers only from real data.
+- **Guarantee:** keep the reference's card and headline; its conditions are written in the card.
+- **Result visuals:** keep now/goal and goal-date graphs, derived from answers and labelled illustrative.
 
-About 14 of 76 recorded funnels show no auto-renewal statement near the CTA; do not copy that gap. Check current requirements for the market before launch ([FBP-028](funnel-best-practices.md#fbp-028)).
+About 14 of 76 recorded funnels show no auto-renewal statement near the CTA, several show timers that restart or disagree, and some cross out list prices nobody pays; those versions are not copied. Check current requirements for the market before launch ([FBP-028](funnel-best-practices.md#fbp-028)).
 
 ## Clone procedure
 
@@ -237,9 +238,9 @@ About 14 of 76 recorded funnels show no auto-renewal statement near the CTA; do 
 2. **Pick one reference paywall** from that blueprint, preferring the one whose price model matches (trial vs intro discount, 2 vs 3 plans, inline form vs separate checkout). Search more with `fgrove references list --step-type paywall --category "<category>"`.
 3. **Open it completely:** `fgrove references step <funnel-id> <position>`, download the image into a new directory, view it in ~900px slices, and read the recognised text.
 4. **Write the section list exactly:** order, repeated blocks and CTAs, sticky elements, card count and default selection, and what sits above the 874px fold. Record it in the arc or copy document as the paywall's skeleton.
-5. **Map every section to approved facts:** plan names and durations, today's price, renewal price and period, trial, currency/tax, cancellation path, refund terms, real ratings/reviews/press with sources, user counts with basis, real program content, answers for chips and hero, legal entity.
+5. **Map every section to approved facts:** plan names and durations, today's price, renewal price and period, intro-offer window and what happens when it ends, trial, currency/tax, cancellation path, refund terms, real ratings/reviews/press with sources, user counts with basis, real program content, answers for chips and hero, legal entity.
 6. **Open slots, never inventions:** `[OFFER: renewal price for 12-week plan]`, `[PROOF: App Store rating, count, date]`. A section that depends entirely on missing proof stays an open slot or is removed; never fill it with realistic-looking placeholders.
-7. **Write copy for every section** in the reference's density: same section count and order, similar headline/body lengths, same number of benefits, FAQ items and testimonials. Apply [truthful replacements](#truthful-replacements).
+7. **Write copy for every section** in the reference's density: same section count and order, similar headline/body lengths, same number of benefits, FAQ items and testimonials. Keep urgency, discounts and terms as the reference shows them, backed as described in [urgency, discounts and terms](#urgency-discounts-and-terms).
 8. **Verify:** render at mobile width; today's charge, renewal and cancellation are readable before every CTA; any deadline/code matches across instances; every number traces to an approved fact or an open slot; the section order matches the reference (record intentional differences).
 
 Design reuses the same reference and section list ([design-funnel](../../design-funnel/SKILL.md)); implementation metadata and payment integration come from the managed project contract.
