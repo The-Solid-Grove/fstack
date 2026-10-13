@@ -4,6 +4,20 @@ Use these as starting points; supply existing artifacts rather than asking the
 agent to infer product or commercial facts. Adjust the requested scope and
 language. These examples authorize preparation/review, not a production release.
 
+## A/B test ideas from drop-off
+
+```text
+Use brainstorm-funnel-tests for [funnel preview URL or local folder].
+
+Drop-off: [analytics screenshot or step / drop-off / entered / lost table, period]
+Steps: [the steps to test, or "pick the three biggest losses"]
+Language: [language of the PDF]
+
+Prototype three radically different ideas per step at the same scale as the
+current step, let me pick or combine them, then QA the chosen variants and
+render the PDF. Do not create experiments or publish.
+```
+
 ## Strategy, Emotional Arc and design
 
 ```text
