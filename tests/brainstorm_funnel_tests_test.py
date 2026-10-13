@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for the propose-funnel-tests PDF renderer (HTML stage; no browser needed)."""
+"""Tests for the brainstorm-funnel-tests PDF renderer (HTML stage; no browser needed)."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "skills/propose-funnel-tests/scripts"))
+sys.path.insert(0, str(ROOT / "skills/brainstorm-funnel-tests/scripts"))
 
 import render_report as rr  # noqa: E402
 

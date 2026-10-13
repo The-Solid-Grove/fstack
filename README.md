@@ -52,13 +52,13 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 **Check the whole experience.** Review screen images, rendered design, mobile layouts, every branch, checkout, registration, and subscription management. Run it independently or verify the funnel after publishing, with evidence and clear blockers.
 
-### [propose-funnel-tests](skills/propose-funnel-tests/SKILL.md)
+### [brainstorm-funnel-tests](skills/brainstorm-funnel-tests/SKILL.md)
 
-**Turn drop-off into the next tests.** Give it the funnel's steps and drop-off by step. It picks the steps worth testing, writes one hypothesis for each, builds and checks the proposed screen, and renders a shareable PDF: drop-off, hypothesis, and current versus proposed screen on one page per test.
+**Turn drop-off into the next tests.** Give it the funnel's steps and drop-off by step. It grills you on scope in short rounds, prototypes several radically different ideas for each leaking step, converges on one variant and hypothesis per step with you, and renders a shareable PDF: drop-off, hypothesis, and current versus proposed screen on one page per test.
 
 ## Put them to work
 
-**Research → Write → Preview copy → Design → Build → QA → Propose tests → Iterate**
+**Research → Write → Preview copy → Design → Build → QA → Brainstorm tests → Iterate**
 
 Start wherever your project is. For example:
 
