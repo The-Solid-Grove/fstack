@@ -81,7 +81,8 @@ Use fstack for Web-to-Web funnel work: web2app-essentials for research,
 writing-funnel-copy for strategy and screen copy, preview-funnel for
 clickable copy review, design-funnel for visual patterns and shared style,
 create-funnel for new FunnelsGrove projects,
-edit-funnel for hosted changes, and qa-funnel for design and flow testing. Read the matching SKILL.md and
+edit-funnel for hosted changes, qa-funnel for design and flow testing, and
+propose-funnel-tests for A/B proposals from drop-off data. Read the matching SKILL.md and
 follow the project's managed FunnelsGrove docs for implementation.
 ```
 
@@ -91,7 +92,7 @@ Remove the installed symlinks first. This preserves directories if you replaced 
 
 ```bash
 for host in ~/.codex/skills ~/.claude/skills; do
-  for skill in create-funnel edit-funnel preview-funnel design-funnel writing-funnel-copy web2app-essentials qa-funnel; do
+  for skill in create-funnel edit-funnel preview-funnel design-funnel writing-funnel-copy web2app-essentials qa-funnel propose-funnel-tests; do
     link="$host/$skill"
     if [ -L "$link" ] && [ "$(readlink "$link")" = "$HOME/.fstack/skills/$skill" ]; then
       rm "$link"

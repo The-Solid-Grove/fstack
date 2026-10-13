@@ -1,0 +1,4 @@
+interface:
+  display_name: "Propose Funnel Tests"
+  short_description: "Turn step drop-off into A/B test proposals and a shareable PDF"
+  default_prompt: "Use $propose-funnel-tests to pick the biggest drop-off steps in this funnel, write one hypothesis per step, build and check the proposed variants, and render the funnelsgrove PDF."
