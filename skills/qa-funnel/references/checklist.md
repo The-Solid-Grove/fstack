@@ -19,7 +19,7 @@ Verify the funnel as a user would move through it:
   the next expected step.
 - Submit email or identity capture with test data and confirm the next expected state.
 - Exercise back, refresh, resume, invalid input, duplicate taps, and supported failure/retry paths. Verify answers and personalization survive as the managed contract specifies.
-- Check expected analytics events and identifiers through available authorized evidence; ensure step and purchase events are not duplicated. Record unavailable analytics access separately.
+- Check expected analytics events and identifiers through available authorized evidence; ensure step and purchase events are not duplicated. Preview suppresses analytics delivery, so preview cannot prove events arrive; production and launch QA require the [paid-traffic launch gate](#paid-traffic-launch-gate) evidence.
 - Check browser console and network errors when a browser tool is available.
 
 ## Visual Pass
@@ -115,6 +115,16 @@ When an eligible test subscription is available (never cancel a real customer su
 - Verify the cancellation flow for the eligible test subscription.
 - Confirm cancellation state, access-through date, and follow-up messaging are correct. Verify a retention offer does not obstruct cancellation.
 
+## Paid-traffic launch gate
+
+Run on production before paid traffic reaches a new or cloned funnel, and after any change to runtime, analytics, or payment wiring. When the funnel's managed `docs/funnelsgrove/qa/publish.md` has this gate, follow its exact procedure.
+
+- Step lifecycle events reach ingest on the live domain: the first step sends `step_started` and `first_step_viewed` to `/ingest` with the funnel id, and the step report shows them within about an hour.
+- The live payment webhook shows verified for the current signing secret. An unverified live webhook means live purchases are not recorded.
+- One real live purchase is recorded (subscription appears, purchase conversion sent), then refunded or cancelled. The real charge needs the user's explicit authorization.
+
+Missing analytics or payment evidence fails release readiness: mark the gate **fail**, never **blocked** or skipped.
+
 ## Reporting
 
 Report the QA result with:
@@ -126,6 +136,7 @@ Report the QA result with:
 - Payment method or payment-path equivalent used.
 - Apple Pay and Google Pay button result.
 - Subscription-management result.
+- [Paid-traffic launch gate](#paid-traffic-launch-gate) result per check, for launches and runtime, analytics, or payment wiring changes.
 - Browser and breakpoint assumptions, including layout and first-view results
   for each [visual pass](#visual-pass) breakpoint and whether first-view sizes
   were measured or the defaults.

@@ -75,6 +75,7 @@ Use `Design.md` and the downloaded contracts to update identity, requested conte
 - Review package/config/manifest metadata, browser title, visible copy, imagery, legal links and sample product claims. Replace starter identity with the actual product; use the real funnel name in metadata. Retained sample content must be identified in the handoff.
 - Keep user-facing routes meaningful. Register new images in the manifest and on their owning steps according to managed asset/preloading contracts; retain build-time raster compression and variants.
 - Keep offer terms, prices, proof and legal details tied to supplied facts. Track missing facts in the brief instead of inventing them.
+- When rebuilding an existing or external funnel on the template, port only its product steps, content and assets. Platform runtime wiring comes from the current template only: keep `src/runtime/` (the flow controller passes `publicAnalyticsSdk` as `analytics` unchanged) and `src/contract/` as downloaded, and take package versions from the managed docs, never from the other funnel's source.
 
 Use `writing-funnel-copy` when creating or revising the journey's copy. For a full visual design, use [design-funnel](../design-funnel/SKILL.md) with the existing `Design.md`, approved Pre-work and Emotional Arc, and complete screen content. Establish the shared style with references and mockups for every actual pattern before full implementation. Resume in the remembered downloaded folder and retain its managed contracts. A scaffolding-only request ends with a working starter and its design brief, not an invented complete product funnel.
 
@@ -87,3 +88,5 @@ For a creation-and-brief-only request, deliver the hosted ID, downloaded source,
 When delivery includes hosted changes, use `fgrove sync up` for a funnel without GitHub sync, or commit/push and `fgrove github pull` for a connected repository, then publish preview and verify it. Production publication requires explicit user authorization. The API's original starter preview does not include later local customization until it is synced and published.
 
 Return the chosen template and why, workspace/project and funnel ID, local folder, `Design.md`, completed checks, retained sample content, and remaining blockers. Include the customized preview URL only when it has actually been published and verified.
+
+Before the funnel receives paid traffic, run the QA [paid-traffic launch gate](../qa-funnel/references/checklist.md#paid-traffic-launch-gate) on production; until it passes, report the funnel as not ready for traffic.
