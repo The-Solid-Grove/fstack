@@ -105,6 +105,11 @@ required production QA against that deployed version. Use test-mode payments
 or the already approved equivalent; publication permission does not authorize
 real charges or changing real customer subscriptions.
 
+For a first launch, or a release that touches runtime, analytics, or payment
+wiring, pass the QA [paid-traffic launch gate](../../qa-funnel/references/checklist.md#paid-traffic-launch-gate)
+before paid traffic. Ask for explicit authorization for its one real live
+purchase; without that evidence the funnel is not ready for paid traffic.
+
 Report preview and production URLs, the evidence that versions match, source
 delivery path, checks and results. If production QA fails or cannot run,
 distinguish the completed deployment from unverified release readiness and
