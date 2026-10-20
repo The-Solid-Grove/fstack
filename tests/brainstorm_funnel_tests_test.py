@@ -72,7 +72,7 @@ class RendererTest(unittest.TestCase):
     def test_renders_russian_report(self):
         code, page, _ = self.render(report())
         self.assertEqual(code, 0)
-        for text in ("Наши рекомендации<br>для <em>Acme</em>", "58,0%", "Ушли 1 870 из 3 224 вошедших", "step-1-b",
+        for text in ("Наши рекомендации<br>для <em>Acme</em>", "If the button sits under the word", "58,0%", "Ушли 1 870 из 3 224 вошедших", "step-1-b",
                      "1 550 на вариант", "13 октября 2026", "Тест 1 из 1",
                      "https://example.com/step-1"):
             self.assertIn(text, page)
@@ -120,7 +120,8 @@ class RendererTest(unittest.TestCase):
                      {"id": "visitor_to_checkout", "value": 6.86, "num": 3596, "den": 52409},
                      {"id": "net_revenue", "value": 52411.02}],
             stages={"visitors": 52409, "paywall_views": 18197},
-            focus={"area": "paywall", "why": ["Few start checkout."], "actions": ["Show plans first."]},
+            focus={"area": "paywall", "summary": "Start with the paywall: plans first.",
+                   "why": ["Few start checkout."], "actions": ["Show plans first."]},
             dropoffs={"email-capture": "Email asks too early."},
             steps=[{"id": "step-1", "drop": 58.0, "lost": 1870, "entered": 3224},
                    {"id": "email-capture", "drop": 32.7, "lost": 151, "entered": 462},
@@ -133,8 +134,8 @@ class RendererTest(unittest.TestCase):
         self.assertEqual(code, 0, err)
         self.assertEqual(err, "")
         for text in ("13–19 октября 2026 · 7 дней", "52\u202f409", "▼ 11,3%", "3\u202f596 / 18\u202f197", "$52\u202f411",
-                     "Главное — конверсия paywall", "Начали оплату: 6,9% визитов, ориентир 8–15%",
-                     "Разобраться с шагом email-capture", "13–19 октября 2026 (7 дней)", "ниже ориентира · ориентир 8–15%",
+                     "Главное — конверсия paywall", "Start with the paywall: plans first.",
+                     "Шаг email-capture", "13–19 октября 2026 (7 дней)", "ниже ориентира · ориентир 8–15%",
                      "Show plans first.", "порог 20%", "Email asks too early.", "Ушли 14\u202f601 из 18\u202f197 вошедших",
                      "Тест 2 из 2"):
             self.assertIn(text, page)

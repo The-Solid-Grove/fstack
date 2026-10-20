@@ -34,7 +34,6 @@ VIEWPORT = (375, 667)
 MAX_HYPOTHESIS = 180
 MAX_CHANGES = 2
 MAX_CHANGE = 70
-MAX_CHART_STEPS = 8
 MAX_NOTE = 160
 MAX_FOCUS_LINES = 3
 MAX_FOCUS_LINE = 110
@@ -60,8 +59,6 @@ STRINGS = {
         "intro": "Посмотрели воронку{funnel} за {period}. Вот что, на наш взгляд, стоит сделать в первую очередь:",
         "report_for": "Отчёт для {product} · {date}",
         "order": "Порядок — по приоритету запуска.",
-        "chart": "Отвал по шагам",
-        "chart_note": "шаги отсортированы по отвалу",
         "test_n": "Тест {i}",
         "test_of": "Тест {i} из {n}",
         "drop": "отвал на шаге",
@@ -79,9 +76,7 @@ STRINGS = {
         "decimal": ",",
         "days": ("день", "дня", "дней"),
         "row_focus": "Главное — {area}",
-        "row_focus_sub": "{metric}: {value} визитов, ориентир {lo}–{hi}%",
-        "row_step": "Разобраться с шагом {id}",
-        "row_test_sub": "отвал на шаге {drop}",
+        "row_step": "Шаг {id}",
         "metrics_title": "Метрики за период",
         "metrics_note": "{period} · изменение — к предыдущему периоду такой же длины",
         "funnel": "Воронка",
@@ -118,8 +113,6 @@ STRINGS = {
         "intro": "We reviewed the funnel{funnel} for {period}. Here is what we would do first:",
         "report_for": "Report for {product} · {date}",
         "order": "Ordered by launch priority.",
-        "chart": "Drop-off by step",
-        "chart_note": "sorted by drop-off",
         "test_n": "Test {i}",
         "test_of": "Test {i} of {n}",
         "drop": "drop-off on this step",
@@ -137,9 +130,7 @@ STRINGS = {
         "decimal": ".",
         "days": ("day", "days", "days"),
         "row_focus": "Main focus: {area}",
-        "row_focus_sub": "{metric}: {value} of visitors, range {lo}–{hi}%",
-        "row_step": "Fix the {id} step",
-        "row_test_sub": "{drop} drop-off on this step",
+        "row_step": "The {id} step",
         "metrics_title": "Metrics for the period",
         "metrics_note": "{period} · change vs the previous period of the same length",
         "funnel": "Funnel",
@@ -281,6 +272,8 @@ def load_report(path: Path) -> tuple[dict, list[str]]:
             raise ReportError(f"focus.area must be one of {sorted(AREAS)}")
         if AREAS[focus["area"]][0] not in metrics:
             raise ReportError(f"focus needs metric `{AREAS[focus['area']][0]}` in `metrics`")
+        if not focus.get("summary") or len(focus["summary"]) > MAX_NOTE:
+            warnings.append(f"focus.summary: write one recommendation of ≤ {MAX_NOTE} chars for the cover")
         for key in ("why", "actions"):
             lines = focus.get(key, [])
             if not lines or len(lines) > MAX_FOCUS_LINES or any(len(x) > MAX_FOCUS_LINE for x in lines):
@@ -370,6 +363,7 @@ def arrow_html(f: Fmt, trend: float | None) -> str:
 
 
 def render_cover(data: dict, f: Fmt, tested: dict[str, int], leaks: list[dict]) -> str:
+    """One written recommendation per row: the focus summary, each leaking step's note, other tests' hypotheses."""
     s, e = f.s, html.escape
     steps = {st["id"]: st for st in data["steps"]}
     tests = data["tests"]
@@ -377,60 +371,35 @@ def render_cover(data: dict, f: Fmt, tested: dict[str, int], leaks: list[dict]) 
     focus = data.get("focus")
     test_tag = lambda i: f'<span class="pill">{s["test_n"].format(i=i)}</span>'
 
-    rows = []  # (title, subline, value, tags); tests outside leaking steps serve the focus when there is one
+    rows = []  # (title, text, value, tags); tests outside leaking steps serve the focus when there is one
     leak_ids = {st["id"] for st in leaks} if "dropoffs" in data else set()
     other = [(i, t) for i, t in enumerate(tests, 1) if t["step"] not in leak_ids]
     if focus:
-        key, (lo, hi), _ = AREAS[focus["area"]]
-        value = f.pct(metrics[key]["value"])
-        sub = s["row_focus_sub"].format(metric=s["area_metric"][focus["area"]].capitalize(), value=value, lo=lo, hi=hi)
-        rows.append((s["row_focus"].format(area=s["area"][focus["area"]]), sub, value,
-                     "".join(test_tag(i) for i, _ in other)))
+        rows.append((s["row_focus"].format(area=s["area"][focus["area"]]), focus.get("summary", ""),
+                     f.pct(metrics[AREAS[focus["area"]][0]]["value"]), "".join(test_tag(i) for i, _ in other)))
     for st in leaks if "dropoffs" in data else []:
-        sub = (s["lost"].format(lost=f.int(st["lost"]), entered=f.int(st["entered"]))
-               if "lost" in st and "entered" in st else "")
-        rows.append((s["row_step"].format(id=st["id"]), sub, f.pct(st["drop"]),
+        rows.append((s["row_step"].format(id=st["id"]), data["dropoffs"].get(st["id"], ""), f.pct(st["drop"]),
                      test_tag(tested[st["id"]]) if st["id"] in tested else ""))
     for i, t in other if not focus else []:
-        drop = f.pct((steps.get(t["step"]) or t)["drop"])
-        rows.append((t["title"], s["row_test_sub"].format(drop=drop), drop, test_tag(i)))
+        rows.append((t["title"], t["hypothesis"], f.pct((steps.get(t["step"]) or t)["drop"]), test_tag(i)))
     agenda = "".join(f"""
-        <li><span class="n">{i}</span><span class="rt"><b>{e(title)}</b><small>{e(sub)}</small></span>
+        <li><span class="n">{i}</span><span class="rt"><b>{e(title)}</b><span>{e(text)}</span></span>
           <span class="tags">{tags}</span><span class="d">{value}</span></li>"""
-        for i, (title, sub, value, tags) in enumerate(rows, 1))
+        for i, (title, text, value, tags) in enumerate(rows, 1))
 
-    hits = set(tested) | leak_ids
-    ranked = sorted(data["steps"], key=lambda st: -st["drop"])
-    shown = [st for st in ranked if st["id"] in hits]
-    shown += [st for st in ranked if st["id"] not in hits][:max(0, MAX_CHART_STEPS - len(shown))]
-    shown = sorted(shown[:MAX_CHART_STEPS], key=lambda st: -st["drop"])
-    top = max(st["drop"] for st in shown) or 1
-    bars = "".join(f"""
-      <div class="bar{' hit' if st['id'] in hits else ''}">
-        <span>{e(st['id'])}</span>
-        <span class="track"><span class="fill" style="width:{st['drop'] / top * 100:.1f}%"></span></span>
-        <span class="val">{f.pct(st['drop'])}</span>
-        <span class="tag">{s['test_n'].format(i=tested[st['id']]) if st['id'] in tested else ''}</span>
-      </div>""" for st in shown)
     when = f.period(data["period"], inline=True) if data.get("period") else f.date(data["date"])
     funnel = f" {e(data['funnel'])}" if data.get("funnel") else ""
     intro = s["intro"].format(funnel=funnel, period=when)
     if tests and not (focus or "dropoffs" in data):
         intro += f" {s['order']}"
-    note = " · ".join(e(x) for x in (data.get("traffic_note"), s["chart_note"]) if x)
     foot = f'<p class="foot">{s["footer"].format(mde=data.get("mde_pp", 5))}</p>' if tests else ""
     return f"""
   <section class="page cover">
     <header><img class="mark-logo" src="{(BRAND / 'app-icon.svg').as_uri()}" alt="funnelsgrove">
       <span class="meta">{s['report_for'].format(product=e(data['product']), date=f.date(data['date']))}</span></header>
-    <div class="cover-body">
-      <div>
-        <h1>{s['title'].format(product=e(data['product']))}</h1>
-        <p class="sub">{intro}</p>
-        <ol>{agenda}</ol>
-      </div>
-      <div class="chart"><h2>{s['chart']}</h2><p>{note}</p>{bars}</div>
-    </div>
+    <h1>{s['title'].format(product=e(data['product']))}</h1>
+    <p class="sub">{intro}</p>
+    <ol>{agenda}</ol>
     {foot}
   </section>"""
 
