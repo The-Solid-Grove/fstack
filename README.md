@@ -54,7 +54,7 @@ Requires Git and Bash. Keep the checkout: the installer links your agent's skill
 
 ### [brainstorm-funnel-tests](skills/brainstorm-funnel-tests/SKILL.md)
 
-**Turn drop-off into the next tests.** Give it the funnel's steps and drop-off by step. It grills you on scope in short rounds, prototypes several radically different ideas for each leaking step, converges on one variant and hypothesis per step with you, and renders a shareable PDF: drop-off, hypothesis, and current versus proposed screen on one page per test.
+**Turn analytics into recommendations and the next tests.** Give it the funnel and a period. It reads the dashboard's metrics, picks one focus area (first step, quiz or paywall), flags steps that lose more than 7% (20% for email), grills you on scope in short rounds, prototypes several radically different ideas for each test, converges on one variant and hypothesis per step with you, and renders a shareable PDF: recommendations first, then metrics, focus, drop-off, and current versus proposed screen on one page per test.
 
 ## Put them to work
 
