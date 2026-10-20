@@ -65,14 +65,14 @@ class RendererTest(unittest.TestCase):
         self.assertEqual(rr.sample_per_variant(0.673, 0.05), 1323)
 
     def test_russian_plural(self):
-        forms = rr.STRINGS["ru"]["tests"]
+        forms = rr.STRINGS["ru"]["days"]
         self.assertEqual([rr.plural_ru(n, forms) for n in (1, 3, 5, 11, 22)],
-                         ["A/B-тест", "A/B-теста", "A/B-тестов", "A/B-тестов", "A/B-теста"])
+                         ["день", "дня", "дней", "дней", "дня"])
 
     def test_renders_russian_report(self):
         code, page, _ = self.render(report())
         self.assertEqual(code, 0)
-        for text in ("58,0%", "Ушли 1 870 из 3 224 вошедших", "step-1-b",
+        for text in ("Наши рекомендации<br>для <em>Acme</em>", "58,0%", "Ушли 1 870 из 3 224 вошедших", "step-1-b",
                      "1 550 на вариант", "13 октября 2026", "Тест 1 из 1",
                      "https://example.com/step-1"):
             self.assertIn(text, page)
@@ -133,7 +133,8 @@ class RendererTest(unittest.TestCase):
         self.assertEqual(code, 0, err)
         self.assertEqual(err, "")
         for text in ("13–19 октября 2026 · 7 дней", "52\u202f409", "▼ 11,3%", "3\u202f596 / 18\u202f197", "$52\u202f411",
-                     "фокус —<br><em>конверсия paywall</em>", "ниже ориентира · ориентир 8–15%",
+                     "Главное — конверсия paywall", "Начали оплату: 6,9% визитов, ориентир 8–15%",
+                     "Разобраться с шагом email-capture", "13–19 октября 2026 (7 дней)", "ниже ориентира · ориентир 8–15%",
                      "Show plans first.", "порог 20%", "Email asks too early.", "Ушли 14\u202f601 из 18\u202f197 вошедших",
                      "Тест 2 из 2"):
             self.assertIn(text, page)

@@ -25,7 +25,7 @@ Wait for the answers, recompute the frontier, and continue. Act on a decision on
 
 ## 1. Read the data
 
-Ask for the period on every run: the last 7 or the last 3 complete days, ending yesterday, unless the user names dates. Download the dashboard's numbers and draft the report from them, so no figure is retyped:
+Ask for the period on every run; it can be any range of complete days. Offer the last 7 or the last 3 days ending yesterday as defaults, and use the user's dates when given. Download the dashboard's numbers and draft the report from them, so no figure is retyped:
 
 ```bash
 fgrove analytics conversions --project <project> --funnel <funnel> --from <yyyy-mm-dd> --to <yyyy-mm-dd> --format json --out analytics.json
@@ -69,6 +69,8 @@ For each test, settle the primary metric: next-step reach per assigned visitor, 
 **Done when** the frontier is empty: every chosen step has one confirmed variant, hypothesis and metric.
 
 ## 5. Render the PDF
+
+Before rendering, run one more round that shows everything the report would say: the period, the focus area with its why and actions, the note for each leaking step, and each test with its hypothesis, metric and variant. Ask what to include, recommending all of it; leave out what the user rejects (drop `focus`, a `dropoffs` note or a test) and rewrite what they correct. Render only after they confirm.
 
 Complete the report JSON described in [report format](references/report-format.md): `focus`, `dropoffs` and `tests`. For `current`, use the real step URL with its buttons visible; FunnelsGrove previews show a single step at `https://<preview-host>/<step-id>?previewFrame=1&previewStepLock=1`. For `proposed`, use the variant's screen URL or a screenshot. Then run, from this skill's directory:
 

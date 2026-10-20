@@ -56,8 +56,9 @@ CURRENCY = {"USD": "$", "EUR": "€", "GBP": "£"}
 
 STRINGS = {
     "ru": {
-        "title": "{product}: <em>{n} {tests}</em><br>на главных отвалах",
-        "tests": ("A/B-тест", "A/B-теста", "A/B-тестов"),
+        "title": "Наши рекомендации<br>для <em>{product}</em>",
+        "intro": "Посмотрели воронку{funnel} за {period}. Вот что, на наш взгляд, стоит сделать в первую очередь:",
+        "report_for": "Отчёт для {product} · {date}",
         "order": "Порядок — по приоритету запуска.",
         "chart": "Отвал по шагам",
         "chart_note": "шаги отсортированы по отвалу",
@@ -77,9 +78,10 @@ STRINGS = {
                    "августа", "сентября", "октября", "ноября", "декабря"),
         "decimal": ",",
         "days": ("день", "дня", "дней"),
-        "focus_title": "{product}: фокус —<br><em>{area}</em>",
-        "dropoffs_cover": "{product}: <em>отвалы</em><br>и что с ними делать",
-        "row_focus": "Фокус: {area}",
+        "row_focus": "Главное — {area}",
+        "row_focus_sub": "{metric}: {value} визитов, ориентир {lo}–{hi}%",
+        "row_step": "Разобраться с шагом {id}",
+        "row_test_sub": "отвал на шаге {drop}",
         "metrics_title": "Метрики за период",
         "metrics_note": "{period} · изменение — к предыдущему периоду такой же длины",
         "funnel": "Воронка",
@@ -112,8 +114,9 @@ STRINGS = {
                   "paywall_views": "Paywall", "checkout_starts": "Checkout", "subscriptions": "Подписки"},
     },
     "en": {
-        "title": "{product}: <em>{n} {tests}</em><br>for the biggest drop-offs",
-        "tests": ("A/B test", "A/B tests", "A/B tests"),
+        "title": "Our recommendations<br>for <em>{product}</em>",
+        "intro": "We reviewed the funnel{funnel} for {period}. Here is what we would do first:",
+        "report_for": "Report for {product} · {date}",
         "order": "Ordered by launch priority.",
         "chart": "Drop-off by step",
         "chart_note": "sorted by drop-off",
@@ -133,9 +136,10 @@ STRINGS = {
                    "August", "September", "October", "November", "December"),
         "decimal": ".",
         "days": ("day", "days", "days"),
-        "focus_title": "{product}: focus on<br><em>{area}</em>",
-        "dropoffs_cover": "{product}: <em>drop-offs</em><br>and what to do",
-        "row_focus": "Focus: {area}",
+        "row_focus": "Main focus: {area}",
+        "row_focus_sub": "{metric}: {value} of visitors, range {lo}–{hi}%",
+        "row_step": "Fix the {id} step",
+        "row_test_sub": "{drop} drop-off on this step",
         "metrics_title": "Metrics for the period",
         "metrics_note": "{period} · change vs the previous period of the same length",
         "funnel": "Funnel",
@@ -214,10 +218,7 @@ class Fmt:
     def plural(self, n: int, forms: tuple[str, str, str]) -> str:
         return plural_ru(n, forms) if self.lang == "ru" else forms[0 if n == 1 else 1]
 
-    def tests(self, n: int) -> str:
-        return self.plural(n, self.s["tests"])
-
-    def period(self, p: dict) -> str:
+    def period(self, p: dict, inline: bool = False) -> str:
         a, b = dt.date.fromisoformat(p["from"]), dt.date.fromisoformat(p["to"])
         days = (b - a).days + 1
         m = self.s["months"]
@@ -227,7 +228,8 @@ class Fmt:
             span = f"{a.day}–{b.day} {m[a.month - 1]} {a.year}"
         else:
             span = f"{a.day} {m[a.month - 1]} – {self.date(p['to'])}"
-        return f"{span} · {days} {self.plural(days, self.s['days'])}"
+        days = f"{days} {self.plural(days, self.s['days'])}"
+        return f"{span} ({days})" if inline else f"{span} · {days}"
 
     def money(self, v: float, currency: str) -> str:
         sym = CURRENCY.get(currency)
@@ -373,29 +375,29 @@ def render_cover(data: dict, f: Fmt, tested: dict[str, int], leaks: list[dict]) 
     tests = data["tests"]
     metrics = {m["id"]: m for m in data.get("metrics", [])}
     focus = data.get("focus")
-    if focus:
-        title = s["focus_title"].format(product=e(data["product"]), area=s["area"][focus["area"]])
-    elif tests:
-        title = s["title"].format(product=e(data["product"]), n=len(tests), tests=f.tests(len(tests)))
-    else:
-        title = s["dropoffs_cover"].format(product=e(data["product"]))
+    test_tag = lambda i: f'<span class="pill">{s["test_n"].format(i=i)}</span>'
 
-    rows = []  # (title, value, tag); tests outside leaking steps serve the focus when there is one
+    rows = []  # (title, subline, value, tags); tests outside leaking steps serve the focus when there is one
     leak_ids = {st["id"] for st in leaks} if "dropoffs" in data else set()
     other = [(i, t) for i, t in enumerate(tests, 1) if t["step"] not in leak_ids]
     if focus:
-        tags = [s["area_metric"][focus["area"]]] + [s["test_n"].format(i=i) for i, _ in other]
-        rows.append((s["row_focus"].format(area=s["area"][focus["area"]]),
-                     f.pct(metrics[AREAS[focus["area"]][0]]["value"]), " · ".join(tags)))
+        key, (lo, hi), _ = AREAS[focus["area"]]
+        value = f.pct(metrics[key]["value"])
+        sub = s["row_focus_sub"].format(metric=s["area_metric"][focus["area"]].capitalize(), value=value, lo=lo, hi=hi)
+        rows.append((s["row_focus"].format(area=s["area"][focus["area"]]), sub, value,
+                     "".join(test_tag(i) for i, _ in other)))
     for st in leaks if "dropoffs" in data else []:
-        tag = s["test_n"].format(i=tested[st["id"]]) if st["id"] in tested else ""
-        rows.append((st["id"], f.pct(st["drop"]), tag))
+        sub = (s["lost"].format(lost=f.int(st["lost"]), entered=f.int(st["entered"]))
+               if "lost" in st and "entered" in st else "")
+        rows.append((s["row_step"].format(id=st["id"]), sub, f.pct(st["drop"]),
+                     test_tag(tested[st["id"]]) if st["id"] in tested else ""))
     for i, t in other if not focus else []:
-        drop = (steps.get(t["step"]) or t)["drop"]
-        rows.append((t["title"], f.pct(drop), s["test_n"].format(i=i) if leak_ids else ""))
+        drop = f.pct((steps.get(t["step"]) or t)["drop"])
+        rows.append((t["title"], s["row_test_sub"].format(drop=drop), drop, test_tag(i)))
     agenda = "".join(f"""
-      <li><span class="n">{i}</span><span>{e(title_)}{f'<small>{tag}</small>' if tag else ''}</span><span class="d">{value}</span></li>"""
-        for i, (title_, value, tag) in enumerate(rows, 1))
+        <li><span class="n">{i}</span><span class="rt"><b>{e(title)}</b><small>{e(sub)}</small></span>
+          <span class="tags">{tags}</span><span class="d">{value}</span></li>"""
+        for i, (title, sub, value, tags) in enumerate(rows, 1))
 
     hits = set(tested) | leak_ids
     ranked = sorted(data["steps"], key=lambda st: -st["drop"])
@@ -410,20 +412,25 @@ def render_cover(data: dict, f: Fmt, tested: dict[str, int], leaks: list[dict]) 
         <span class="val">{f.pct(st['drop'])}</span>
         <span class="tag">{s['test_n'].format(i=tested[st['id']]) if st['id'] in tested else ''}</span>
       </div>""" for st in shown)
-    when = f.period(data["period"]) if data.get("period") else f.date(data["date"])
-    sub = " · ".join(e(x) for x in (data.get("funnel"), when) if x)
-    order = "" if focus or "dropoffs" in data else f"<br>{s['order']}"
+    when = f.period(data["period"], inline=True) if data.get("period") else f.date(data["date"])
+    funnel = f" {e(data['funnel'])}" if data.get("funnel") else ""
+    intro = s["intro"].format(funnel=funnel, period=when)
+    if tests and not (focus or "dropoffs" in data):
+        intro += f" {s['order']}"
     note = " · ".join(e(x) for x in (data.get("traffic_note"), s["chart_note"]) if x)
     foot = f'<p class="foot">{s["footer"].format(mde=data.get("mde_pp", 5))}</p>' if tests else ""
     return f"""
   <section class="page cover">
-    <div>
-      <img class="logo" src="{(BRAND / 'logo-dark.svg').as_uri()}" alt="funnelsgrove">
-      <h1>{title}</h1>
-      <p class="sub">{sub}{order}</p>
-      <ol>{agenda}</ol>
+    <header><img class="mark-logo" src="{(BRAND / 'app-icon.svg').as_uri()}" alt="funnelsgrove">
+      <span class="meta">{s['report_for'].format(product=e(data['product']), date=f.date(data['date']))}</span></header>
+    <div class="cover-body">
+      <div>
+        <h1>{s['title'].format(product=e(data['product']))}</h1>
+        <p class="sub">{intro}</p>
+        <ol>{agenda}</ol>
+      </div>
+      <div class="chart"><h2>{s['chart']}</h2><p>{note}</p>{bars}</div>
     </div>
-    <div class="chart"><h2>{s['chart']}</h2><p>{note}</p>{bars}</div>
     {foot}
   </section>"""
 
@@ -595,7 +602,8 @@ def render_html(data: dict, screens: dict[tuple[int, str], str]) -> str:
         pages.append(render_dropoffs(data, f, tested, leaks))
     pages += render_tests(data, f, screens)
     css = (SKILL_DIR / "assets" / "report.css").read_text(encoding="utf-8")
-    css = css.replace("SORA_URL", (BRAND / "Sora-variable.ttf").as_uri())
+    for subset in ("latin", "cyrillic"):
+        css = css.replace(f"INTER_{subset.upper()}_URL", (BRAND / f"Inter-{subset}.woff2").as_uri())
     return f"""<!doctype html>
 <html lang="{data['lang']}"><head><meta charset="utf-8"><title>{html.escape(data['product'])} — funnelsgrove</title>
 <style>{css}</style></head><body>
