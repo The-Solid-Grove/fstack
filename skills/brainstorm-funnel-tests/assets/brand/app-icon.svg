@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="funnelsgrove">
+<title>funnelsgrove</title>
+<rect width="64" height="64" rx="15" fill="#17654A"/><g transform="translate(7 7) scale(.78125)" color="#F0F2E9"><path d="M9 55V10H32 M9 30H27" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M53 16C48 11 38 11 34 17C31 22 31 44 34 49C38 55 49 55 55 49V34H44" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>

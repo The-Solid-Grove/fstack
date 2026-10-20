@@ -1,4 +1,4 @@
 interface:
   display_name: "Brainstorm Funnel Tests"
-  short_description: "Brainstorm A/B test ideas from step drop-off into a shareable PDF"
-  default_prompt: "Use $brainstorm-funnel-tests to pick the biggest drop-off steps in this funnel, grill me on scope, prototype several radically different ideas per step, converge on one variant each, and render the funnelsgrove PDF."
+  short_description: "Turn period analytics into recommendations and A/B tests in a shareable PDF"
+  default_prompt: "Use $brainstorm-funnel-tests to read this funnel's analytics for a period, choose the focus area, flag the leaking steps, grill me on scope, prototype several radically different ideas per step, converge on one variant each, and render the funnelsgrove PDF."
