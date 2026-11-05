@@ -1,6 +1,6 @@
 <img src="assets/web-to-web-growth.png" alt="Skills for Web-to-Web Growth" width="50%">
 
-# Skills for Web-to-Web Growth
+# Skills for growing apps on the web
 
 Agent skills for researching, writing, and building subscription web funnels.
 
