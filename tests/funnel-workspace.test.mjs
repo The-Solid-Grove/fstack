@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import { afterEach, test } from 'node:test';
 
-const script = fileURLToPath(new URL('../scripts/funnel-workspace.mjs', import.meta.url));
+const script = fileURLToPath(new URL('../skills/edit-funnel/scripts/funnel-workspace.mjs', import.meta.url));
 const roots = [];
 afterEach(async () => {
   await Promise.all(roots.splice(0).map(root => rm(root, { recursive: true, force: true })));

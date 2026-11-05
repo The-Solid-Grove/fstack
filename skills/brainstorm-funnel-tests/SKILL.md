@@ -5,7 +5,7 @@ description: "Use when turning a funnel's analytics for a period into recommenda
 
 # Brainstorm Funnel Tests
 
-Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
 
 Turn a period of funnel analytics into recommendations and a few simple, testable ideas: pick **one focus area**, flag the **leaking steps**, **diverge** into several radically different variants per step, **converge** on one per step with the user, then render a branded PDF. Every section is optional. The PDF opens with the recommendations, then explains them: the period's dashboard metrics, the focus area against benchmarks, the drop-off above the threshold, and one page per test with the step's drop-off, one hypothesis, and the current and proposed screens side by side. Everything here is a throwaway prototype; creating experiments, changing the funnel, or publishing requires its own authorization through `edit-funnel`.
 

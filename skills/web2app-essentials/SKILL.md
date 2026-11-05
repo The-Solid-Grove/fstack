@@ -5,7 +5,7 @@ description: Use when answering Web-to-Web growth questions about channel fit, e
 
 # Web-to-Web Essentials
 
-Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
 
 Concise lessons and worksheets for acquiring customers and selling subscriptions on the web. The product can be an app or a browser product. References stay synchronized with the [course](https://funnelsgrove.com/learn/web2web); the invocation remains `web2app-essentials` for compatibility.
 
@@ -33,6 +33,6 @@ Start with [the index](references/index.md), or read the relevant lesson below. 
 
 ## Ownership
 
-`course.json` records the canonical source revision and file hashes. Improve lessons in the FunnelsGrove course first, then export; do not append independent updates to References. See [the sync workflow](../../docs/getting-started.md#course-references).
+`course.json` records the canonical source revision and file hashes. Improve lessons in the FunnelsGrove course first, then export; do not append independent updates to References. See [the sync workflow](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#course-references).
 
 This skill teaches the system. Use `writing-funnel-copy` for copy, `preview-funnel` for a mockup, `create-funnel` or `edit-funnel` for implementation, and `qa-funnel` for design and end-to-end checks. Synced managed project docs own implementation contracts.

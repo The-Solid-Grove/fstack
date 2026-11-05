@@ -5,7 +5,7 @@ description: Use when writing or revising quiz-to-paywall funnel copy, positioni
 
 # Writing Funnel Copy
 
-Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
 
 Turn the product, audience and ad promise into a quiz-to-paywall journey that keeps the visitor's energy high: easy questions broken up every 2–3 screens by **energy screens** that reassure, prove and excite, a personal **plan** reveal, **email**, and a **paywall** cloned from a proven reference structure. Every screen is a psychological instrument with one job, and value is shown so the visitor concludes it themselves (the Hitchcock principle).
 
@@ -38,7 +38,7 @@ Use `qa-funnel` for design and functional testing of a built funnel; use `web2ap
 
 ## Reference funnels
 
-`fgrove references` reads the public Funnel Screens library (recorded journeys with screen text, appearance and full-height images) without login. Run the Fstack checkout's `scripts/ensure-fgrove-cli` if `fgrove` is missing. Commands are listed in the [rhythm template](references/funnel-rhythm-template.md#reading-a-reference-rhythm-with-the-cli).
+`fgrove references` reads the public Funnel Screens library (recorded journeys with screen text, appearance and full-height images) without login. Install it with `npm install -g @funnelsgrove/cli@latest` if `fgrove` is missing. Commands are listed in the [rhythm template](references/funnel-rhythm-template.md#reading-a-reference-rhythm-with-the-cli).
 
 References supply rhythm, screen jobs, composition and paywall structure. Their claims, ratings, prices and testimonials describe the recorded product only, and their screen classification is not FunnelsGrove step metadata. If the CLI is unavailable, use the IDs and descriptions recorded in the references and state that images were not inspected.
 
@@ -54,7 +54,7 @@ Read the product brief, `PRODUCT_SENSE.md`, existing funnel, entry creative, off
 
 ### 2. Scan reference funnels
 
-Pick 1–2 recorded funnels from the same or an adjacent category (`fgrove references categories`, `fgrove references list --category …`). Print each one's rhythm strip with the Fstack checkout's `scripts/reference-strip <funnel-id>` (`Q E Q Q E … L P @ $`, with energy share and longest question run), read the screens, and note which energy archetypes appear where, the closing order and the paywall structure. Open the images of screens you expect to borrow from. Add a candidate paywall reference (`fgrove references list --step-type paywall`) whose price model fits the offer.
+Pick 1–2 recorded funnels from the same or an adjacent category (`fgrove references categories`, `fgrove references list --category …`). Print each one's rhythm strip with this skill's `scripts/reference-strip <funnel-id>` (`Q E Q Q E … L P @ $`, with energy share and longest question run), read the screens, and note which energy archetypes appear where, the closing order and the paywall structure. Open the images of screens you expect to borrow from. Add a candidate paywall reference (`fgrove references list --step-type paywall`) whose price model fits the offer.
 
 **Done when:** a short reference scan (strips, notable energy screens with funnel ID and position, candidate paywall) is ready to inform the arc.
 

@@ -4,7 +4,7 @@ import { link, mkdir, readdir, readFile, realpath, rename, rm, rmdir, stat, writ
 import os from 'node:os';
 import path from 'node:path';
 
-const usage = `Usage: node scripts/funnel-workspace.mjs find|remember
+const usage = `Usage: node skills/edit-funnel/scripts/funnel-workspace.mjs find|remember
   --api-url URL --workspace ID --funnel ID [--dir PATH] [--replace] [--state-dir PATH]
 
 Remember a verified local funnel folder; find reuses it across conversations.

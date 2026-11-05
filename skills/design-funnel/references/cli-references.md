@@ -2,8 +2,8 @@
 
 `fgrove references` reads the public Funnel Screens library without logging in:
 recorded journeys with each screen's recognised text, buttons/options, appearance
-description and image (paywalls are full-height captures). Run the Fstack
-checkout's `scripts/ensure-fgrove-cli` if `fgrove` is missing. A user-selected
+description and image (paywalls are full-height captures). Install it with
+`npm install -g @funnelsgrove/cli@latest` if `fgrove` is missing. A user-selected
 reference remains authoritative; the library fills gaps.
 
 ## Discover and inspect

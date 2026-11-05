@@ -5,7 +5,7 @@ description: Use when editing an existing FunnelsGrove funnel in its remembered 
 
 # Edit Funnel
 
-Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
 
 Reuse one working folder for each hosted funnel. Make the requested change there,
 verify it locally, and deliver only to the environments the user authorized.
@@ -24,9 +24,9 @@ These gates remain mandatory when tests and builds pass, the change looks small,
 
 ## 1. Resolve and reuse the working folder
 
-Run the fstack checkout's `scripts/ensure-fgrove-cli` before hosted funnel work.
-It checks and updates the installed CLI; if unavailable, use the installed CLI's
-current update guidance. Resolve the requested API, workspace, project and funnel
+Make sure the `fgrove` CLI is installed and current (`npm install -g @funnelsgrove/cli@latest`) before
+hosted funnel work; if npm is unavailable, use the installed CLI's current update
+guidance. Resolve the requested API, workspace, project and funnel
 from supplied context. Confirm the connected account with
 `fgrove --api-url <api-url> whoami`.
 Ask only for missing information that prevents selecting the right target.

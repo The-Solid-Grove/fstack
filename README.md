@@ -12,13 +12,21 @@ Works with **Codex** and **Claude Code**. The course covers Web-to-Web growth; c
 
 ## Installation
 
+With the [skills CLI](https://skills.sh):
+
+```bash
+npx skills add The-Solid-Grove/fstack
+```
+
+Or from a git checkout that keeps itself up to date:
+
 ```bash
 git clone https://github.com/The-Solid-Grove/fstack.git ~/.fstack
 cd ~/.fstack
 ./setup --host auto --skip-fgrove-cli
 ```
 
-Requires Git and Bash. Keep the checkout: the installer links your agent's skills to these files. The first fstack skill used in a conversation updates a clean `main` checkout to the latest release automatically; custom branches and local changes are left alone and an update is offered instead.
+The checkout route requires Git and Bash. Keep the checkout: the installer links your agent's skills to these files. The first fstack skill used in a conversation updates a clean `main` checkout to the latest release automatically; custom branches and local changes are left alone and an update is offered instead. Skills installed with the skills CLI are updated with `npx skills update`.
 
 [Host options, FunnelsGrove setup, and updates →](docs/getting-started.md)
 

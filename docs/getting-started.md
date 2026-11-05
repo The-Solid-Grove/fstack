@@ -4,6 +4,18 @@
 
 ## Install
 
+### With the skills CLI
+
+The fastest way, and the one listed on [skills.sh](https://skills.sh):
+
+```bash
+npx skills add The-Solid-Grove/fstack
+```
+
+The CLI detects the installed agents and asks which ones to use and whether to install for the current project or user-wide (`-g`). It copies each skill directory, including its `scripts/`, into the agent's skill folder; installing the whole pack keeps the cross-references between skills working. There is no git checkout: update with `npx skills update`, remove with `npx skills remove`. Hosted work needs the fgrove CLI, which the skills install on demand with `npm install -g @funnelsgrove/cli@latest`.
+
+### From a git checkout
+
 Clone the pack and link the skills to your agent:
 
 ```bash
@@ -14,7 +26,7 @@ cd ~/.fstack
 
 Choose a single agent with `--host codex` or `--host claude`. Auto detects installed agent commands and falls back to both when neither is found.
 
-The installer creates symlinks in `~/.codex/skills/` and/or `~/.claude/skills/`. Keep the checkout: those links point to its files. Re-running setup refreshes the links.
+The installer creates symlinks in `~/.codex/skills/` and/or `~/.claude/skills/`. Keep the checkout: those links point to its files. Re-running setup refreshes the links. A checkout updates itself in conversation (see [Update](#update)) and offers `scripts/ensure-fgrove-cli` to check the fgrove CLI against npm.
 
 For research and copy, you need Git, Bash, and your agent. For clickable previews, the bundled workflow also uses Python 3 and browser access. Reference funnels (rhythm, energy screens and paywall structures) come from the public Funnel Screens library through [`fgrove references`](../skills/design-funnel/references/cli-references.md), which needs the `fgrove` CLI but no login; `scripts/ensure-fgrove-cli` installs it.
 
@@ -45,7 +57,9 @@ Creation and editing [remember one working folder per funnel](../skills/edit-fun
 
 ## Update
 
-Agents update fstack once per conversation, before the first fstack skill runs: when the checkout is a clean `main` branch behind `origin/main`, the check fast-forwards it and refreshes skill links (see [Agent update check](#agent-update-check)). It compares commits, so it picks up improvements even when `VERSION` has not changed. Custom branches, detached checkouts, local edits and diverged history are never changed; the agent offers the update instead. Setup only checks. A failed network check leaves the current skills usable.
+Skills installed with the skills CLI are updated by the CLI: `npx skills check` reports available updates and `npx skills update` reinstalls them. The in-conversation check below finds no checkout and does nothing.
+
+Agents update a git checkout once per conversation, before the first fstack skill runs: when the checkout is a clean `main` branch behind `origin/main`, the check fast-forwards it and refreshes skill links (see [Agent update check](#agent-update-check)). It compares commits, so it picks up improvements even when `VERSION` has not changed. Custom branches, detached checkouts, local edits and diverged history are never changed; the agent offers the update instead. Setup only checks. A failed network check leaves the current skills usable.
 
 Check or update manually with:
 
@@ -63,9 +77,14 @@ Before the first fstack skill in a conversation, resolve the loaded skill direct
 ```bash
 fstack_skill_dir="$(cd "<directory-containing-the-loaded-SKILL.md>" && pwd -P)"
 fstack_checkout="$(cd "$fstack_skill_dir/../.." && pwd -P)"
-"$fstack_checkout/scripts/check-fstack-update" --apply
+if [ -x "$fstack_checkout/scripts/check-fstack-update" ]; then
+  "$fstack_checkout/scripts/check-fstack-update" --apply
+else
+  echo "fstack: no git checkout (installed with the skills CLI); continue."
+fi
 ```
 
+- **`fstack: no git checkout`** — the skills were copied by the skills CLI (or by hand), so there is nothing to fast-forward. Continue with the installed skills; if the user asks about updates, point to `npx skills update`.
 - **`fstack: updated (…)`** — a clean `main` checkout was fast-forwarded to the latest release and skill links were refreshed in the hosts that already use this checkout (new skills linked, removed ones unlinked). Tell the user the old and new versions in one line, then reread the active `SKILL.md` and the references it needs before continuing.
 - **`fstack: current`** or **`update check unavailable`** — continue with the installed skills.
 - **`fstack: update available (…)`** — the checkout is on a custom branch, detached, has local changes or has diverged, so nothing was changed. Show the installed and latest revisions and offer to update once per conversation; continue the task with the current skills while awaiting the answer. When the user accepts, keep local edits, custom branches and divergent history intact: explain the specific state and agree how to retain that work before moving the checkout to `main` and running `git -C "$fstack_checkout" pull --ff-only origin main`.
@@ -88,7 +107,9 @@ follow the project's managed FunnelsGrove docs for implementation.
 
 ## Uninstall
 
-Remove the installed symlinks first. This preserves directories if you replaced a link with your own copy:
+Skills installed with the skills CLI: `npx skills remove` (pick the fstack skills) or `npx skills remove <skill-name>`.
+
+For a git checkout, remove the installed symlinks first. This preserves directories if you replaced a link with your own copy:
 
 ```bash
 for host in ~/.codex/skills ~/.claude/skills; do

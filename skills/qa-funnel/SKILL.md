@@ -5,7 +5,7 @@ description: "Use when reviewing funnel screen images or rendered designs, or te
 
 # QA Funnel
 
-Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
 
 Inspect the requested screen artifact or local, preview, or production URL and produce an evidence-backed report. A QA request authorizes inspection and ordinary test interactions; publishing, changing source, real charges, and changing real customer subscriptions require their own authorization. Reuse permission already given for the target.
 
