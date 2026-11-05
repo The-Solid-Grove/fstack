@@ -2,8 +2,8 @@
 """Print the rhythm strip of a recorded Funnel Screens journey.
 
 Usage:
-  scripts/reference-strip <funnel-id> [<funnel-id> ...]
-  scripts/reference-strip --file journey.json
+  skills/writing-funnel-copy/scripts/reference-strip <funnel-id> [<funnel-id> ...]
+  skills/writing-funnel-copy/scripts/reference-strip --file journey.json
 
 Reads `fgrove references show <funnel-id> --json` (public, no login) or a saved
 response, then prints the strip (Q question, E energy, P result/plan, L loading,

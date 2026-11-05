@@ -5,7 +5,7 @@ description: Use when creating a new hosted FunnelsGrove funnel from one of thre
 
 # Create Funnel
 
-Before the first fstack skill in a conversation, run the [update check](../../docs/getting-started.md#agent-update-check): it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task.
+Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
 
 Create through the connected FunnelsGrove account, then download the new funnel's source with the CLI. The three template cards describe different starting structures; choose for the product and journey, then establish its own identity in `Design.md`.
 
@@ -21,7 +21,7 @@ These gates remain mandatory when tests and builds pass, the change looks small,
 
 ## 1. Connect and choose
 
-Run the Fstack checkout's `scripts/ensure-fgrove-cli`, then:
+Make sure the `fgrove` CLI is installed and current (`npm install -g @funnelsgrove/cli@latest`), then:
 
 ```bash
 fgrove whoami

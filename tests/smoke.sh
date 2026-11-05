@@ -3,7 +3,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
-bash -n "$ROOT/setup" "$ROOT/scripts/ensure-fgrove-cli" "$ROOT/scripts/check-fstack-update"
+bash -n "$ROOT/setup" "$ROOT/tests/portable-skills.sh" "$ROOT/scripts/ensure-fgrove-cli" "$ROOT/scripts/check-fstack-update"
 for host in codex claude; do
   HOME="$TMP/$host" "$ROOT/setup" --host "$host" --skip-fgrove-cli --skip-update-check --quiet
   for skill in create-funnel edit-funnel preview-funnel design-funnel writing-funnel-copy web2app-essentials qa-funnel brainstorm-funnel-tests; do

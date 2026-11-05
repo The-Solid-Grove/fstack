@@ -6,10 +6,10 @@ Keep one canonical working folder for each `(API URL, workspace ID, funnel ID)` 
 
 Use the target established in the main skill; resolve its immutable IDs from the user's link, current project, previous handoff, and read-only CLI results. `fgrove status --dir <path>` reports API and local identity, not whether source is dirty or current. The default API is `https://api.funnelsgrove.com/trpc`; respect the requested API or `FUNNELSGROVE_API_URL` instead when set.
 
-Use the installed fstack checkout's helper (resolve skill symlinks physically, as in the [update workflow](../../../docs/getting-started.md#agent-update-check)):
+Use the helper bundled with the `edit-funnel` skill, `<edit-funnel-skill-dir>/scripts/funnel-workspace.mjs` (resolve the installed skill directory physically, as in the [update workflow](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check); a symlinked install resolves to the pack's git checkout):
 
 ```bash
-node <fstack-checkout>/scripts/funnel-workspace.mjs find \
+node <edit-funnel-skill-dir>/scripts/funnel-workspace.mjs find \
   --api-url <api-url> --workspace <workspace-id> --funnel <funnel-id>
 ```
 
@@ -44,7 +44,7 @@ When download and manifest creation succeed, remember the folder. If download fa
 After verifying an existing folder or completing its first download:
 
 ```bash
-node <fstack-checkout>/scripts/funnel-workspace.mjs remember \
+node <edit-funnel-skill-dir>/scripts/funnel-workspace.mjs remember \
   --api-url <api-url> --workspace <workspace-id> --funnel <funnel-id> \
   --dir <local-dir>
 ```
