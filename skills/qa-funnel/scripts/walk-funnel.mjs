@@ -134,9 +134,10 @@ const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function waitFor(page, predicate, timeout) {
   const deadline = Date.now() + timeout;
   do {
-    const state = await describe(page);
-    if (predicate(state)) return state;
-    await pause(100);
+    // A redirect (e.g. the checkout return URL) destroys the context mid-evaluate: keep polling.
+    const state = await describe(page).catch(() => null);
+    if (state && predicate(state)) return state;
+    await pause(state ? 100 : 500);
   } while (Date.now() < deadline);
   return null;
 }
@@ -196,8 +197,17 @@ async function checkout(page, state, options, record) {
   record.checkout = { screenshot: screenshotName(record.index, state.stepId, '-checkout') };
   await page.screenshot({ path: path.join(options.out, record.checkout.screenshot) });
   if (!options['pay-test-card']) return;
-  const card = dialog.getByRole('button', { name: /card/i }).first();
-  if (await card.isVisible()) await card.click();
+  // The card method opens only once the dialog has finished opening and its session is ready:
+  // tap it until its submit button is no longer inside a collapsed (aria-hidden) block.
+  const card = dialog.locator('button, [role=radio]').filter({ hasText: /card/i })
+    .or(dialog.locator('button[aria-label*="card" i], [role=radio][aria-label*="card" i]')).first();
+  const cardOpen = () => dialog.evaluate(el => [...el.querySelectorAll('button[type=submit]')]
+    .some(b => b.getClientRects().length && !b.closest('[aria-hidden=true]')));
+  const cardDeadline = Date.now() + options['screen-timeout'];
+  while (await card.isVisible() && !await cardOpen() && Date.now() < cardDeadline) {
+    await card.click().catch(() => {});
+    await pause(1000);
+  }
   const fields = { number: '4242424242424242', expiry: '12/34', cvc: '123' };
   for (const [name, value] of Object.entries(fields)) {
     const deadline = Date.now() + options['screen-timeout'];
@@ -215,7 +225,8 @@ async function checkout(page, state, options, record) {
     const postal = frame.locator('input[name=postalCode],input[name=postal],input[name=postal_code]').first();
     if (await postal.isVisible()) await postal.fill('10001');
   }
-  await dialog.getByRole('button', { name: /^(pay|subscribe|start|confirm|purchase)/i }).last().click();
+  const submit = dialog.locator('button[type=submit]').filter({ visible: true }).last();
+  await (await submit.count() ? submit : dialog.getByRole('button', { name: /^(pay|subscribe|start|confirm|purchase)/i }).last()).click();
   const destination = await waitFor(page, next => changed(state, next), 90000);
   if (!destination) throw new Error('Test payment did not leave the paywall within 90 seconds.');
   record.checkout.destination = { stepId: destination.stepId, pathname: destination.pathname, url: page.url() };
