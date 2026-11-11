@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><style>
+body{font:16px sans-serif;margin:20px}button,input{display:block;margin:12px;padding:12px}.sticky{position:fixed;bottom:0;background:white}dialog{position:fixed;inset:10px;z-index:10}iframe{width:280px;height:180px}
+</style></head><body><main class="funnel-shell"></main><script>
+const mode = new URLSearchParams(location.search).get('mode');
+const shell = document.querySelector('main');
+function show(id, content, kind='quiz') { shell.dataset.stepKind=kind; shell.innerHTML=`<section data-step-id="${id}"><h1>${id}</h1>${content}</section>`; }
+function nextButton(fn) { return `<footer><button onclick="${fn}">Continue</button><button onclick="throw Error('Back clicked')">Back</button></footer>`; }
+function choice(){show('choice',`<div role="radiogroup"><button role="radio" onclick="delayed()">One</button><button role="radio" onclick="delayed()">Two</button></div>`)}
+function delayed(){document.querySelector('[role=radiogroup]').outerHTML='<div></div><button aria-label="Back" onclick="throw Error(\'Back clicked while waiting\')">Back</button>';setTimeout(()=>document.querySelector('section').insertAdjacentHTML('beforeend','<button onclick="multi()">Continue</button>'),600)}
+function multi(){show('multi',`<button role="checkbox" aria-checked="false" onclick="toggle(this)">A</button><button role="checkbox" aria-checked="false" onclick="toggle(this)">B</button><button role="checkbox" aria-checked="false" onclick="toggle(this)">C</button><footer><button disabled onclick="email()">Continue</button></footer>`)}
+function toggle(el){el.setAttribute('aria-checked',el.getAttribute('aria-checked')==='false');document.querySelector('footer button').disabled=document.querySelectorAll('[aria-checked=true]').length<2}
+function email(){show('email',`<input type="email" required>${nextButton("if(document.querySelector('input').validity.valid)details()")}`)}
+function details(){show('details',`<input type="text" required><input type="number" required>${nextButton("if([...document.querySelectorAll('input')].every(i=>i.value))sheet()")}`)}
+function sheet(){show('sheet',`<button onclick="throw Error('background clicked')">Background</button><dialog open><div role="group"><button onclick="loader()">Pick me</button></div></dialog>`)}
+function loader(){show('loader',`<button disabled onclick="offer()">Continue</button>`);setTimeout(()=>document.querySelector('button').disabled=false,1000)}
+function offer(){console.error('fixture console error');fetch('/failure');if(mode==='pageerror')setTimeout(()=>{throw Error('fixture uncaught')},10);show('offer',`<div role="radiogroup"><button role="radio">Monthly</button><button role="radio">Quarterly</button><button role="radio">Annual</button></div><button onclick="checkout()">Buy plan</button><div style="height:1000px">Offer details</div><div class="sticky"><button onclick="throw Error('sticky clicked')">Sticky buy</button></div>`,'paywall')}
+function checkout(){shell.insertAdjacentHTML('beforeend',`<dialog open><h2>Test mode</h2><button onclick="card()">Card</button></dialog>`)}
+function card(){document.querySelector('dialog').innerHTML=`<h2>Test mode</h2><iframe srcdoc='<input name="number"><input name="expiry"><input name="cvc"><input name="postalCode">'></iframe><button onclick="paid()">Pay</button>`}
+function paid(){const doc=document.querySelector('iframe').contentDocument;if([...doc.querySelectorAll('input')].some(i=>!i.value))throw Error('empty card');history.pushState({},'', '/done');shell.innerHTML='<h1>Done</h1>';shell.dataset.stepKind='end'}
+if(mode==='stuck')show('stuck','<button>Continue</button>');else if(mode==='end'){shell.innerHTML='<h1>Finished</h1>'}else choice();
+</script></body></html>

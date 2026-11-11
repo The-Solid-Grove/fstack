@@ -108,11 +108,14 @@ content, not three arbitrary pattern examples. A scoped edit does not require
 building unrelated screens; reuse explicit feedback on unchanged accepted
 revisions and review the changed scope.
 
-Use the normal available image-generation skill/tool to create screen images,
-with inspected references, existing `Design.md`, exact copy, real option counts
-and selection semantics. If the user requests another format or image generation
-is unavailable, use a scoped alternative such as rendered mockups and identify
-the format/limitation. Keep the same coverage and review requirements.
+When the funnel's source exists (a managed FunnelsGrove project), build these
+screens in it: design tokens and shared components first, then the three screens
+with exact copy, real option counts and selection semantics. Show screenshots of
+the running screens at the [visual pass](../qa-funnel/references/checklist.md#visual-pass)
+small size; **the running screen is the mockup**. Generate screen images with the
+normal available image tool only when there is no source to build in (a
+standalone design) or the user asks for images, and identify the format. Keep
+the same coverage and review requirements.
 
 For every new or revised screen, use [qa-funnel](../qa-funnel/SKILL.md) with
 exact copy, reference, `Design.md` and prior findings. Follow its
@@ -126,15 +129,19 @@ screens alongside or linked, and a short explanation of borrowed composition and
 intentional brand/content differences. Supply readable individual images or a
 reachable preview; a prompt or tiny contact sheet alone is insufficient.
 Ask for feedback on hierarchy, tone and style. **Wait for the user's feedback
-before designing later screens or implementing the full journey.** Record the
+before designing later screens or implementing the full journey.** While it is
+pending, prepare what the feedback cannot change: content files for the
+remaining screens, manifest and registry entries, assets, and the offer. Record the
 reviewed screen IDs/revisions and accepted feedback; revise and recheck affected
 screens. Reuse explicit acceptance of those revisions instead of asking again.
 This feedback is separate from strategy/arc approval and from runtime QA.
 
 ### Complete the pattern set
 
-After incorporating opening feedback, create a separate mockup for each remaining
-actual pattern and necessary layout/state variant. Use actual screen-map content,
+After incorporating opening feedback, produce a mockup for each remaining actual
+pattern and necessary layout/state variant: in a managed project, the pattern's
+representative screen built in source and captured running; otherwise an image.
+Use actual screen-map content,
 including long copy and complete offer disclosures. Inspect the full composition
 of long screens rather than a cropped viewport. Reuse accepted opening mockups
 as visual context so later typography, imagery and controls stay coherent.

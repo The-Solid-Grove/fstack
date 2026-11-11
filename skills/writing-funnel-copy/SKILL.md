@@ -11,9 +11,9 @@ Turn the product, audience and ad promise into a quiz-to-paywall journey that ke
 
 For a new or substantially redesigned funnel, work in this order:
 
-**Product → Reference scan → Pre-work → approval → Emotional Arc → approval → Screen copy → Self-test → Hand-off.**
+**Product → Reference scan → Pre-work → Emotional Arc → strategy approval → Screen copy → Self-test → Hand-off.**
 
-The two approvals are separate handoffs. A request to write a funnel starts this workflow; it does not approve strategy or an arc the user has not seen.
+Pre-work and the Emotional Arc are approved together, in one **strategy approval**. A request to write a funnel starts this workflow; it does not approve a strategy or an arc the user has not seen.
 
 ## FunnelsGrove Contract Gate
 
@@ -48,7 +48,7 @@ Keep each stage as a clearly titled artifact in the conversation or the project'
 
 ### 1. Understand the product
 
-Read the product brief, `PRODUCT_SENSE.md`, existing funnel, entry creative, offer and proof. Establish what the product does, its mechanism, who it serves, the advertised promise, pricing/access and limitations. Research before asking; ask only for missing facts that change the strategy, in one compact round. Include the high-value proof assets energy screens need: store rating, number of users, awards, expert backing, method name, catalogue size, real testimonials.
+Read the product brief, `PRODUCT_SENSE.md`, existing funnel, entry creative, offer and proof. Establish what the product does, its mechanism, who it serves, the advertised promise, pricing/access and limitations. Research before asking, then ask every missing fact in **one question round**. Cover what the later stages will need, so nothing interrupts design or build: entry variants (languages, segments, deep links from ads), offer facts (plans, prices, discount, trial, guarantee), brand assets, legal entity, and the high-value proof assets energy screens need: store rating, number of users, awards, expert backing, method name, catalogue size, real testimonials.
 
 **Done when:** a concise brief separates facts from assumptions and lists audience, entry promise, offer and available proof.
 
@@ -58,17 +58,17 @@ Pick 1–2 recorded funnels from the same or an adjacent category (`fgrove refer
 
 **Done when:** a short reference scan (strips, notable energy screens with funnel ID and position, candidate paywall) is ready to inform the arc.
 
-### 3. Prepare Pre-work and obtain approval
+### 3. Prepare Pre-work
 
 Follow [Pre-work](references/funnel-psychology-framework.md#pre-work): foundation, five-column table (problems, why current solutions fail, barriers, values, higher-level values), primary anchor, transformation and entry promise, **energy inventory** (which proof assets exist and which are open), and **2–3 planned Hitchcock moments** (input → what we reveal → what the visitor concludes).
 
-Present **Pre-work** as a reviewable artifact and ask the user to approve it or request changes. **Stop here until the user explicitly approves this Pre-work. Do not draft the Emotional Arc, screen sequence, headlines or CTAs while approval is pending.**
+When research leaves the audience, the promise or the offer genuinely uncertain, present Pre-work alone and settle it before building the arc. Otherwise continue to the arc and present both together.
 
-**Done when:** the Pre-work checks pass and the user approves the presented strategy.
+**Done when:** the Pre-work checks pass.
 
-### 4. Build the Emotional Arc on the rhythm template and obtain approval
+### 4. Build the Emotional Arc on the rhythm template and obtain the strategy approval
 
-From the approved Pre-work, lay the journey on the [rhythm template](references/funnel-rhythm-template.md) and return the [Emotional Arc](references/funnel-psychology-framework.md#emotional-arc):
+From the Pre-work, lay the journey on the [rhythm template](references/funnel-rhythm-template.md) and return the [Emotional Arc](references/funnel-psychology-framework.md#emotional-arc):
 
 - one **feeling journey** line;
 - the **rhythm strip**, checked against the [cadence rules](references/funnel-rhythm-template.md#cadence-rules): screen 1 asks, first energy screen by screen 3, at most 3 questions in a row early (4 later), energy share 30–45%, varied archetypes, closing `M → L → P → @ → $`;
@@ -77,9 +77,11 @@ From the approved Pre-work, lay the journey on the [rhythm template](references/
 
 Assign every energy screen an archetype from the [catalog](references/energy-screens.md) that fits its trigger, and every question a named use. Recommend a screen budget if none was supplied. Labels stay structural; finished headlines, question wording and CTAs belong to step 5.
 
-Present the **Emotional Arc** and ask the user to approve it or request changes. **Stop here until the user explicitly approves this Emotional Arc.**
+Present **Pre-work and the Emotional Arc together** as one reviewable artifact and ask the user to approve them or request changes. **Screen copy starts only after the user explicitly approves both.** A change to Pre-work rebuilds the affected part of the arc before copy.
 
-**Done when:** the cadence rules pass (or each deviation has a written reason), and the user approves the journey.
+While the approval is pending, do the work no strategy decision can change: create the hosted project and funnel when that is already authorized, download the source, install dependencies, pull the environment, read the managed docs, collect brand assets, draft the `Design.md` tokens, and prepare the test offer.
+
+**Done when:** the cadence rules pass (or each deviation has a written reason), and the user approves the strategy.
 
 ### 5. Write the screen copy
 
@@ -109,7 +111,7 @@ For a copy-review clickthrough, use [preview-funnel](../preview-funnel/SKILL.md)
 
 - Reuse explicitly approved Pre-work and Emotional Arc when they still match the product, audience, promise, offer and requested scope. State which approval you rely on; an existing file or silence alone is not approval.
 - For a local wording correction that preserves the strategy, offer, sequence and emotional progression, inspect the affected screen and its neighbours, apply the relevant practices and the per-screen rubric, and return the scoped revision.
-- A change to the strategic focus, audience, promise, mechanism or offer reopens Pre-work approval and then arc approval for the affected scope. A change to the sequence, cadence or emotional progression reopens arc approval before rewriting the affected screens.
+- A change to the strategic focus, audience, promise, mechanism or offer reopens the strategy approval for the affected scope. A change to the sequence, cadence or emotional progression reopens arc approval before rewriting the affected screens.
 - For a rhythm review of an existing funnel, write its current strip, compare it with the cadence rules and the reference scan, and propose concrete insertions (which energy archetype after which question) or merges.
 - A review-only request can return findings and recommendations directly. Apply the workflow above when moving from findings into rewritten copy.
 

@@ -86,7 +86,10 @@ use its scripts and managed QA guidance to choose the checks.
 
 Start the local preview using the project's instructions. Exercise the changed
 screens through their real incoming and outgoing flow, inspect runtime errors,
-and fix failures before delivery. Verify every created or edited screen at the
+and fix failures before delivery. Before a hosted write, run the
+[qa-funnel walker](../qa-funnel/SKILL.md#2-inspect-and-collect-evidence) against a
+local production build (`npm run build`, then `npm run start`): it shows the same
+screens a preview would, in seconds. Verify every created or edited screen at the
 [visual pass](../qa-funnel/references/checklist.md#visual-pass) breakpoints: layout
 at the full size and first view at the visible size; also apply the managed local
 QA requirements, including available viewport height and interaction states.
