@@ -66,6 +66,10 @@ the synced version and local verification evidence.
 Publishing uses the hosted draft. Complete source delivery first; a publish
 command does not upload local edits.
 
+Publish **once per review round**: collect the round's fixes, pass them on the
+local production build with the qa-funnel walker, then sync and publish that
+batch. A preview publish takes minutes, so a publish per fix multiplies the wait.
+
 When preview publication is authorized:
 
 ```bash

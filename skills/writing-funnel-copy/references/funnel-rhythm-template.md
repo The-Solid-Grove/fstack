@@ -83,9 +83,14 @@ Observed orders before the paywall (69 funnels): **loading → email → plan** 
 
 ### Loading
 
-- **Headline:** "Creating your {goal} plan…" / "Analysing your answers…".
-- **Progress rows:** 3–5 rows named after answer groups the plan really uses (Goals · Level · Schedule · Preferences).
-- **While it runs:** a rating/testimonial carousel under the bar, or 1–2 yes/no micro-questions ("Do you finish what you start?") that also feed the plan.
+A **phased loader**: rows fill one at a time, two stop questions pause it, and a button ends it. In the rhythm strip the whole loader is one `L`; write its stop questions in the screen map and the screen copy like any other question.
+
+- **Headline:** "Creating your {goal} plan…" / "Analysing your answers…"; once the last row completes, "Your {goal} plan is ready".
+- **Progress rows:** 3–4 rows named after answer groups the plan really uses (Goals · Level · Schedule · Preferences). Each row takes 5–7 seconds and slows toward its end.
+- **Stop questions:** two one-tap questions that pause the loader mid-row in a bottom sheet ("Do you finish what you start?", "Want daily reminders?"). Each has 2–4 options and a named use in the plan or on the paywall.
+- **While it runs:** one rating or testimonial under the rows.
+- **Ending:** a button ("Show my plan") becomes active when the last row completes; the visitor leaves the loader by tapping it.
+- **Build:** the project's managed step page for progress screens describes the phased loader's steps, CSS animation and timing.
 - **References:** `headway-live` #56–57 (micro-question inside the loader), `harna-c2cc0f618f` #38 (testimonial under progress), `leaply-0b5c2f1884` #35–36 (named analysis rows).
 
 ### Plan reveal

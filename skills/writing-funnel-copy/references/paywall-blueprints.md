@@ -100,6 +100,17 @@ Order (★ core):
 
 **Above the fold (874px):** sticky bar → now/goal visual → plan-ready headline → offer panel; the first card starts at the fold; the CTA stays visible.
 
+**Default build.** Use this page wherever the chosen reference does not show its own version of a section:
+
+1. **Sticky bar:** the discount in plain words ("50% OFF your plan") beside the CTA. It stays visible for the whole page, and its button scrolls to the plan cards.
+2. **Hero:** a two-part headline and one image.
+3. **Offer block:** an intro card (what they get, in a title and one sentence) → promo panel ("Intro offer applied", the percent as its largest text) → "Choose your plan" → three plan cards → money-back guarantee line → CTA → payment badges (Apple Pay, Visa, Mastercard, Maestro, Amex) → renewal terms.
+4. **How it works** in three steps → **recap** (one large fact, one sentence, CTA) → **stories** → **FAQ** → **guarantee card** with CTA → **legal footer**.
+
+- **Offer to propose:** an initial offer on every plan: the first period costs 50% less, then the full price renews. Write it simply as "50% OFF": one number that is true on every card, with no deadline. Confirm it as an offer fact before writing prices.
+- **Plan cards:** radio, plan name, regular price struck through beside today's price, and a per-day tag with the regular per-day price struck through. The middle plan is preselected under a "Most popular" band. Renewal terms sit under the CTA; the cards carry none.
+- **Checkout:** the offer block's CTA opens a checkout dialog with the order summary, wallets first and card second. Every other CTA scrolls to the plan cards, and the page itself shows no wallet button.
+
 | Reference | Why |
 | --- | --- |
 | `fgrove references step betterme-bd3b48ded3 61` (Fitness, 8,140px) | The complete canonical B1: now/goal photos with metrics, 3 cards, boxed renewal terms under the CTA, app carousel, highlights, ratings, success story with a disclaimer, FAQ, press, reviews, repeated offer, guarantee, footer. |
