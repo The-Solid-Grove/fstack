@@ -65,9 +65,11 @@ export function screenshotName(index, stepId, suffix = '') {
 }
 
 const secondary = /^(back|go back|close|skip|dismiss|cancel)(\b|$)/i;
+// Icon-only back/close buttons carry a localized aria-label; their visible glyph identifies them in any language.
+const secondaryGlyph = /^[←‹<×✕✖]$/;
 function primaryButton(controls) {
   const buttons = controls.filter(c => c.type === 'button' && c.enabled && !c.option);
-  const preferred = buttons.filter(c => !secondary.test(c.label));
+  const preferred = buttons.filter(c => !secondary.test(c.label) && !secondaryGlyph.test(c.glyph ?? ''));
   const candidates = preferred;
   return candidates.filter(c => c.actionArea).at(-1) ?? candidates.at(-1);
 }
@@ -111,17 +113,21 @@ async function describe(page) {
     const dialog = [...document.querySelectorAll('[role=dialog],dialog[open]')].find(visible);
     const scope = dialog ?? root;
     document.querySelectorAll('[data-walk-control]').forEach(el => el.removeAttribute('data-walk-control'));
-    const elements = [...scope.querySelectorAll('input,textarea,button,[role=button],[role=radio],[role=checkbox]')].filter(visible);
+    // The runtime action bar renders beside the step stage, not inside it; include it unless a dialog is open.
+    const outside = dialog ? [] : [...document.querySelectorAll('.action-bar,[data-action-area]')].filter(el => !root.contains(el) && visible(el));
+    const elements = [scope, ...outside].flatMap(el => [...el.querySelectorAll('input,textarea,button,[role=button],[role=radio],[role=checkbox]')]).filter(visible);
     const controls = elements.map((el, i) => {
       el.setAttribute('data-walk-control', String(i));
       const role = el.getAttribute('role');
-      const type = ['radio', 'checkbox'].includes(role) ? role : el.tagName === 'INPUT' ? el.type : el.tagName === 'TEXTAREA' ? 'text' : 'button';
+      const numeric = el.tagName === 'INPUT' && ['numeric', 'decimal'].includes(el.inputMode);
+      const type = ['radio', 'checkbox'].includes(role) ? role : numeric ? 'number' : el.tagName === 'INPUT' ? el.type : el.tagName === 'TEXTAREA' ? 'text' : 'button';
       const option = ['radio', 'checkbox'].includes(type)
         || (type === 'button' && (!!el.closest('[role=radiogroup],[role=group]') || el.hasAttribute('aria-checked') || el.hasAttribute('aria-pressed')));
-      return { id: i, type, option, label: (el.getAttribute('aria-label') || el.innerText || el.labels?.[0]?.innerText || '').trim(),
+      return { id: i, type, option, label: (el.getAttribute('aria-label') || el.innerText || el.labels?.[0]?.innerText || '').trim(), glyph: (el.innerText || '').trim(),
+        min: el.getAttribute('min'), max: el.getAttribute('max'),
         enabled: !el.matches(':disabled') && el.getAttribute('aria-disabled') !== 'true', required: el.required || el.getAttribute('aria-required') === 'true',
         checked: el.checked || el.getAttribute('aria-checked') === 'true', dialog: !!dialog,
-        actionArea: !!el.closest('footer,[data-action-area],.actions,.action-area,.funnel-actions') };
+        actionArea: !!el.closest('footer,[data-action-area],.actions,.action-area,.action-bar,.funnel-actions') };
     });
     return { stepId: step?.getAttribute('data-step-id') || location.pathname, pathname: location.pathname,
       kind: step?.closest('.funnel-shell')?.getAttribute('data-step-kind') ?? null,
@@ -143,7 +149,16 @@ async function waitFor(page, predicate, timeout) {
 }
 function control(page, item) { return page.locator(`[data-walk-control="${item.id}"]`).filter({ visible: true }).first(); }
 async function act(page, state, action, options) {
-  for (const input of action.inputs ?? []) await control(page, input).fill(input.type === 'email' ? options.email : input.type === 'number' ? '30' : 'Test');
+  for (const input of action.inputs ?? []) {
+    if (input.type !== 'number') { await control(page, input).fill(input.type === 'email' ? options.email : 'Test'); continue; }
+    // A range-checked number (height, weight, age) enables Continue only for a plausible value: try candidates until it does.
+    const mid = input.min && input.max ? String(Math.round((Number(input.min) + Number(input.max)) / 2)) : null;
+    for (const value of [mid, '170', '75', '65', '30'].filter(Boolean)) {
+      await control(page, input).fill(value);
+      await pause(150);
+      if (primaryButton((await describe(page)).controls)) break;
+    }
+  }
   for (const option of action.options ?? []) {
     if (!option.checked) await control(page, option).click();
     if (changed(state, await describe(page))) return;
@@ -297,7 +312,10 @@ export async function walk(options) {
           record.rule = `${record.rule === 'end' ? 'wait' : 'loader'}→${action.rule}`;
         }
         await act(page, state, action, { ...options, 'screen-timeout': remaining() });
-        if (!await waitFor(page, next => changed(state, next), remaining())) {
+        // A step can stay on its URL and present new controls (a loader that ends with Continue): walk that state next.
+        const controlsOf = screen => screen.controls.map(c => `${c.type}:${c.label}`).join('|');
+        if (!await waitFor(page, next => changed(state, next)
+          || (controlsOf(next) !== controlsOf(state) && !idle(decideAction(next, answers).rule)), remaining())) {
           record.status = 'stuck'; reason = 'stuck'; break;
         }
         reason = 'max-screens';

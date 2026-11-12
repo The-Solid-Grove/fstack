@@ -41,6 +41,10 @@ test('action priority, modal options, primary preference and loaders', () => {
   assert.equal(decide([next, back]).button.id, 9);
   assert.equal(decide([{ ...next, enabled: false }]).rule, 'loader');
   assert.equal(decide([]).rule, 'end');
+  // A localized icon-only back button is never the primary action.
+  const iconBack = { id: 10, type: 'button', label: 'Atgal', glyph: '←', enabled: true };
+  assert.equal(decide([iconBack]).rule, 'loader');
+  assert.equal(decide([iconBack, next]).button.id, 9);
 });
 
 test('only a reached stop condition without stuck screens or page errors succeeds', () => {
