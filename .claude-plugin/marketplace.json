@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "funnelsgrove",
-      "source": "./",
+      "source": "./plugin",
       "description": "Build, design and grow web2app subscription funnels with FunnelsGrove."
     }
   ]

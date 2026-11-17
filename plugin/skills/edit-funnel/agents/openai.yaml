@@ -1,0 +1,4 @@
+interface:
+  display_name: "Edit Funnel"
+  short_description: "Reuse, edit, preview, and QA a hosted funnel"
+  default_prompt: "Use $edit-funnel to reuse this funnel's remembered folder, make and verify the requested edits locally, and deliver to the authorized environment with the required QA."

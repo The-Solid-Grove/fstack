@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""Build plugin/skills/ for the Claude directory from skills/.
+
+The Claude directory accepts only Markdown, text, JSON, YAML and PNG/JPEG/GIF/
+WebP/ICO images from publishers that are not Verified. This copies every
+allowed skill file into plugin/skills/, leaves out the rest (helper scripts,
+fonts, CSS/HTML/SVG templates), and tells Claude in each affected SKILL.md
+which bundled files the plugin build does not include.
+
+  scripts/build-claude-plugin           rebuild plugin/skills/
+  scripts/build-claude-plugin --check   exit 1 when plugin/skills/ is stale
+"""
+from __future__ import annotations
+
+import argparse
+import filecmp
+import shutil
+import sys
+import tempfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SOURCE = ROOT / "skills"
+TARGET = ROOT / "plugin" / "skills"
+ALLOWED_SUFFIXES = {".md", ".txt", ".json", ".yaml", ".yml", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico"}
+TEXT_SUFFIXES = {".md", ".txt", ".json", ".yaml", ".yml"}
+IGNORED_NAMES = {".DS_Store", "__pycache__"}
+
+NOTE = (
+    "> **Claude plugin build.** The Claude directory accepts only Markdown, JSON, YAML and images "
+    "from this publisher, so this copy of the skill leaves out these bundled files: {files}. "
+    "When a step needs one, tell the user it comes with the full skill pack "
+    "(`npx skills add The-Solid-Grove/fstack`, or the git checkout in "
+    "https://github.com/The-Solid-Grove/fstack), or complete the step without it "
+    "by following the rest of this file.\n"
+)
+
+
+def allowed(path: Path) -> bool:
+    if path.suffix.lower() not in ALLOWED_SUFFIXES:
+        return False
+    if path.suffix.lower() in TEXT_SUFFIXES:
+        with path.open("rb") as handle:
+            if handle.read(2) == b"#!":
+                return False
+    return True
+
+
+def with_note(text: str, excluded: list[str]) -> str:
+    """Insert the note right after the SKILL.md front matter and first heading."""
+    files = ", ".join(f"`{name}`" for name in excluded)
+    lines = text.splitlines(keepends=True)
+    index = 0
+    if lines and lines[0].strip() == "---":
+        index = next(i for i in range(1, len(lines)) if lines[i].strip() == "---") + 1
+    for i in range(index, len(lines)):
+        if lines[i].startswith("# "):
+            index = i + 1
+            break
+    return "".join(lines[:index]) + "\n" + NOTE.format(files=files) + "".join(lines[index:])
+
+
+def build(target: Path) -> None:
+    if target.exists():
+        shutil.rmtree(target)
+    for skill in sorted(p for p in SOURCE.iterdir() if p.is_dir()):
+        excluded: list[str] = []
+        for path in sorted(skill.rglob("*")):
+            if any(part in IGNORED_NAMES for part in path.parts) or not path.is_file():
+                continue
+            relative = path.relative_to(skill)
+            if not allowed(path):
+                excluded.append(relative.as_posix())
+                continue
+            destination = target / skill.name / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(path, destination)
+        skill_md = target / skill.name / "SKILL.md"
+        if excluded and skill_md.exists():
+            skill_md.write_text(with_note(skill_md.read_text(encoding="utf-8"), excluded), encoding="utf-8")
+
+
+def same_tree(left: Path, right: Path) -> bool:
+    comparison = filecmp.dircmp(left, right, ignore=list(IGNORED_NAMES))
+    if comparison.left_only or comparison.right_only or comparison.funny_files:
+        return False
+    _, mismatch, errors = filecmp.cmpfiles(left, right, comparison.common_files, shallow=False)
+    if mismatch or errors:
+        return False
+    return all(same_tree(left / name, right / name) for name in comparison.common_dirs)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--check", action="store_true", help="fail when plugin/skills/ is out of date")
+    args = parser.parse_args()
+    if not args.check:
+        build(TARGET)
+        return 0
+    with tempfile.TemporaryDirectory() as scratch:
+        fresh = Path(scratch) / "skills"
+        build(fresh)
+        if TARGET.is_dir() and same_tree(fresh, TARGET):
+            return 0
+    print("plugin/skills/ is out of date; run scripts/build-claude-plugin", file=sys.stderr)
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
