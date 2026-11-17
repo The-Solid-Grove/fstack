@@ -1,16 +1,25 @@
 <img src="assets/web-to-web-growth.png" alt="Skills for Web-to-Web Growth" width="50%">
 
-# Skills for growing apps on the web
+# FunnelsGrove for Claude
 
-Agent skills for researching, writing, and building subscription web funnels.
+**Your funnel growth team, inside Claude.** Build web2app subscription funnels, make them look like the best in the category, and keep improving them with A/B tests, all from one conversation.
 
-A good funnel connects the ad promise, the questions, the offer, and the product. **fstack** gives your agent a set of focused practices for working on each part.
+- **Build from anything.** Start from a Figma file, a competitor's funnel, or a product idea. Claude turns it into a quiz-to-paywall funnel hosted on FunnelsGrove, with checkout, registration and subscription management included.
+- **Design that converts.** Claude works from the public Funnel Screens library: 2,700+ real screens recorded from 79 top subscription funnels, with energy-screen patterns and proven paywall structures. Every screen gets a job, and the whole journey feels like one product.
+- **Test the design before you launch.** Funnel QA reviews copy, mobile layouts, every branch, checkout and subscription flows, and reports evidence and clear blockers.
+- **Run experiments and improve.** Give Claude a funnel and a period. It reads the analytics, flags the steps that lose users, proposes radically different variants, converges on one hypothesis per test, and hands you a shareable report to launch from.
+- **Learn the playbook.** The full FunnelsGrove Web-to-Web course is built in: channels, unit economics, payments, analytics and experiments.
 
-Use them together or pick the one you need. Read the instructions, adapt them to your product, and make them your own.
-
-Works with **Codex** and **Claude Code**. The course covers Web-to-Web growth; copy and previews can be used independently. Building and hosted editing use **FunnelsGrove**.
+Works in **Claude Code**, **Cowork** and **Codex**. Research, copy, previews and the reference library work without an account; building, publishing and analytics use a [FunnelsGrove](https://funnelsgrove.com) account.
 
 ## Installation
+
+As a Claude plugin, from the Claude directory, or in Claude Code:
+
+```bash
+claude plugin marketplace add The-Solid-Grove/fstack
+claude plugin install funnelsgrove@fstack
+```
 
 With the [skills CLI](https://skills.sh):
 
@@ -77,6 +86,21 @@ to make the approved copy clickable for review.
 ```
 
 [Sample requests](docs/sample-requests.md) · [Setup and maintenance](docs/getting-started.md) · [Funnel QA](skills/qa-funnel/SKILL.md)
+
+## What the plugin runs and connects to
+
+The plugin is a set of skills: Markdown instructions plus readable helper scripts that Claude runs only while a skill needs them. It declares no hooks, background processes or MCP servers.
+
+- **FunnelsGrove CLI.** Hosted work and the reference library use the `fgrove` CLI. When it is missing, a skill asks Claude to install it with `npm install -g @funnelsgrove/cli@latest` (from the public npm registry).
+- **FunnelsGrove services.** `fgrove references` reads the public Funnel Screens library at funnelsgrove.com without login. After you run `fgrove login`, the CLI sends the funnel source, copy, experiment and analytics requests you ask for to the FunnelsGrove API under your account. Credentials are stored by the CLI on your machine, never in this plugin.
+- **GitHub.** A git checkout of this repository checks GitHub for a newer `main` once per conversation (`scripts/check-fstack-update`). Plugin and skills-CLI installs have no checkout and skip the check.
+- **Local tools.** Previews, design mockups, QA evidence and reports are written to your working folder. `qa-funnel` drives headless Chromium through Playwright against the funnel URL you choose; if Playwright is missing it asks you to install it in your QA folder. `brainstorm-funnel-tests` renders its PDF with a local Chrome.
+
+The plugin itself collects no data. Data you send to FunnelsGrove is handled under the [FunnelsGrove Privacy Policy](https://www.funnelsgrove.com/privacy) and [Terms](https://www.funnelsgrove.com/terms).
+
+## Privacy Policy
+
+See the [FunnelsGrove Privacy Policy](https://www.funnelsgrove.com/privacy). Questions: open an [issue](https://github.com/The-Solid-Grove/fstack/issues).
 
 ---
 

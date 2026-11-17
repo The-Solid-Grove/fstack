@@ -5,7 +5,7 @@ description: Use when editing an existing FunnelsGrove funnel in its remembered 
 
 # Edit Funnel
 
-Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
+Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed as a Claude plugin or with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
 
 Reuse one working folder for each hosted funnel. Make the requested change there,
 verify it locally, and deliver only to the environments the user authorized.

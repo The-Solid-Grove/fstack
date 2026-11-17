@@ -5,7 +5,7 @@ description: Use when answering Web-to-Web growth questions about channel fit, e
 
 # Web-to-Web Essentials
 
-Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
+Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed as a Claude plugin or with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
 
 Concise lessons and worksheets for acquiring customers and selling subscriptions on the web. The product can be an app or a browser product. References stay synchronized with the [course](https://funnelsgrove.com/learn/web2web); the invocation remains `web2app-essentials` for compatibility.
 
