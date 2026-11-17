@@ -57,6 +57,27 @@ Building, publishing and analytics need a FunnelsGrove account and the `fgrove` 
 
 **Turn analytics into recommendations and the next tests.** Give it the funnel and a period. It reads the dashboard's metrics, picks one focus area (first step, quiz or paywall), flags steps that lose more than 7% (20% for email), grills you on scope in short rounds, prototypes several radically different ideas for each test, converges on one variant and hypothesis per step with you, and renders a shareable PDF: recommendations first, then metrics, focus, drop-off, and current versus proposed screen on one page per test.
 
+## Use FunnelsGrove in Claude chat (connector)
+
+The FunnelsGrove connector lets Claude work with your FunnelsGrove account from any Claude chat, on web, desktop and mobile, without the CLI.
+
+**Connect:** add **FunnelsGrove** from the Claude directory, or go to Settings → Connectors → Add custom connector and enter `https://api.funnelsgrove.com/mcp`. Sign in to FunnelsGrove and approve access. You need a FunnelsGrove account with access to a workspace and project.
+
+| Tool | What it does | Access |
+| --- | --- | --- |
+| `search_reference_funnels`, `get_reference_funnel` | Browse the public library of recorded funnels: screens, text and images | Read |
+| `list_workspaces_and_projects`, `list_funnels`, `get_funnel`, `list_funnel_templates` | See your workspaces, projects, funnels and templates | Read |
+| `get_funnel_analytics`, `get_step_dropoff` | Funnel metrics for a period and drop-off by step | Read |
+| `list_experiments`, `get_experiment_results` | Your A/B experiments and their results | Read |
+| `create_funnel` | Create a hosted funnel from a template and a brief (for example one Claude wrote from a Figma file or a competitor's funnel) | Write |
+| `create_experiment`, `start_experiment` | Set up an A/B experiment and start or resume it | Write |
+| `stop_experiment` | Pause a running experiment | Write, changes live traffic |
+| `publish_funnel` | Publish a funnel to its live domain | Write, changes live traffic |
+
+Claude asks before it runs a write tool. Try: "Show me paywalls from fitness funnels in the reference library", "Where did my funnel lose users last week?", "Create an experiment that tests an annual-first paywall".
+
+To disconnect, remove the connector in Claude's settings. Sign-in grants expire automatically; data is handled under the [FunnelsGrove Privacy Policy](https://www.funnelsgrove.com/privacy).
+
 ## What this plugin contains, runs and connects to
 
 This plugin contains only Markdown instructions, reference documents and images. It bundles no scripts, hooks, MCP servers or background processes. The full skill pack in [The-Solid-Grove/fstack](https://github.com/The-Solid-Grove/fstack) adds optional helper scripts (a Playwright funnel walker for QA, a PDF report renderer, a reference-strip tool, a local workspace registry and preview CSS); each skill that would use one says so and works without it.
