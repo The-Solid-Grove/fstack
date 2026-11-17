@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "funnelsgrove",
+  "displayName": "FunnelsGrove",
+  "version": "0.14.0",
+  "description": "Build, design and grow web2app subscription funnels: start from Figma or a competitor, design from 2,700+ real funnel screens, QA every branch, and turn analytics into A/B tests.",
+  "author": {
+    "name": "FunnelsGrove",
+    "url": "https://funnelsgrove.com"
+  },
+  "homepage": "https://github.com/The-Solid-Grove/fstack#readme",
+  "repository": "https://github.com/The-Solid-Grove/fstack",
+  "keywords": [
+    "web2app",
+    "funnels",
+    "quiz funnel",
+    "paywall",
+    "subscription",
+    "a/b testing",
+    "conversion",
+    "growth"
+  ],
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md",
+  "supportUrl": "https://github.com/The-Solid-Grove/fstack/issues",
+  "privacyPolicyUrl": "https://www.funnelsgrove.com/privacy",
+  "termsOfServiceUrl": "https://www.funnelsgrove.com/terms",
+  "license": "MIT"
+}

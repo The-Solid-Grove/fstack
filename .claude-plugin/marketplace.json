@@ -1,0 +1,15 @@
+{
+  "name": "fstack",
+  "description": "FunnelsGrove skills for building, designing and growing web2app subscription funnels.",
+  "owner": {
+    "name": "FunnelsGrove",
+    "url": "https://funnelsgrove.com"
+  },
+  "plugins": [
+    {
+      "name": "funnelsgrove",
+      "source": "./",
+      "description": "Build, design and grow web2app subscription funnels with FunnelsGrove."
+    }
+  ]
+}
