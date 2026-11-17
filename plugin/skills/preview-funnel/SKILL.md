@@ -1,0 +1,159 @@
+---
+name: preview-funnel
+description: Use when turning finished funnel copy, screen-by-screen funnel specs, PLAN.md sections, or research-derived funnel copy into a temporary clickable local mockup for copy review, especially before committing to final design or FunnelsGrove implementation.
+---
+
+# Preview Funnel
+
+> **Claude plugin build.** The Claude directory accepts only Markdown, JSON, YAML and images from this publisher, so this copy of the skill leaves out these bundled files: `references/example.html`, `references/preview-style.css`. When a step needs one, tell the user it comes with the full skill pack (`npx skills add The-Solid-Grove/fstack`, or the git checkout in https://github.com/The-Solid-Grove/fstack), or complete the step without it by following the rest of this file.
+
+Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed as a Claude plugin or with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
+
+## Overview
+
+Build a simple, temporary click-through that makes funnel copy easy to read,
+tap through, and critique. Favor plain static HTML/CSS/JS and one reusable
+screen renderer. Structure stays low-fidelity, but the preview should look
+good by default: use the bundled warm-editorial stylesheet
+(`references/preview-style.css`). Explicit user design, branding, and asset
+requests take precedence over this default; adapt the mockup to them while
+preserving navigation, content fit, and sticky CTA checks.
+
+For a full visual design, use [design-funnel](../design-funnel/SKILL.md) with the
+approved content and existing `Design.md`. It develops references and reviewed
+mockups for every actual screen pattern before implementing the shared style.
+This temporary preview remains the workflow for reviewing copy and pacing.
+
+## Workflow
+
+1. Find the source copy: `PLAN.md`, screen-by-screen spec, content files, or
+   research notes. Record the source path in the mockup UI.
+2. Create the preview outside tracked source, preferably:
+
+   ```bash
+   preview_dir="$(mktemp -d "${TMPDIR:-/tmp}/preview-funnel.XXXXXX")"
+   ```
+
+   Use a repo `.tmp/` directory only when the project already ignores it. Do
+   not leave product-specific mockups in the repo unless the user asks to save
+   them.
+3. Build the smallest useful static app:
+   - `index.html` for the shell
+   - `styles.css` — start from `references/preview-style.css` unless the user
+     supplied another design; adapt styles to the requested result
+   - `steps.mjs` or `steps.json` for copy data
+   - `app.mjs` for navigation and choice state
+4. Render one reusable mobile screen: progress header, headline, support copy,
+   optional choice cards, optional notes/proof rows, and a sticky bottom CTA.
+   Render every screen kind from the copy: questions, energy screens (archetype
+   label, evidence block or a labelled `.visual-slot` describing the planned
+   visual), mirror, loading, plan reveal, email and paywall (sections in the
+   reference order). Under the stage nav, show the **rhythm strip**
+   (`Q E Q Q E … P @ $`) with the current screen highlighted and each cell
+   clickable, and label the nav with the arc ID and screen title, so pacing can
+   be reviewed at a glance.
+5. Follow the Visual Style section below. The goal is still copy flow review,
+   not final design approval — but the preview should be pleasant to read and
+   feel like a real product, not a wireframe.
+6. Start a local server from the temporary directory:
+
+   ```bash
+   cd "$preview_dir" && python3 -m http.server 5177
+   ```
+
+   If the port is busy, choose another available port and report the actual URL.
+7. Open the URL in the browser. If the Browser plugin is available, use it for
+   local preview and verification.
+8. Click through the whole flow at the [visual pass](../qa-funnel/references/checklist.md#visual-pass)
+   breakpoints. At each layout size: no clipped headline text, no overlapping
+   controls, and scrollability where content exceeds the viewport. At each
+   first-view size: headline, single-choice options and the sticky CTA are
+   visible without scrolling.
+9. Leave the server running only while the user is reviewing. Stop it and remove
+   the temporary directory when the preview is no longer needed unless the user
+   explicitly asks to keep it.
+
+## Visual Style
+
+The default look is "candlelit stationery": a dark warm stage with a vignette
+and film grain around a cream paper phone screen, a single copper accent, a
+serif display face (Fraunces) for headlines, and a humanist sans (DM Sans) for
+everything else. It is defined once in `references/preview-style.css` — copy
+it in as `styles.css` and build markup from its class names.
+`references/example.html` is a working six-screen sample (hook question,
+authority burst with a proof slot, question, answer reassurance with a proof
+card, plan reveal with a stat box, paywall sections) with the rhythm strip, and
+shows the expected markup and renderer wiring. Use it as the default structure; adapt markup when the
+requested design needs it:
+
+- Stage (page): `.stage-title` (italic serif) / `.stage-subtitle` (small caps;
+  put the source copy path here) above the phone, `.stage-nav` for
+  back/restart controls under it.
+- Phone: `.phone > .screen` — the bezel, notch, copper edge glow, and paper
+  grain all come from `.phone`'s own CSS; no extra markup.
+- Screen anatomy, top to bottom: `.app-name` (small caps between hairlines),
+  `.progress > i` (fill width = step progress), `.step-num`
+  (`<strong>03</strong> / 12`), `.content` (scrollable; children get a
+  staggered entrance animation, and short content auto-centers vertically),
+  `.cta` (pinned to the bottom).
+- Copy: `.hero` (serif headline, one per screen; wrap a key phrase in `<em>`
+  for a copper italic), `.hero-sm`, `.body-text`, `.note` (italic serif
+  caveat), `.quote` (left-bordered italic).
+- Choices: `.options > button.opt`; each gets a radio ring automatically;
+  toggle `.selected` on tap (copper ring, border, and tint come from CSS).
+- Proof and letters: `.card-paper` with optional `.from` label and
+  `.letter-text` for quoted letter copy; `.tag` for PRO/MOST POPULAR pills;
+  `.stat-box` with `.num` and `.label` for counters.
+- Buttons: `.btn` primary (disable until a required choice is made),
+  `.btn-ghost` secondary.
+- Energy and paywall: `.archetype` small-caps label above the headline,
+  `.visual-slot` dashed box for a planned visual or open proof slot,
+  `.pw-section > .label` for each paywall section.
+- Rhythm: `.rhythm > span` under the stage nav; add `.energy` to energy,
+  mirror and plan cells and `.on` to the current one.
+
+Rules:
+
+- With the default theme, keep colors in its `:root` custom properties.
+- Headlines use the display serif; do not set body copy in it.
+- For requested branding, start with the `:root` properties and change
+  typography, markup, or layout where needed to match the supplied design.
+- Use simple visual anchors by default. Include user-requested images or
+  assets when they help review the intended screens.
+
+## Copy Data Shape
+
+Use a compact data object so copy changes are easy. `kind` is one of
+`question`, `energy`, `mirror`, `loading`, `plan`, `email` or `paywall`; it drives
+the rhythm strip (`Q`, `E`, `M`, `L`, `P`, `@`, `$`) and the renderer. These are
+preview labels, not FunnelsGrove step metadata.
+
+```js
+export const steps = [
+  {
+    id: "S03",
+    title: "Experience",
+    kind: "question",
+    headline: "Have you played before?",
+    supportingText: "We'll adjust to your level.",
+    primaryAction: "Continue",
+    choices: ["Never", "A little", "I used to", "Yes, regularly"],
+  },
+  {
+    id: "S04",
+    title: "Answer reassurance",
+    kind: "energy",
+    archetype: "Answer reassurance",
+    headline: "No worries, you're in the <em>right place!</em>",
+    supportingText: "Lessons start from your level and grow with you.",
+    visual: "Level path illustration + [PROOF: learners who started here]",
+    primaryAction: "Continue",
+  },
+];
+```
+
+## Completion
+
+Report the local URL, source copy path, where the temporary files live, how to
+restart the server, which breakpoint checks passed, and whether the temporary
+files were removed or intentionally left for review.

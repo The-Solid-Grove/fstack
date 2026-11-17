@@ -14,7 +14,7 @@ Works in **Claude Code**, **Cowork** and **Codex**. Research, copy, previews and
 
 ## Installation
 
-As a Claude plugin, from the Claude directory, or in Claude Code:
+As a Claude plugin, from the Claude directory, or in Claude Code (the plugin is the Markdown-only build in [`plugin/`](plugin/README.md); helper scripts come with the installs below):
 
 ```bash
 claude plugin marketplace add The-Solid-Grove/fstack
@@ -87,9 +87,9 @@ to make the approved copy clickable for review.
 
 [Sample requests](docs/sample-requests.md) · [Setup and maintenance](docs/getting-started.md) · [Funnel QA](skills/qa-funnel/SKILL.md)
 
-## What the plugin runs and connects to
+## What the skills run and connect to
 
-The plugin is a set of skills: Markdown instructions plus readable helper scripts that Claude runs only while a skill needs them. It declares no hooks, background processes or MCP servers.
+The pack is a set of skills: Markdown instructions plus readable helper scripts that Claude runs only while a skill needs them. It declares no hooks, background processes or MCP servers. The Claude plugin build in `plugin/` leaves the helper scripts out.
 
 - **FunnelsGrove CLI.** Hosted work and the reference library use the `fgrove` CLI. When it is missing, a skill asks Claude to install it with `npm install -g @funnelsgrove/cli@latest` (from the public npm registry).
 - **FunnelsGrove services.** `fgrove references` reads the public Funnel Screens library at funnelsgrove.com without login. After you run `fgrove login`, the CLI sends the funnel source, copy, experiment and analytics requests you ask for to the FunnelsGrove API under your account. Credentials are stored by the CLI on your machine, never in this plugin.
