@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "funnelsgrove": {
+      "type": "http",
+      "url": "https://api.funnelsgrove.com/mcp"
+    }
+  }
+}

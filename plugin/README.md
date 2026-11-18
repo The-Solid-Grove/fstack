@@ -57,9 +57,34 @@ Building, publishing and analytics need a FunnelsGrove account and the `fgrove` 
 
 **Turn analytics into recommendations and the next tests.** Give it the funnel and a period. It reads the dashboard's metrics, picks one focus area (first step, quiz or paywall), flags steps that lose more than 7% (20% for email), grills you on scope in short rounds, prototypes several radically different ideas for each test, converges on one variant and hypothesis per step with you, and renders a shareable PDF: recommendations first, then metrics, focus, drop-off, and current versus proposed screen on one page per test.
 
+## Use FunnelsGrove in Claude chat (connector)
+
+The FunnelsGrove connector lets Claude work with your FunnelsGrove account from any Claude chat, on web, desktop and mobile, without the CLI: read analytics, compare periods and channels, run A/B experiments and study the reference library. This plugin declares the same connector, so its tools also appear in Claude Code.
+
+**Connect:** add **FunnelsGrove** from the Claude directory, or go to Settings → Connectors → Add custom connector and enter `https://api.funnelsgrove.com/mcp`. Sign in to FunnelsGrove and approve access. You need a FunnelsGrove account with access to a workspace and project.
+
+| Tool | What it does | Access |
+| --- | --- | --- |
+| `search_reference_funnels`, `get_reference_funnel` | Browse the public library of recorded funnels: screens, text and images | Read |
+| `list_workspaces_and_projects`, `list_funnels`, `get_funnel`, `list_funnel_templates` | See your workspaces, projects, funnels and templates | Read |
+| `get_funnel_analytics`, `compare_funnel_periods` | Visitors, paywall views, checkouts, subscriptions and revenue for a period, and what changed against the previous one | Read |
+| `get_step_dropoff`, `list_traffic_sources` | Drop-off by step, overall or for one UTM source, campaign or ad set | Read |
+| `list_domains` | Your production domains and the funnel each one serves | Read |
+| `list_experiments`, `get_experiment_results` | Your A/B experiments, their results and a significance verdict per metric | Read |
+| `create_funnel` | Create a hosted funnel from a template and save a brief (for example one Claude wrote from a Figma file or a competitor's funnel); customize the screens with the skills above in Claude Code | Write |
+| `create_experiment`, `start_experiment` | Set up an A/B experiment and start or resume it | Write |
+| `stop_experiment` | Pause a running experiment | Write, changes live traffic |
+| `publish_funnel` | Publish a funnel to its preview link, or to a production domain | Write, changes live traffic |
+
+Two ready-made prompts: **Funnel performance report** (what changed, weakest steps and channels, experiment verdicts, next actions) and **Plan A/B tests** (weak steps, proven reference funnels, test proposals).
+
+Claude asks before it runs a write tool. Try: "Show me paywalls from fitness funnels in the reference library", "What changed in my funnel this week compared with last week?", "Which campaign converts best?", "Is my paywall test significant yet?".
+
+To disconnect, remove the connector in Claude's settings. Sign-in grants expire automatically; data is handled under the [FunnelsGrove Privacy Policy](https://www.funnelsgrove.com/privacy).
+
 ## What this plugin contains, runs and connects to
 
-This plugin contains only Markdown instructions, reference documents and images. It bundles no scripts, hooks, MCP servers or background processes. The full skill pack in [The-Solid-Grove/fstack](https://github.com/The-Solid-Grove/fstack) adds optional helper scripts (a Playwright funnel walker for QA, a PDF report renderer, a reference-strip tool, a local workspace registry and preview CSS); each skill that would use one says so and works without it.
+This plugin contains only Markdown instructions, reference documents and images, plus `.mcp.json`, which declares the remote FunnelsGrove connector (`https://api.funnelsgrove.com/mcp`). It bundles no scripts, hooks, local MCP servers or background processes. The full skill pack in [The-Solid-Grove/fstack](https://github.com/The-Solid-Grove/fstack) adds optional helper scripts (a Playwright funnel walker for QA, a PDF report renderer, a reference-strip tool, a local workspace registry and preview CSS); each skill that would use one says so and works without it.
 
 - **FunnelsGrove CLI.** Hosted work and the reference library use the `fgrove` CLI. When it is missing, a skill asks Claude to install it with `npm install -g @funnelsgrove/cli@latest` from the public npm registry.
 - **FunnelsGrove services.** `fgrove references` reads the public Funnel Screens library at funnelsgrove.com without login. After you run `fgrove login`, the CLI sends the funnel source, copy, experiment and analytics requests you ask for to the FunnelsGrove API under your account. The CLI stores its own credentials on your machine; this plugin never reads them.
