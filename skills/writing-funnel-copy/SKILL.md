@@ -54,7 +54,7 @@ Read the product brief, `PRODUCT_SENSE.md`, existing funnel, entry creative, off
 
 ### 2. Scan reference funnels
 
-Pick 1–2 recorded funnels from the same or an adjacent category (`fgrove references categories`, `fgrove references list --category …`). Print each one's rhythm strip with this skill's `scripts/reference-strip <funnel-id>` (`Q E Q Q E … L P @ $`, with energy share and longest question run), read the screens, and note which energy archetypes appear where, the closing order and the paywall structure. Open the images of screens you expect to borrow from. Add a candidate paywall reference (`fgrove references list --step-type paywall`) whose price model fits the offer.
+Pick 1–2 recorded funnels from the same or an adjacent category (`fgrove references categories`, `fgrove references list --category …`). Print each one's rhythm strip with this skill's `node scripts/reference-strip.mjs <funnel-id>` (Node only, so it runs on Windows too) (`Q E Q Q E … L P @ $`, with energy share and longest question run), read the screens, and note which energy archetypes appear where, the closing order and the paywall structure. Open the images of screens you expect to borrow from. Add a candidate paywall reference (`fgrove references list --step-type paywall`) whose price model fits the offer.
 
 **Done when:** a short reference scan (strips, notable energy screens with funnel ID and position, candidate paywall) is ready to inform the arc.
 

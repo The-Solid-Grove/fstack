@@ -5,7 +5,7 @@ description: Use when writing or revising quiz-to-paywall funnel copy, positioni
 
 # Writing Funnel Copy
 
-> **Claude plugin build.** The Claude directory accepts only Markdown, JSON, YAML and images from this publisher, so this copy of the skill leaves out these bundled files: `scripts/reference-strip`. When a step needs one, tell the user it comes with the full skill pack (`npx skills add The-Solid-Grove/fstack`, or the git checkout in https://github.com/The-Solid-Grove/fstack), or complete the step without it by following the rest of this file.
+> **Claude plugin build.** The Claude directory accepts only Markdown, JSON, YAML and images from this publisher, so this copy of the skill leaves out these bundled files: `scripts/reference-strip.mjs`. When a step needs one, tell the user it comes with the full skill pack (`npx skills add The-Solid-Grove/fstack`, or the git checkout in https://github.com/The-Solid-Grove/fstack), or complete the step without it by following the rest of this file.
 
 Before the first fstack skill in a conversation, run the [update check](https://github.com/The-Solid-Grove/fstack/blob/main/docs/getting-started.md#agent-update-check): in a git checkout it applies a safe update automatically; reread this file if it reports `updated`, and offer any update it could not apply without blocking the task. Skills installed as a Claude plugin or with the skills CLI (`npx skills add`) have no checkout: skip the check and continue.
 
@@ -56,7 +56,7 @@ Read the product brief, `PRODUCT_SENSE.md`, existing funnel, entry creative, off
 
 ### 2. Scan reference funnels
 
-Pick 1–2 recorded funnels from the same or an adjacent category (`fgrove references categories`, `fgrove references list --category …`). Print each one's rhythm strip with this skill's `scripts/reference-strip <funnel-id>` (`Q E Q Q E … L P @ $`, with energy share and longest question run), read the screens, and note which energy archetypes appear where, the closing order and the paywall structure. Open the images of screens you expect to borrow from. Add a candidate paywall reference (`fgrove references list --step-type paywall`) whose price model fits the offer.
+Pick 1–2 recorded funnels from the same or an adjacent category (`fgrove references categories`, `fgrove references list --category …`). Print each one's rhythm strip with this skill's `node scripts/reference-strip.mjs <funnel-id>` (Node only, so it runs on Windows too) (`Q E Q Q E … L P @ $`, with energy share and longest question run), read the screens, and note which energy archetypes appear where, the closing order and the paywall structure. Open the images of screens you expect to borrow from. Add a candidate paywall reference (`fgrove references list --step-type paywall`) whose price model fits the offer.
 
 **Done when:** a short reference scan (strips, notable energy screens with funnel ID and position, candidate paywall) is ready to inform the arc.
 
