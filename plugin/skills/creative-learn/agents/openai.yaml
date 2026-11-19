@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Learn"
+  short_description: "Record ad test results on Variations, Angles and Concepts"
+  default_prompt: "Use $creative-learn to record these ad test results on the project's Variations and Angles by my Go and winner rule, mark finished Concepts done, and name what to mix next."

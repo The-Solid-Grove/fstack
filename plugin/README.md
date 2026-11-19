@@ -57,6 +57,26 @@ Building, publishing and analytics need a FunnelsGrove account and the `fgrove` 
 
 **Turn analytics into recommendations and the next tests.** Give it the funnel and a period. It reads the dashboard's metrics, picks one focus area (first step, quiz or paywall), flags steps that lose more than 7% (20% for email), grills you on scope in short rounds, prototypes several radically different ideas for each test, converges on one variant and hypothesis per step with you, and renders a shareable PDF: recommendations first, then metrics, focus, drop-off, and current versus proposed screen on one page per test.
 
+## Skills for ad creatives
+
+Four skills run the loop from an idea to a tested ad in **FunnelsGrove Creatives**: plan, script, produce, learn. They need the Creatives Platform, which FunnelsGrove switches on per workspace, and the `fgrove` CLI.
+
+### [creative-brainstorm](skills/creative-brainstorm/SKILL.md)
+
+**Plan what to make.** Read the project's Angles, results and winners, then save Concepts: new ideas per Angle, or mixes of the ads that won. Nothing is produced; you pick.
+
+### [creative-script](skills/creative-script/SKILL.md)
+
+**Turn a pick into a script.** Scenes with seconds, pictures, lines and words on screen, and a credit estimate. You approve.
+
+### [creative-produce](skills/creative-produce/SKILL.md)
+
+**Make it, and fix what you send back.** The board first, then takes and the cut. Notes you leave on a Shot or a video become a revision, and each note gets an answer.
+
+### [creative-learn](skills/creative-learn/SKILL.md)
+
+**Write down what the tests showed.** Results on each launched Variation, the status and lessons of each Angle, and the winners worth mixing next.
+
 ## Use FunnelsGrove in Claude chat (connector)
 
 The FunnelsGrove connector lets Claude work with your FunnelsGrove account from any Claude chat, on web, desktop and mobile, without the CLI: read analytics, compare periods and channels, run A/B experiments and study the reference library. This plugin declares the same connector, so its tools also appear in Claude Code.

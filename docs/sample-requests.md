@@ -70,3 +70,40 @@ The [Psychology Framework](../skills/writing-funnel-copy/references/funnel-psych
 owns the artifact format; the [Rhythm Template](../skills/writing-funnel-copy/references/funnel-rhythm-template.md)
 owns screen order and cadence. [design-funnel](../skills/design-funnel/SKILL.md)
 owns the early visual feedback checkpoint and the rest of the design workflow.
+
+## Ad creatives: plan, script, produce, learn
+
+```text
+Use creative-brainstorm for [project].
+
+Mix the winners of the last [period] into [4] Concepts, and add [3] new
+Concepts for the working Angles that have nothing planned. Save them for me
+to pick. Do not produce anything.
+```
+
+```text
+Use creative-script for Concept [K012] in [project].
+
+Script: [paste your script, or leave empty for the agent to write it]
+Length: [seconds]
+Budget: [credits for this video]
+
+Save the script as scenes with the estimate for my approval.
+```
+
+```text
+Use creative-produce for [project].
+
+Work the Creatives inbox: produce the approved Concepts and apply the open
+notes. Stop at the board and at the rough cut. Stop and ask when one video
+passes [credits].
+```
+
+```text
+Use creative-learn for [project].
+
+Results: [export, table or screenshot per ad, with the period]
+Rule: [Go and winner thresholds]
+
+Record the results, update the Angles, and name what to mix next.
+```
