@@ -73,6 +73,32 @@ The checkout route requires Git and Bash. Keep the checkout: the installer links
 
 **Turn analytics into recommendations and the next tests.** Give it the funnel and a period. It reads the dashboard's metrics, picks one focus area (first step, quiz or paywall), flags steps that lose more than 7% (20% for email), grills you on scope in short rounds, prototypes several radically different ideas for each test, converges on one variant and hypothesis per step with you, and renders a shareable PDF: recommendations first, then metrics, focus, drop-off, and current versus proposed screen on one page per test.
 
+## Skills for ad creatives
+
+Four skills run the loop from an idea to a tested ad in **FunnelsGrove Creatives**: plan, script, produce, learn. Each ends where a person decides, and the next starts from that decision. They need the Creatives Platform, which FunnelsGrove switches on per workspace.
+
+### [creative-brainstorm](skills/creative-brainstorm/SKILL.md)
+
+**Plan what to make.** Read the project's Angles, results and winners, then save Concepts: new ideas per Angle, or mixes that recombine the hook, body and format of the ads that won. Nothing is produced; you pick.
+
+### [creative-script](skills/creative-script/SKILL.md)
+
+**Turn a pick into a script.** Scenes with seconds, pictures, lines and words on screen, the cheapest way to make it, and a credit estimate. Paste your own script and it becomes the same thing. You approve.
+
+### [creative-produce](skills/creative-produce/SKILL.md)
+
+**Make it, and fix what you send back.** The board first, then takes and the cut, with a stop at the board and at the rough cut. Notes you leave on a Shot or a video become a revision that changes only what was asked, and each note gets an answer.
+
+### [creative-learn](skills/creative-learn/SKILL.md)
+
+**Write down what the tests showed.** Results on each launched Variation by your Go and winner rule, the status and lessons of each Angle, and the winners worth mixing next.
+
+One prompt hands the agent everything that waits for it:
+
+```text
+Work the Creatives inbox: fgrove creatives inbox --project <project>
+```
+
 ## Put them to work
 
 **Research → Write → Preview copy → Design → Build → QA → Brainstorm tests → Iterate**

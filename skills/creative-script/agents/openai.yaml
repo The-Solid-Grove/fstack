@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Script"
+  short_description: "Write a Concept's script as scenes with a credit estimate"
+  default_prompt: "Use $creative-script to write the script of the picked Concepts in this project as scenes with seconds, lines and words on screen, state the estimate, and save each for my approval."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Produce"
+  short_description: "Produce approved Concepts and apply notes on delivered creatives"
+  default_prompt: "Use $creative-produce to read this project's Creatives inbox, produce the approved Concepts with a gate at the board and at the rough cut, and apply the open notes, closing each with what changed."

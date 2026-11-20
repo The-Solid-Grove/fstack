@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Brainstorm"
+  short_description: "Plan new ad Concepts from Angles, results and winners"
+  default_prompt: "Use $creative-brainstorm to read this project's Angles, Variations and Concepts, then save new Concepts or mixes of the winners for me to pick. Do not produce anything."
